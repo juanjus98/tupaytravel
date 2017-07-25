@@ -1,0 +1,24 @@
+[14-Mar-2016 11:55:28 America/Chicago] PHP Warning:  unlink(../images/hotel/house_3.jpg): No such file or directory in /home/gruasok/public_html/tupaytravel/panel/modelhotel.php on line 113
+[14-Mar-2016 11:55:30 America/Chicago] PHP Warning:  unlink(../images/hotel/house_5.jpg): No such file or directory in /home/gruasok/public_html/tupaytravel/panel/modelhotel.php on line 113
+[20-Feb-2017 09:23:26 America/Chicago] PHP Warning:  require_once(../libs/upload.php): failed to open stream: No such file or directory in /home/tupaytra/public_html/panel/paquete_galeria.php on line 13
+[20-Feb-2017 09:23:26 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '../libs/upload.php' (include_path='.:/opt/php54/lib/php') in /home/tupaytra/public_html/panel/paquete_galeria.php on line 13
+[20-Feb-2017 10:30:42 America/Chicago] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/tupaytra/public_html/panel/paquete_galeria.php on line 29
+[20-Feb-2017 10:44:55 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tupaytra/public_html/panel/paquete_galeria.php:26) in /home/tupaytra/public_html/panel/paquete_galeria.php on line 34
+[20-Feb-2017 10:45:41 America/Chicago] PHP Parse error:  syntax error, unexpected '*' in /home/tupaytra/public_html/panel/paquete_galeria.php on line 35
+[20-Feb-2017 10:46:30 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tupaytra/public_html/panel/paquete_galeria.php:26) in /home/tupaytra/public_html/panel/paquete_galeria.php on line 34
+[20-Feb-2017 10:47:34 America/Chicago] PHP Parse error:  syntax error, unexpected '||' (T_BOOLEAN_OR), expecting ')' in /home/tupaytra/public_html/panel/paquete_galeria.php on line 34
+[20-Feb-2017 10:47:57 America/Chicago] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND), expecting ')' in /home/tupaytra/public_html/panel/paquete_galeria.php on line 34
+[20-Feb-2017 10:48:21 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tupaytra/public_html/panel/paquete_galeria.php:26) in /home/tupaytra/public_html/panel/paquete_galeria.php on line 35
+[20-Feb-2017 10:48:33 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tupaytra/public_html/panel/paquete_galeria.php:26) in /home/tupaytra/public_html/panel/paquete_galeria.php on line 35
+[20-Feb-2017 11:13:53 America/Chicago] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/tupaytra/public_html/panel/paquete_galeria.php on line 9
+[20-Feb-2017 11:13:53 America/Chicago] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, boolean given in /home/tupaytra/public_html/panel/paquete_galeria.php on line 139
+[20-Feb-2017 11:23:57 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/tupaytra/public_html/panel/paquete_galeria.php on line 54
+[20-Feb-2017 11:23:57 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/tupaytra/public_html/panel/paquete_galeria.php:54) in /home/tupaytra/public_html/panel/paquete_galeria.php on line 60
+[27-Feb-2017 17:46:12 America/Chicago] PHP Warning:  require_once(/home/tupaytra/public_html/panel/libs/function.video.php): failed to open stream: No such file or directory in /home/tupaytra/public_html/panel/modelvideo.php on line 3
+[27-Feb-2017 17:46:12 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '/home/tupaytra/public_html/panel/libs/function.video.php' (include_path='.:/opt/php54/lib/php') in /home/tupaytra/public_html/panel/modelvideo.php on line 3
+[01-Mar-2017 22:38:36 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/tupaytra/public_html/panel/promocion.php on line 172
+[01-Mar-2017 22:38:42 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home/tupaytra/public_html/panel/promocion.php on line 172
+[13-Jun-2017 17:27:14 America/Chicago] PHP Warning:  unlink(../images/hotel/samay2.jpg): No such file or directory in /home/tupaytra/public_html/panel/modelhotel.php on line 113
+[20-Jun-2017 17:12:10 America/Chicago] PHP Warning:  unlink(../images/hotel/Casa Andina clasicc00.jpg): No such file or directory in /home/tupaytra/public_html/panel/modelhotel.php on line 113
+[20-Jun-2017 17:12:11 America/Chicago] PHP Warning:  unlink(../images/hotel/): Is a directory in /home/tupaytra/public_html/panel/modelhotel.php on line 113
+[11-Jul-2017 23:55:53 America/Chicago] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/tupaytra/public_html/panel/listado_paginas.php on line 113
