@@ -23,9 +23,6 @@ body {
 }
 
 
-/**
- * Promociones home
- */
  .titulo_opciones {
   font-size: 22px;
   font-weight: bold;
@@ -36,8 +33,29 @@ body {
   border-bottom: solid 2px @color-secondary-0;
   padding-bottom: 6px;
   margin-bottom: 14px;
+
+  span{
+    font-size: 15px;
+    font-weight:normal;
+    padding: 6px 0px;
+
+    a {
+      text-decoration: none;
+      &:hver{
+        font-weight:bold;
+      }
+      i {
+        font-size: 17px;
+      }
+    }
+
+  }
+
 }
 
+/**
+ * Promociones home
+ */
 .cont-promo {
   margin: 0 0 10px 0;
   background: @color-secondary-0;
@@ -69,15 +87,15 @@ ul.social-icons {
     padding:0;
     margin: 0;
 }
+
 .social-icons li {
     vertical-align: top;
     display: inline;
     height: 100px;
-}
-.social-icons a {
+ a {
     color: #fff;
     text-decoration: none;
-}
+
 .fa-facebook {
     padding:10px 14px;
     -o-transition:.5s;
@@ -150,3 +168,52 @@ ul.social-icons {
 .fa-google-plus:hover {
     background-color: #e25714;
 }
+}
+}
+
+/**
+ * Icons
+ */
+.youtube-icon {
+  color: #DC2825;
+}
+
+
+/**
+ * Video slider
+ */
+.video-item {
+  position: relative;
+  display: block;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
+
+  .video {
+    /*position: relative;
+    display: block;
+    background:#ff0;
+    height:100%;
+    width:100%;*/
+    text-align:center;
+
+    span {
+      top: 50%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      font-size:40px;
+      color: rgba(0,0,0, 0.5);
+      transform: translateY(-50%);
+    }
+
+    }
+
+    &:hover {
+      .video span {
+        color: #DC2825;
+      }
+
+    }
+  }

@@ -18,5 +18,9 @@
 <script src="assets/plugins/fancybox/dist/jquery.fancybox.min.js"></script>
 <!-- //fancybox-->
 
+<!-- sticky-->
+<script type="text/javascript" src="assets/plugins/sticky/jquery.sticky.js"></script>
+<!-- sticky-->
+
 <script src="assets/js/app.js" type="text/javascript"></script>
 <!-- JavaScript-->

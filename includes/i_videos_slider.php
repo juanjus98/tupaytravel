@@ -3,7 +3,11 @@ $sql_videos="SELECT * from tblvideos Where estado != 0 Order By orden Limit 8";
 $rs_videos=mysql_query($sql_videos, $link);
 ?>
 <div class="container-videos">
-  <h3>Nos recomiendan:</h3>
+  <h3 class="titulo_opciones">
+  Ellos nos recomiendan 
+  <div class="clearfix visible-xs-block"></div>
+  <span><a href=""><i class="fa fa-youtube-play youtube-icon" aria-hidden="true"></i> Visita nuestro canal</a></span>
+  </h3>
   <?php
   if(mysql_num_rows($rs_videos) > 0){
     ?>
@@ -15,7 +19,8 @@ $rs_videos=mysql_query($sql_videos, $link);
         ?>
         <li>
           <div class="video-item">
-            <a href="<?php echo $video_embed;?>" title="<?php echo $fs_video['titulo'];?>" class="various fancybox.iframe">
+            <a href="<?php echo $video_embed;?>" title="<?php echo $fs_video['titulo'];?>" class="various video fancybox.iframe">
+              <span class="fa fa-youtube-play"></span>
               <img src="<?php echo $fs_video['imagen'];?>" alt="<?php echo $fs_video['titulo'];?>" class="img-responsive">
             </a>
           </div>
@@ -27,10 +32,4 @@ $rs_videos=mysql_query($sql_videos, $link);
     <?php
   }
   ?>
-  <div align="right">
-    <a href="https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA" target="_blank">
-      <img src="images/ver-mas.png" alt="Ver mas videos"><br />
-    </a>
-  </div>
-  
 </div>

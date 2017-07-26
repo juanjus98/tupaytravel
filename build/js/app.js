@@ -19,6 +19,9 @@ $.datepicker.regional['es'] = {
 $.datepicker.setDefaults($.datepicker.regional['es']);
 
 $(function() {
+	//Toolbar static
+	$("#tool-bar").sticky({ topSpacing: 0 });
+
 	//Galería videos.
 	$("#content-slider").lightSlider({
 		loop:true,

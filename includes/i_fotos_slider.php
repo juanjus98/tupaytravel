@@ -1,5 +1,5 @@
 <div class="container-videos">
-  <h3>Galería de fotos:</h3>
+  <h3 class="titulo_opciones">Galería de fotos:</h3>
     <ul id="content-slider-fotos" class="content-slider">
         <li>
           <div class="video-item">
