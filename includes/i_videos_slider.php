@@ -2,7 +2,7 @@
 $sql_videos="SELECT * from tblvideos Where estado != 0 Order By orden Limit 8";
 $rs_videos=mysql_query($sql_videos, $link);
 ?>
-<div class="container-videos">
+<div class="container-box">
   <h3 class="titulo_opciones">
   Ellos nos recomiendan 
   <div class="clearfix visible-xs-block"></div>

@@ -1,6 +1,6 @@
 <h3 class="titulo_opciones">Nuestras promociones:</h3>
 <?php
-$sql_promociones="SELECT * from tblpromociones Where estado != 0 Order By orden Limit 6";
+$sql_promociones="SELECT * FROM tblpromociones WHERE estado != 0 ORDER BY orden LIMIT 6";
 $rs_promociones=mysql_query($sql_promociones, $link);
 ?>
  <?php

@@ -22,5 +22,13 @@
 <script type="text/javascript" src="assets/plugins/sticky/jquery.sticky.js"></script>
 <!-- sticky-->
 
+<!-- slimscroll-->
+<script type="text/javascript" src="assets/plugins/slimscroll/jquery.slimscroll.js"></script>
+<!-- //slimscroll-->
+
+<!-- emoji-->
+<script src="assets/plugins/emoji/emoji.js" type="text/javascript"></script>
+<!-- //emoji-->
+
 <script src="assets/js/app.js" type="text/javascript"></script>
 <!-- JavaScript-->

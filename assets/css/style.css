@@ -165,9 +165,31 @@ ul.social-icons {
 .youtube-icon {
   color: #DC2825;
 }
+.marg-t20 {
+  margin-top: 20px;
+}
 /**
  * Video slider
  */
+.container-box {
+  padding: 12px 15px;
+  border: solid 1px #B5DB39;
+  margin-top: 15px;
+}
+.container-box .titulo_opciones {
+  border-bottom: none;
+  color: #99C115;
+  margin-bottom: 0;
+}
+.container-box .titulo_opciones span {
+  padding: 0;
+}
+.container-box .titulo_opciones span a {
+  color: #99C115;
+}
+.container-box .titulo_opciones span a:hover {
+  text-decoration: underline;
+}
 .video-item {
   position: relative;
   display: block;
@@ -195,6 +217,67 @@ ul.social-icons {
 }
 .video-item:hover .video span {
   color: #DC2825;
+}
+.brd-1 {
+  border: solid 1px #B5DB39;
+}
+.brd-2 {
+  border: solid 1px #4C3923;
+}
+.btn-wa1 {
+  background-image: linear-gradient(to top, #7A9E05 0%, #99C115 100%);
+  color: #fff;
+  border: solid 1px #87aa12;
+}
+.btn-wa1:hover {
+  background-image: linear-gradient(to top, #99C115 0%, #7A9E05 100%);
+  color: #fff;
+}
+.btn-wa2 {
+  background-image: linear-gradient(to top, #261807 0%, #392713 100%);
+  color: #fff;
+  border: solid 1px #261a0d;
+}
+.btn-wa2:hover {
+  background-image: linear-gradient(to top, #392713 0%, #261807 100%);
+  color: #fff;
+}
+/**
+ * Boxes
+ */
+.boxs-fast .box {
+  padding: 40px;
+  margin-bottom: 15px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.boxs-fast .box-1 {
+  background: url(../images/bg-pagos1.jpg) repeat-x center center;
+}
+.boxs-fast .box-2 {
+  background: url(../images/bg-galeria.jpg) repeat-x center center;
+}
+.boxs-fast .box-3 {
+  background: url(../images/bg-certificados-licencias.jpg) repeat-x center center;
+}
+/**
+ * Listado
+ */
+.container-list {
+  margin-bottom: 0px;
+}
+.container-list .list-group-item {
+  padding: 6px 0px;
+  background: none;
+  border: none;
+  border-bottom: solid 1px #f7f7f7;
+}
+.container-list .list-group-item img {
+  vertical-align: middle;
+  max-height: 18px;
+  margin-top: -3px;
 }
 .tool-bar {
   z-index: 99 !important;

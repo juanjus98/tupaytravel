@@ -178,10 +178,34 @@ ul.social-icons {
   color: #DC2825;
 }
 
+.marg-t20 {
+  margin-top: 20px;
+}
 
 /**
  * Video slider
  */
+.container-box {
+  padding: 12px 15px;
+  border: solid 1px @color-secondary-2;
+  margin-top: 15px;
+
+  .titulo_opciones{
+    border-bottom: none;
+    color: @color-secondary-0;
+    margin-bottom:0;
+    span{
+      padding:0;
+      a {
+        color: @color-secondary-0;
+        &:hover {
+          text-decoration:underline;
+        }
+      }
+    }
+  }
+}
+
 .video-item {
   position: relative;
   display: block;
@@ -217,3 +241,80 @@ ul.social-icons {
 
     }
   }
+
+.brd-1 {
+  border: solid 1px @color-secondary-2;
+}
+
+.brd-2 {
+  border: solid 1px @color-primary-2;
+}
+
+.btn-wa1 {
+  background-image: linear-gradient(to top, @color-secondary-3 0%, @color-secondary-0 100%);
+  color: #fff;
+  border: solid 1px darken(@color-secondary-0, 5%);
+
+  &:hover {
+    background-image: linear-gradient(to top, @color-secondary-0 0%, @color-secondary-3 100%);
+    color: #fff;
+  }
+}
+
+.btn-wa2 {
+  background-image: linear-gradient(to top, @color-primary-3 0%, @color-primary-0 100%);
+  color: #fff;
+  border: solid 1px darken(@color-primary-0, 5%);
+
+  &:hover {
+    background-image: linear-gradient(to top, @color-primary-0 0%, @color-primary-3 100%);
+    color: #fff;
+  }
+}
+
+/**
+ * Boxes
+ */
+.boxs-fast {
+
+  .box {
+    padding: 40px;
+    margin-bottom: 15px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .box-1{
+    background: url(../images/bg-pagos1.jpg) repeat-x center center; 
+  }
+
+  .box-2{
+    background: url(../images/bg-galeria.jpg) repeat-x center center; 
+  }
+
+  .box-3{
+    background: url(../images/bg-certificados-licencias.jpg) repeat-x center center; 
+  }
+
+}
+
+/**
+ * Listado
+ */
+.container-list {
+  margin-bottom: 0px;
+  .list-group-item {
+    padding: 6px 0px;
+    background: none;
+    border: none;
+    border-bottom: solid 1px #f7f7f7;
+    img {
+      vertical-align: middle;
+      max-height: 18px;
+      margin-top: -3px;
+    }
+
+  }
+}

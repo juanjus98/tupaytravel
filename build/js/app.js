@@ -19,6 +19,14 @@ $.datepicker.regional['es'] = {
 $.datepicker.setDefaults($.datepicker.regional['es']);
 
 $(function() {
+	//Slimscroll
+	$('.box-wscroll').slimScroll({
+        height: '233px'
+    });
+
+    //Emoji
+	$('.to-emoji').Emoji();
+
 	//Toolbar static
 	$("#tool-bar").sticky({ topSpacing: 0 });
 
