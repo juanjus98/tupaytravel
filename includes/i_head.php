@@ -10,8 +10,6 @@
 <meta name="keywords" content="tours en cusco, tours a machupicchu, agencia de viaje en cusco, travel cusco, turismo en machupicchu, turist cusco.">
 
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-<!-- <link id="switch_style" href="./css/real_estate.css" rel="stylesheet"> -->
-<!-- <link href="./css/theme.css" rel="stylesheet"> -->
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
 

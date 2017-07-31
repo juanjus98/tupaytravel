@@ -29,7 +29,7 @@ $(function() {
     });
 
     //Emoji
-	$('.to-emoji').Emoji();
+	/*$('.to-emoji').Emoji();*/
 
 	//Toolbar static
 	$("#tool-bar").sticky({ topSpacing: 0 });
