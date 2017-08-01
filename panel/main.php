@@ -18,7 +18,7 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
  <link href="../css/tablednd.css" rel="stylesheet" type="text/css">
 
  <style>
-   .contenedor {
+   /*.contenedor {
      margin:0 auto;
      width:85%;
      text-align:center;
@@ -26,7 +26,7 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
 
    li a{
      cursor:pointer;/*permite que se despliegue el dropdown en ipad, que sin esto no se muestra*/
-   }
+   }*/
  </style>
  <script>
    $(document).ready(function(){
@@ -92,7 +92,7 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
 </script>
 </head>
 <body background="../images/fondo.jpg">
- <div class="container">
+ <div class="container-fluid">
    <div class="panel panel-primary">
      <div class="panel-heading"> 
        <nav class="navbar navbar-default" role="navigation">
@@ -138,10 +138,10 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Paquete
  </button>
  <div class="row col-lg-offset-5">
-
-   <h3>Listado de Paquetes</h3></div>
-   <div class="row">
-     <div class="col-md-12">
+   <h3>Listado de Paquetes</h3>
+  </div>
+   <!-- <div class="row"> -->
+     <!-- <div class="col-md-12"> -->
        <div class="table-responsive">
          <table class="table table-striped" id="listado">
            <thead>
@@ -178,8 +178,8 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
          </tbody>
        </table>
      </div>
-   </div>
- </div>
+   <!-- </div> -->
+ <!-- </div> -->
 
  <div class="panel-heading">
    <div class="contenedor" align="center">

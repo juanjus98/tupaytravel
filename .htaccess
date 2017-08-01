@@ -17,5 +17,9 @@ Rewriterule ^paquete/(.+)/(.+)/$ detalle_paquete.php?id_paquete=$1&title=$2 [L,Q
 Rewriterule ^paquete/(.+)/(.+)/(.+)$ detalle_paquete.php?id_paquete=$1&title=$2&token=$3 [L,QSA]
 
 RewriteRule ^contacto$ contacto.php [L,QSA]
+RewriteRule ^contactenos$ contacto.php [L,QSA]
 
 Rewriterule ^p/(.+)$ pagina.php?url_key=$1 [L,QSA]
+
+#V2
+RewriteRule ^paquetes$ paquetes.php [L,QSA]

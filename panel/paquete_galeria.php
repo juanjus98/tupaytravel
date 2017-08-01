@@ -13,6 +13,8 @@ if($_POST['accion'] === 'cargar'){
  $titulo = $_POST['titulo'];
  $id_tblpaquete = $_POST['id_tblpaquete'];
 
+ $principal = (isset($_POST['principal'])) ? 1 : 99 ;
+
  require_once '../libs/upload/class.upload.php';
 
  if (!empty($_FILES['imagen'])) {
@@ -26,7 +28,7 @@ if($_POST['accion'] === 'cargar'){
        $nombre_imagen = $foo->file_dst_name;
 
  //Insertar en la tabla;
-       $sql="INSERT INTO tblpaquete_galeria (id_tblpaquete,titulo,nombre_imagen) VALUES ('".$id_tblpaquete."','".$titulo."','".$nombre_imagen."')";
+       $sql="INSERT INTO tblpaquete_galeria (id_tblpaquete,titulo,nombre_imagen,principal) VALUES ('".$id_tblpaquete."','".$titulo."','".$nombre_imagen."','".$principal."')";
        $res=mysql_query($sql, $conection);
        $id_galeria=mysql_insert_id($conection);
 
@@ -127,6 +129,13 @@ if($_POST['accion'] === 'eliminar'){
              <label for="imagen">Imagen JPG (600px * 380px)</label>
                <input type="file" name="imagen" id="imagen">
              </div>
+
+            <div class="checkbox">
+              <label>
+              <input type="checkbox" name="principal" value="1"> Seleccionar como imagen principal.
+              </label>
+            </div>
+
              <div class="clearfix"></div>
              <button type="submit" class="btn btn-primary">Cargar imagen</button>
            </form>
@@ -142,12 +151,12 @@ if($_POST['accion'] === 'eliminar'){
                  <th></th>
                  <th>Título</th>
                  <th>Imagen</th>
+                 <th>Principal</th>
                </tr> 
              </thead>
              <tbody>
                <?php
- //Consultar galeri
- //Consultar paquete
+                //Consultar galeria
                $sql="SELECT * from tblpaquete_galeria Where id_tblpaquete=" . $_GET['id'];
                $res=mysql_query($sql, $conection);
 
@@ -158,7 +167,12 @@ if($_POST['accion'] === 'eliminar'){
                    <tr>
                      <td><input type="checkbox" name="regs[<?php echo $fs['id'];?>]"></td>
                      <td><?php echo $fs['titulo'];?></td>
-                     <td><img src="../images/uploads/<?php echo $fs['nombre_imagen'];?>" style="max-height: 40px;"></td>
+                     <td>
+                     <img src="../images/uploads/<?php echo $fs['nombre_imagen'];?>" style="max-height: 40px;">
+                     </td>
+                     <td class="text-center">
+                     <?php echo $principal = ($fs['principal'] == 1) ? "SI" : '';?>
+                     </td>
                    </tr>
                    <?php } } else {?>
                    <tr>

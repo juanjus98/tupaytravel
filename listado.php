@@ -184,7 +184,7 @@ if($_POST){
      </div>
      <?php
          //Consultar galería
-     $sql_gal="SELECT * FROM tblpaquete_galeria where id_tblpaquete='".$com['id_paquete']."'";
+     $sql_gal="SELECT * FROM tblpaquete_galeria where id_tblpaquete='".$com['id_paquete']."' Order By principal ASC, id Asc";
      $query_gal=mysql_query($sql_gal,$link);
      if(mysql_num_rows($query_gal) > 0){
        ?>

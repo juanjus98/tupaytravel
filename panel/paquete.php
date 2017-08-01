@@ -76,7 +76,7 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
      $res=mysql_query($sql, $conection);
      $row=  mysql_fetch_array($res);
      ?>
-      <form class="form-horizontal" method="post" action="modelpaquete.php">
+      <form class="form-horizontal" method="post" action="modelpaquete.php" enctype="multipart/form-data">
         <div class="form-group">
           <label for="nombre" class="col-sm-2 control-label">Nombre del Paquete:</label>
           <div class="col-sm-10">
@@ -170,13 +170,23 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
           
           <input type="hidden" id="guardar" name="guardar" value="<?php echo $_GET['id']?>" >
          
-            <div class="form-group" style="float: right;">
-          <div class="form-group">
-          <button type="submit" id="editar" class="btn btn-primary" aria-label="Left Align">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Guardar
-          </button>
-          </div>
-        </div>
+
+<!-- <div class="panel panel-default">
+<div class="panel-heading">Imágen</div>
+<div class="panel-body">
+  <input type="file" name="imagen">
+</div>
+</div> -->
+
+<div class="clearfix"></div>
+
+<div class="form-group">
+<button type="submit" id="editar" class="btn btn-primary col-lg-offset-2">
+  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Guardar
+</button>
+</div>
+
+
       </form>
   </div>
   

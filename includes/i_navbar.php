@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-nav-wa">
         <li class="active"><a href="#"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-        <li><a href="#">Paquetes Tour Perú</a></li>
+        <li><a href="paquetes">Paquetes Tour Perú</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tours <span class="caret"></span></a>
           <?php 
