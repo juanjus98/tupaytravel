@@ -708,12 +708,13 @@ fieldset[disabled] .btn-primary-1.active {
   display: block;
 }
 .cont-thumbnails .thumbnail .titulo-imagen h3 {
+  width: 100%;
   position: absolute;
   bottom: 0;
   text-align: right;
   padding: 10px;
   margin: 0;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   color: #fff;
   font-family: 'Pontano Sans', Tahoma, sans-serif;

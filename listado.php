@@ -204,7 +204,6 @@ if($_POST){
 
          <div class="clearfix"></div>
 
-
          <?php 
          echo '<a href="'.$url_paquete.'"><h3 class="to-emoji">'.$com['name'].'</h3></a>';
          $sql1="SELECT tblpaquete_tour.* FROM tblpaquete_tour where id_paquete='".$com['id_paquete']."'";

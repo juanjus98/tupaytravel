@@ -38,12 +38,23 @@ while ($paquete = mysql_fetch_array($result)) {
   /*echo "<pre>";
   print_r($paquete);
   echo "</pre>";*/
+/**
+ * Consultar Galería
+ */
+//Consultar galería
+$urlImagen = 'images/no-image.jpg';
+$sql_gal="SELECT * FROM tblpaquete_galeria where id_tblpaquete='".$paquete['id']."' Order By principal ASC, id Asc";
+$query_gal=mysql_query($sql_gal,$link);
+if(mysql_num_rows($query_gal) > 0){
+  $fs_gal = mysql_fetch_array($query_gal);
+  $urlImagen = 'images/uploads/' . $fs_gal['nombre_imagen'];
+}
 ?>
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <a href="#" class="titulo-imagen">
-        <img src="images/uploads/test-1.jpg" alt="alt">
-        <h3><?php echo $paquete['nombre'];?></h3>
+        <img src="<?php echo $urlImagen;?>" class="img-responsive" alt="<?php echo trim($paquete['nombre']);?>">
+        <h3><?php echo trim($paquete['nombre']);?></h3>
       </a>
       <div class="cont-btns">
         <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
