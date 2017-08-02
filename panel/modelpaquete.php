@@ -9,12 +9,14 @@ if(isset($_POST['guardar']) && $_POST['guardar']=="")
     $ress=mysql_query($con, $conection);
     $fila=mysql_fetch_row($ress);
     $orden=(int)($fila[0]+1);
+
+    $cant=$_POST['cant_detalles'];
     
-    $sql="INSERT INTO tblpaquete (nombre,cantidad,nacionalidad,estadia, precio,orden) VALUES ('".$_POST['nombre']."','".$_POST['cantidad']."','".$_POST['nacionalidad']."','".$_POST['estadia']."','".$_POST['precio']."','".$orden."')";
+    $sql="INSERT INTO tblpaquete (nombre,cantidad,nacionalidad,estadia, precio,orden) VALUES ('".$_POST['nombre']."','".$cant."','".$_POST['nacionalidad']."','".$_POST['estadia']."','".$_POST['precio']."','".$orden."')";
     $res=mysql_query($sql, $conection);
     $id_paquete=mysql_insert_id($conection);
     
-    $cant=$_POST['cant_detalles'];
+    /*$cant=$_POST['cant_detalles'];*/
 
     for($i=0;$i<$cant;$i++)
     {
@@ -33,8 +35,9 @@ if(isset($_POST['guardar']) && $_POST['guardar']=="")
 else if(isset($_POST['guardar']) && $_POST['guardar']!="")
 {
 
+  $cant=$_POST['cant_detalles'];
 
-  $sql="UPDATE tblpaquete SET nombre='".$_POST['nombre']."',fecha_inicio='".$_POST['finicio']."',fecha_fin='".$_POST['ffin']."',cantidad='".$_POST['cantidad']."',nacionalidad='".$_POST['nacionalidad']."',estadia='".$_POST['estadia']."',precio='".$_POST['precio']."',detalles='".$_POST['detalles']."' WHERE id='".$_POST['guardar']."'";
+  $sql="UPDATE tblpaquete SET nombre='".$_POST['nombre']."',fecha_inicio='".$_POST['finicio']."',fecha_fin='".$_POST['ffin']."',cantidad='".$cant."',nacionalidad='".$_POST['nacionalidad']."',estadia='".$_POST['estadia']."',precio='".$_POST['precio']."',detalles='".$_POST['detalles']."' WHERE id='".$_POST['guardar']."'";
 
   $res=mysql_query($sql, $conection);
    
@@ -42,8 +45,6 @@ else if(isset($_POST['guardar']) && $_POST['guardar']!="")
   $sqldelete="delete from tblpaquete_tour WHERE id_paquete='".$_POST['guardar']."'";
   $resdelete=mysql_query($sqldelete, $conection);
   
-  $cant=$_POST['cant_detalles'];
-
     for($i=0;$i<$cant;$i++)
     {
      $nombre=$_POST['nombre_'.$i];

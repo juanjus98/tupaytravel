@@ -83,12 +83,12 @@ $conection = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo
               <input name="nombre" style="width: 250px;" type="text" class="form-control" id="nombre" value="<?php echo $row['nombre'];?>" size="20" autofocus="">
           </div>
         </div>
-        <div class="form-group">
-          <label for="ffin" class="col-sm-2 control-label">Cantidad de Personas::</label>
+        <!-- <div class="form-group">
+          <label for="ffin" class="col-sm-2 control-label">Cantidad de Personas:</label>
           <div class="col-sm-10">
              <input name="cantidad" type="text" style="width: 250px;" class="form-control" id="cantidad" value="<?php echo $row['cantidad'];?>" size="20" autofocus="">
           </div>
-        </div>
+        </div> -->
           <div class="form-group">
           <label for="nacionalidad" class="col-sm-2 control-label">Nacionalidad:</label>
           <div class="col-sm-10">

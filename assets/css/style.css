@@ -599,6 +599,15 @@ ul.social-icons {
 .form-home .input-group i {
   color: #655441;
 }
+.form-home h3 {
+  margin: 0 0 8px 0;
+  padding: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: solid 1px #655441;
+  color: #D1F264;
+}
 .btn-primary-1 {
   color: #fff;
   background-image: linear-gradient(to top, #5B7700 0%, #D1F264 100%);
@@ -639,6 +648,85 @@ fieldset[disabled] .btn-primary-1.active {
 .btn-primary-1 .badge {
   color: #c4db28;
   background-color: #ffffff;
+}
+/**
+ * Botones detalles
+ */
+.btn-precio {
+  color: #fff;
+  background-color: #99C115;
+  border: none;
+  font-size: 18px;
+  /*font-weight: bold;*/
+  border-radius: 0px;
+}
+.btn-precio:hover,
+.btn-precio:focus,
+.btn-precio:active,
+.btn-precio.active,
+.open .dropdown-toggle.btn-precio {
+  color: #fff;
+  background-color: #99C115;
+  border: none;
+}
+.btn-precio:active,
+.btn-precio.active,
+.open .dropdown-toggle.btn-precio {
+  background-color: #99C115;
+}
+.btn-detalles {
+  color: #fff;
+  background-color: #5B7700;
+  border: none;
+  font-size: 18px;
+  /*font-weight: bold;*/
+  border-radius: 0px;
+}
+.btn-detalles:hover,
+.btn-detalles:focus,
+.btn-detalles:active,
+.btn-detalles.active,
+.open .dropdown-toggle.btn-detalles {
+  color: #fff;
+  background-color: #7A9E05;
+  border: none;
+}
+.btn-detalles:active,
+.btn-detalles.active,
+.open .dropdown-toggle.btn-detalles {
+  background-color: #5B7700;
+}
+.cont-thumbnails .thumbnail {
+  padding: 4px 0 2px 0;
+  background: #392713;
+  border: none;
+  border-radius: 0px;
+}
+.cont-thumbnails .thumbnail .titulo-imagen {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+.cont-thumbnails .thumbnail .titulo-imagen h3 {
+  position: absolute;
+  bottom: 0;
+  text-align: right;
+  padding: 10px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  font-family: 'Pontano Sans', Tahoma, sans-serif;
+  /*text-transform: uppercase;*/
+  text-shadow: 2px 2px 4px #000000;
+}
+.cont-thumbnails .thumbnail .titulo-imagen h3 .emoji {
+  max-height: 22px;
+  margin-top: -3px;
+}
+.cont-thumbnails .thumbnail .cont-btns {
+  padding: 0;
+  background: #df0;
 }
 @media (max-width: 767px) {
   body {

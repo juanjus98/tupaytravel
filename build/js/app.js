@@ -28,6 +28,9 @@ $(function() {
 	//Toolbar static
 	$("#tool-bar").sticky({ topSpacing: 0 });
 
+	//Sidebar static
+	$("#sticky-sidebar").sticky({ topSpacing: 0 });
+
 	//Galería videos.
 	$("#content-slider").lightSlider({
 		loop:true,

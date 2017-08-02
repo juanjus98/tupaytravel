@@ -4,6 +4,13 @@ include("conectar.php");
 include("funciones.php");
 require_once __DIR__ . '/libs/function.video.php';
 $link = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo conectarse : '. mysql_error());
+
+/**
+ * Consultar paquetes
+ */
+$sql_query = "SELECT * FROM tblpaquete ORDER BY cantidad ASC";
+$result = mysql_query($sql_query,$link);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,7 +28,42 @@ $link = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo cone
     </div>
 
     <div class="col-md-9">
-      <?php //include('includes/i_form.php');?>
+      <div class="cont-thumbnails">
+<?php
+if(mysql_num_rows($result) > 0) {
+?>        
+<div class="row">
+<?php
+while ($paquete = mysql_fetch_array($result)) {
+  /*echo "<pre>";
+  print_r($paquete);
+  echo "</pre>";*/
+?>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="#" class="titulo-imagen">
+        <img src="images/uploads/test-1.jpg" alt="alt">
+        <h3><?php echo $paquete['nombre'];?></h3>
+      </a>
+      <div class="cont-btns">
+        <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+        <a href="javascript:;" class="btn btn-precio" role="button"><?php echo $paquete['precio'];?></a>
+        <a href="#" class="btn btn-detalles" role="button">
+          <i class="fa fa-info" aria-hidden="true"></i> Detalles
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php 
+}
+?>
+</div>
+<?php
+}
+?>
+
+      </div>
     </div>
 
   </div>

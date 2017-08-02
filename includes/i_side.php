@@ -1,7 +1,9 @@
+<div id="sticky-sidebar">
 <form class="form-vertical" name="buscador" id="buscador" action="tours/" method="post">
  <fieldset class="form-home">
+ <h3>¿En qué fechas viajas?</h3>
   <div class="form-group">
-    <label>Inicio de Tour desde Lima - Perú</label>
+    <label>Desde</label>
     <div class="input-group date">
       <input type="text" class="form-control" name="fecha_inicio" id="date_from" value="" >
       <span class="input-group-addon">
@@ -14,7 +16,7 @@
   </div>
 
   <div class="form-group">
-    <label>Fin de Tour desde Lima - Perú</label>
+    <label>Hasta</label>
     <div class="input-group date">
       <input type="text" class="form-control" name="fecha_fin" id="date_to" value="">
       <span class="input-group-addon">
@@ -35,34 +37,31 @@
 <!-- Provincias tblprovincia-->
 <fieldset>
 <?php
-$sql_pquetes="SELECT count(tblpaquete_tour.id_paquete) as cant,tblpaquete_tour.id_paquete,
-tblpaquete.nombre as name,tblpaquete.orden, tblpaquete.precio FROM tblpaquete_tour 
-inner join tblpaquete on tblpaquete.id=tblpaquete_tour.id_paquete GROUP BY tblpaquete_tour.id_paquete";
-
-$rs_paquetes=mysql_query($sql_pquetes, $link);
+$sql_dias="SELECT COUNT(t1.id) AS numero_dias FROM tblpaquete_tour AS t1 
+INNER JOIN tblpaquete AS t2 ON (t2.id = t1.id_paquete) GROUP BY t1.id_paquete";
+$rs_dias=mysql_query($sql_dias, $link);
+if(mysql_num_rows($rs_dias) > 0){
+  $dias = array();
+  while ($fs_dia = mysql_fetch_array($rs_dias)) {
+    $dias[$fs_dia['numero_dias']] = $fs_dia['numero_dias'];
+  }
+}
 ?>
 <div class="container-box">
-<h3 class="titulo_opciones">Seleccionar Provincia</h3>
+<h3 class="titulo_opciones">Número de días</h3>
 <div class="box-wscroll">
 <?php
-  if(mysql_num_rows($rs_paquetes) > 0){
+  if(!empty($dias)){
+      foreach ($dias as $key => $dia) {
+        //$url_paquete = 'paquete/' . $fs_paquete['id_paquete'] . '/' . url_amigable($fs_paquete['name']) .'/';
     ?>
-  <ul class="list-group container-list">
-  <?php
-      while ($fs_paquete = mysql_fetch_array($rs_paquetes)) {
-        $url_paquete = 'paquete/' . $fs_paquete['id_paquete'] . '/' . url_amigable($fs_paquete['name']) .'/';
-    ?>
-    <li class="list-group-item">
-      <a href="<?php echo $url_paquete;?>" class="text-capitalize to-emoji"><?php echo $fs_paquete['name'];?></a>
-    </li>
+      <a href="#" class="btn btn-block btn-default"><?php echo ($dia == 1) ? 'Tour de ' . $dia . ' Día' : 'Tours de ' . $dia . ' Días' ;?></a>
     <?php
       }
-    ?>
-  </ul>
-<?php
  }
 ?>
 </div>
 </div>
 </fieldset>
 </form>
+</div>
