@@ -1,6 +1,6 @@
 <?php
-define("DOMINIO", "localhost/tupaytravel");
-define("MURL", "http://" . DOMINIO . "/");
+define("DOMINIO", "tupaytravel.com");
+define("MURL", "http://www." . DOMINIO . "/");
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'tupaytra');
@@ -8,8 +8,8 @@ define('DB_PASSWORD', 'peru@2015');
 define('DB_DATABASE', 'tupaytra_bd2');
 
 function conectar(){
-$link = mysql_connect("localhost","root","12345678", "db_tupaytravel");
-mysql_select_db("db_tupaytravel",$link);
+@$link = mysql_connect("localhost","tupaytra","peru@2015");
+mysql_select_db("tupaytra_bd2",$link);
 
 mysql_query("SET NAMES 'utf8'"); //change added by me resuelve el problema del cotejamiento
 if (!$link) {

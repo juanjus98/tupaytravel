@@ -1,0 +1,1 @@
+var left_side_width = 220; //Sidebar width in pixels

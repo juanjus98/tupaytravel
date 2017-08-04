@@ -19,6 +19,11 @@ if(mysql_num_rows($result)){
   $paquete=mysql_fetch_array($result);
   $url_paquete = 'paquete-tour/' . url_amigable($paquete['nombre']) . '-' . $paquete['id'];
   $titulo = strtolower(trim($paquete['nombre']));
+
+  /*echo "<pre>";
+  print_r($paquete);
+  echo "</pre>";*/
+
   /**
   * Consultar Galería
   */
@@ -107,31 +112,52 @@ if(mysql_num_rows($result)){
       </div>
 
       <!-- Tabs-->
-      <div class="cont-tabs">
+      <!-- <div class="cont-tabs"> -->
+      <div class="tabbable-panel">
+      <div class="tabbable-line">
       <ul class="nav nav-tabs" id="myTabs" rele="tablist">
         <li role="presentation" class="active">
           <a href="#descripcion" id="descripcion-tab" role="tab" data-toggle="tab" aria-controls="descripcion" aria-expanded="true">
-          Descripción
+          <i class="fa fa-info-circle" aria-hidden="true"></i> Información
+          </a>
+        </li>
+
+        <li role="presentation">
+          <a href="#itinerario" id="descripcion-tab" role="tab" data-toggle="tab" aria-controls="itinerario" aria-expanded="true">
+          <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Itinerario
           </a>
         </li>
 
         <li role="presentation">
           <a href="#pago" id="pago-tab" role="tab" data-toggle="tab" aria-controls="pago" aria-expanded="true">
-          Formas de pago
+          <i class="fa fa-usd" aria-hidden="true"></i>  Formas de pago
           </a>
         </li>
 
       </ul>
       <div class="tab-content" id="myTabContent">
+        <!--Descripción-->
         <div class="tab-pane fade in active" role="tabpanel" id="descripcion" aria-labelledby="descripcion-tab">
         <p>DESCRIPCIÓN Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
         </p>
         </div>
+        <!--//Descripción-->
 
+        <!--Itinerario-->
+        <div class="tab-pane fade" role="tabpanel" id="itinerario" aria-labelledby="itinerario-tab">
+        <p>ITINERARIO Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+        </p>
+        </div>
+        <!--//Itinerario-->
+
+        <!--Formas de pago-->
         <div class="tab-pane fade" role="tabpanel" id="pago" aria-labelledby="pago-tab">
         <p>PAGO Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
         </p>
         </div>
+        <!--//Formas de pago-->
+
+      </div>
 
       </div>
       </div>

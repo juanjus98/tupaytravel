@@ -20,30 +20,30 @@ $.datepicker.setDefaults($.datepicker.regional['es']);
 
 $(function() {
 	//Select search select2
-    $(".select_search").select2();
+	$(".select_search").select2();
 
 	//Galería
 	$('#imageGallery').lightSlider({
-        gallery:true,
-        item:1,
-        loop:true,
-        /*auto:true,*/
-        thumbItem:9,
-        slideMargin:0,
-        enableDrag: true,
-        enableTouch: true,
-        currentPagerPosition:'left',
-        onSliderLoad: function(el) {
-            el.lightGallery({
-                selector: '#imageGallery .lslide'
-            });
-        }   
-    });
+		gallery:true,
+		item:1,
+		loop:true,
+		/*auto:true,*/
+		thumbItem:9,
+		slideMargin:0,
+		enableDrag: true,
+		enableTouch: true,
+		currentPagerPosition:'left',
+		onSliderLoad: function(el) {
+			el.lightGallery({
+				selector: '#imageGallery .lslide'
+			});
+		}   
+	});
 
 	//Slimscroll
 	$('.box-wscroll').slimScroll({
-        height: '233px'
-    });
+		height: '233px'
+	});
 
 	//Toolbar static
 	$("#tool-bar").sticky({ topSpacing: 0 });
@@ -122,17 +122,17 @@ $(function() {
 	/**
 	 * Fecha datepicker
 	 */
-	$(".select-fecha").datepicker({
+	 $(".select-fecha").datepicker({
 	 	minDate: 0,
 	 	defaultDate: "+1w",
 	 	changeMonth: true,
 	 	changeYear: true,
 	 	numberOfMonths: 1
 	 });
-	
-	$(".show_calendar").click(function() {
-		$(".select-fecha").datepicker("show");
-	});
+
+	 $(".show_calendar").click(function() {
+	 	$(".select-fecha").datepicker("show");
+	 });
 
 	/**
 	 * Formulario home
@@ -158,17 +158,6 @@ $(function() {
 	 	from.datepicker( "option", "maxDate", getDate( this ) );
 	 });
 
-	 function getDate( element ) {
-	 	var date;
-	 	try {
-	 		date = $.datepicker.parseDate( dateFormat, element.value );
-	 	} catch( error ) {
-	 		date = null;
-	 	}
-
-	 	return date;
-	 };
-
 	 $("#fecha_inicio_show").click(function() {
 	 	$("#date_from").datepicker("show");
 	 });
@@ -177,8 +166,8 @@ $(function() {
 	 	$("#date_to").datepicker("show");
 	 });
 
-$('#buscar').on('click',function(event){
-	event.preventDefault();
+	 $('#buscar').on('click',function(event){
+	 	event.preventDefault();
 	//Validar
 	if($('#date_from').val()==""){
 		alert('Seleccionar Fecha Inicio de Tour');
@@ -210,4 +199,4 @@ $('#buscar').on('click',function(event){
 	$(location).attr('href',urlBusqueda);
 });
 
-});
+	});

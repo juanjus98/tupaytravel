@@ -1,0 +1,24 @@
+{
+  "name": "waapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Julio Sandoval Layza",
+  "license": "ISC",
+  "devDependencies": {
+    "erkalicious-grunt-este-watch": "^0.1.28",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-less": "^1.2.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-este-watch": "^0.1.18"
+  }
+}
