@@ -30,5 +30,9 @@
 <script src="assets/plugins/emoji/emoji.js" type="text/javascript"></script>
 <!-- //emoji-->
 
+<!-- select2-->
+<script src="assets/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+<!-- //select2-->
+
 <script src="assets/js/app.js" type="text/javascript"></script>
 <!-- JavaScript-->

@@ -1,11 +1,11 @@
-<form class="form-vertical" name="buscador" id="buscador" action="tours/" method="post">
+<form class="form-vertical" name="buscador" id="buscador" action="paquetes" method="post">
  <fieldset class="form-home">
   <div class="form-group">
     <label>Inicio de Tour desde Lima - Perú</label>
     <div class="input-group date">
       <input type="text" class="form-control" name="fecha_inicio" id="date_from" value="" >
       <span class="input-group-addon">
-        <a href="#" id="fecha_inicio_show">
+        <a href="javascript:;" id="fecha_inicio_show">
           <!-- <span class="glyphicon glyphicon-calendar"></span> -->
           <i class="fa fa-calendar" aria-hidden="true"></i>
         </a>
@@ -18,7 +18,7 @@
     <div class="input-group date">
       <input type="text" class="form-control" name="fecha_fin" id="date_to" value="">
       <span class="input-group-addon">
-        <a href="#" id="fecha_fin_show">
+        <a href="javascript:;" id="fecha_fin_show">
           <!-- <span class="glyphicon glyphicon-calendar"></span> -->
           <i class="fa fa-calendar" aria-hidden="true"></i>
         </a>

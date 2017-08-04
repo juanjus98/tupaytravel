@@ -5,10 +5,9 @@
   <div class="form-group">
     <label>Desde</label>
     <div class="input-group date">
-      <input type="text" class="form-control" name="fecha_inicio" id="date_from" value="" >
+      <input type="text" class="form-control" name="fecha_inicio" id="date_from" value="<?php echo $desde = (!empty($fechaDesde)) ? date("d-m-Y", strtotime($fechaDesde)) : '' ;?>" >
       <span class="input-group-addon">
         <a href="#" id="fecha_inicio_show">
-          <!-- <span class="glyphicon glyphicon-calendar"></span> -->
           <i class="fa fa-calendar" aria-hidden="true"></i>
         </a>
       </span>
@@ -18,16 +17,14 @@
   <div class="form-group">
     <label>Hasta</label>
     <div class="input-group date">
-      <input type="text" class="form-control" name="fecha_fin" id="date_to" value="">
+      <input type="text" class="form-control" name="fecha_fin" id="date_to" value="<?php echo $hasta = (!empty($fechaHasta)) ? date("d-m-Y", strtotime($fechaHasta)) : '' ;?>">
       <span class="input-group-addon">
         <a href="#" id="fecha_fin_show">
-          <!-- <span class="glyphicon glyphicon-calendar"></span> -->
           <i class="fa fa-calendar" aria-hidden="true"></i>
         </a>
       </span>
     </div>
   </div>
-
   <div class="row"> 
     <div class="col-md-12">
       <button id="buscar" class="btn btn-primary-1 btn-block" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Filtrar</button>
@@ -53,9 +50,9 @@ if(mysql_num_rows($rs_dias) > 0){
 <?php
   if(!empty($dias)){
       foreach ($dias as $key => $dia) {
-        //$url_paquete = 'paquete/' . $fs_paquete['id_paquete'] . '/' . url_amigable($fs_paquete['name']) .'/';
+        $urlPaquetes = 'paquetes-tours/'.$dia.'dias';
     ?>
-      <a href="#" class="btn btn-block btn-default"><?php echo ($dia == 1) ? 'Tour de ' . $dia . ' Día' : 'Tours de ' . $dia . ' Días' ;?></a>
+      <a href="<?php echo $urlPaquetes;?>" class="btn btn-block btn-default"><?php echo ($dia == 1) ? 'Tour de ' . $dia . ' Día' : 'Tours de ' . $dia . ' Días' ;?></a>
     <?php
       }
  }

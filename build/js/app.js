@@ -19,6 +19,26 @@ $.datepicker.regional['es'] = {
 $.datepicker.setDefaults($.datepicker.regional['es']);
 
 $(function() {
+	//Select search select2
+    $(".select_search").select2();
+
+	//Galería
+	$('#imageGallery').lightSlider({
+        gallery:true,
+        item:1,
+        loop:true,
+        /*auto:true,*/
+        thumbItem:9,
+        slideMargin:0,
+        enableDrag: true,
+        enableTouch: true,
+        currentPagerPosition:'left',
+        onSliderLoad: function(el) {
+            el.lightGallery({
+                selector: '#imageGallery .lslide'
+            });
+        }   
+    });
 
 	//Slimscroll
 	$('.box-wscroll').slimScroll({
@@ -27,9 +47,6 @@ $(function() {
 
 	//Toolbar static
 	$("#tool-bar").sticky({ topSpacing: 0 });
-
-	//Sidebar static
-	/*$("#sticky-sidebar").sticky({ topSpacing: 0 });*/
 
 	//Galería videos.
 	$("#content-slider").lightSlider({
@@ -103,6 +120,21 @@ $(function() {
 	});
 
 	/**
+	 * Fecha datepicker
+	 */
+	$(".select-fecha").datepicker({
+	 	minDate: 0,
+	 	defaultDate: "+1w",
+	 	changeMonth: true,
+	 	changeYear: true,
+	 	numberOfMonths: 1
+	 });
+	
+	$(".show_calendar").click(function() {
+		$(".select-fecha").datepicker("show");
+	});
+
+	/**
 	 * Formulario home
 	 */
 	 var dateFormat = "dd-mm-yy",
@@ -138,38 +170,44 @@ $(function() {
 	 };
 
 	 $("#fecha_inicio_show").click(function() {
-	 	console.log("open 1");
 	 	$("#date_from").datepicker("show");
 	 });
 
 	 $("#fecha_fin_show").click(function() {
-	 	console.log("open 2");
 	 	$("#date_to").datepicker("show");
 	 });
 
-	 $('#buscar').on('click',function(event){
-	 	event.preventDefault()
-      //Validar
-      if($('#date_from').val()==""){
-      	alert('Seleccionar Fecha Inicio de Tour');
-      	$('#date_from').focus();
-      	return false;
-      }
+$('#buscar').on('click',function(event){
+	event.preventDefault();
+	//Validar
+	if($('#date_from').val()==""){
+		alert('Seleccionar Fecha Inicio de Tour');
+		$('#date_from').focus();
+		return false;
+	}
 
-      if($('#date_to').val()==""){
-      	alert('Seleccionar Fecha Fin de Tour');
-      	$('#date_to').focus();
-      	return false;
-      }
+	if($('#date_to').val()==""){
+		alert('Seleccionar Fecha Fin de Tour');
+		$('#date_to').focus();
+		return false;
+	}
 
-      if($('select#adultos').val() == "0"){
-      	alert('Debe seleccionar al menos un Adulto');
-      	$('select#adultos').focus();
-      	return false;
-      }
+	/*if($('select#adultos').val() == "0"){
+		alert('Debe seleccionar al menos un Adulto');
+		$('select#adultos').focus();
+		return false;
+	}*/
 
-      $('form#buscador').submit();
+	//Setear url
+	var date_from = $('#date_from').val();
+	var date_to = $('#date_to').val();
+	date_from = date_from.replace("-", "");
+	date_from = date_from.replace("-", "");
+	date_to = date_to.replace("-", "");
+	date_to = date_to.replace("-", "");
 
-  });
+	var urlBusqueda = 'paquetes-tours/desde_' + date_from + 'hasta_' + date_to;
+	$(location).attr('href',urlBusqueda);
+});
 
-	});
+});

@@ -22,4 +22,7 @@ RewriteRule ^contactenos$ contacto.php [L,QSA]
 Rewriterule ^p/(.+)$ pagina.php?url_key=$1 [L,QSA]
 
 #V2
-RewriteRule ^paquetes$ paquetes.php [L,QSA]
+RewriteRule ^paquetes-tours$ p_paquetes.php [L,QSA]
+RewriteRule ^paquetes-tours/(.+)$ p_paquetes.php?params=$1 [L,QSA]
+
+RewriteRule ^paquete-tour/(.+)$ p_paquete.php?params=$1 [L,QSA]

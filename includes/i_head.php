@@ -1,4 +1,5 @@
-<!-- <base href="<?php echo MURL;?>"> -->
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59836a81515dc700116604dd&product=inline-share-buttons' async='async'></script>
+<base href="<?php echo MURL;?>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <title>Tupay Travel - Agencia de Viajes de Cusco y Machupicchu - Perú</title>
@@ -13,6 +14,8 @@
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
 
+<link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet"/>
+
 <!-- Favicon -->
 <link rel="apple-touch-icon" sizes="76x76" href="images/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
@@ -24,4 +27,6 @@
 <link rel="icon" href="images/favicons/favicon.ico" type="image/x-icon">
 <!-- // Favicon -->
 
-<script type="text/javascript">var base_url='http://localhost/tupaytravel/<?php //echo MURL;?>';</script>
+<script type="text/javascript">var base_url='<?php echo MURL;?>';</script>
+
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59836a81515dc700116604dd&product=inline-share-buttons' async='async'></script>
