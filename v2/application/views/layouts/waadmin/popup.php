@@ -27,6 +27,9 @@ die();*/
     <script type="text/javascript">var base_url='<?php echo base_url('admin');?>';</script>
     <?php //echo notify();?>
 
+    <!--iCheked-->
+    <link href="<?php echo base_url('plugins/icheck/skins/all.css?v=1.0.2') ?>" rel="stylesheet">
+
 </head>
 <body class="skin-wa">
         <div class="wrapper row-offcanvas row-offcanvas-left">
@@ -56,7 +59,7 @@ die();*/
    <script type="text/javascript" src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
    <script src="<?php echo base_url() ?>plugins/js-cookie/js.cookie.js"></script>
 
-   <!-- <script src="<?php echo base_url() ?>plugins/ckeditor/ckeditor.js" type="text/javascript"></script> -->
+   <script src="<?php echo base_url('plugins/icheck/icheck.js?v=1.0.2');?>"></script>
 
    <script type="text/javascript" src="<?php echo base_url() ?>js/general.min.js"></script>
    

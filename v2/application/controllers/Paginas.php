@@ -22,6 +22,10 @@ class Paginas extends CI_Controller {
     $this->website_info = $this->Inicio->get_website();
   }
 
+  public function redirect(){
+    redirect('waadmin', 'refresh');
+  }
+
   public function index() {
     $data['active_link'] = "inicio";
 

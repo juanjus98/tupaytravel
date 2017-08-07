@@ -116,9 +116,7 @@ function get_urlkey($data){
   }else{
     $result = $urlkey . "-" .$rand_str;
   }
-
   return $result;
-  
 }
 
 function valida_urlkey($data){
