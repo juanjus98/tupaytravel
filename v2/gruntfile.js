@@ -4,14 +4,13 @@ module.exports = function(grunt){
 		less: {
 			development:{
 				options:{
-					paths:['less/']
+					paths:['build/less/']
 				},
 				files:{
-					"css/bootstrap.css" : "less/bootstrap.less",
-					"css/general.css" : "less/admin-lte.less", //Waadmin
-					"css/style.css" : "less/website/website.less", //Website
-					"css/font-awesome.css" : "less/font-awesome.less",
-					"css/hover.css" : "less/hover/hover.less"
+					"assets/css/bootstrap.css" : "node_modules/bootstrap/less/bootstrap.less",
+					"assets/css/font-awesome.css" : "build/less/font-awesome/less/font-awesome.less",
+					"assets/css/style.css" : "build/less/website/website.less",
+					"assets/css/waadmin.css" : "build/less/AdminLTE/AdminLTE.less",
 				}
 			}
 		},
@@ -19,29 +18,29 @@ module.exports = function(grunt){
 			target: {
 				files: [{
 					expand: true,
-					cwd: 'css',
-					src: ['bootstrap.css','general.css', 'style.css','font-awesome.css','hover.css'],
-					dest: 'css',
+					cwd: 'assets/css',
+					src: ['style.css','font-awesome.css','bootstrap.css','waadmin.css'],
+					dest: 'assets/css',
 					ext: '.min.css'
 				}]
 			}
 		},
 		jshint: {
-			all:['js/scripts/*.js']
+			all:['build/js/waadmin/*.js', 'build/js/website/*.js']
 		},
 		concat: {
 			basic_and_extras: {
 				files: {
-					'js/general.js': ['js/scripts/variables.js','js/scripts/functions.js','js/scripts/main.js'],
-					'js/wa-scripts.js': ['js/website/variables.js','js/website/functions.js','js/website/main.js'],
+					'assets/js/waadmin.js': ['build/js/waadmin/variables.js','build/js/waadmin/functions.js','build/js/waadmin/main.js'],
+					'assets/js/website.js': ['build/js/website/variables.js','build/js/website/functions.js','build/js/website/main.js'],
 				},
 			},
 		},
 		uglify: {
 			my_target: {
 				files: {
-					'js/general.min.js': ['js/general.js'],
-					'js/wa-scripts.min.js': ['js/wa-scripts.js']
+					'assets/js/waadmin.min.js': ['assets/js/waadmin.js'],
+					'assets/js/website.min.js': ['assets/js/website.js']
 				}
 			}
 		}
@@ -54,6 +53,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-concat'); //Une archivos javascript
 	grunt.loadNpmTasks('grunt-contrib-uglify'); //Minifica archivos javascript
 
-	grunt.registerTask('default',['less','cssmin','jshint','concat','uglify'])
+	grunt.registerTask('default',['less','cssmin','jshint','concat','uglify']);
 
 }

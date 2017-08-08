@@ -35,7 +35,7 @@ $confirmation_code = array(
 
         <div class="container">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-7 girl-cont">
-                <img src="<?php echo base_url(); ?>images/chica.png" class="img-responsive" />
+                <img src="<?php echo base_url('assets/images/waadmin/chica.png'); ?>" class="img-responsive" />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
 
