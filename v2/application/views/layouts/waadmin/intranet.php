@@ -61,7 +61,7 @@ die();*/
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header bg-light-blue">
-                                <img src="<?php echo base_url('images/avatar3.png');?>" class="img-circle" alt="User Image" />
+                                <img src="<?php echo base_url('assets/images/waadmin/avatar04.png');?>" class="img-circle" alt="User Image" />
                                 <p>
                                     <?php echo $user_info['nombre'] ." ". $user_info['apellido'];?>
                                     <small>Desde: <?php echo date("d/m/Y",strtotime($user_info['fch_ingreso'])); ?></small>

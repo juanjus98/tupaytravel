@@ -45,25 +45,29 @@ if (!function_exists('wamenu')) {
 
     function wamenu() {
         $CI= & get_instance();
-        //Categorias de productos
-        $CI->load->model('crud_model', 'Crud');
+        //Menu
+        $CI->load->model('menu_model', 'Menu');
 
-        $data_crud['table'] = "servicio as t1";
-        $data_crud['columns'] = "t1.*";
-        $data_crud['where'] = array("t1.estado !=" => 0);
-        $data_crud['order_by'] = "t1.orden Asc";
-        $resultado = $CI->Crud->getRows($data_crud);
-
+        //Menú tours
+        $resultado = $CI->Menu->menuTours();
         foreach ($resultado as $key => $value) {
-            $servicios["servicio/{$value['url_key']}"] = $value['nombre_largo'];
+            $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
+            $menuTours["tours/{$urlkey}"] = $value['provincia'];
+        }
+
+        //Menú estadia
+        $resultado = $CI->Menu->menuEstadia();
+        foreach ($resultado as $key => $value) {
+            $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
+            $menuEstadia["hoteles/{$urlkey}"] = $value['provincia'];
         }
 
 
         $menu = array(
-            'inicio' => 'Inicio',
-            'contactanos' => 'Contactanos',
-            'salones' => 'Salones',
-            'servicios' => $servicios
+            'inicio' => '<i class="fa fa-home" aria-hidden="true"></i>',
+            'paquetes-tours' => 'Paquetes Tour Perú',
+            'Tours' => $menuTours,
+            'Estadía' => $menuEstadia
         );
 
         return $menu;

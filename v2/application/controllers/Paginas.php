@@ -16,6 +16,8 @@ class Paginas extends CI_Controller {
     $this->load->model('productos_model', 'Productos');
     $this->load->model("crud_model","Crud");
 
+    $this->load->model("promociones_model","Promociones");
+
     /**
      * Información del website
      */
@@ -31,6 +33,9 @@ class Paginas extends CI_Controller {
 
     $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($data['website']); //siempre
+
+    //Promociones
+    $data['promociones'] = $this->Promociones->listado(6,0);
 
     $data_crud['table'] = "slider as t1";
     $data_crud['columns'] = "t1.*";

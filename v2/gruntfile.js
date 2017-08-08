@@ -32,7 +32,7 @@ module.exports = function(grunt){
 			basic_and_extras: {
 				files: {
 					'assets/js/waadmin.js': ['build/js/waadmin/variables.js','build/js/waadmin/functions.js','build/js/waadmin/main.js'],
-					'assets/js/website.js': ['build/js/website/variables.js','build/js/website/functions.js','build/js/website/main.js'],
+					'assets/js/website.js': ['build/js/website/variables.js','build/js/website/functions.js','build/js/website/app.js'],
 				},
 			},
 		},
