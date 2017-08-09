@@ -6,9 +6,9 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  */
 $config['admin_name'] = "Administrador";
 
-$config['admin_domain'] = "salonesyeventos.pe";
+$config['admin_domain'] = "tupaytravel.com";
 $config['admin_url'] = "http://" . $config['admin_domain'];
-$config['admin_logo'] = $config['admin_url'] . "/images/logo-admin.png";
+$config['admin_logo'] = $config['admin_url'] . "/assets/images/waadmin/logo.png";
 
 //Direcotio de admin
 $config['admin_path'] = 'waadmin';
@@ -16,16 +16,16 @@ $config['admin_path'] = 'waadmin';
 /**
  * Generales para el website
  */
-$config['website']['dominio'] = "www.salonesyeventos.pe";
+$config['website']['dominio'] = "www.tupaytravel.com";
 
 /**
  * Directorio de carga de imagenes
  */
-$config['upload_path'] = "/images/uploads/";
+$config['upload_path'] = "/assets/images/uploads/";
 
 /**
  * Configuración de email
  */
-$config['waemail']['dominio'] = "www.salonesyeventos.pe";
-$config['waemail']['logo'] = "http://www.salonesyeventos.pe/images/logo.png";
+$config['waemail']['dominio'] = "www.tupaytravel.com";
+$config['waemail']['logo'] = "http://tupaytravel.pe/assets/images/logo-email.png";
 $config['waemail']['color'] = "#F3A313";

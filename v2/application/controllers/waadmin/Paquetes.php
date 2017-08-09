@@ -75,7 +75,7 @@ $this->template->build('waadmin/paquetes/index', $data);
 }
 
 function editar($tipo='C',$id=NULL){
-  $path = '../../../js/ckfinder';
+   $path = '../../../assets/plugins/ckfinder';
    $width = 'auto';
    $ckEditor = $this->editor($path, $width);
 
@@ -301,7 +301,7 @@ function editor($path, $width) {
 
  //configure base path of ckeditor folder 
 
-   $this->ckeditor->basePath = base_url() . 'js/ckeditor/';
+   $this->ckeditor->basePath = base_url('assets/plugins/ckeditor/');
 
    $this->ckeditor->config['toolbar'] = 'Full';
 
