@@ -178,6 +178,10 @@ ul.social-icons {
   color: #DC2825;
 }
 
+.galeria-icon {
+  color: @color-primary-0;
+}
+
 .marg-t20 {
   margin-top: 20px;
 }
@@ -206,7 +210,7 @@ ul.social-icons {
   }
 }
 
-.video-item {
+.cont-item {
   position: relative;
   display: block;
   -webkit-transition: background-color 2s ease-out;
@@ -214,12 +218,7 @@ ul.social-icons {
   -o-transition: background-color 2s ease-out;
   transition: background-color 2s ease-out;
 
-  .video {
-    /*position: relative;
-    display: block;
-    background:#ff0;
-    height:100%;
-    width:100%;*/
+  .video, .foto {
     text-align:center;
 
     span {
@@ -228,7 +227,7 @@ ul.social-icons {
       left: 0;
       right: 0;
       font-size:40px;
-      color: rgba(0,0,0, 0.5);
+      color: rgba(255,255,255,0.5);
       transform: translateY(-50%);
     }
 
@@ -236,7 +235,11 @@ ul.social-icons {
 
     &:hover {
       .video span {
-        color: #DC2825;
+        color:  rgba(196, 48, 43, .8);
+      }
+
+      .foto span {
+       color:   rgba(153, 193, 21, .8); 
       }
 
     }

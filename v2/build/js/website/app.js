@@ -80,7 +80,7 @@ $(function() {
     //Galería de fotos.
     $("#content-slider-fotos").lightSlider({
     	loop:true,
-    	auto:true,
+    	auto:false,
     	item:4,
     	slideMove:2,
     	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',

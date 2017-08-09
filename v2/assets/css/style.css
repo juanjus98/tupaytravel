@@ -165,6 +165,9 @@ ul.social-icons {
 .youtube-icon {
   color: #DC2825;
 }
+.galeria-icon {
+  color: #392713;
+}
 .marg-t20 {
   margin-top: 20px;
 }
@@ -190,7 +193,7 @@ ul.social-icons {
 .container-box .titulo_opciones span a:hover {
   text-decoration: underline;
 }
-.video-item {
+.cont-item {
   position: relative;
   display: block;
   -webkit-transition: background-color 2s ease-out;
@@ -198,25 +201,25 @@ ul.social-icons {
   -o-transition: background-color 2s ease-out;
   transition: background-color 2s ease-out;
 }
-.video-item .video {
-  /*position: relative;
-    display: block;
-    background:#ff0;
-    height:100%;
-    width:100%;*/
+.cont-item .video,
+.cont-item .foto {
   text-align: center;
 }
-.video-item .video span {
+.cont-item .video span,
+.cont-item .foto span {
   top: 50%;
   position: absolute;
   left: 0;
   right: 0;
   font-size: 40px;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   transform: translateY(-50%);
 }
-.video-item:hover .video span {
-  color: #DC2825;
+.cont-item:hover .video span {
+  color: rgba(196, 48, 43, 0.8);
+}
+.cont-item:hover .foto span {
+  color: rgba(153, 193, 21, 0.8);
 }
 .brd-1 {
   border: solid 1px #B5DB39;

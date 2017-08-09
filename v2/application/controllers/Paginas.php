@@ -17,6 +17,10 @@ class Paginas extends CI_Controller {
     $this->load->model("crud_model","Crud");
 
     $this->load->model("promociones_model","Promociones");
+    $this->load->model("videos_model","Videos");
+    $this->load->model("paquetes_model","Paquetes");
+    $this->load->model("tours_model","Tours");
+    $this->load->model("hoteles_model","Hoteles");
 
     /**
      * Información del website
@@ -36,6 +40,24 @@ class Paginas extends CI_Controller {
 
     //Promociones
     $data['promociones'] = $this->Promociones->listado(6,0);
+    //Videos
+    $data['videos'] = $this->Videos->listado(8,0);
+
+    //Paquetes
+    $total_paquetes = $this->Paquetes->total_registros();
+    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0);
+
+    //Tours
+    $total_tours = $this->Tours->total_registros();
+    $data['tours'] = $this->Tours->listado($total_tours,0);
+
+    //Hoteles
+    $total_hoteles = $this->Hoteles->total_registros();
+    $data['hoteles'] = $this->Hoteles->listado($total_hoteles,0);
+    /*echo "<pre>";
+    print_r($data['paquetes']);
+    echo "</pre>";*/
+
 
     $data_crud['table'] = "slider as t1";
     $data_crud['columns'] = "t1.*";

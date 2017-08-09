@@ -111,15 +111,10 @@
   <div class="col-md-8 col-sm-6">
     <h3 class="titulo_opciones">Nuestras promociones:</h3>
     <?php
-    /*$sql_promociones="SELECT * FROM tblpromociones WHERE estado != 0 ORDER BY orden LIMIT 6";
-    $rs_promociones=mysql_query($sql_promociones, $link);*/
-    ?>
-    <?php
     if(!empty($promociones)){
      ?>
      <div class="row">
        <?php
-       /*while ($fs_promocion = mysql_fetch_array($rs_promociones)) {*/
         foreach ($promociones as $key => $value) {
           $tituloPromo = $value['titulo'];
           $urlImagen = base_url('assets/images/uploads/' . $value['imagen']);
@@ -146,24 +141,307 @@
 <!--Nos recomiendan-->
 <div class="row">
   <div class="col-md-12">
-    <?php include('includes/i_videos_slider.php');?>
+  <div class="container-box">
+    <h3 class="titulo_opciones">
+    Ellos nos recomiendan
+    <div class="clearfix visible-xs-block"></div>
+    <span><a href="#"><i class="fa fa-youtube-play youtube-icon" aria-hidden="true"></i> Visita nuestro canal</a></span>
+    </h3>
+    <?php
+    if(!empty($videos)){
+      ?>
+      <ul id="content-slider" class="content-slider">
+        <?php
+          foreach ($videos as $key => $value) {
+          $youtube_id = getYoutubeId($value['url']);
+          $video_embed = "http://www.youtube.com/embed/".$youtube_id."?autoplay=1"; 
+          $video_titulo = $value['titulo'];
+          $video_imagen = $value['imagen'];
+          ?>
+          <li>
+            <div class="cont-item">
+              <a href="<?php echo $video_embed;?>" title="<?php echo $video_titulo;?>" class="various video fancybox.iframe">
+                <span class="fa fa-youtube-play"></span>
+                <img src="<?php echo $video_imagen;?>" alt="<?php echo $video_titulo;?>" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <?php
+        }
+        ?>
+      </ul>
+      <?php
+    }
+    ?>
+  </div><!-- //container-box-->
+  </div>
+</div>
+
+<!-- Galería de fotos-->
+<div class="row">
+  <div class="col-md-12">
+  <div class="container-box">
+    <h3 class="titulo_opciones">
+    Galería de fotos
+    <div class="clearfix visible-xs-block"></div>
+    <span><a href="#"><i class="fa fa-camera-retro galeria-icon" aria-hidden="true"></i> Ver galería</a></span>
+    </h3>
+      <ul id="content-slider-fotos" class="content-slider">
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/1.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/2.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/3.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/4.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/5.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/6.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/7.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/8.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/9.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/10.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/11.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/12.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/13.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/14.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/15.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/16.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/17.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/18.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="cont-item">
+              <a href="./fotos/" title="Galería Tupay" class="foto">
+                <span class="fa fa-camera-retro"></span>
+                <img src="<?php echo base_url('assets/images/fotos/19.jpg');?>" alt="Galería Tupay" class="img-responsive">
+              </a>
+            </div>
+          </li>
+      </ul>
+  </div><!-- //container-box-->
   </div>
 </div>
 
 <!-- Paquetes, Tours y estadía-->
 <div class="row">
   <div class="col-md-4">
-    <?php include('includes/i_paquetes.php');?>
+    <div class="container-box">
+    <h3 class="titulo_opciones">
+      Paquetes Tour Perú 
+      <div class="clearfix visible-xs-block"></div>
+      <span>
+        <a href="paquetes-tours">Ver más</a>
+      </span>
+    </h3>
+    <div class="box-wscroll">
+    <?php
+      if(!empty($paquetes)){
+        ?>
+      <ul class="list-group container-list">
+      <?php
+          foreach ($paquetes as $key => $value) {
+            $url_paquete = 'paquete-tour/' . $value['url_key'];
+        ?>
+        <li class="list-group-item">
+          <a href="<?php echo $url_paquete;?>" class="text-capitalize to-emoji"><?php echo $value['nombre'];?></a>
+        </li>
+        <?php
+          }
+        ?>
+      </ul>
+    <?php
+     }
+    ?>
+    </div>
+    </div>
   </div>
   <div class="col-md-4">
-    <?php include('includes/i_tours.php');?>
+<div class="container-box">
+<h3 class="titulo_opciones">
+  Tours 
+  <div class="clearfix visible-xs-block"></div>
+  <span>
+    <a href="#">Ver más</a>
+  </span>
+</h3>
+<div class="box-wscroll">
+<?php
+  if(!empty($tours)){
+    ?>
+  <ul class="list-group container-list">
+  <?php
+        foreach ($tours as $key => $value) {
+        $url_tour = 'tour/' . $value['url_key'];
+    ?>
+    <li class="list-group-item">
+      <a href="<?php echo $url_tour;?>" class="text-capitalize to-emoji"><?php echo $value['nombre'];?></a>
+    </li>
+    <?php
+      }
+    ?>
+  </ul>
+<?php
+ }
+?>
+</div>
+</div>
   </div>
   <div class="col-md-4">
-    <?php include('includes/i_estadia.php');?>
+<div class="container-box">
+<h3 class="titulo_opciones">
+  Estadía 
+  <div class="clearfix visible-xs-block"></div>
+  <span>
+    <a href="#">Ver más</a>
+  </span>
+</h3>
+<div class="box-wscroll">
+<?php
+  if(!empty($hoteles)){
+    ?>
+  <ul class="list-group container-list">
+  <?php
+        foreach ($hoteles as $key => $value) {
+        $url_hotel = 'hotel/' . $value['url_key'];
+    ?>
+    <li class="list-group-item">
+      <a href="<?php echo $url_hotel;?>" class="text-capitalize to-emoji"><?php echo $value['nombre'];?></a>
+    </li>
+    <?php
+      }
+    ?>
+  </ul>
+<?php
+ }
+?>
+</div>
+</div>
   </div>
 </div>
 
 <!-- Bloques rápidos-->
-<?php include('includes/i_boxes.php');?>
+<?php //include('includes/i_boxes.php');?>
 
 </section>

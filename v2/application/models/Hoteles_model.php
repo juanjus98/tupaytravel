@@ -1,6 +1,5 @@
 <?php
-
-class Videos_model extends CI_Model {
+class Hoteles_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -22,22 +21,22 @@ class Videos_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        if (!empty($data['categoria_id'])) {
+        /*if (!empty($data['categoria_id'])) {
             $where["t1.categoria_id"] = $data['categoria_id'];
-        }
+        }*/
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
         } else {
-            $like["t1.titulo"] = "";
+            $like["t1.nombre"] = "";
         }
 
         $resultado = $this->db->select("t1.*")
                 /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
                 ->where($where)
                 ->like($like)
-                ->get("tblvideos as t1")
+                ->get("tblhotel as t1")
                 ->num_rows();
 
         return $resultado;
@@ -59,15 +58,15 @@ class Videos_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        if (!empty($data['categoria_id'])) {
+        /*if (!empty($data['categoria_id'])) {
             $where["t1.categoria_id"] = $data['categoria_id'];
-        }
+        }*/
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
         } else {
-            $like["t1.titulo"] = "";
+            $like["t1.nombre"] = "";
         }
 
 
@@ -75,7 +74,7 @@ class Videos_model extends CI_Model {
         if (!empty($data['ordenar_por'])) {
             $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
         } else {
-            $order_by = 't1.orden ASC, t1.fecha DESC';
+            $order_by = 't1.nombre ASC';
         }
 
         if ($start > 0) {
@@ -88,7 +87,7 @@ class Videos_model extends CI_Model {
                 ->like($like)
                 ->order_by($order_by)
                 ->limit($limit, $start)
-                ->get("tblvideos as t1")
+                ->get("tblhotel as t1")
                 ->result_array();
 
         return $resultado;
@@ -119,11 +118,11 @@ class Videos_model extends CI_Model {
                 /*->join("categoria as t2","t2.id = t1.categoria_id","left")
                 ->join("marca as t3","t3.id = t1.marca_id","left")*/
                 ->where($where)
-                ->get("tblvideos as t1")
+                ->get("tblhotel as t1")
                 ->row_array();
 
         return $result;
     }
-
+    
 
 }
