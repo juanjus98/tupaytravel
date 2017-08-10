@@ -17,6 +17,7 @@ class Paquetes extends CI_Controller {
  $this->load->helper('waadmin');
  $this->load->model("crud_model","Crud");
  $this->load->model('paquetes_model', 'Paquetes');
+ $this->load->model('provincias_model', 'Provincias');
 
  $this->load->library("imaupload");
 }
@@ -101,15 +102,25 @@ function editar($tipo='C',$id=NULL){
    $data['wa_modulo'] = $data['tipo'];
    $data['wa_menu'] = 'Paquete';
 
-
    if($tipo == 'E' || $tipo == 'V'){
       $data_row = array('id' => $id);
       $data['post'] = $this->Paquetes->get_row($data_row);
    }
 
+   /**
+    * Provincias
+    */
+   $total_provincias = $this->Provincias->total_registros();
+   $data['provincias'] = $this->Provincias->listado($total_provincias,0);
+
    if ($this->input->post()) {
        $post= $this->input->post();
-       $data['post'] = $post; 
+       $data['post'] = $post;
+
+       echo "<pre>";
+       print_r($post);
+       echo "</pre>";
+       die();
 
        $config = array(
            array(

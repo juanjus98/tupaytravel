@@ -1,6 +1,30 @@
 $(function() {
     "use strict";
     console.log("Developer!");
+    //Chosen select
+    $(".chosen-select").chosen({
+        no_results_text: "Oops, sin resultados!",
+        width: "100%",
+        search_contains: true
+    });
+
+    //Ciudades en orden
+    var MY_SELECT = $('select[multiple].chosen-select').get(0);
+
+    $(document).on("change", "#ciudades_select", function() {
+        console.log("Conservar orden");
+        var selection = ChosenOrder.getSelectionOrder(MY_SELECT);
+
+        var ciudades_text = '';
+        $('#ciudades_text').val('');
+        $(selection).each(function(i) {
+            ciudades_text += selection[i] + ',';
+        });
+        $('#ciudades_text').val(ciudades_text.slice(0,-1));
+
+        return false;
+    });
+
     //Submit Eliminar 
     $(document).on("click", "#btn-eliminar", function() {
         if (confirm("Realemente desea aliminar")) {
@@ -40,14 +64,14 @@ $(function() {
 
     //Cargar popup
     $(document).on("click", ".wapopup", function() {
-     var url = $(this).attr('href');
-     var title = $(this).attr('title');
-     var height = $(this).data('height');
-     var width = $(this).data('width');
-     popupCenter(url,title,width,height);
-     return false;
+       var url = $(this).attr('href');
+       var title = $(this).attr('title');
+       var height = $(this).data('height');
+       var width = $(this).data('width');
+       popupCenter(url,title,width,height);
+       return false;
 
- });
+   });
 
     // -------- Toggle navbar Muestra/Oculta
     $(document).on("click", "#wa-togle", function() {

@@ -18,8 +18,12 @@ die();*/
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.css') ?>">
 
-    <!--iCheked-->
+    <!-- iCheked-->
     <link href="<?php echo base_url('assets/plugins/icheck/skins/all.css?v=1.0.2') ?>" rel="stylesheet">
+
+    <!-- Chosen-->
+    <link href="<?php echo base_url('assets/plugins/chosen/chosen.min.css') ?>" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="chosen.css"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -99,7 +103,7 @@ die();*/
             <?php $this->load->view('layouts/waadmin/aside'); ?>
 
             <?php
-                //collpase_cookie (mostrar / ocultar menu)
+            //collpase_cookie (mostrar / ocultar menu)
             $strech_left = "";
             if(isset($_COOKIE["collpase_cookie"])){
               $strech_left = ($_COOKIE["collpase_cookie"] == 2) ? "strech" : "";
@@ -127,13 +131,16 @@ die();*/
      </aside><!-- /.right-side -->
  </div><!-- ./wrapper -->
 
-<script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap.min.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.js') ?>"></script>
-<script src="<?php echo base_url('assets/plugins/js-cookie/js.cookie.js');?>"></script>
-<script src="<?php echo base_url('assets/plugins/icheck/icheck.js?v=1.0.2');?>"></script>
-<script src="<?php echo base_url('assets/plugins/moment.min.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js/waadmin.min.js'); ?>"></script>
+ <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js') ?>"></script>
+ <script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap.min.js') ?>"></script>
+ <script type="text/javascript" src="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.js') ?>"></script>
+ <script src="<?php echo base_url('assets/plugins/js-cookie/js.cookie.js');?>"></script>
+ <script src="<?php echo base_url('assets/plugins/icheck/icheck.js?v=1.0.2');?>"></script>
+ <script src="<?php echo base_url('assets/plugins/moment.min.js');?>"></script>
+ <script src="<?php echo base_url('assets/plugins/chosen/chosen.jquery.min.js');?>"></script>
+ <script src="<?php echo base_url('assets/plugins/chosen/chosen.order.jquery.min.js');?>"></script>
+
+ <script type="text/javascript" src="<?php echo base_url('assets/js/waadmin.min.js'); ?>"></script>
 </body>
 </html>
 

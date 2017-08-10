@@ -25,12 +25,12 @@
  $(function() {
   "use strict";
 
-  $.fn.tree = function() {
+$.fn.tree = function() {
 
-    return this.each(function() {
-      var btn = $(this).children("a").first();
-      var menu = $(this).children(".treeview-menu").first();
-      var isActive = $(this).hasClass('active');
+  return this.each(function() {
+    var btn = $(this).children("a").first();
+    var menu = $(this).children(".treeview-menu").first();
+    var isActive = $(this).hasClass('active');
 
             //initialize already active menus
             if (isActive) {
@@ -64,7 +64,7 @@
 
           });
 
-  };
+};
 
 /*
  * TODO LIST CUSTOM PLUGIN
@@ -626,6 +626,6 @@ function popupCenter(url, title, w, h) {
 
   // Puts focus on the newWindow
   if (window.focus) {
-      newWindow.focus();
+    newWindow.focus();
   }
 }
