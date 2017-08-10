@@ -30,7 +30,6 @@ die();*/
 
     <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>">
     <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
-    <?php //echo notify();?>
 
 </head>
 <body class="skin-wa">
@@ -128,20 +127,13 @@ die();*/
      </aside><!-- /.right-side -->
  </div><!-- ./wrapper -->
 
-
 <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/plugins/bootstrap.min.js') ?>"></script>
-<!-- <script type="text/javascript" src="<?php echo base_url() ?>plugins/sticky/jquery.sticky.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.js') ?>"></script>
-
 <script src="<?php echo base_url('assets/plugins/js-cookie/js.cookie.js');?>"></script>
 <script src="<?php echo base_url('assets/plugins/icheck/icheck.js?v=1.0.2');?>"></script>
 <script src="<?php echo base_url('assets/plugins/moment.min.js');?>"></script>
-
 <script type="text/javascript" src="<?php echo base_url('assets/js/waadmin.min.js'); ?>"></script>
-
-
 </body>
-
 </html>
 

@@ -56,7 +56,8 @@ echo '</pre><hr>';*/
                             <tr>
                                 <th><input type="checkbox" id="chkTodo"/></th>
                                 <th>Título</th>
-                                <th>Imagen</th>
+                                <th class="text-center">Imagen</th>
+                                <th class="text-center">Orden</th>
                                 <th></th>
                             </tr>
                             <?php
@@ -71,10 +72,11 @@ echo '</pre><hr>';*/
                                         <td class="text-center">
                                         <?php
                                         if(!empty($item['nombre_imagen'])){
-                                            echo '<img src="'.base_url('../images/uploads/' . $item['nombre_imagen']).'" title="'.$item['titulo'].'" class="img-responsive" style="max-height: 40px;">';
+                                            echo '<img src="'.base_url('assets/images/uploads/' . $item['nombre_imagen']).'" title="'.$item['titulo'].'" class="img-responsive" style="max-height: 40px;">';
                                         }
                                         ?>
                                         </td>
+                                        <td class="text-center"><?php echo $item['orden'];?></td>
                                         <td>
                                             <a href="<?php echo base_url(); ?>waadmin/paquetes_galeria/editar/V/<?php echo $item['id']; ?>/<?php echo $this->paquete_id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo base_url(); ?>waadmin/paquetes_galeria/editar/E/<?php echo $item['id']; ?>/<?php echo $this->paquete_id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -85,7 +87,7 @@ echo '</pre><hr>';*/
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="6">No se encontro ningún registro.</td>
+                                    <td colspan="6" class="text-center"><small>No se encontro ningún registro.</small></td>
                                 </tr>
                                 <?php
                             }

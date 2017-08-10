@@ -75,7 +75,7 @@ $this->template->build('waadmin/paquetes/index', $data);
 }
 
 function editar($tipo='C',$id=NULL){
-   $path = '../../../assets/plugins/ckfinder';
+   $path = '../../../../assets/plugins/ckfinder';
    $width = 'auto';
    $ckEditor = $this->editor($path, $width);
 

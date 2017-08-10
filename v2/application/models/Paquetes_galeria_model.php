@@ -6,19 +6,6 @@ class Paquetes_galeria_model extends CI_Model {
         parent::__construct();
     }
 
-    public function set_post($searchterm) {
-        if ($searchterm) {
-            $this->session->set_userdata('s_post', $searchterm);
-            return $searchterm;
-        } elseif ($this->session->userdata('s_post')) {
-            $searchterm = $this->session->userdata('s_post');
-            return $searchterm;
-        } else {
-            $searchterm = "";
-            return $searchterm;
-        }
-    }
-
     /**
      * Total de registros
      *

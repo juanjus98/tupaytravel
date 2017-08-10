@@ -82,7 +82,7 @@ echo '</pre>';*/
                                             <a href="<?php echo base_url(); ?>waadmin/paquetes/editar/V/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo base_url(); ?>waadmin/paquetes/editar/E/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="500" href="<?php echo base_url(); ?>waadmin/paquetes_galeria/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Galería"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/paquetes_galeria/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Intinerario"><i class="fa fa-calendar" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>

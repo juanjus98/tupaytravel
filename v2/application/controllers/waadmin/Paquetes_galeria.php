@@ -34,7 +34,7 @@ function index($id){
  $data['paquete'] = $this->Crud->getRow($data_crud);
 
  $data['wa_modulo'] = $data['paquete']['nombre'];
- $data['wa_menu'] = 'Galería';
+ $data['wa_menu'] = 'Intinerario';
 
  $sessionName = 's_paquetes_galeria'; //Session name
 
@@ -71,7 +71,7 @@ function index($id){
  $this->pagination->initialize($set_paginacion);
  $data["links"] = $this->pagination->create_links();
 
- $this->template->title('Galería');
+ $this->template->title('Intinerario');
  $this->template->build('waadmin/paquetes_galeria/index', $data);
 }
 
@@ -97,7 +97,7 @@ function editar($tipo='C',$id=null,$id_relation){
 
  $data['wa_tipo'] = $tipo;
  $data['wa_modulo'] = $data['tipo'];
- $data['wa_menu'] = 'Galería';
+ $data['wa_menu'] = 'Intinerario';
 
  if($tipo == 'E' || $tipo == 'V'){
    $data_crud['table'] = "tblpaquete_galeria as t1";
@@ -118,6 +118,22 @@ function editar($tipo='C',$id=null,$id_relation){
      'errors' => array(
        'required' => 'Campo requerido.',
        )
+     ),
+   array(
+     'field' => 'descripcion',
+     'label' => 'Descripción',
+     'rules' => 'required',
+     'errors' => array(
+       'required' => 'Campo requerido.',
+       )
+     ),
+   array(
+     'field' => 'orden',
+     'label' => 'Orden',
+     'rules' => 'required',
+     'errors' => array(
+       'required' => 'Campo requerido.',
+       )
      )
    );
 
@@ -131,11 +147,13 @@ function editar($tipo='C',$id=null,$id_relation){
 
   //Cargar Imagen
   if($_FILES["nombre_imagen"]){
-    $imagen_info = $this->imaupload->do_upload("/images/uploads", "nombre_imagen");
+    $imagen_info = $this->imaupload->do_upload("/assets/images/uploads", "nombre_imagen");
   }
 
   $data_form = array(
     'titulo' => $post['titulo'],
+    'descripcion' => $post['descripcion'],
+    'orden' => $post['orden']
     );
 
   if (!empty($imagen_info['upload_data'])) {
@@ -177,7 +195,7 @@ function eliminar($id){
           'estado' => 0
           );
         $this->db->where('id', $value);
-        $this->db->update('paquete_imagen', $data_form);
+        $this->db->update('tblpaquete_galeria', $data_form);
       }
     }
 

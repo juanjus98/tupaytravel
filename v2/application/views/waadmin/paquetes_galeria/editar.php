@@ -54,6 +54,28 @@ echo "</pre>";*/
                        </div>
                      </td>
                    </tr>
+                   <tr>
+                     <td>
+                       <div class="form-group" style="margin-bottom: 0px;">
+                         <label for="descripcion" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Descripción:</label>
+                         <div class="col-sm-10">
+                         <textarea name="descripcion" id="descripcion" class="form-control input-sm" rows="4" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>><?php echo $retVal = (!empty($post['descripcion'])) ? $post['descripcion'] : '';?></textarea>
+                           <?php echo form_error('descripcion', '<div class="error">', '</div>'); ?>
+                         </div>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>
+                       <div class="form-group" style="margin-bottom: 0px;">
+                         <label for="orden" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Orden:</label>
+                         <div class="col-sm-3">
+                           <input name="orden" id="orden" type="text" value="<?php echo $retVal = (!empty($post['orden'])) ? $post['orden'] : '99';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                           <?php echo form_error('orden', '<div class="error">', '</div>'); ?>
+                         </div>
+                       </div>
+                     </td>
+                   </tr>
                  </tbody>
                </table><br>
 
@@ -71,15 +93,16 @@ echo "</pre>";*/
                          <div class="col-sm-10">
                            <div class="alert alert-warning alert-dismissable">
                             <i class="fa fa-info-circle"></i> 
-                            <b>Atención!</b> Peso máximo 500KB (jpg, png, gif).
+                            <b>Atención!</b> Peso máximo 500KB (jpg, png, gif), Dimensiones 600px * 380px.
                           </div>
                           <input type="file" name="nombre_imagen" id="nombre_imagen" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
                           <?php
                           if(!empty($post['nombre_imagen'])){
+                            $nombre_imagen = base_url('assets/images/uploads/' . $post['nombre_imagen']);
                            ?>
                            <br>
-                           <a href="<?php echo base_url('../images/uploads/' . $post['nombre_imagen']);?>" target="_blank">
-                             <img src="<?php echo base_url('../images/uploads/' . $post['nombre_imagen']);?>" style="max-height: 60px;">
+                           <a href="<?php echo $nombre_imagen;?>" target="_blank">
+                             <img src="<?php echo $nombre_imagen;?>" style="max-height: 80px;">
                            </a>
                            <?php }?>
                          </div>
