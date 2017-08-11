@@ -3572,6 +3572,9 @@ fieldset[disabled] .btn-vk.active {
   font-size: 12px;
   font-weight: bold;
 }
+.bootstrap-tagsinput {
+  width: 100%;
+}
 /* CELULAR */
 @media (max-width: 767px) {
   .girl-cont {

@@ -20,6 +20,7 @@ $tag_image = $head_info['image'];
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title><?php echo $retVal = (@$template['title'] != 'Inicio') ? @$template['title'] . ' - ' : ''; ?> <?php echo $tag_title; ?></title>
   <meta name="description" content="<?php echo $tag_description; ?>">
   <meta name="author" content="<?php echo base64_decode("d2ViQXB1LmNvbQ=="); ?>">
@@ -30,16 +31,11 @@ $tag_image = $head_info['image'];
   <meta property="og:description" content="<?php echo $tag_description; ?>">
   <meta property="og:url" content="<?php echo $tag_url; ?>" />
   <meta property="og:image" content="<?php echo $tag_image; ?>">
-  <!-- <title> Muebles, Estantes, Escritorios, Separadores, Archivadores, Counter, Mesa | <?php echo @$template['title']; ?> </title> -->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
-
-
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -112,7 +108,7 @@ $tag_image = $head_info['image'];
 <div class="head-bar">
   <div class="col-md-12">
     <h1 class="logo pull-left">
-      <a href="#" title="">
+      <a href="<?php echo base_url();?>" title="">
         <img src="<?php echo base_url('assets/images/logo.png');?>" alt="">
       </a>
     </h1>

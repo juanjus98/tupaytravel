@@ -1,7 +1,7 @@
 <?php
-echo '<pre>';
+/*echo '<pre>';
 print_r($post);
-echo '</pre>';
+echo '</pre>';*/
 /*foreach ($post['ciudades'] as $key => $value) {
   echo "<pre>";
   print_r(trim($value));
@@ -83,22 +83,51 @@ echo '</pre>';
                        <div class="form-group" style="margin-bottom: 0px;">
                          <label for="ciudades" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Ciudades:</label>
                          <div class="col-sm-10">
-                         <select name="ciudades[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
+                           <select name="ciudades[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
                             <option value=""></option>
                             <?php
                             if(!empty($provincias)){
                               foreach ($provincias as $key => $value) {
-                                $provincia_reg = strip_tags($value['provincia']);
+                                $provincia = strip_tags($value['provincia']);
+                                $provincia_id = $value['id'];
                                 $selected_ciudad = '';
                                 if(!empty($post['ciudades'])){
-                                   $selected_ciudad = (array_search($provincia_reg, $post['ciudades'])) ? 'selected' : '' ;
+                                  foreach ($post['ciudades'] as $key => $item) {
+                                    if($item == $provincia_id){
+                                      $selected_ciudad = 'selected';
+                                      break;
+                                    }
+                                  }
                                 }
-              echo '<option value="'.$provincia_reg.'" ' . $selected_ciudad . '>'.$provincia_reg.' - ' . $provincia_nombre . '</option>';
+                                echo '<option value="'.$provincia_id.'" ' . $selected_ciudad . '>'.$provincia.'</option>';
                               }
                             }
                             ?>
                           </select>
+                          <?php echo form_error('ciudades[]', '<div class="error">', '</div>'); ?>
                         </div>
+                      </td>
+                    </tr>
+                    <tr>
+                     <td>
+                       <div class="form-group" style="margin-bottom: 0px;">
+                         <label for="estadia" class="col-sm-2 control-label" style="text-align: right;">Estadía:</label>
+                         <div class="col-sm-4">
+                           <?php
+                           $checked = "";
+                           if(!empty($post['estadia']) && $post['estadia'] == 1){
+                            $checked = "checked";
+                          }
+                          ?>
+                          <input class="form-control input-sm" id="estadia" name="estadia" type="checkbox" value="1" <?php echo $checked;?> <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>  Incluye estadía.
+                          <?php echo form_error('estadia', '<div class="error">', '</div>'); ?>
+                        </div>
+
+                        <label for="precio" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Precio:</label>
+                         <div class="col-sm-4">
+                           <input name="precio" id="precio" type="text" value="<?php echo $retVal = (!empty($post['precio'])) ? $post['precio'] : '';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                           <?php echo form_error('precio', '<div class="error">', '</div>'); ?>
+                         </div>
                       </td>
                     </tr>
 
@@ -167,8 +196,8 @@ echo '</pre>';
                          if(!empty($post['imagen'])){
                            ?>
                            <p class="help-block">
-                             <a href="<?php echo base_url('images/uploads/' . $post['imagen']);?>" target="_blank">
-                               <img src="<?php echo base_url('images/uploads/' . $post['imagen']);?>" style="max-height: 60px;">
+                             <a href="<?php echo base_url($this->config->item('upload_path') . $post['imagen']);?>" target="_blank">
+                               <img src="<?php echo base_url($this->config->item('upload_path') . $post['imagen']);?>" style="max-height: 60px;">
                              </a>
                            </p>
                            <?php }?>

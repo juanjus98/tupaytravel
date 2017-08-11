@@ -62,12 +62,11 @@ $route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto
 $route['contactanos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
 
-$route['salones'] = 'paginas/salones';
-$route['salon/(:any)'] = 'paginas/salon/$1';
+$route['paquetes-tours'] = 'paginas/paquetes';
+$route['paquetes-tours/(:any)'] = 'paginas/paquetes/$1';
 
 //Servicio servicio
 $route['servicio/(:any)'] = 'paginas/servicio/$1';
-
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

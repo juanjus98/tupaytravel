@@ -68,7 +68,7 @@ if (!function_exists('wamenu')) {
             'paquetes-tours' => 'Paquetes Tour Perú',
             'Tours' => $menuTours,
             'Estadía' => $menuEstadia
-        );
+            );
 
         return $menu;
     }
@@ -232,14 +232,15 @@ if (!function_exists('set_paginacion')) {
  *
  * Genera iformación para el head para seo
  * 
- * @category		Utilitarios
- * @author		Juan Julio Sandoval Layza
- * @since		08-05-2015
- * @version		Version 1.0
+ * @category        Utilitarios
+ * @author      Juan Julio Sandoval Layza
+ * @since       08-05-2015
+ * @version     Version 1.0
  */
 if (!function_exists('head_info')) {
 
     function head_info($info, $page = "inicio") {
+        $CI =& get_instance();
         if (!empty($info)) {
             switch ($page) {
                 case "inicio":
@@ -247,7 +248,7 @@ if (!function_exists('head_info')) {
                     "title" => $info['title'],
                     "description" => strip_tags($info['description']),
                     "keywords" => strip_tags($info['keywords']),
-                    "image" => base_url() . "images/uploads/" . strip_tags($info['imagen_1'])
+                    "image" => base_url($CI->config->item('upload_path') . $info['imagen_1'])
                     );
                 break;
                 case "salon":
@@ -320,24 +321,24 @@ function getYoutubeId($url)
         if (
             false === strpos($host, 'youtube') &&
             false === strpos($host, 'youtu.be')
-        ) {
+            ) {
             return false;
-        }
     }
-    if (isset($parts['query'])) {
-        parse_str($parts['query'], $qs);
-        if (isset($qs['v'])) {
-            return $qs['v'];
-        }
-        else if (isset($qs['vi'])) {
-            return $qs['vi'];
-        }
+}
+if (isset($parts['query'])) {
+    parse_str($parts['query'], $qs);
+    if (isset($qs['v'])) {
+        return $qs['v'];
     }
-    if (isset($parts['path'])) {
-        $path = explode('/', trim($parts['path'], '/'));
-        return $path[count($path) - 1];
+    else if (isset($qs['vi'])) {
+        return $qs['vi'];
     }
-    return false;
+}
+if (isset($parts['path'])) {
+    $path = explode('/', trim($parts['path'], '/'));
+    return $path[count($path) - 1];
+}
+return false;
 }
 
 
@@ -415,50 +416,4 @@ function getVideoLocation($url)
         return 'http://www.youtube.com/embed/' . $id;
     }
     return false;
-}
-
-/**
- * Returns the html code for an embed responsive video, for a given url.
- * The url has to be either from:
- * - youtube
- * - daily motion
- * - vimeo
- *
- * Returns false in case of failure
- */
-function getEmbedVideo($url)
-{
-
-    $code = <<<EEE
-    <style>
-        .embed-container { 
-            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; 
-        }
-        .embed-container iframe, .embed-container object, .embed-container embed { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-        }
-    </style>
-EEE;
-
-
-    if (false !== ($id = getDailyMotionId($url))) {
-        $code .= <<<EEE
-<div class='embed-container'><iframe src='http://www.dailymotion.com/embed/video/$id' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
-EEE;
-
-    }
-    elseif (false !== ($id = getVimeoId($url))) {
-        $code .= <<<EEE
-<div class='embed-container'><iframe src='http://player.vimeo.com/video/$id' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
-EEE;
-    }
-    elseif (false !== ($id = getYoutubeId($url))) {
-        $code .= <<<EEE
-<div class='embed-container'><iframe src='http://www.youtube.com/embed/$id' frameborder='0' allowfullscreen></iframe></div>
-EEE;
-    }
-    else {
-        $code = false;
-    }
-    return $code;
 }

@@ -70,10 +70,44 @@ class Paginas extends CI_Controller {
     $this->template->build('paginas/index', $data);
   }
 
+  public function paquetes($args=null) {
 
-    public function contactanos() {
-        $this->template->title('Contáctanos');
-        $data['active_link'] = "contactanos";
+    if(isset($args)){
+      //echo $args;
+      /*$params = $_GET['params'];*/
+      $_hasta = explode('hasta_', $args);
+      if(count($_hasta) > 1){
+        $_desde = explode('desde_',$_hasta[0]);
+        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
+        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
+        $fechaDesde = date('Y-m-d', strtotime($strDesde));
+        $fechaHasta = date('Y-m-d', strtotime($strHasta));
+        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
+        $nroDias = floor($dateDiff / (60 * 60 * 24));
+      }
+
+      $_dias = explode('dias', $args);
+      if(count($_dias) > 1){
+        $nroDias = $_dias[0];
+      }
+    }
+
+    $data['active_link'] = "paquetes-tours";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($this->website_info); //siempre
+
+    //Paquetes
+    $total_paquetes = $this->Paquetes->total_registros();
+    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0);
+
+    $this->template->title('Paquetes');
+    $this->template->build('paginas/paquetes', $data);
+  }
+
+
+  public function contactanos() {
+    $this->template->title('Contáctanos');
+    $data['active_link'] = "contactanos";
         $data['website'] = $this->Inicio->get_website(); //siempre
         $data['head_info'] = head_info($data['website']); //siempre
 
@@ -82,34 +116,34 @@ class Paginas extends CI_Controller {
           $post = $this->input->post();
           $config = array(
            array(
-               'field' => 'nombre',
-               'label' => 'Nombres',
-               'rules' => 'required',
-               'errors' => array(
-                   'required' => 'Campo requerido.',
-                   )
-               ),
-           array(
-               'field' => 'email',
-               'label' => 'E-mail',
-               'rules' => 'required|valid_email',
-               'errors' => array(
-                   'required' => 'Campo requerido.',
-                   'valid_email' => 'E-mail inválido.'
-                   )
-               ),
-           array(
-               'field' => 'telefono',
-               'label' => 'Teléfono',
-               'rules' => 'required',
-               'errors' => array(
-                   'required' => 'Campo requerido.',
-                   )
+             'field' => 'nombre',
+             'label' => 'Nombres',
+             'rules' => 'required',
+             'errors' => array(
+               'required' => 'Campo requerido.',
                )
+             ),
+           array(
+             'field' => 'email',
+             'label' => 'E-mail',
+             'rules' => 'required|valid_email',
+             'errors' => array(
+               'required' => 'Campo requerido.',
+               'valid_email' => 'E-mail inválido.'
+               )
+             ),
+           array(
+             'field' => 'telefono',
+             'label' => 'Teléfono',
+             'rules' => 'required',
+             'errors' => array(
+               'required' => 'Campo requerido.',
+               )
+             )
            );
 
-       $this->form_validation->set_rules($config);
-       $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
+          $this->form_validation->set_rules($config);
+          $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
           if ($this->form_validation->run() == FALSE)
           {
@@ -183,13 +217,13 @@ class Paginas extends CI_Controller {
         } //Post
 
 
-      $this->template->build('paginas/contactanos', $data);
-    }
+        $this->template->build('paginas/contactanos', $data);
+      }
 
     //Mensaje de confirmación
-    public function confirmacion($token='') {
-      $data['active_link'] = "inicio";
-      $data['website'] = $this->Inicio->get_website();
+      public function confirmacion($token='') {
+        $data['active_link'] = "inicio";
+        $data['website'] = $this->Inicio->get_website();
       $data['head_info'] = head_info($data['website']); //siempre
 
       $this->template->title('Confirmación');
@@ -275,7 +309,7 @@ class Paginas extends CI_Controller {
       $this->template->build('paginas/servicio', $data);
     }
 
-}
+  }
 
-    /* End of file categorias.php */
+  /* End of file categorias.php */
 /* Location: ./application/controllers/waadmin/categorias.php */

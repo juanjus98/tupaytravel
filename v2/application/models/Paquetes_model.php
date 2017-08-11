@@ -142,7 +142,7 @@ class Paquetes_model extends CI_Model {
                 ->result_array();
         if (!empty($ciudades_result)) {
             foreach ($ciudades_result as $key => $value) {
-                $ciudades[] = $value['ciudad'];
+                $ciudades[] = $value['id_tblprovincia'];
             }
             $result['ciudades'] = $ciudades;
         }
