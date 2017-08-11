@@ -632,7 +632,7 @@ function popupCenter(url, title, w, h) {
 }
 $(function() {
     "use strict";
-    console.log("Developer!");
+
     //Chosen select
     $(".chosen-select").chosen({
         no_results_text: "Oops, sin resultados!",
@@ -641,22 +641,21 @@ $(function() {
     });
 
     //Ciudades en orden
-    var MY_SELECT = $('select[multiple].chosen-select').get(0);
+/*    var MY_SELECT = $('select[multiple].chosen-select').get(0);
 
     $(document).on("change", "#ciudades_select", function() {
         console.log("Conservar orden");
         var selection = ChosenOrder.getSelectionOrder(MY_SELECT);
 
-        $('#ciudades_text').val('');
         var ciudades_text = '';
+        $('#ciudades_text').val('');
         $(selection).each(function(i) {
-            /*$('#order-list').append("<li>" + selection[i] + "</li>");*/
             ciudades_text += selection[i] + ',';
         });
         $('#ciudades_text').val(ciudades_text.slice(0,-1));
 
         return false;
-    });
+    });*/
 
     //Submit Eliminar 
     $(document).on("click", "#btn-eliminar", function() {

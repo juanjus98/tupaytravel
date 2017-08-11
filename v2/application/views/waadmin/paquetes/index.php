@@ -91,7 +91,7 @@ echo '</pre>';*/
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="6">No se encontro ningún registro.</td>
+                                    <td colspan="6" class="text-center"><small>No se encontro ningún registro.</small></td>
                                 </tr>
                                 <?php
                             }

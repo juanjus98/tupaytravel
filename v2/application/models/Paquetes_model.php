@@ -22,9 +22,9 @@ class Paquetes_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        /*if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id"] = $data['categoria_id'];
-        }*/
+        if (!empty($data['ciudad'])) {
+            $where["t2.ciudad"] = $data['ciudad'];
+        }
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -34,9 +34,11 @@ class Paquetes_model extends CI_Model {
         }
 
         $resultado = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
+                ->join("tblpaquete_ciudades as t2","t2.id_tblpaquete = t1.id","left")
                 ->where($where)
+                ->where_in('t1.ciudades','CUSCO')
                 ->like($like)
+                ->group_by('t1.id')
                 ->get("tblpaquete as t1")
                 ->num_rows();
 
@@ -59,9 +61,9 @@ class Paquetes_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        /*if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id"] = $data['categoria_id'];
-        }*/
+        if (!empty($data['ciudad'])) {
+            $where["t2.ciudad"] = $data['ciudad'];
+        }
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -83,9 +85,10 @@ class Paquetes_model extends CI_Model {
         }
 
         $resultado = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
+                ->join("tblpaquete_ciudades as t2","t2.id_tblpaquete = t1.id","left")
                 ->where($where)
                 ->like($like)
+                ->group_by('t1.id')
                 ->order_by($order_by)
                 ->limit($limit, $start)
                 ->get("tblpaquete as t1")
@@ -116,72 +119,36 @@ class Paquetes_model extends CI_Model {
         }
 
         $result = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")
-                ->join("marca as t3","t3.id = t1.marca_id","left")*/
                 ->where($where)
                 ->get("tblpaquete as t1")
                 ->row_array();
 
+        //Consultar itinerario (galeria)
+        $itinerarios = $this->db->select("t1.*")
+                ->where("t1.id_tblpaquete =", $result['id'])
+                ->where("t1.estado !=", 0)
+                ->order_by('t1.orden','ASC')
+                ->get("tblpaquete_galeria as t1")
+                ->result_array();
+        if (!empty($itinerarios)) {
+            $result['itinerarios'] = $itinerarios;
+        }
+
+        //Consultar ciudades
+        $ciudades_result = $this->db->select("t1.*")
+                ->where("t1.id_tblpaquete =", $result['id'])
+                ->order_by('t1.id','ASC')
+                ->get("tblpaquete_ciudades as t1")
+                ->result_array();
+        if (!empty($ciudades_result)) {
+            foreach ($ciudades_result as $key => $value) {
+                $ciudades[] = $value['ciudad'];
+            }
+            $result['ciudades'] = $ciudades;
+        }
+
         return $result;
     }
     
-    /**
-     * Listado de marcas
-     *
-     * Trae un listado de las marcas (td:marca)
-     *
-     * @package		Productos
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       webApu.com 
-     * @since		04-02-2016
-     * @version		Version 1.0
-     */
-    function listar_marcas() {
-        $resultado = $this->db->select("t1.*")
-                ->where("estado != ", 0)
-                ->order_by("t1.orden", "asc")
-                ->get('marca as t1')
-                ->result_array();
-        return $resultado;
-    }
-
-    /**
-     * Listado de productos relacionados
-     *
-     * Muestra un listado de todas las productos
-     *
-     * @package     productos
-     * @author      Juan Julio Sandoval Layza
-     * @copyright   webApu.com 
-     * @since       02-03-2014
-     * @version     Version 1.0
-     */
-    function get_relacionados($producto_id, $categoria_id, $limit = 3) {
-        //Where
-        $where = array('t1.estado != ' => 0);
-
-        //Where
-        if (!empty($data['producto_id'])) {
-            $where["t1.producto_id != "] = $data['producto_id'];
-        }
-
-        if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id != "] = $data['categoria_id'];
-        }
-
-        //ORDENAR POR
-        $order_by = 't1.agregar DESC';
-
-        $resultado = $this->db->select("t1.*, t2.nombre as categoria_nombre, t3.nombre as marca_nombre")
-                ->join("categoria as t2","t2.id = t1.categoria_id")
-                ->join("marca as t3","t3.id = t1.marca_id")
-                ->where($where)
-                ->order_by($order_by)
-                ->limit($limit)
-                ->get("producto as t1")
-                ->result_array();
-
-        return $resultado;
-    }
 
 }

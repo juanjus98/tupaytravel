@@ -1,6 +1,6 @@
 $(function() {
     "use strict";
-    console.log("Developer!");
+
     //Chosen select
     $(".chosen-select").chosen({
         no_results_text: "Oops, sin resultados!",
@@ -9,7 +9,7 @@ $(function() {
     });
 
     //Ciudades en orden
-    var MY_SELECT = $('select[multiple].chosen-select').get(0);
+/*    var MY_SELECT = $('select[multiple].chosen-select').get(0);
 
     $(document).on("change", "#ciudades_select", function() {
         console.log("Conservar orden");
@@ -23,7 +23,7 @@ $(function() {
         $('#ciudades_text').val(ciudades_text.slice(0,-1));
 
         return false;
-    });
+    });*/
 
     //Submit Eliminar 
     $(document).on("click", "#btn-eliminar", function() {

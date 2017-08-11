@@ -1,7 +1,12 @@
 <?php
-/*echo '<pre>';
-print_r($provincias);
-echo '</pre>';*/
+echo '<pre>';
+print_r($post);
+echo '</pre>';
+/*foreach ($post['ciudades'] as $key => $value) {
+  echo "<pre>";
+  print_r(trim($value));
+  echo "</pre>";
+}*/
 ?>
 <div class="row">
  <div class="col-xs-12">
@@ -78,13 +83,17 @@ echo '</pre>';*/
                        <div class="form-group" style="margin-bottom: 0px;">
                          <label for="ciudades" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Ciudades:</label>
                          <div class="col-sm-10">
-                         <input type="text" name="ciudades" id="ciudades_text" value="">
-                         <select name="ciudades_select[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
+                         <select name="ciudades[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
                             <option value=""></option>
                             <?php
                             if(!empty($provincias)){
                               foreach ($provincias as $key => $value) {
-                                echo '<option value="'.$value['provincia'].'">'.$value['provincia'].'</option>';
+                                $provincia_reg = strip_tags($value['provincia']);
+                                $selected_ciudad = '';
+                                if(!empty($post['ciudades'])){
+                                   $selected_ciudad = (array_search($provincia_reg, $post['ciudades'])) ? 'selected' : '' ;
+                                }
+              echo '<option value="'.$provincia_reg.'" ' . $selected_ciudad . '>'.$provincia_reg.' - ' . $provincia_nombre . '</option>';
                               }
                             }
                             ?>
