@@ -19,10 +19,11 @@ class Paquetes_galeria_model extends CI_Model {
      */
     function total_registros($data = NULL) {
         //Where
-        $where = array(
-            't1.id_tblpaquete' => $data['id_tblpaquete'],
-            't1.estado != ' => 0
-        );
+        $where = array('t1.estado != ' => 0);
+
+        if (!empty($data['id_tblpaquete'])) {
+            $where["t1.id_tblpaquete"] = $data['id_tblpaquete'];
+        }
 
         $resultado = $this->db->select("*")
                 ->where($where)
@@ -45,10 +46,11 @@ class Paquetes_galeria_model extends CI_Model {
      */
     function listado($limit, $start, $data = NULL) {
         //Where
-        $where = array(
-            't1.id_tblpaquete' => $data['id_tblpaquete'],
-            't1.estado != ' => 0
-        );
+        $where = array('t1.estado != ' => 0);
+
+        if (!empty($data['id_tblpaquete'])) {
+            $where["t1.id_tblpaquete"] = $data['id_tblpaquete'];
+        }
 
         if ($start > 0) {
             $start = ($start - 1) * $limit;

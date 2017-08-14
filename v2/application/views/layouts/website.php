@@ -233,7 +233,8 @@ $tag_image = $head_info['image'];
 <script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
 <!-- JavaScript-->
 
-<link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet">
 
     </body>
     </html>

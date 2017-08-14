@@ -21,6 +21,7 @@ class Paginas extends CI_Controller {
     $this->load->model("paquetes_model","Paquetes");
     $this->load->model("tours_model","Tours");
     $this->load->model("hoteles_model","Hoteles");
+    $this->load->model("paquetes_galeria_model","Paquetes_galeria");
 
     /**
      * Información del website
@@ -71,10 +72,7 @@ class Paginas extends CI_Controller {
   }
 
   public function paquetes($args=null) {
-
     if(isset($args)){
-      //echo $args;
-      /*$params = $_GET['params'];*/
       $_hasta = explode('hasta_', $args);
       if(count($_hasta) > 1){
         $_desde = explode('desde_',$_hasta[0]);
@@ -102,6 +100,38 @@ class Paginas extends CI_Controller {
 
     $this->template->title('Paquetes');
     $this->template->build('paginas/paquetes', $data);
+  }
+
+public function paquete($url_key) {
+    if(isset($args)){
+      $_hasta = explode('hasta_', $args);
+      if(count($_hasta) > 1){
+        $_desde = explode('desde_',$_hasta[0]);
+        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
+        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
+        $fechaDesde = date('Y-m-d', strtotime($strDesde));
+        $fechaHasta = date('Y-m-d', strtotime($strHasta));
+        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
+        $nroDias = floor($dateDiff / (60 * 60 * 24));
+      }
+
+      $_dias = explode('dias', $args);
+      if(count($_dias) > 1){
+        $nroDias = $_dias[0];
+      }
+    }
+
+    //Consultar Paquete
+    $data_paquete = array('url_key' => $url_key, );
+    $paquete = $this->Paquetes->get_row($data_paquete);
+    $data['paquete'] = $paquete;
+
+    $data['active_link'] = "paquetes-tours";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($this->website_info); //siempre
+
+    $this->template->title('Paquete');
+    $this->template->build('paginas/paquete', $data);
   }
 
 

@@ -10,17 +10,7 @@ $.getDataJson = function(url, data, callback) {
 		success: callback
 	});
 };
-
-function getDate(element) {
-	var date;
-	try {
-		date = $.datepicker.parseDate(dateFormat, element.value);
-	} catch( error ) {
-		date = null;
-	}
-	return date;
-};
-$.datepicker.regional['es'] = {
+$.datepicker.regional["es"] = {
 	closeText: 'Cerrar',
 	prevText: '< Ant',
 	nextText: 'Sig >',
@@ -38,7 +28,17 @@ $.datepicker.regional['es'] = {
 	yearSuffix: ''
 };
 
-$.datepicker.setDefaults($.datepicker.regional['es']);
+$.datepicker.setDefaults($.datepicker.regional["es"]);
+
+function getDate(element) {
+	var date;
+	try {
+		date = $.datepicker.parseDate(dateFormat, element.value);
+	} catch( error ) {
+		date = null;
+	}
+	return date;
+}
 
 $(function() {
 	//Select search select2
