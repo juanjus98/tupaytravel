@@ -34,13 +34,13 @@ class Paquetes_model extends CI_Model {
         }
 
         $resultado = $this->db->select("t1.*")
-                ->join("tblpaquete_ciudades as t2","t2.id_tblpaquete = t1.id","left")
-                ->where($where)
-                ->where_in('t1.ciudades','CUSCO')
-                ->like($like)
-                ->group_by('t1.id')
-                ->get("tblpaquete as t1")
-                ->num_rows();
+        ->join("tblpaquete_ciudades as t2","t2.id_tblpaquete = t1.id","left")
+        ->where($where)
+        ->where_in('t1.ciudades','CUSCO')
+        ->like($like)
+        ->group_by('t1.id')
+        ->get("tblpaquete as t1")
+        ->num_rows();
 
         return $resultado;
     }
@@ -85,14 +85,14 @@ class Paquetes_model extends CI_Model {
         }
 
         $resultado = $this->db->select("t1.*")
-                ->join("tblpaquete_ciudades as t2","t2.id_tblpaquete = t1.id","left")
-                ->where($where)
-                ->like($like)
-                ->group_by('t1.id')
-                ->order_by($order_by)
-                ->limit($limit, $start)
-                ->get("tblpaquete as t1")
-                ->result_array();
+        ->join("tblpaquete_ciudades as t2","t2.id_tblpaquete = t1.id","left")
+        ->where($where)
+        ->like($like)
+        ->group_by('t1.id')
+        ->order_by($order_by)
+        ->limit($limit, $start)
+        ->get("tblpaquete as t1")
+        ->result_array();
 
         return $resultado;
     }
@@ -119,32 +119,39 @@ class Paquetes_model extends CI_Model {
         }
 
         $result = $this->db->select("t1.*")
-                ->where($where)
-                ->get("tblpaquete as t1")
-                ->row_array();
+        ->where($where)
+        ->get("tblpaquete as t1")
+        ->row_array();
+
+/*        echo "<pre>";
+        print_r($result);
+        echo "</pre>";*/
 
         //Consultar itinerario (galeria)
         $itinerarios = $this->db->select("t1.*")
-                ->where("t1.id_tblpaquete =", $result['id'])
-                ->where("t1.estado !=", 0)
-                ->order_by('t1.orden','ASC')
-                ->get("tblpaquete_galeria as t1")
-                ->result_array();
+        ->where("t1.id_tblpaquete =", $result['id'])
+        ->where("t1.estado !=", 0)
+        ->order_by('t1.orden','ASC')
+        ->get("tblpaquete_galeria as t1")
+        ->result_array();
         if (!empty($itinerarios)) {
             $result['itinerarios'] = $itinerarios;
         }
 
         //Consultar ciudades
-        $ciudades_result = $this->db->select("t1.*")
-                ->where("t1.id_tblpaquete =", $result['id'])
-                ->order_by('t1.id','ASC')
-                ->get("tblpaquete_ciudades as t1")
-                ->result_array();
+        $ciudades_result = $this->db->select("t1.*, t2.provincia")
+        ->join('tblprovincia as t2', 't2.id = t1.id_tblprovincia')
+        ->where("t1.id_tblpaquete =", $result['id'])
+        ->order_by('t1.id','ASC')
+        ->get("tblpaquete_ciudades as t1")
+        ->result_array();
         if (!empty($ciudades_result)) {
             foreach ($ciudades_result as $key => $value) {
                 $ciudades[] = $value['id_tblprovincia'];
+                $ciudades_nombres[] = $value['provincia'];
             }
             $result['ciudades'] = $ciudades;
+            $result['ciudades_nombres'] = $ciudades_nombres;
         }
 
         return $result;

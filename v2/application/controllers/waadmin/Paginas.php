@@ -1,554 +1,260 @@
 <?php
-
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Paginas extends CI_Controller {
 
-    function __construct() {
-        parent::__construct();
-        $this->load->helper('waadmin');
-        $this->auth->logged_in();
-        $this->load->library("imaupload");
-        $this->load->model('paginas_model', 'Paginas');
-        $this->template->set_layout('waadmin/intranet.php');
-    }
+ function __construct() {
+   parent::__construct();
+   $this->template->set_layout('waadmin/intranet.php');
+ /**
+ * Verficamos si existe una session activa
+ */
+ $this->auth->logged_in();
 
-    /**
-     * Listar categorías.
-     *
-     * Muestra el listado de las categorías.
-     *
-     * @package		Categorías
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       Winner System 
-     * @since		26-02-2015
-     * @version		Version 1.0
-     */
-    public function index() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Paginacion
-        $base_url = base_url() . "waadmin/categorias/index";
-        $per_page = 5; //registros por página
-        $uri_segment = 4; //segmento de la url
-        $num_links = 4; //número de links
-        //Página actual
-        $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
-        if ($page == 0) {
-            $this->session->unset_userdata('s_post');
-        }
+ //Información del usuario que ha iniciado session
+ $this->user_info = $this->auth->user_profile();
 
-        //Setear post
-        $post = $this->Categorias->set_post($this->input->post());
-        $data['post'] = $post;
+ $this->load->helper('waadmin');
+ $this->load->model("crud_model","Crud");
+ $this->load->model('paginas_model', 'Paginas');
 
-        //Total de registros por post
-        $data['total_registros'] = $this->Categorias->total_registros($post);
+ $this->load->library("imaupload");
+}
 
-        //Listado
-        $data['listado'] = $this->Categorias->listado($per_page, $page, $post);
+ /**
+ * Listar categorías.
+ *
+ * Muestra el listado de las categorías.
+ *
+ * @package     paginas
+ * @author      Juan Julio Sandoval Layza
+ * @copyright webApu.com 
+ * @since       26-02-2015
+ * @version     Version 1.0
+ */
+ public function index() {
+ //$data['wa_tipo'] = $tipo;
+   $data['wa_modulo'] = 'Listado';
+   $data['wa_menu'] = 'Páginas';
 
-        //Paginacion
-        $total_rows = $data['total_registros'];
-        $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links, $total_rows);
+ $sessionName = 's_paginas'; //Session name
 
-        $this->pagination->initialize($set_paginacion);
-        $data["links"] = $this->pagination->create_links();
+ //Paginacion
+ $base_url = base_url() . "waadmin/paginas/index";
+ $per_page = 10; //registros por página
+ $uri_segment = 4; //segmento de la url
+ $num_links = 4; //número de links
 
-        $this->template->title('Categorías');
-        $this->template->build('waadmin/categorias/index', $data);
-    }
+ //Página actual
+ $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
 
-    /**
-     * Home
-     *
-     * Página de inicio del website
-     *
-     * @package		Paginas
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       Winner System 
-     * @since		07-05-2015
-     * @version		Version 1.0
-     */
-    public function home() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(1);
+ if (isset($_GET['refresh'])) {
+   $this->session->unset_userdata($sessionName);
+   redirect("waadmin/paginas/index");
+ }
 
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'resumen',
-                    'label' => 'Resumen',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'url_video',
-                    'label' => 'Url video',
-                    'rules' => 'required'
-                )
-            );
+ //Setear post
+ $post = $this->Crud->set_post($this->input->post(),$sessionName);
+ $data['post'] = $post;
 
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
+ //Total de registros por post
+ $data['total_registros'] = $this->Paginas->total_registros($post);
 
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'],
-                    "descripcion1" => $post['descripcion1'],
-                    "url_video" => $post['url_video']
-                );
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
+ //Listado
+ $data['listado'] = $this->Paginas->listado($per_page, $page, $post);
 
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/home");
-            }
-        }
+ //Paginacion
+ $total_rows = $data['total_registros'];
+ $set_paginacion = set_paginacion($base_url, $per_page, $uri_segment, $num_links, $total_rows);
 
-        $this->template->title('Página Home');
-        $this->template->build('waadmin/paginas/home', $data);
-    }
+ $this->pagination->initialize($set_paginacion);
+ $data["links"] = $this->pagination->create_links();
 
-    /**
-     * Nosotros
-     *
-     * Página nosotros
-     *
-     * @package		Paginas
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       Winner System 
-     * @since		07-05-2015
-     * @version		Version 1.0
-     */
-    public function nosotros() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(2);
+ $this->template->title('paginas');
+ $this->template->build('waadmin/paginas/index', $data);
+}
 
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                )
-            );
+function editar($tipo='C',$id=NULL){
+ $path = '../../../../assets/plugins/ckfinder';
+ $width = 'auto';
+ $ckEditor = $this->editor($path, $width);
 
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
+ $data['current_url'] = base_url(uri_string());
+ $data['back_url'] = base_url('waadmin/paginas/index');
+ if(isset($id)){
+   $data['edit_url'] = base_url('waadmin/paginas/editar/E/' . $id);
+ }
 
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'],
-                    "descripcion1" => $post['descripcion1'],
-                    "url_video" => $post['url_video']
-                );
+ switch ($tipo) {
+   case 'C':
+   $data['tipo'] = 'Agregar';
+   break;
+   case 'E':
+   $data['tipo'] = 'Editar';
+   break;
+   case 'V':
+   $data['tipo'] = 'Visualizar';
+   break;
+ }
 
-                //cargar imágenes
-                $imagen_info = $this->imaupload->do_upload("/images/upload/", "imagen_1");
-                if (!empty($imagen_info['upload_data'])) {
-                    $data_update['imagen_1'] = $imagen_info['upload_data']['file_name'];
-                }
+ $data['wa_tipo'] = $tipo;
+ $data['wa_modulo'] = $data['tipo'];
+ $data['wa_menu'] = 'Página';
 
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
+ if($tipo == 'E' || $tipo == 'V'){
+  $data_row = array('id' => $id);
+  $data['post'] = $this->Paginas->get_row($data_row);
+}
 
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/nosotros");
-            }
-        }
+   if ($this->input->post()) {
+     $post= $this->input->post();
+     $data['post'] = $post;
 
-        $this->template->title('Página Home');
-        $this->template->build('waadmin/paginas/nosotros', $data);
-    }
+     $config = array(
+       array(
+         'field' => 'nombre_corto',
+         'label' => 'Título',
+         'rules' => 'required',
+         'errors' => array(
+           'required' => 'Campo requerido.',
+           )
+         ),
+       array(
+         'field' => 'descripcion1',
+         'label' => 'Descripción',
+         'rules' => 'required',
+         'errors' => array(
+           'required' => 'Campo requerido.',
+           )
+         )
+       );
 
-    /**
-     * Clientes
-     *
-     * Página clientes
-     *
-     * @package		Paginas
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       Winner System 
-     * @since		07-05-2015
-     * @version		Version 1.0
-     */
-    public function clientes() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(3);
+     $this->form_validation->set_rules($config);
+     $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'resumen',
-                    'label' => 'Resumen',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                )
-            );
+     if ($this->form_validation->run() == FALSE){
+       /*Error*/
+       $data['post'] = $this->input->post();
+     }else{
 
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
+          //Cargar Imagen
+      $upload_path = $this->config->item('upload_path');
+      if($_FILES["descargable"]){
+       $upload_info = $this->imaupload->do_upload($upload_path, "descargable");
+     }
 
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'],
-                    "descripcion1" => $post['descripcion1']
-                );
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
+     /*$estadia = (isset($post['estadia'])) ? $post['estadia'] : 0 ;*/
 
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/clientes");
-            }
-        }
+     $data_form = array(
+       "nombre_corto" => $post['nombre_corto'],
+       "resumen" => $post['resumen'],
+       "descripcion1" => $post['descripcion1'],
+       "descargable_titulo" => $post['descargable_titulo'],
+       "keywords" => $post['keywords']
+       );
 
-        $this->template->title('Página Home');
-        $this->template->build('waadmin/paginas/clientes', $data);
-    }
+          //cargar imágenes
+     if (!empty($upload_info['upload_data'])) {
+       $data_form['descargable'] = $upload_info['upload_data']['file_name'];
+     }
 
-    /**
-     * Servicios
-     *
-     * Página Servicios
-     *
-     * @package     Paginas
-     * @author      Juan Julio Sandoval Layza
-     * @copyright       Winner System 
-     * @since       07-05-2015
-     * @version     Version 1.0
-     */
-    public function servicios() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(4);
+     $data_urlkey = array('tipo' => 'pg', 'urlkey' => $post['nombre_corto']);
+     $url_key = $this->Crud->get_urlkey($data_urlkey);
+     $data_form['url_key'] = $url_key;
 
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'resumen',
-                    'label' => 'Resumen',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                )
-            );
+          //Agregar
+     if($tipo == 'C'){
+       $this->db->insert('pagina', $data_form);
+       $paquete_id = $this->db->insert_id();
 
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
+       $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
+     }
 
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'],
-                    "descripcion1" => $post['descripcion1']
-                );
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
+          //Editar
+     if ($tipo == 'E') {
+       $this->db->where('id', $post['id']);
+       $this->db->update('pagina', $data_form);
+       $paquete_id = $post['id'];
+       $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
+     }
 
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/servicios");
-            }
-        }
+    //Actualizamos la tabla urlkey
+     $data_urlkey_insert = array('tipo' => 'pg', 'urlkey' => $url_key);
+     $this->db->insert("urlkey",$data_urlkey_insert);
 
-        $this->template->title('Página Home');
-        $this->template->build('waadmin/paginas/clientes', $data);
-    }
+     redirect('/waadmin/paginas/index');
+   }
 
-    /**
-     * Soporte
-     *
-     * Página soporte
-     *
-     * @package     Paginas
-     * @author      Juan Julio Sandoval Layza
-     * @since       20-07-2015
-     * @version     Version 1.0
-     */
-    public function soporte() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(5);
+ }
 
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                )
-            );
+ $this->template->title($data['tipo'] . ' Página');
+ $this->template->build('waadmin/paginas/editar', $data);
+}
 
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
+ /**
+ * Eliminar
+ *
+ * Eliminar categorias
+ *
+ * @package     Dispositivo
+ * @author      Juan Julio Sandoval Layza
+ * @copyright webApu.com 
+ * @since       26-02-2015
+ * @version     Version 1.0
+ */
+ public function eliminar() {
+   if ($this->input->post()) {
+     $items = $this->input->post('items');
+     if (!empty($items)) {
+       foreach ($items as $item) {
+         $eliminar = date("Y-m-d H:i:s");
+         $data_eliminar = array(
+           "eliminar" => $eliminar,
+           "estado" => 0
+           );
+         $this->db->where('id', $item);
+         $this->db->update('tblpaquete', $data_eliminar);
+       }
+       $this->session->set_userdata('msj_success', "Registros eliminados satisfactoriamente.");
+       redirect("waadmin/paginas/index");
+     } else {
+       $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+       redirect("waadmin/paginas/index");
+     }
+   } else {
+     $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
+     redirect("waadmin/paginas/index");
+   }
 
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'], //Descargar Skype
-                    "descripcion1" => $post['descripcion1'],
-                    "imagen_2" => $post['imagen_2'],
-                    "imagen_3" => $post['imagen_3']
-                );
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
+   $this->template->title('Listado de dispositivos.');
+   $this->template->build('inicio');
+ }
 
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/soporte");
-            }
-        }
 
-        $this->template->title('Página Soporte');
-        $this->template->build('waadmin/paginas/soporte', $data);
-    }
+ function editor($path, $width) {
 
-    /**
-     * Descargas
-     *
-     * Página Descargas
-     *
-     * @package     Paginas
-     * @author      Juan Julio Sandoval Layza
-     * @since       20-07-2015
-     * @version     Version 1.0
-     */
-    public function descargas() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(6);
+ //Loading Library For Ckeditor
 
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'resumen',
-                    'label' => 'Resumen',
-                    'rules' => 'required'
-                )
-            );
+   $this->load->library('ckeditor');
 
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
+   $this->load->library('ckfinder');
 
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'], //Descargar Skype
-                    "descripcion1" => $post['descripcion1'],
-                    "url_video" => $post['url_video']
-                );
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
+ //configure base path of ckeditor folder 
 
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/descargas");
-            }
-        }
+   $this->ckeditor->basePath = base_url('assets/plugins/ckeditor/');
 
-        $this->template->title('Página Descargas');
-        $this->template->build('waadmin/paginas/descargas', $data);
-    }
+   $this->ckeditor->config['toolbar'] = 'Full';
 
-    /**
-     * Contáctenos
-     *
-     * Página Contáctenos
-     *
-     * @package     Paginas
-     * @author      Juan Julio Sandoval Layza
-     * @since       17-08-2015
-     * @version     Version 1.0
-     */
-    public function contactenos() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(8);
+   $this->ckeditor->config['language'] = 'es';
 
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                )
-            );
+   $this->ckeditor->config['width'] = $width;
 
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
+ //configure ckfinder with ckeditor config 
 
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'],
-                    "descripcion1" => $post['descripcion1']
-                );
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
-
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/contactenos");
-            }
-        }
-
-        $this->template->title('Página Contáctenos');
-        $this->template->build('waadmin/paginas/contactenos', $data);
-    }
-    
-    /**
-     * Pagos
-     *
-     * Página pagos
-     *
-     * @package		Paginas
-     * @author		Juan Julio Sandoval Layza
-     * @copyright       Winner System 
-     * @since		07-05-2015
-     * @version		Version 1.0
-     */
-    public function pagos() {
-        $data['user_info'] = $this->session->userdata('s_user_info');
-        //Traer información de una página
-        $data['post'] = $this->Paginas->get_pagina(7);
-
-        if ($this->input->post()) {
-            $config = array(
-                array(
-                    'field' => 'nombre_corto',
-                    'label' => 'Título',
-                    'rules' => 'required'
-                ),
-                array(
-                    'field' => 'descripcion1',
-                    'label' => 'Descripción',
-                    'rules' => 'required'
-                )
-            );
-
-            $this->form_validation->set_rules($config);
-            $this->form_validation->set_message('required', '* Campo obligatorio.');
-            $this->form_validation->set_error_delimiters('<div class="col-sm-4 msj-error">', '</div>');
-
-            if ($this->form_validation->run() == FALSE) {
-                $post = $this->input->post();
-                $data['post'] = $post;
-            } else {
-                $post = $this->input->post();
-                $data_update = array(
-                    "nombre_corto" => $post['nombre_corto'],
-                    "resumen" => $post['resumen'],
-                    "descripcion1" => $post['descripcion1']
-                );
-
-                //cargar imágenes
-                $imagen_info = $this->imaupload->do_upload("/images/upload/", "imagen_1");
-                if (!empty($imagen_info['upload_data'])) {
-                    $data_update['imagen_1'] = $imagen_info['upload_data']['file_name'];
-                }
-
-                $this->db->where('id', $post['id']);
-                $this->db->update('pagina', $data_update);
-
-                $this->session->set_userdata('msj_success', "Registro editado satisfactoriamente.");
-                redirect("waadmin/paginas/nosotros");
-            }
-        }
-
-        $this->template->title('Página pagos');
-        $this->template->build('waadmin/paginas/pagos', $data);
-    }
+   $this->ckfinder->SetupCKEditor($this->ckeditor, $path);
+ }
 
 }
 
 /* End of file categorias.php */
-/* Location: ./application/controllers/waadmin/categorias.php */
+ /* Location: ./application/controllers/waadmin/categorias.php */

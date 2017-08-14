@@ -122,13 +122,19 @@ public function paquete($url_key) {
     }
 
     //Consultar Paquete
-    $data_paquete = array('url_key' => $url_key, );
+    $data_paquete = array('url_key' => $url_key);
     $paquete = $this->Paquetes->get_row($data_paquete);
     $data['paquete'] = $paquete;
 
     $data['active_link'] = "paquetes-tours";
     $data['website'] = $this->Inicio->get_website();
-    $data['head_info'] = head_info($this->website_info); //siempre
+    $data['head_info'] = head_info($paquete, 'paquete'); //siempre
+
+    //Formas de pago (página)
+    if(!empty($paquete['formas_pago_id'])){
+      $data_pagina = array('id' => $paquete['formas_pago_id']);
+      $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
+    }
 
     $this->template->title('Paquete');
     $this->template->build('paginas/paquete', $data);

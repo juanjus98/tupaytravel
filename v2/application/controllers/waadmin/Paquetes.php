@@ -18,6 +18,7 @@ class Paquetes extends CI_Controller {
  $this->load->model("crud_model","Crud");
  $this->load->model('paquetes_model', 'Paquetes');
  $this->load->model('provincias_model', 'Provincias');
+ $this->load->model('paginas_model', 'Paginas');
 
  $this->load->library("imaupload");
 }
@@ -113,6 +114,12 @@ function editar($tipo='C',$id=NULL){
    $total_provincias = $this->Provincias->total_registros();
    $data['provincias'] = $this->Provincias->listado($total_provincias,0);
 
+   /**
+    * Provincias
+    */
+   $total_paginas = $this->Paginas->total_registros();
+   $data['paginas'] = $this->Paginas->listado($total_paginas,0);
+
    if ($this->input->post()) {
      $post= $this->input->post();
      $data['post'] = $post;
@@ -165,6 +172,14 @@ function editar($tipo='C',$id=NULL){
          'errors' => array(
            'required' => 'Campo requerido.',
            )
+         ),
+       array(
+         'field' => 'formas_pago_id',
+         'label' => 'Forma de pago',
+         'rules' => 'required',
+         'errors' => array(
+           'required' => 'Campo requerido.',
+           )
          )
        );
 
@@ -191,7 +206,8 @@ function editar($tipo='C',$id=NULL){
        "estadia" => $estadia,
        "precio" => $post['precio'],
        "orden" => $post['orden'],
-       "keywords" => $post['keywords']
+       "keywords" => $post['keywords'],
+       "formas_pago_id" => $post['formas_pago_id']
        );
 
           //cargar imágenes
@@ -199,15 +215,20 @@ function editar($tipo='C',$id=NULL){
        $data_form['imagen'] = $imagen_info1['upload_data']['file_name'];
      }
 
-     $data_urlkey = array('tipo' => 'p', 'urlkey' => $post['nombre']);
-     $url_key = $this->Crud->get_urlkey($data_urlkey);
-     $data_form['url_key'] = $url_key;
+     if(empty($post['url_key_pre'])){
+       $data_urlkey = array('tipo' => 'p', 'urlkey' => $post['nombre']);
+       $url_key = $this->Crud->get_urlkey($data_urlkey);
+       $data_form['url_key'] = $url_key;
 
-          //Agregar
+       //Actualizamos la tabla urlkey
+       $data_urlkey_insert = array('tipo' => 'p', 'urlkey' => $url_key);
+       $this->db->insert("urlkey",$data_urlkey_insert);
+     }
+
+    //Agregar
      if($tipo == 'C'){
        $this->db->insert('tblpaquete', $data_form);
        $paquete_id = $this->db->insert_id();
-
        $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
      }
 
@@ -234,10 +255,6 @@ function editar($tipo='C',$id=NULL){
          $this->db->insert('tblpaquete_ciudades', $data_insert);
        }
      }
-
-    //Actualizamos la tabla urlkey
-     $data_urlkey_insert = array('tipo' => 'p', 'urlkey' => $url_key);
-     $this->db->insert("urlkey",$data_urlkey_insert);
 
      redirect('/waadmin/paquetes/index');
    }

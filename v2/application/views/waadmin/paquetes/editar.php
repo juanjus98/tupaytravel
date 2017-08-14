@@ -1,12 +1,8 @@
 <?php
 /*echo '<pre>';
-print_r($post);
+print_r($paginas);
 echo '</pre>';*/
-/*foreach ($post['ciudades'] as $key => $value) {
-  echo "<pre>";
-  print_r(trim($value));
-  echo "</pre>";
-}*/
+
 ?>
 <div class="row">
  <div class="col-xs-12">
@@ -56,9 +52,9 @@ echo '</pre>';*/
                            <input name="nombre" id="nombre" type="text" value="<?php echo $retVal = (!empty($post['nombre'])) ? $post['nombre'] : '';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
                            <?php echo form_error('nombre', '<div class="error">', '</div>'); ?>
                          </div>
-
                          <label for="url_key" class="col-sm-2 control-label" style="text-align: right;"> Slug:</label>
                          <div class="col-sm-4">
+                           <input type="hidden" name="url_key_pre" value="<?php echo $retVal = (!empty($post['url_key'])) ? $post['url_key'] : '' ; ?>">
                            <input name="url_key" id="url_key" type="text" value="<?php echo $retVal = (!empty($post['url_key'])) ? $post['url_key'] : '' ; ?>" class="form-control input-sm" placeholder="Automático" disabled>
                          </div>
 
@@ -167,7 +163,7 @@ echo '</pre>';*/
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
                          <div class="col-sm-12">
-                          <?php echo form_error('orden', '<div class="detalles">', '</div>'); ?>
+                          <?php echo form_error('detalles', '<div class="error">', '</div>'); ?>
                           <?php
                           $detalles = (!empty($post['detalles'])) ? $post['detalles'] : '' ;
                           echo $this->ckeditor->editor('detalles', $detalles);
@@ -206,7 +202,37 @@ echo '</pre>';*/
                      </td>
                    </tr>
                  </tbody>
-               </table><br>        
+               </table><br>
+
+               <table class="table table-bordered">
+                  <thead class="thead-default">
+                   <tr>
+                     <th><i class="fa fa-list"></i> Forma de Pago</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr>
+                     <td>
+                       <div class="form-group" style="margin-bottom: 0px;">
+                         <label for="orden" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Forma de pago:</label>
+                         <div class="col-sm-4">
+                         <select name="formas_pago_id" id="formas_pago_id" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                           <option value="">Seleccionar</option>
+                           <?php
+                           if(!empty($paginas)){
+                            foreach ($paginas as $key => $value) {
+                              $selected = ($value['id'] == $post['formas_pago_id']) ? 'selected' : '' ;
+                              echo '<option value="'.$value['id'].'" '.$selected.'>'.$value['nombre_corto'].'</option>';
+                            }
+                           }
+                           ?>
+                         </select>
+                           <?php echo form_error('formas_pago_id', '<div class="error">', '</div>'); ?>
+                         </div>
+                       </td>
+                     </tr>
+                </tbody>
+              </table><br>        
              </div>
            </fieldset >
          </div><!--end pad-->

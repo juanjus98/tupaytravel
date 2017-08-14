@@ -40,7 +40,7 @@ class Imaupload {
      */
     function do_upload($upload_path, $file_name) {
         $config_upload['upload_path'] = dirname($_SERVER["SCRIPT_FILENAME"]) . $upload_path;
-        $config_upload['allowed_types']        = 'gif|jpg|png';
+        $config_upload['allowed_types']        = 'gif|jpg|png|doc|docx|pdf';
         $config_upload['max_size']             = 3000;
         /*$config_upload['max_width']            = 1024;
         $config_upload['max_height']           = 1024;*/
