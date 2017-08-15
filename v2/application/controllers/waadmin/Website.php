@@ -88,7 +88,15 @@ class Website extends CI_Controller{
 					),
 				array(
 					'field' => 'telefono_1',
-					'label' => 'telefono',
+					'label' => 'Teléfono',
+					'rules' => 'required',
+					'errors' => array(
+						'required' => 'Campo requerido.',
+						)
+					),
+				array(
+					'field' => 'telefono_2',
+					'label' => 'Celular',
 					'rules' => 'required',
 					'errors' => array(
 						'required' => 'Campo requerido.',
@@ -145,11 +153,16 @@ class Website extends CI_Controller{
 					'description' => $post['description'], 
 					'keywords' => $post['keywords'], 
 					'direccion' => $post['direccion'],
-					'telefono_1' => $post['telefono_1'], 
+					'telefono_1' => $post['telefono_1'],
+					'telefono_2' => $post['telefono_2'],
 					'email_1' => $post['email_1'], 
 					'email_2' => $post['email_2'], 
 					'url_facebook' => $post['url_facebook'], 
 					'url_twitter' => $post['url_twitter'],
+					'url_googleplus' => $post['url_googleplus'],
+					'url_youtube' => $post['url_youtube'],
+					'messenger' => $post['messenger'],
+					'skype' => $post['skype']
 					);
 
 				//cargar imágenes

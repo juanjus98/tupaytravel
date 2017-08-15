@@ -92,10 +92,10 @@ $disabled = ($wa_tipo === 'V') ? "disabled" : "";
 														<input class="form-control input-sm" id="telefono_1" name="telefono_1" type="text" value="<?php echo $retVal = (!empty($post['telefono_1'])) ? $post['telefono_1'] : '';?>" <?php echo $disabled;?>>
 														<?php echo form_error('telefono_1'); ?>
 													</div>
-													<label for="direccion" class="col-sm-2 control-label" style="text-align: right;"><span class="text-red">*</span> Dirección:</label>
+													<label for="telefono_2" class="col-sm-2 control-label" style="text-align: right;"><span class="text-red">*</span> Celular:</label>
 													<div class="col-sm-4">
-														<input class="form-control input-sm" id="direccion" name="direccion" type="text" value="<?php echo $retVal = (!empty($post['direccion'])) ? $post['direccion'] : '';?>" <?php echo $disabled;?>>
-														<?php echo form_error('direccion'); ?>
+														<input class="form-control input-sm" id="telefono_2" name="telefono_2" type="text" value="<?php echo $retVal = (!empty($post['telefono_2'])) ? $post['telefono_2'] : '';?>" <?php echo $disabled;?>>
+														<?php echo form_error('telefono_2'); ?>
 													</div>
 												</div>
 											</td>
@@ -112,6 +112,17 @@ $disabled = ($wa_tipo === 'V') ? "disabled" : "";
 													<div class="col-sm-4">
 														<input class="form-control input-sm" id="email_2" name="email_2" type="text" value="<?php echo $retVal = (!empty($post['email_2'])) ? $post['email_2'] : '';?>" <?php echo $disabled;?>>
 														<?php echo form_error('email_2'); ?>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="form-group" style="margin-bottom: 0px;">
+													<label for="direccion" class="col-sm-2 control-label" style="text-align: right;"><span class="text-red">*</span> Dirección:</label>
+													<div class="col-sm-10">
+														<input class="form-control input-sm" id="direccion" name="direccion" type="text" value="<?php echo $retVal = (!empty($post['direccion'])) ? $post['direccion'] : '';?>" <?php echo $disabled;?>>
+														<?php echo form_error('direccion'); ?>
 													</div>
 												</div>
 											</td>
@@ -134,10 +145,42 @@ $disabled = ($wa_tipo === 'V') ? "disabled" : "";
 														<input class="form-control input-sm" id="url_facebook" name="url_facebook" type="text" value="<?php echo $retVal = (!empty($post['url_facebook'])) ? $post['url_facebook'] : '';?>" <?php echo $disabled;?>>
 														<?php echo form_error('url_facebook'); ?>
 													</div>
-													<label for="url_twitter" class="col-sm-2 control-label" style="text-align: right;"><span class="text-red">*</span> Twitter:</label>
+													<label for="url_twitter" class="col-sm-2 control-label" style="text-align: right;">Twitter:</label>
 													<div class="col-sm-4">
 														<input class="form-control input-sm" id="url_twitter" name="url_twitter" type="text" value="<?php echo $retVal = (!empty($post['url_twitter'])) ? $post['url_twitter'] : '';?>" <?php echo $disabled;?>>
 														<?php echo form_error('url_twitter'); ?>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="form-group" style="margin-bottom: 0px;">
+													<label for="url_googleplus" class="col-sm-2 control-label" style="text-align: right;">Google plus:</label>
+													<div class="col-sm-4">
+														<input class="form-control input-sm" id="url_googleplus" name="url_googleplus" type="text" value="<?php echo $retVal = (!empty($post['url_googleplus'])) ? $post['url_googleplus'] : '';?>" <?php echo $disabled;?>>
+														<?php echo form_error('url_googleplus'); ?>
+													</div>
+													<label for="url_youtube" class="col-sm-2 control-label" style="text-align: right;"> Youtube:</label>
+													<div class="col-sm-4">
+														<input class="form-control input-sm" id="url_youtube" name="url_youtube" type="text" value="<?php echo $retVal = (!empty($post['url_youtube'])) ? $post['url_youtube'] : '';?>" <?php echo $disabled;?>>
+														<?php echo form_error('url_youtube'); ?>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="form-group" style="margin-bottom: 0px;">
+													<label for="messenger" class="col-sm-2 control-label" style="text-align: right;">Facebook Messenger:</label>
+													<div class="col-sm-4">
+														<input class="form-control input-sm" id="messenger" name="messenger" type="text" value="<?php echo $retVal = (!empty($post['messenger'])) ? $post['messenger'] : '';?>" <?php echo $disabled;?>>
+														<?php echo form_error('messenger'); ?>
+													</div>
+													<label for="skype" class="col-sm-2 control-label" style="text-align: right;"> Skype:</label>
+													<div class="col-sm-4">
+														<input class="form-control input-sm" id="skype" name="skype" type="text" value="<?php echo $retVal = (!empty($post['skype'])) ? $post['skype'] : '';?>" <?php echo $disabled;?>>
+														<?php echo form_error('skype'); ?>
 													</div>
 												</div>
 											</td>

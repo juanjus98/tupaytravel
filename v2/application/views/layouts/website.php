@@ -4,8 +4,24 @@
  * Desarrollado por Juan Julio Sandoval Layza <juanjus98@gmail.com>
  */
 $website_info = $this->website_info;
+/*echo "<pre>";
+print_r($website_info);
+echo "</pre>";*/
+$direccion = $website_info['direccion'];
 $telefono_1 = $website_info['telefono_1'];
+$telefono_2 = $website_info['telefono_2'];
+
+$email_1 = $website_info['email_1'];
+$email_2 = $website_info['email_2'];
+
+$skype_user = 'skype:'.$website_info['skype'].'?call';
+$facebook_messenger = 'https://m.me/' . $website_info['messenger']; //Messenger facebook
+$whatsapp_messenger = 'https://api.whatsapp.com/send?phone=' . $telefono_2;
+
 $url_facebook = 'https://www.facebook.com/' . $website_info['url_facebook'];
+$url_twitter = 'https://twitter.com/' . $website_info['url_twitter'];
+$url_youtube = 'https://www.youtube.com/user/' . $website_info['url_youtube'];
+
 /**
  * Preparar tags en header
  */
@@ -76,21 +92,21 @@ $tag_image = $head_info['image'];
   <div class="boxes">
     <div class="box box1">
       <h3>Hablemos por</h3>
-      <p><a href="#"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
+      <p><a href="<?php echo $retVal = (!empty($skype_user)) ? $skype_user : '#' ; ?>" target="_blank" title="Hablemos por skype"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
     </div>
     <div class="box box2">
       <h3>Whatsapp</h3>
-      <p><a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i> +51988878850</a></p>
+      <p><a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> <?php echo $retVal = (!empty($telefono_1)) ? $telefono_1 : '' ; ?></a></p>
     </div>
     <div class="box box3 hidden-xs">
       <h3>Escríbenos</h3>
-      <p><a href="#">reservas@tupaytravel.com</a></p>
+      <p><a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ;?>?Subject=Contáctar"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ;?></a></p>
     </div>
     <div class="box box4 hidden-xs">
       <ul class="social-icons">
-        <li><a href="" class="social-icon"> <i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-        <li><a href="" class="social-icon"> <i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-        <li><a href="" class="social-icon"> <i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+        <li><a href="<?php echo $retVal = (!empty($url_facebook)) ? $url_facebook : '#' ; ?>" target="_blank" class="social-icon"> <i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        <li><a href="<?php echo $retVal = (!empty($url_twitter)) ? $url_twitter : '#' ; ?>" target="_blank" class="social-icon"> <i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        <li><a href="<?php echo $retVal = (!empty($url_youtube)) ? $url_youtube : '#' ; ?>" target="_blank" class="social-icon"> <i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
       </ul>
     </div>
     <div class="box box5 hidden-xs">
@@ -151,11 +167,10 @@ $tag_image = $head_info['image'];
           <div class="footer-single">
             <div class="footer-title"><h2>Información de Contácto</h2></div>
             <address>
-              <strong>Oficina:</strong> Dirección de la oficina #344<br>
-              Cusco, Perú <br>
-              <i class="fa fa-phone"></i>  +51988878850 <br>
-              <i class="fa fa-fax"></i> +51984786422<br>
-              <i class="fa fa-envelope"></i> reservas@tupaytravel.com<br>
+              <strong>Oficina:</strong> <?php echo $retVal = (!empty($direccion)) ? $direccion : '' ; ?> <br>
+              <i class="fa fa-phone"></i>  <?php echo $retVal = (!empty($telefono_1)) ? $telefono_1 : '' ; ?> <br>
+              <i class="fa fa-whatsapp"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : '' ; ?><br>
+              <i class="fa fa-envelope"></i> <?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?><br>
             </address>          
           </div>
         </div>
@@ -194,6 +209,17 @@ $tag_image = $head_info['image'];
 
 </div><!-- main brd-lr-->
 </div><!-- container-->
+
+<!-- Multichat-->
+<div class="cont-multichat">
+  <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
+    <img src="<?php echo base_url('assets/images/icon-messenger48.png');?>" alt="Facebook messenger">
+  </a>
+  <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
+    <img src="<?php echo base_url('assets/images/icon-whatsapp48.png');?>" alt="Whatsapp">
+  </a>
+</div>
+<!-- //Multichat-->
 
 <!-- JavaScript-->
 <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>

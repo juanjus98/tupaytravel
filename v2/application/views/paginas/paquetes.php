@@ -6,7 +6,7 @@
 
     <div class="col-md-9">
       <div class="cont-titulos">
-        <h1 class="titulo_opciones">Paquetes encontrados. <span>text</span></h1>
+        <h1 class="titulo_opciones">Paquetes encontrados. <span><?php echo $retVal = (!empty($total_paquetes)) ? $total_paquetes : '' ; ?></span></h1>
       </div>
       <div class="cont-thumbnails">
         <?php

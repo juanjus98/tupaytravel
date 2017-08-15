@@ -413,8 +413,8 @@ ul.social-icons {
 .navbar-wa .navbar-nav-wa li .dropdown-menu li a {
   /*font-family: @font-primary;*/
   font-size: 16px;
-  padding: 0;
-  line-height: 16px;
+  padding: 6px 15px;
+  /*line-height:16px;*/
   font-weight: bold;
   text-transform: uppercase;
   color: #fff;
