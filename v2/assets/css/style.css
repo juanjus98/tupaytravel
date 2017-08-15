@@ -699,6 +699,28 @@ ul.social-icons {
 .cont-detail .cont-gallery {
   margin-bottom: 20px;
 }
+/**
+ * cont-ckeditor
+ */
+.cont-ckeditor {
+  font-family: 'Nunito Sans', sans-serif;
+}
+.cont-ckeditor h1 {
+  font-size: 26px;
+  font-weight: 700;
+}
+.cont-ckeditor h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+.cont-ckeditor h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+.cont-ckeditor h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
 /* Tabs panel */
 .tabbable-panel {
   border: 1px solid #eee;
@@ -1145,18 +1167,38 @@ fieldset[disabled] .btn-primary-1.active {
 .marker-outline .timeline-item:hover .timeline-marker:before {
   background: #99C115;
 }
+/**
+ * Mobiles
+ */
 @media (max-width: 767px) {
   body {
     /*background: #fc0 !important;*/
   }
   .navbar-collapse {
-    /*padding-right: 0px;
-		padding-left: 0px;*/
     overflow: hidden;
   }
-  /**
- * Galeria
- */
+  .sharethis-inline-share-buttons {
+    margin: 15px 0;
+  }
+  .cont-detail h1 {
+    font-size: 18px;
+  }
+  .cont-detail .cont-icono {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .cont-detail .cont-icono i {
+    font-size: 20px;
+  }
+  .cont-detail .cont-icono h4 {
+    font-size: 11px;
+  }
+  .cont-detail .cont-icono p {
+    font-size: 11px;
+  }
+  .cont-detail .form-vertical {
+    margin-top: 15px;
+  }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   body {

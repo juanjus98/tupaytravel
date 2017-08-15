@@ -39,7 +39,7 @@ $ciudades = implode (", ", $paquete['ciudades_nombres']);
             ?>
           </div>
           <div class="col-md-2">
-            <div class="row">
+            <div class="row iconos-desc">
               <div class="col-xs-3 col-sm-3 col-md-12 col-lg-12">
                 <div class="cont-icono">
                   <i class="fa fa-bed" aria-hidden="true"></i>
@@ -157,12 +157,9 @@ $ciudades = implode (", ", $paquete['ciudades_nombres']);
                   <!--//Itinerario-->
 
                   <!--Formas de pago-->
-                  <div class="tab-pane fade" role="tabpanel" id="pago" aria-labelledby="pago-tab">
+                  <div class="tab-pane fade cont-ckeditor" role="tabpanel" id="pago" aria-labelledby="pago-tab">
                     <?php
                     if(!empty($formas_pago)){
-/*                      echo "<pre>";
-                      print_r($formas_pago);
-                      echo "</pre>";*/
 
                       echo '<p>' . $formas_pago['resumen'] . '</p>';
                       echo $formas_pago['descripcion1'];

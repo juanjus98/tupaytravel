@@ -22,9 +22,9 @@ class Tours_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        /*if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id"] = $data['categoria_id'];
-        }*/
+        if (!empty($data['id_tbltours_categoria'])) {
+            $where["t1.id_tbltours_categoria"] = $data['id_tbltours_categoria'];
+        }
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -33,12 +33,13 @@ class Tours_model extends CI_Model {
             $like["t1.nombre"] = "";
         }
 
-        $resultado = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
-                ->where($where)
-                ->like($like)
-                ->get("tbltours as t1")
-                ->num_rows();
+        $resultado = $this->db->select("t1.*, t2.categoria, t3.provincia")
+        ->join("tbltours_categoria as t2","t2.id = t1.id_tbltours_categoria")
+        ->join("tblprovincia as t3","t3.id = t1.id_provincia")
+        ->where($where)
+        ->like($like)
+        ->get("tbltours as t1")
+        ->num_rows();
 
         return $resultado;
     }
@@ -59,9 +60,9 @@ class Tours_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        /*if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id"] = $data['categoria_id'];
-        }*/
+        if (!empty($data['id_tbltours_categoria'])) {
+            $where["t1.id_tbltours_categoria"] = $data['id_tbltours_categoria'];
+        }
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -82,14 +83,15 @@ class Tours_model extends CI_Model {
             $start = ($start - 1) * $limit;
         }
 
-        $resultado = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
-                ->where($where)
-                ->like($like)
-                ->order_by($order_by)
-                ->limit($limit, $start)
-                ->get("tbltours as t1")
-                ->result_array();
+        $resultado = $this->db->select("t1.*, t2.categoria, t3.provincia")
+        ->join("tbltours_categoria as t2","t2.id = t1.id_tbltours_categoria")
+        ->join("tblprovincia as t3","t3.id = t1.id_provincia")
+        ->where($where)
+        ->like($like)
+        ->order_by($order_by)
+        ->limit($limit, $start)
+        ->get("tbltours as t1")
+        ->result_array();
 
         return $resultado;
     }
@@ -115,15 +117,15 @@ class Tours_model extends CI_Model {
             $where['t1.url_key'] = $data['url_key'];
         }
 
-        $result = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")
-                ->join("marca as t3","t3.id = t1.marca_id","left")*/
-                ->where($where)
-                ->get("tbltours as t1")
-                ->row_array();
+        $resultado = $this->db->select("t1.*, t2.categoria, t3.provincia")
+        ->join("tbltours_categoria as t2","t2.id = t1.id_tbltours_categoria")
+        ->join("tblprovincia as t3","t3.id = t1.id_provincia")
+        ->where($where)
+        ->get("tbltours as t1")
+        ->row_array();
 
         return $result;
     }
-    
+
 
 }
