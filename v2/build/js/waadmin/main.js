@@ -8,6 +8,37 @@ $(function() {
         search_contains: true
     });
 
+    /**
+     * Editar en lista box_orden
+     */
+     $(document).on("click", ".box_orden", function() {
+        $(this).hide();
+        var tdparent = $(this).parents('td');
+        tdparent.find('input').show().focus().select();
+        return false;
+    });
+
+     $("td input.input-order").focusout(function(){
+        $(this).hide();
+        var tdparent = $(this).parents('td');
+        var url = base_url + tdparent.data('controller');
+        var id = tdparent.data('identificador');
+        var orden = $(this).val();
+        tdparent.find('.box_orden').show().text(orden).show();
+
+        //Update
+        var data = { id: id, orden: orden };
+        $.ajax({
+          method: "POST",
+          url: url,
+          data: data
+      })
+        .done(function( msg ) {
+            console.log(msg);
+        });
+
+    });
+
     //Ciudades en orden
 /*    var MY_SELECT = $('select[multiple].chosen-select').get(0);
 
@@ -64,14 +95,14 @@ $(function() {
 
     //Cargar popup
     $(document).on("click", ".wapopup", function() {
-       var url = $(this).attr('href');
-       var title = $(this).attr('title');
-       var height = $(this).data('height');
-       var width = $(this).data('width');
-       popupCenter(url,title,width,height);
-       return false;
+     var url = $(this).attr('href');
+     var title = $(this).attr('title');
+     var height = $(this).data('height');
+     var width = $(this).data('width');
+     popupCenter(url,title,width,height);
+     return false;
 
-   });
+ });
 
     // -------- Toggle navbar Muestra/Oculta
     $(document).on("click", "#wa-togle", function() {

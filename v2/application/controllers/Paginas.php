@@ -45,8 +45,9 @@ class Paginas extends CI_Controller {
     $data['videos'] = $this->Videos->listado(8,0);
 
     //Paquetes
+    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
     $total_paquetes = $this->Paquetes->total_registros();
-    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0);
+    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
 
     //Tours
     $total_tours = $this->Tours->total_registros();
@@ -72,6 +73,11 @@ class Paginas extends CI_Controller {
   }
 
   public function paquetes($args=null) {
+    
+    $data['dias'] = $this->Paquetes->listadoDias();
+    
+    $data_busqueda = array();
+    $nroDias = 0;
     if(isset($args)){
       $_hasta = explode('hasta_', $args);
       if(count($_hasta) > 1){
@@ -82,6 +88,8 @@ class Paginas extends CI_Controller {
         $fechaHasta = date('Y-m-d', strtotime($strHasta));
         $dateDiff = strtotime($strHasta) - strtotime($strDesde);
         $nroDias = floor($dateDiff / (60 * 60 * 24));
+        $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
+        $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
       }
 
       $_dias = explode('dias', $args);
@@ -95,14 +103,23 @@ class Paginas extends CI_Controller {
     $data['head_info'] = head_info($this->website_info); //siempre
 
     //Paquetes
-    $total_paquetes = $this->Paquetes->total_registros();
-    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0);
+    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+    if($nroDias > 0){
+      $data_paquetes['nro_dias'] = $nroDias;
+      $data_busqueda['nroDias'] = $nroDias;
+    }
+
+    $total_paquetes = $this->Paquetes->total_registros($data_paquetes);
+    $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
+
+    //Información de busqueda
+    $data['busqueda'] = $data_busqueda;
 
     $this->template->title('Paquetes');
     $this->template->build('paginas/paquetes', $data);
   }
 
-public function paquete($url_key) {
+  public function paquete($url_key) {
     if(isset($args)){
       $_hasta = explode('hasta_', $args);
       if(count($_hasta) > 1){
@@ -147,7 +164,7 @@ public function paquete($url_key) {
         $data['website'] = $this->Inicio->get_website(); //siempre
         $data['head_info'] = head_info($data['website']); //siempre
 
-      //Enviar formulario
+        //Enviar formulario
         if($this->input->post()){
           $post = $this->input->post();
           $config = array(

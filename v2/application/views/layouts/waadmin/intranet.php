@@ -33,7 +33,7 @@ die();*/
     <![endif]-->
 
     <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>">
-    <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
+    <script type="text/javascript">var base_url='<?php echo base_url($this->config->item('admin_path'));?>';</script>
 
 </head>
 <body class="skin-wa">

@@ -191,12 +191,6 @@ $(function() {
 		return false;
 	}
 
-	/*if($('select#adultos').val() == "0"){
-		alert('Debe seleccionar al menos un Adulto');
-		$('select#adultos').focus();
-		return false;
-	}*/
-
 	//Setear url
 	var date_from = $('#date_from').val();
 	var date_to = $('#date_to').val();
@@ -205,7 +199,7 @@ $(function() {
 	date_to = date_to.replace("-", "");
 	date_to = date_to.replace("-", "");
 
-	var urlBusqueda = 'paquetes-tours/desde_' + date_from + 'hasta_' + date_to;
+	var urlBusqueda = base_url + 'paquetes-tours/desde_' + date_from + 'hasta_' + date_to;
 	$(location).attr('href',urlBusqueda);
 });
 

@@ -17,7 +17,7 @@ echo '</pre>';*/
                                 $campos = array(
                                     "t1.nombre" => "Nombre",
                                     "t1.url_key" => "Slug"
-                                );
+                                    );
                                 foreach ($campos as $indice => $campo) {
                                     $selected_campo = "";
                                     if ($post['campo'] == $indice) {
@@ -59,12 +59,12 @@ echo '</pre>';*/
                     <table class="table table-hover table-bordered">
                         <tbody>
                             <tr>
-                            <th><input type="checkbox" id="chkTodo" /></th>
-                            <th>Nombre</th>
-                            <!-- <th>Slug</th> -->
-                            <th class="text-center">Orden</th>
-                            <th>Fecha de creación</th>
-                            <th></th>
+                                <th><input type="checkbox" id="chkTodo" /></th>
+                                <th>Nombre</th>
+                                <!-- <th>Slug</th> -->
+                                <th class="text-center">Orden</th>
+                                <th class="text-center">N° días</th>
+                                <th></th>
                             </tr>
                             <?php
                             if(!empty($listado)){
@@ -76,9 +76,14 @@ echo '</pre>';*/
                                         </td>
                                         <td><?php echo $item['nombre']; ?></td>
                                         <!-- <td><?php echo $item['url_key']; ?></td> -->
-                                        <td class="text-center"><?php echo $item['orden']; ?></td>
-                                        <td><?php echo $item['agregar']; ?></td>
-                                        <td>
+                                        <td class="text-center" data-controller="/paquetes/uporden" data-identificador="<?php echo $item['id'];?>">
+                                            <div class="box_orden">
+                                                <?php echo $item['orden']; ?>
+                                            </div>
+                                            <input type="text" name="orden_<?php echo $item['id'];?>" value="<?php echo $item['orden'];?>" style="display: none; max-width: 40px; margin: 0 auto;" class="form-control input-sm text-center input-order">
+                                        </td>
+                                        <td class="text-center"><?php echo $item['nro_dias']; ?></td>
+                                        <td class="text-center">
                                             <a href="<?php echo base_url(); ?>waadmin/paquetes/editar/V/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo base_url(); ?>waadmin/paquetes/editar/E/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 

@@ -14,12 +14,12 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 /node_modules/
-/.phpintel/
 
 # IDE Files
 #-------------------------
 /nbproject/
 .idea/*
+.phpintel/*
 
 ## Sublime Text cache files
 *.tmlanguage.cache

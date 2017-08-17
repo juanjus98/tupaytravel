@@ -36,7 +36,6 @@ class Paquetes_model extends CI_Model {
         $resultado = $this->db->select("t1.*")
         ->join("tblpaquete_ciudades as t2","t2.id_tblpaquete = t1.id","left")
         ->where($where)
-        ->where_in('t1.ciudades','CUSCO')
         ->like($like)
         ->group_by('t1.id')
         ->get("tblpaquete as t1")
@@ -65,6 +64,10 @@ class Paquetes_model extends CI_Model {
             $where["t2.ciudad"] = $data['ciudad'];
         }
 
+        if(!empty($data['nro_dias'])){
+            $where["t1.nro_dias"] = $data['nro_dias'];
+        }
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
@@ -72,12 +75,11 @@ class Paquetes_model extends CI_Model {
             $like["t1.nombre"] = "";
         }
 
-
         //ORDENAR POR
         if (!empty($data['ordenar_por'])) {
             $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
         } else {
-            $order_by = 't1.agregar DESC';
+            $order_by = 't1.orden ASC';
         }
 
         if ($start > 0) {
@@ -155,6 +157,37 @@ class Paquetes_model extends CI_Model {
         }
 
         return $result;
+    }
+
+
+/**
+     * Listado de productos
+     *
+     * Muestra un listado de todas las productos
+     *
+     * @package     productos
+     * @author      Juan Julio Sandoval Layza
+     * @copyright   webApu.com 
+     * @since       02-03-2014
+     * @version     Version 1.0
+     */
+    function listadoDias() {
+        //Where
+        $where = array('t1.estado != ' => 0);
+
+        //Where
+        /*if (!empty($data['ciudad'])) {
+            $where["t2.ciudad"] = $data['ciudad'];
+        }*/
+
+        $resultado = $this->db->select("t1.nro_dias")
+        ->where($where)
+        ->group_by('t1.nro_dias')
+        ->order_by('t1.nro_dias','ASC')
+        ->get("tblpaquete as t1")
+        ->result_array();
+        
+        return $resultado;
     }
     
 

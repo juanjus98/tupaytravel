@@ -42,8 +42,8 @@ class Paquetes extends CI_Controller {
  $sessionName = 's_paquetes'; //Session name
 
  //Paginacion
- $base_url = base_url() . "waadmin/paquetes/index";
- $per_page = 10; //registros por página
+ $base_url = base_url('waadmin/paquetes/index');
+ $per_page = 30; //registros por página
  $uri_segment = 4; //segmento de la url
  $num_links = 4; //número de links
 
@@ -263,6 +263,19 @@ function editar($tipo='C',$id=NULL){
 
  $this->template->title($data['tipo'] . ' Paquete');
  $this->template->build('waadmin/paquetes/editar', $data);
+}
+
+/**
+ * Ajax actualizar orden
+ */
+public function uporden(){
+  if($this->input->post()){
+    $post = $this->input->post();
+    $data_form = array('orden' => $post['orden']);
+    $this->db->where('id', $post['id']);
+    $this->db->update('tblpaquete', $data_form);
+    echo "Orden actualizado.";
+  }
 }
 
  /**

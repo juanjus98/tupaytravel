@@ -33,6 +33,8 @@ function index($id){
  $data_crud['where'] = array("t1.id" => $this->paquete_id, "t1.estado !=" => 0);
  $data['paquete'] = $this->Crud->getRow($data_crud);
 
+ $this->upDias($id);
+
  $data['wa_modulo'] = $data['paquete']['nombre'];
  $data['wa_menu'] = 'Intinerario';
 
@@ -73,6 +75,25 @@ function index($id){
 
  $this->template->title('Intinerario');
  $this->template->build('waadmin/paquetes_galeria/index', $data);
+}
+
+/**
+ * Actualizar número de días a un paquete
+ */
+function upDias($paquete_id){
+  //Consultar tblpaquete_galeria
+ $data_crud['table'] = "tblpaquete_galeria as t1";
+ $data_crud['columns'] = "t1.id, t1.id_tblpaquete, t1.titulo";
+ $data_crud['where'] = array("t1.id_tblpaquete" => $paquete_id, "t1.estado !=" => 0);
+ $data_crud['order_by'] = "t1.id Asc";
+ $paquete_galeria = $this->Crud->getRows($data_crud);
+ $nro_dias = count($paquete_galeria);
+
+ //Actualizar
+ $data_form = array('nro_dias' => $nro_dias, );
+ $this->db->where('id', $paquete_id);
+ $this->db->update('tblpaquete', $data_form);
+
 }
 
 
@@ -158,7 +179,7 @@ function editar($tipo='C',$id=null,$id_relation){
 
   if (!empty($imagen_info['upload_data'])) {
    $data_form['nombre_imagen'] = $imagen_info['upload_data']['file_name'];
-  }
+ }
 
     //Agregar
  if($tipo == 'C'){
@@ -173,6 +194,9 @@ if ($tipo == 'E') {
   $this->db->update('tblpaquete_galeria', $data_form);
   $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
 }
+
+//Actualizar paquete
+$this->upDias($id_relation);
 
 redirect('/waadmin/paquetes_galeria/index/' . $id_relation);
 
@@ -197,6 +221,9 @@ function eliminar($id){
         $this->db->where('id', $value);
         $this->db->update('tblpaquete_galeria', $data_form);
       }
+
+      //Actualizar paquete
+      $this->upDias($id);
     }
 
     $this->session->set_userdata('msj_success', "Registros eliminados satisfactoriamente.");

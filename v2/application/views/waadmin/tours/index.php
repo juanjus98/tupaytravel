@@ -11,6 +11,24 @@ echo '</pre>';*/
                 <form name="frm-buscar" id="frm-buscar" method="post" action="" role="search">
                     <div class="row pad" style="padding-bottom: 0px;">
 
+                    <div class="col-sm-2">
+                            <select name="campo" class="form-control input-sm">
+                                <?php
+                                $campos = array(
+                                    "t1.nombre" => "Nombre",
+                                    "t1.url_key" => "Slug"
+                                    );
+                                foreach ($campos as $indice => $campo) {
+                                    $selected_campo = "";
+                                    if ($post['campo'] == $indice) {
+                                        $selected_campo = "selected";
+                                    }
+                                    echo '<option value="' . $indice . '" ' . $selected_campo . '>' . $campo . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
                         <div class="col-sm-2">
                             <select name="campo" class="form-control input-sm">
                                 <?php
