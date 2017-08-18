@@ -86,7 +86,7 @@ class Paginas extends CI_Controller {
         $fechaDesde = date('Y-m-d', strtotime($strDesde));
         $fechaHasta = date('Y-m-d', strtotime($strHasta));
         $dateDiff = strtotime($strHasta) - strtotime($strDesde);
-        $nroDias = floor($dateDiff / (60 * 60 * 24));
+        $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
         $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
         $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
       }
