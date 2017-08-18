@@ -73,7 +73,6 @@ class Paginas extends CI_Controller {
   }
 
   public function paquetes($args=null) {
-    
     $data['dias'] = $this->Paquetes->listadoDias();
     
     $data_busqueda = array();
@@ -152,6 +151,9 @@ class Paginas extends CI_Controller {
       $data_pagina = array('id' => $paquete['formas_pago_id']);
       $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
     }
+
+    //Paises
+    $data['paises'] = $this->Crud->getPaises();
 
     $this->template->title('Paquete');
     $this->template->build('paginas/paquete', $data);

@@ -1,4 +1,8 @@
-<?php 
+<?php
+/*echo "<pre>";
+print_r($paises);
+echo "</pre>";*/
+
 $itinerarios = $paquete['itinerarios'];
 $estadia = ($paquete['estadia']==1) ? 'SI' : 'NO';
 $duracion = count($itinerarios);
@@ -186,9 +190,6 @@ $ciudades = implode (", ", $paquete['ciudades_nombres']);
 
           </div>
           <div class="col-md-4">
-            <?php
-//$paises = getPaises();
-            ?>
             <div id="sticky-sidebar">
               <form class="form-vertical" name="buscador" id="buscador" action="tours/" method="post">
                <fieldset class="form-reservar">
@@ -211,11 +212,11 @@ $ciudades = implode (", ", $paquete['ciudades_nombres']);
   <select class="form-control select_search" name="pais_origen">
     <option value="">Seleccionar</option>
     <?php
-    /*if(!empty($paises)){
+    if(!empty($paises)){
       foreach ($paises as $key => $pais) {
-        echo '<option value="'.$pais['name'].'">'.$pais['name'].'</option>';
+        echo '<option value="'.$pais->alpha3Code.'">'.$pais->name.'</option>';
       }
-    }*/
+    }
     ?>
   </select>
 </div>
