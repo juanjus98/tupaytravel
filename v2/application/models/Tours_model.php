@@ -26,6 +26,10 @@ class Tours_model extends CI_Model {
             $where["t1.id_tbltours_categoria"] = $data['id_tbltours_categoria'];
         }
 
+        if (!empty($data['id_provincia'])) {
+            $where["t1.id_provincia"] = $data['id_provincia'];
+        }
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
@@ -64,9 +68,14 @@ class Tours_model extends CI_Model {
             $where["t1.id_tbltours_categoria"] = $data['id_tbltours_categoria'];
         }
 
+        if (!empty($data['id_provincia'])) {
+            $where["t1.id_provincia"] = $data['id_provincia'];
+        }
+
         //Like
-        if (!empty($data['campo']) && !empty($data['busqueda'])) {
-            $like[$data['campo']] = $data['busqueda'];
+        if (!empty($data['busqueda'])) {
+        /*if (!empty($data['campo']) && !empty($data['busqueda'])) {*/
+            $like["t1.nombre"] = $data['busqueda'];
         } else {
             $like["t1.nombre"] = "";
         }
@@ -124,7 +133,7 @@ class Tours_model extends CI_Model {
         ->get("tbltours as t1")
         ->row_array();
 
-        return $result;
+        return $resultado;
     }
 
 

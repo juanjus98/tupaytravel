@@ -39,13 +39,24 @@ class Tours extends CI_Controller {
    $data['wa_modulo'] = 'Listado';
    $data['wa_menu'] = 'tours';
 
- $sessionName = 's_tours'; //Session name
+//Provincias   
+$total_provincias = $this->Provincias->total_registros();
+$data['provincias'] = $this->Provincias->listado($total_provincias, 0);
 
- //Paginacion
- $base_url = base_url() . "waadmin/tours/index";
- $per_page = 10; //registros por página
- $uri_segment = 4; //segmento de la url
- $num_links = 4; //número de links
+//Consultar categoria
+$data_crud['table'] = "tbltours_categoria as t1";
+$data_crud['columns'] = "t1.*";
+$data_crud['where'] = array("t1.estado !=" => 0);
+$data_crud['order_by'] = "t1.categoria ASC";
+$data['categorias'] = $this->Crud->getRows($data_crud);
+
+$sessionName = 's_tours'; //Session name
+
+//Paginacion
+$base_url = base_url() . "waadmin/tours/index";
+$per_page = 30; //registros por página
+$uri_segment = 4; //segmento de la url
+$num_links = 4; //número de links
 
  //Página actual
  $page = ($this->uri->segment($uri_segment)) ? $this->uri->segment($uri_segment) : 0;
@@ -101,24 +112,30 @@ function editar($tipo='C',$id=NULL){
 
  $data['wa_tipo'] = $tipo;
  $data['wa_modulo'] = $data['tipo'];
- $data['wa_menu'] = 'Paquete';
+ $data['wa_menu'] = 'Tour';
 
  if($tipo == 'E' || $tipo == 'V'){
   $data_row = array('id' => $id);
   $data['post'] = $this->Tours->get_row($data_row);
 }
 
-   /**
-    * Provincias
-    */
-   $total_provincias = $this->Provincias->total_registros();
-   $data['provincias'] = $this->Provincias->listado($total_provincias,0);
+//Provincias   
+$total_provincias = $this->Provincias->total_registros();
+$data['provincias'] = $this->Provincias->listado($total_provincias, 0);
 
-   /**
-    * Provincias
-    */
+//Consultar categoria
+$data_crud['table'] = "tbltours_categoria as t1";
+$data_crud['columns'] = "t1.*";
+$data_crud['where'] = array("t1.estado !=" => 0);
+$data_crud['order_by'] = "t1.categoria ASC";
+$data['categorias'] = $this->Crud->getRows($data_crud);
+
+  /**
+  * Paginas
+  */
    $total_paginas = $this->Paginas->total_registros();
    $data['paginas'] = $this->Paginas->listado($total_paginas,0);
+   
 
    if ($this->input->post()) {
      $post= $this->input->post();
@@ -134,24 +151,24 @@ function editar($tipo='C',$id=NULL){
            )
          ),
        array(
+         'field' => 'id_tbltours_categoria',
+         'label' => 'Categoría',
+         'rules' => 'required',
+         'errors' => array(
+           'required' => 'Campo requerido.',
+           )
+         ),
+       array(
+         'field' => 'id_provincia',
+         'label' => 'Provincia',
+         'rules' => 'required',
+         'errors' => array(
+           'required' => 'Campo requerido.',
+           )
+         ),
+       array(
          'field' => 'descripcion',
          'label' => 'Descripción',
-         'rules' => 'required',
-         'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-         ),
-       array(
-         'field' => 'ciudades[]',
-         'label' => 'Ciudades',
-         'rules' => 'required',
-         'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-         ),
-       array(
-         'field' => 'precio',
-         'label' => 'Precio',
          'rules' => 'required',
          'errors' => array(
            'required' => 'Campo requerido.',
@@ -166,7 +183,7 @@ function editar($tipo='C',$id=NULL){
            )
          ),
        array(
-         'field' => 'detalles',
+         'field' => 'detalle',
          'label' => 'Detalles',
          'rules' => 'required',
          'errors' => array(
@@ -200,13 +217,15 @@ function editar($tipo='C',$id=NULL){
      $estadia = (isset($post['estadia'])) ? $post['estadia'] : 0 ;
 
      $data_form = array(
+      "id_tbltours_categoria" => $post['id_tbltours_categoria'],
        "nombre" => $post['nombre'],
-       "detalles" => $post['detalles'],
+       "detalle" => $post['detalle'],
        "descripcion" => $post['descripcion'],
        "estadia" => $estadia,
        "precio" => $post['precio'],
        "orden" => $post['orden'],
        "keywords" => $post['keywords'],
+       "id_provincia" => $post['id_provincia'],
        "formas_pago_id" => $post['formas_pago_id']
        );
 
@@ -228,7 +247,7 @@ function editar($tipo='C',$id=NULL){
     //Agregar
      if($tipo == 'C'){
        $this->db->insert('tbltours', $data_form);
-       $paquete_id = $this->db->insert_id();
+       $Tour_id = $this->db->insert_id();
        $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
      }
 
@@ -236,24 +255,8 @@ function editar($tipo='C',$id=NULL){
      if ($tipo == 'E') {
        $this->db->where('id', $post['id']);
        $this->db->update('tbltours', $data_form);
-       $paquete_id = $post['id'];
+       $Tour_id = $post['id'];
        $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
-     }
-
-     $estadia = (isset($post['estadia'])) ? $post['estadia'] : 0 ;
-
-     //INSERTAMOS Ciudades
-     $this->db->where('id_tbltours', $paquete_id);
-     $this->db->delete('tbltours_ciudades');
-     if (!empty($post['ciudades'])) {
-       $ciudades = $post['ciudades'];
-       foreach ($ciudades as $id_tblprovincia) {
-         $data_insert = array(
-           "id_tbltours" => $paquete_id,
-           "id_tblprovincia" => $id_tblprovincia
-           );
-         $this->db->insert('tbltours_ciudades', $data_insert);
-       }
      }
 
      redirect('/waadmin/tours/index');
@@ -261,7 +264,7 @@ function editar($tipo='C',$id=NULL){
 
  }
 
- $this->template->title($data['tipo'] . ' Paquete');
+ $this->template->title($data['tipo'] . ' Tour');
  $this->template->build('waadmin/tours/editar', $data);
 }
 
