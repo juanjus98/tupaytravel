@@ -136,6 +136,17 @@ class Tours_model extends CI_Model {
         ->get("tbltours as t1")
         ->row_array();
 
+        //Consultar itinerario (galeria)
+        $itinerarios = $this->db->select("t1.*")
+        ->where("t1.id_tbltours =", $resultado['id'])
+        ->where("t1.estado !=", 0)
+        ->order_by('t1.orden','ASC')
+        ->get("tbltours_itinerario as t1")
+        ->result_array();
+        if (!empty($itinerarios)) {
+            $resultado['itinerarios'] = $itinerarios;
+        }
+
         return $resultado;
     }
 

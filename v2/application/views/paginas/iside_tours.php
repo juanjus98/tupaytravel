@@ -1,11 +1,11 @@
 <?php
 /*echo "<pre>";
-print_r($busqueda);
+print_r($categorias);
 echo "</pre>";*/
 ?>
 <div id="sticky-sidebar">
   <form class="form-vertical" name="buscador" id="buscador" action="" method="post">
-   <fieldset class="form-home">
+   <!-- <fieldset class="form-home">
      <h3>¿En qué fechas viajas?</h3>
      <div class="form-group">
       <label>Desde</label>
@@ -35,6 +35,25 @@ echo "</pre>";*/
         <button id="buscar" class="btn btn-primary-1 btn-block" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
       </div>
     </div>
+  </fieldset> -->
+
+  <fieldset>
+    <div class="container-box">
+      <h3 class="titulo_opciones">Categoría</h3>
+      <div>
+        <?php
+        if(!empty($categorias)){
+          foreach ($categorias as $key => $value) {
+              $categoria_str = url_title(convert_accented_characters($value['categoria']),'-', TRUE);
+              $urlCategoria = base_url('tours/'.$categoria_str);
+              ?>
+              <a href="<?php echo $urlCategoria;?>" class="btn btn-block btn-primary"><?php echo $value['categoria'];?></a>
+              <?php
+          }
+        }
+        ?>
+      </div>
+    </div>
   </fieldset>
 
   <fieldset>
@@ -45,7 +64,7 @@ echo "</pre>";*/
         if(!empty($dias)){
           foreach ($dias as $key => $dia) {
             if($dia['nro_dias'] > 0){
-              $urlPaquetes = base_url('paquetes-tours/'.$dia['nro_dias'].'dias');
+              $urlPaquetes = base_url('tours/'.$dia['nro_dias'].'dias');
               ?>
               <a href="<?php echo $urlPaquetes;?>" class="btn btn-block btn-default"><?php echo ($dia['nro_dias'] == 1) ? 'Tour de ' . $dia['nro_dias'] . ' Día' : 'Tours de ' . $dia['nro_dias'] . ' Días' ;?></a>
               <?php

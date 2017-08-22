@@ -28,7 +28,7 @@ class Paginas extends CI_Controller {
  *
  * @package     paginas
  * @author      Juan Julio Sandoval Layza
- * @copyright webApu.com 
+ * @copyright   webApu.com 
  * @since       26-02-2015
  * @version     Version 1.0
  */
@@ -106,89 +106,89 @@ function editar($tipo='C',$id=NULL){
   $data['post'] = $this->Paginas->get_row($data_row);
 }
 
-   if ($this->input->post()) {
-     $post= $this->input->post();
-     $data['post'] = $post;
+if ($this->input->post()) {
+ $post= $this->input->post();
+ $data['post'] = $post;
 
-     $config = array(
-       array(
-         'field' => 'nombre_corto',
-         'label' => 'Título',
-         'rules' => 'required',
-         'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-         ),
-       array(
-         'field' => 'descripcion1',
-         'label' => 'Descripción',
-         'rules' => 'required',
-         'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-         )
-       );
+ $config = array(
+   array(
+     'field' => 'nombre_corto',
+     'label' => 'Título',
+     'rules' => 'required',
+     'errors' => array(
+       'required' => 'Campo requerido.',
+       )
+     ),
+   array(
+     'field' => 'descripcion1',
+     'label' => 'Descripción',
+     'rules' => 'required',
+     'errors' => array(
+       'required' => 'Campo requerido.',
+       )
+     )
+   );
 
-     $this->form_validation->set_rules($config);
-     $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
+ $this->form_validation->set_rules($config);
+ $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
-     if ($this->form_validation->run() == FALSE){
-       /*Error*/
-       $data['post'] = $this->input->post();
-     }else{
+ if ($this->form_validation->run() == FALSE){
+   /*Error*/
+   $data['post'] = $this->input->post();
+ }else{
 
           //Cargar Imagen
-      $upload_path = $this->config->item('upload_path');
-      if($_FILES["descargable"]){
-       $upload_info = $this->imaupload->do_upload($upload_path, "descargable");
-     }
-
-     /*$estadia = (isset($post['estadia'])) ? $post['estadia'] : 0 ;*/
-
-     $data_form = array(
-       "nombre_corto" => $post['nombre_corto'],
-       "resumen" => $post['resumen'],
-       "descripcion1" => $post['descripcion1'],
-       "descargable_titulo" => $post['descargable_titulo'],
-       "keywords" => $post['keywords']
-       );
-
-          //cargar imágenes
-     if (!empty($upload_info['upload_data'])) {
-       $data_form['descargable'] = $upload_info['upload_data']['file_name'];
-     }
-
-     $data_urlkey = array('tipo' => 'pg', 'urlkey' => $post['nombre_corto']);
-     $url_key = $this->Crud->get_urlkey($data_urlkey);
-     $data_form['url_key'] = $url_key;
-
-          //Agregar
-     if($tipo == 'C'){
-       $this->db->insert('pagina', $data_form);
-       $paquete_id = $this->db->insert_id();
-
-       $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
-     }
-
-          //Editar
-     if ($tipo == 'E') {
-       $this->db->where('id', $post['id']);
-       $this->db->update('pagina', $data_form);
-       $paquete_id = $post['id'];
-       $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
-     }
-
-    //Actualizamos la tabla urlkey
-     $data_urlkey_insert = array('tipo' => 'pg', 'urlkey' => $url_key);
-     $this->db->insert("urlkey",$data_urlkey_insert);
-
-     redirect('/waadmin/paginas/index');
-   }
-
+  $upload_path = $this->config->item('upload_path');
+  if($_FILES["descargable"]){
+   $upload_info = $this->imaupload->do_upload($upload_path, "descargable");
  }
 
- $this->template->title($data['tipo'] . ' Página');
- $this->template->build('waadmin/paginas/editar', $data);
+ /*$estadia = (isset($post['estadia'])) ? $post['estadia'] : 0 ;*/
+
+ $data_form = array(
+   "nombre_corto" => $post['nombre_corto'],
+   "resumen" => $post['resumen'],
+   "descripcion1" => $post['descripcion1'],
+   "descargable_titulo" => $post['descargable_titulo'],
+   "keywords" => $post['keywords']
+   );
+
+          //cargar imágenes
+ if (!empty($upload_info['upload_data'])) {
+   $data_form['descargable'] = $upload_info['upload_data']['file_name'];
+ }
+
+ $data_urlkey = array('tipo' => 'pg', 'urlkey' => $post['nombre_corto']);
+ $url_key = $this->Crud->get_urlkey($data_urlkey);
+ $data_form['url_key'] = $url_key;
+
+          //Agregar
+ if($tipo == 'C'){
+   $this->db->insert('pagina', $data_form);
+   $paquete_id = $this->db->insert_id();
+
+   $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
+ }
+
+          //Editar
+ if ($tipo == 'E') {
+   $this->db->where('id', $post['id']);
+   $this->db->update('pagina', $data_form);
+   $paquete_id = $post['id'];
+   $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
+ }
+
+    //Actualizamos la tabla urlkey
+ $data_urlkey_insert = array('tipo' => 'pg', 'urlkey' => $url_key);
+ $this->db->insert("urlkey",$data_urlkey_insert);
+
+ redirect('/waadmin/paginas/index');
+}
+
+}
+
+$this->template->title($data['tipo'] . ' Página');
+$this->template->build('waadmin/paginas/editar', $data);
 }
 
  /**

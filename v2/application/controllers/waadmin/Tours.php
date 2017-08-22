@@ -307,6 +307,19 @@ $data['categorias'] = $this->Crud->getRows($data_crud);
    $this->template->build('inicio');
  }
 
+ /**
+ * Ajax actualizar orden
+ */
+public function uporden(){
+  if($this->input->post()){
+    $post = $this->input->post();
+    $data_form = array('orden' => $post['orden']);
+    $this->db->where('id', $post['id']);
+    $this->db->update('tbltours', $data_form);
+    echo "Orden actualizado.";
+  }
+}
+
 
 function editor($path, $width) {
 

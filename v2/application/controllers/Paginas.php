@@ -22,6 +22,7 @@ class Paginas extends CI_Controller {
     $this->load->model("tours_model","Tours");
     $this->load->model("hoteles_model","Hoteles");
     $this->load->model("paquetes_galeria_model","Paquetes_galeria");
+    $this->load->model("tours_itinerario_model","Tours_itinerario");
 
     /**
      * Información del website
@@ -164,33 +165,40 @@ class Paginas extends CI_Controller {
 /**
  * Tours
  */
-  public function tours($args=null) {
-    $data['dias'] = $this->Tours->listadoDias();
-    
-    $data_busqueda = array();
-    $nroDias = 0;
-    if(isset($args)){
-      $_hasta = explode('hasta_', $args);
-      if(count($_hasta) > 1){
-        $_desde = explode('desde_',$_hasta[0]);
-        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
-        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
-        $fechaDesde = date('Y-m-d', strtotime($strDesde));
-        $fechaHasta = date('Y-m-d', strtotime($strHasta));
-        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
-        $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
-        $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
-        $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
-      }
+public function tours($args=null) {
+  $data['dias'] = $this->Tours->listadoDias();
 
-      $_dias = explode('dias', $args);
-      if(count($_dias) > 1){
-        $nroDias = $_dias[0];
-      }
+    //Consultar categoria
+  $data_crud['table'] = "tbltours_categoria as t1";
+  $data_crud['columns'] = "t1.*";
+  $data_crud['where'] = array("t1.estado !=" => 0);
+  $data_crud['order_by'] = "t1.categoria ASC";
+  $data['categorias'] = $this->Crud->getRows($data_crud);
+
+  $data_busqueda = array();
+  $nroDias = 0;
+  if(isset($args)){
+    $_hasta = explode('hasta_', $args);
+    if(count($_hasta) > 1){
+      $_desde = explode('desde_',$_hasta[0]);
+      $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
+      $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
+      $fechaDesde = date('Y-m-d', strtotime($strDesde));
+      $fechaHasta = date('Y-m-d', strtotime($strHasta));
+      $dateDiff = strtotime($strHasta) - strtotime($strDesde);
+      $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
+      $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
+      $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
     }
 
-    $data['active_link'] = "Tours";
-    $data['website'] = $this->Inicio->get_website();
+    $_dias = explode('dias', $args);
+    if(count($_dias) > 1){
+      $nroDias = $_dias[0];
+    }
+  }
+
+  $data['active_link'] = "Tours";
+  $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($this->website_info); //siempre
 
     //Paquetes
@@ -209,6 +217,33 @@ class Paginas extends CI_Controller {
 
     $this->template->title('Tours');
     $this->template->build('paginas/tours', $data);
+  }
+
+/**
+ * Tour
+ */
+  public function tour($url_key) {
+
+    //Consultar tour
+    $data_paquete = array('url_key' => $url_key);
+    $tour = $this->Tours->get_row($data_paquete);
+    $data['tour'] = $tour;
+
+    $data['active_link'] = "Tours";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($tour, 'tour'); //siempre
+
+    //Formas de pago (página)
+    if(!empty($tour['formas_pago_id'])){
+      $data_pagina = array('id' => $tour['formas_pago_id']);
+      $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
+    }
+
+    //Paises
+    $data['paises'] = $this->Crud->getPaises();
+
+    $this->template->title('Tour');
+    $this->template->build('paginas/tour', $data);
   }
 
 

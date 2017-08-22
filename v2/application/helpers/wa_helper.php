@@ -259,12 +259,12 @@ if (!function_exists('head_info')) {
                     "image" => base_url($CI->config->item('upload_path') . $info['imagen'])
                     );
                 break;
-                case "servicio":
+                case "tour":
                 $head_info = array(
-                    "title" => $info['nombre_largo'],
+                    "title" => $info['nombre'],
                     "description" => strip_tags(str_replace("\n", "",$info['descripcion'])),
                     "keywords" => $info['keywords'],
-                    "image" => base_url() . "images/upload/" . $info['imagen_2']
+                    "image" => base_url($CI->config->item('upload_path') . $info['imagen'])
                     );
                 break;
             }

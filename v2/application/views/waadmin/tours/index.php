@@ -74,6 +74,7 @@ die();*/
                                 <th>Nombre</th>
                                 <th>Provincia</th>
                                 <th class="text-center">Orden</th>
+                                <th class="text-center">N° días</th>
                                 <th style="min-width: 110px;"></th>
                             </tr>
                             <?php
@@ -87,7 +88,13 @@ die();*/
                                         <td><?php echo $item['categoria']; ?></td>
                                         <td><?php echo $item['nombre']; ?></td>
                                         <td><?php echo $item['provincia']; ?></td>
-                                        <td class="text-center"><?php echo $item['orden']; ?></td>
+                                        <td class="text-center" data-controller="/tours/uporden" data-identificador="<?php echo $item['id'];?>">
+                                            <div class="box_orden">
+                                                <?php echo $item['orden']; ?>
+                                            </div>
+                                            <input type="text" name="orden_<?php echo $item['id'];?>" value="<?php echo $item['orden'];?>" style="display: none; max-width: 40px; margin: 0 auto;" class="form-control input-sm text-center input-order">
+                                        </td>
+                                        <td class="text-center"><?php echo $item['nro_dias']; ?></td>
                                         <td class="text-center">
                                             <a href="<?php echo base_url(); ?>waadmin/tours/editar/V/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo base_url(); ?>waadmin/tours/editar/E/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
