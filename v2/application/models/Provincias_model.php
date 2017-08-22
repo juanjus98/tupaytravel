@@ -63,6 +63,7 @@ class Provincias_model extends CI_Model {
             $where["t1.categoria_id"] = $data['categoria_id'];
         }
 
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];

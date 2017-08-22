@@ -76,8 +76,9 @@ class Tours_model extends CI_Model {
         }
 
         //Like
-        if (!empty($data['campo']) && !empty($data['busqueda'])) {
-            $like[$data['campo']] = $data['busqueda'];
+        if (!empty($data['busqueda'])) {
+        /*if (!empty($data['campo']) && !empty($data['busqueda'])) {*/
+            $like["t1.nombre"] = $data['busqueda'];
         } else {
             $like["t1.nombre"] = "";
         }
@@ -135,7 +136,7 @@ class Tours_model extends CI_Model {
         ->get("tbltours as t1")
         ->row_array();
 
-        return $result;
+        return $resultado;
     }
 
 /**

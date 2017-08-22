@@ -1,7 +1,8 @@
 <?php
 /*echo '<pre>';
-print_r($listado);
-echo '</pre>';*/
+print_r($provincias);
+echo '</pre>';
+die();*/
 ?>
 <?php echo msj(); ?>
 <div class="row">
@@ -11,41 +12,33 @@ echo '</pre>';*/
                 <form name="frm-buscar" id="frm-buscar" method="post" action="" role="search">
                     <div class="row pad" style="padding-bottom: 0px;">
 
-                    <div class="col-sm-2">
-                            <select name="campo" class="form-control input-sm">
+                        <div class="col-sm-2">
+                            <select name="id_tbltours_categoria" class="form-control input-sm chosen-select"  data-placeholder="Seleccionar categoría">
+                            <option value=""></option>
                                 <?php
-                                $campos = array(
-                                    "t1.nombre" => "Nombre",
-                                    "t1.url_key" => "Slug"
-                                    );
-                                foreach ($campos as $indice => $campo) {
-                                    $selected_campo = "";
-                                    if ($post['campo'] == $indice) {
-                                        $selected_campo = "selected";
-                                    }
-                                    echo '<option value="' . $indice . '" ' . $selected_campo . '>' . $campo . '</option>';
+                                foreach ($categorias as $value) {
+                                    $selected = ($value['id'] == $post['id_tbltours_categoria']) ? 'selected' : '' ;
+                                    echo '<option value="' . $value['id'] . '" ' . $selected . '>' . $value['categoria'] . '</option>';
                                 }
                                 ?>
                             </select>
                         </div>
 
-                        <div class="col-sm-2">
-                            <select name="campo" class="form-control input-sm">
+                    <div class="col-sm-2">
+                            <select name="id_provincia" class="form-control input-sm chosen-select" data-placeholder="Seleccionar provincia">
+                            <option value=""></option>
                                 <?php
-                                $campos = array(
-                                    "t1.nombre" => "Nombre",
-                                    "t1.url_key" => "Slug"
-                                    );
-                                foreach ($campos as $indice => $campo) {
-                                    $selected_campo = "";
-                                    if ($post['campo'] == $indice) {
-                                        $selected_campo = "selected";
-                                    }
-                                    echo '<option value="' . $indice . '" ' . $selected_campo . '>' . $campo . '</option>';
+                                foreach ($provincias as $index => $value) {
+                                    $selected = "";
+                                if ($post['id_provincia'] == $value['id']) {
+                                    $selected = "selected";
+                                }
+                                echo '<option value="' . $value['id'] . '" ' . $selected . '>' . $value['provincia'] . '</option>';
                                 }
                                 ?>
                             </select>
                         </div>
+
                         <div class="col-sm-3">
                             <div class="input-group">
                                 <input type="text" name="busqueda" class="form-control input-sm" placeholder="Busqueda" value="<?php if(!empty($post['busqueda'])){ echo $post['busqueda'];} ?>">
@@ -59,9 +52,8 @@ echo '</pre>';*/
                             <a href="<?php echo base_url('waadmin/tours/index?refresh');?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
                         </div>
 
-                        <div class="col-sm-5">
+                        <div class="col-sm-3">
                             <div class="pull-right">
-
                                 <!-- <button class="btn btn-success btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button> -->
                                 <a href="<?php echo base_url('waadmin/tours/editar/C');?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
 
@@ -100,7 +92,7 @@ echo '</pre>';*/
                                             <a href="<?php echo base_url(); ?>waadmin/tours/editar/V/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             <a href="<?php echo base_url(); ?>waadmin/tours/editar/E/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/tours_galeria/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Intinerario"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/tours_itinerario/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Intinerario"><i class="fa fa-calendar" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>

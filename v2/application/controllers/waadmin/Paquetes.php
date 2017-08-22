@@ -115,7 +115,7 @@ function editar($tipo='C',$id=NULL){
    $data['provincias'] = $this->Provincias->listado($total_provincias,0);
 
    /**
-    * Provincias
+    * Paginas
     */
    $total_paginas = $this->Paginas->total_registros();
    $data['paginas'] = $this->Paginas->listado($total_paginas,0);

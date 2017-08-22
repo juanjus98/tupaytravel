@@ -61,7 +61,42 @@ echo '</pre>';*/
                        </div>
                      </td>
                    </tr>
+<tr>
+                     <td>
+                       <div class="form-group" style="margin-bottom: 0px;">
+                         <label for="id_tbltours_categoria" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Categoría:</label>
+                         <div class="col-sm-4">
+                           <select name="id_tbltours_categoria" id="id_tbltours_categoria" data-placeholder="Seleccionar provincia" class="chosen-select">
+                            <option value=""></option>
+                            <?php
+                            if(!empty($categorias)){
+                              foreach ($categorias as $key => $value) {
+                                $selected_categoria = ($value['id'] == $post['id_tbltours_categoria']) ? 'selected' : '' ;
+                                echo '<option value="'.$value['id'].'" ' . $selected_categoria . '>'.$value['categoria'].'</option>';
+                              }
+                            }
+                            ?>
+                          </select>
+                          <?php echo form_error('id_tbltours_categoria', '<div class="error">', '</div>'); ?>
+                        </div>
 
+                         <label for="id_provincia" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Provincia:</label>
+                         <div class="col-sm-4">
+                           <select name="id_provincia" id="id_provincia" data-placeholder="Seleccionar provincia" class="chosen-select">
+                            <option value=""></option>
+                            <?php
+                            if(!empty($provincias)){
+                              foreach ($provincias as $key => $value) {
+                                $selected_provincia = ($value['id'] == $post['id_provincia']) ? 'selected' : '' ;
+                                echo '<option value="'.$value['id'].'" ' . $selected_provincia . '>'.$value['provincia'].'</option>';
+                              }
+                            }
+                            ?>
+                          </select>
+                          <?php echo form_error('id_provincia', '<div class="error">', '</div>'); ?>
+                        </div>
+                      </td>
+                    </tr>
                    <tr>
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
@@ -73,37 +108,6 @@ echo '</pre>';*/
                        </div>
                      </td>
                    </tr>
-
-                   <tr>
-                     <td>
-                       <div class="form-group" style="margin-bottom: 0px;">
-                         <label for="ciudades" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Ciudades:</label>
-                         <div class="col-sm-10">
-                           <select name="ciudades[]" id="ciudades_select" data-placeholder="Seleccionar ciudad(es)" class="chosen-select" multiple>
-                            <option value=""></option>
-                            <?php
-                            if(!empty($provincias)){
-                              foreach ($provincias as $key => $value) {
-                                $provincia = strip_tags($value['provincia']);
-                                $provincia_id = $value['id'];
-                                $selected_ciudad = '';
-                                if(!empty($post['ciudades'])){
-                                  foreach ($post['ciudades'] as $key => $item) {
-                                    if($item == $provincia_id){
-                                      $selected_ciudad = 'selected';
-                                      break;
-                                    }
-                                  }
-                                }
-                                echo '<option value="'.$provincia_id.'" ' . $selected_ciudad . '>'.$provincia.'</option>';
-                              }
-                            }
-                            ?>
-                          </select>
-                          <?php echo form_error('ciudades[]', '<div class="error">', '</div>'); ?>
-                        </div>
-                      </td>
-                    </tr>
                     <tr>
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
@@ -163,10 +167,10 @@ echo '</pre>';*/
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
                          <div class="col-sm-12">
-                          <?php echo form_error('detalles', '<div class="error">', '</div>'); ?>
+                          <?php echo form_error('detalle', '<div class="error">', '</div>'); ?>
                           <?php
-                          $detalles = (!empty($post['detalles'])) ? $post['detalles'] : '' ;
-                          echo $this->ckeditor->editor('detalles', $detalles);
+                          $detalle = (!empty($post['detalle'])) ? $post['detalle'] : '' ;
+                          echo $this->ckeditor->editor('detalle', $detalle);
                           ?>
                         </div>
                       </div>
