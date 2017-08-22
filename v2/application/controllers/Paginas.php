@@ -109,6 +109,7 @@ class Paginas extends CI_Controller {
     }
 
     $total_paquetes = $this->Paquetes->total_registros($data_paquetes);
+    $data['total_paquetes'] = $total_paquetes;
     $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
 
     //Información de busqueda
@@ -157,6 +158,57 @@ class Paginas extends CI_Controller {
 
     $this->template->title('Paquete');
     $this->template->build('paginas/paquete', $data);
+  }
+
+
+/**
+ * Tours
+ */
+  public function tours($args=null) {
+    $data['dias'] = $this->Tours->listadoDias();
+    
+    $data_busqueda = array();
+    $nroDias = 0;
+    if(isset($args)){
+      $_hasta = explode('hasta_', $args);
+      if(count($_hasta) > 1){
+        $_desde = explode('desde_',$_hasta[0]);
+        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
+        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
+        $fechaDesde = date('Y-m-d', strtotime($strDesde));
+        $fechaHasta = date('Y-m-d', strtotime($strHasta));
+        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
+        $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
+        $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
+        $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
+      }
+
+      $_dias = explode('dias', $args);
+      if(count($_dias) > 1){
+        $nroDias = $_dias[0];
+      }
+    }
+
+    $data['active_link'] = "Tours";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($this->website_info); //siempre
+
+    //Paquetes
+    $data_tours = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+    if($nroDias > 0){
+      $data_tours['nro_dias'] = $nroDias;
+      $data_busqueda['nroDias'] = $nroDias;
+    }
+
+    $total_tours = $this->Tours->total_registros($data_tours);
+    $data['total_listado'] = $total_tours;
+    $data['listado'] = $this->Tours->listado($total_tours,0,$data_tours);
+
+    //Información de busqueda
+    $data['busqueda'] = $data_busqueda;
+
+    $this->template->title('Tours');
+    $this->template->build('paginas/tours', $data);
   }
 
 

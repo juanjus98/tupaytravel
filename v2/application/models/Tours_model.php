@@ -26,6 +26,10 @@ class Tours_model extends CI_Model {
             $where["t1.id_tbltours_categoria"] = $data['id_tbltours_categoria'];
         }
 
+        if (!empty($data['id_provincia'])) {
+            $where["t1.id_provincia"] = $data['id_provincia'];
+        }
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
@@ -56,12 +60,19 @@ class Tours_model extends CI_Model {
      * @version		Version 1.0
      */
     function listado($limit, $start, $data = NULL) {
+        /*echo "<pre>";
+        print_r($data);
+        echo "</pre>";*/
         //Where
         $where = array('t1.estado != ' => 0);
 
         //Where
         if (!empty($data['id_tbltours_categoria'])) {
             $where["t1.id_tbltours_categoria"] = $data['id_tbltours_categoria'];
+        }
+
+        if (!empty($data['id_provincia'])) {
+            $where["t1.id_provincia"] = $data['id_provincia'];
         }
 
         //Like
@@ -126,6 +137,30 @@ class Tours_model extends CI_Model {
 
         return $result;
     }
+
+/**
+     * Listado de productos
+     *
+     * Muestra un listado de todas las productos
+     *
+     * @package     productos
+     * @author      Juan Julio Sandoval Layza
+     * @copyright   webApu.com 
+     * @since       02-03-2014
+     * @version     Version 1.0
+     */
+function listadoDias() {
+    $where = array('t1.estado != ' => 0);
+
+    $resultado = $this->db->select("t1.nro_dias")
+    ->where($where)
+    ->group_by('t1.nro_dias')
+    ->order_by('t1.nro_dias','ASC')
+    ->get("tbltours as t1")
+    ->result_array();
+    
+    return $resultado;
+}
 
 
 }

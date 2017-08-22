@@ -62,9 +62,19 @@ $route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto
 $route['contactanos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
 
+/**
+ * Paquetes
+ */
 $route['paquetes-tours'] = 'paginas/paquetes';
 $route['paquetes-tours/(:any)'] = 'paginas/paquetes/$1';
 $route['paquete-tour/(:any)'] = 'paginas/paquete/$1';
+
+/**
+ * Tours
+ */
+$route['tours'] = 'paginas/tours';
+$route['tours/(:any)'] = 'paginas/tours/$1';
+$route['tour/(:any)'] = 'paginas/tour/$1';
 
 //Servicio servicio
 $route['servicio/(:any)'] = 'paginas/servicio/$1';
