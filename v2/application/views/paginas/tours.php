@@ -1,7 +1,10 @@
 <?php
 /*echo "<pre>";
-print_r($dias);
+print_r($busqueda);
 echo "</pre>";*/
+if(!empty($busqueda)){
+  $provincia = $busqueda['provincia'];
+}
 ?>
 <section class="main-container">
   <div class="row">
@@ -11,7 +14,7 @@ echo "</pre>";*/
 
     <div class="col-md-9">
       <div class="cont-titulos">
-        <h1 class="titulo_opciones">Tours encontrados. <span><?php echo $retVal = (!empty($total_listado)) ? $total_listado : '' ; ?></span></h1>
+        <h1 class="titulo_opciones">Tours encontrados<?php echo $retVal = (!empty($provincia)) ? ' en ' . ucfirst(strtolower($provincia['provincia'])) : '' ;?>. <span><?php echo $retVal = (!empty($total_listado)) ? $total_listado : '' ; ?></span></h1>
       </div>
       <div class="cont-thumbnails">
         <?php

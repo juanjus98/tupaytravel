@@ -30,6 +30,10 @@ class Tours_model extends CI_Model {
             $where["t1.id_provincia"] = $data['id_provincia'];
         }
 
+        if (!empty($data['nro_dias'])) {
+            $where["t1.nro_dias"] = $data['nro_dias'];
+        }
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
@@ -60,9 +64,6 @@ class Tours_model extends CI_Model {
      * @version		Version 1.0
      */
     function listado($limit, $start, $data = NULL) {
-        /*echo "<pre>";
-        print_r($data);
-        echo "</pre>";*/
         //Where
         $where = array('t1.estado != ' => 0);
 
@@ -75,38 +76,41 @@ class Tours_model extends CI_Model {
             $where["t1.id_provincia"] = $data['id_provincia'];
         }
 
+        if (!empty($data['nro_dias'])) {
+            $where["t1.nro_dias"] = $data['nro_dias'];
+        }
+
         //Like
         if (!empty($data['busqueda'])) {
-        /*if (!empty($data['campo']) && !empty($data['busqueda'])) {*/
-            $like["t1.nombre"] = $data['busqueda'];
-        } else {
-            $like["t1.nombre"] = "";
-        }
-
+            /*if (!empty($data['campo']) && !empty($data['busqueda'])) {*/
+                $like["t1.nombre"] = $data['busqueda'];
+            } else {
+                $like["t1.nombre"] = "";
+            }
 
         //ORDENAR POR
-        if (!empty($data['ordenar_por'])) {
-            $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
-        } else {
-            $order_by = 't1.nombre ASC';
+            if (!empty($data['ordenar_por'])) {
+                $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
+            } else {
+                $order_by = 't1.nombre ASC';
+            }
+
+            if ($start > 0) {
+                $start = ($start - 1) * $limit;
+            }
+
+            $resultado = $this->db->select("t1.*, t2.categoria, t3.provincia")
+            ->join("tbltours_categoria as t2","t2.id = t1.id_tbltours_categoria")
+            ->join("tblprovincia as t3","t3.id = t1.id_provincia")
+            ->where($where)
+            ->like($like)
+            ->order_by($order_by)
+            ->limit($limit, $start)
+            ->get("tbltours as t1")
+            ->result_array();
+
+            return $resultado;
         }
-
-        if ($start > 0) {
-            $start = ($start - 1) * $limit;
-        }
-
-        $resultado = $this->db->select("t1.*, t2.categoria, t3.provincia")
-        ->join("tbltours_categoria as t2","t2.id = t1.id_tbltours_categoria")
-        ->join("tblprovincia as t3","t3.id = t1.id_provincia")
-        ->where($where)
-        ->like($like)
-        ->order_by($order_by)
-        ->limit($limit, $start)
-        ->get("tbltours as t1")
-        ->result_array();
-
-        return $resultado;
-    }
 
     /**
      * Cosultar categoría
@@ -161,8 +165,12 @@ class Tours_model extends CI_Model {
      * @since       02-03-2014
      * @version     Version 1.0
      */
-function listadoDias() {
+function listadoDias($data=null) {
     $where = array('t1.estado != ' => 0);
+
+    if (!empty($data['id_provincia'])) {
+        $where["t1.id_provincia"] = $data['id_provincia'];
+    }
 
     $resultado = $this->db->select("t1.nro_dias")
     ->where($where)

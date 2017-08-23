@@ -23,6 +23,7 @@ class Paginas extends CI_Controller {
     $this->load->model("hoteles_model","Hoteles");
     $this->load->model("paquetes_galeria_model","Paquetes_galeria");
     $this->load->model("tours_itinerario_model","Tours_itinerario");
+    $this->load->model("provincias_model","Provincias");
 
     /**
      * Información del website
@@ -165,72 +166,81 @@ class Paginas extends CI_Controller {
 /**
  * Tours
  */
-public function tours($args=null) {
-  $data['dias'] = $this->Tours->listadoDias();
+public function tours($provincia_key=null, $categoria_key=null, $args=null) {
+  $data_busqueda = array();
+  $data_dias = array();
 
+  $data_tours = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+  /**
+   * Setear argumentos de busqueda
+   */
+  if(isset($provincia_key)){
+    $data_provincia = array('url_key' => $provincia_key);
+    $provincia = $this->Provincias->get_row($data_provincia);
+    $id_provincia = $provincia['id'];
+    $data_tours['id_provincia'] = $id_provincia;
+    $data_busqueda['provincia'] = $provincia;
+
+    $data_dias['id_provincia'] = $id_provincia;
+  }
+
+  if(isset($categoria_key)){
     //Consultar categoria
+    $data_crud['table'] = "tbltours_categoria as t1";
+    $data_crud['columns'] = "t1.*";
+    $data_crud['where'] = array("t1.url_key" => $categoria_key, "t1.estado !=" => 0);
+    $categoria = $this->Crud->getRow($data_crud);
+    $id_tbltours_categoria = $categoria['id'];
+    $data_tours['id_tbltours_categoria'] = $id_tbltours_categoria;
+    $data_busqueda['categoria'] = $categoria;
+  }
+
+  if(isset($args)){
+    list($nro_dias, $str_dias) = explode("-", $args);
+    /*echo $nro_dias;*/
+    $data_tours['nro_dias'] = $nro_dias;
+    $data_busqueda['nro_dias'] = $nro_dias;
+  }
+
+
+  $data['dias'] = $this->Tours->listadoDias($data_dias);
+
+  //Consultar categoria
   $data_crud['table'] = "tbltours_categoria as t1";
   $data_crud['columns'] = "t1.*";
   $data_crud['where'] = array("t1.estado !=" => 0);
   $data_crud['order_by'] = "t1.categoria ASC";
   $data['categorias'] = $this->Crud->getRows($data_crud);
 
-  $data_busqueda = array();
-  $nroDias = 0;
-  if(isset($args)){
-    $_hasta = explode('hasta_', $args);
-    if(count($_hasta) > 1){
-      $_desde = explode('desde_',$_hasta[0]);
-      $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
-      $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
-      $fechaDesde = date('Y-m-d', strtotime($strDesde));
-      $fechaHasta = date('Y-m-d', strtotime($strHasta));
-      $dateDiff = strtotime($strHasta) - strtotime($strDesde);
-      $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
-      $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
-      $data_busqueda['fechaHasta'] = date("d-m-Y", strtotime($fechaHasta));
-    }
-
-    $_dias = explode('dias', $args);
-    if(count($_dias) > 1){
-      $nroDias = $_dias[0];
-    }
-  }
 
   $data['active_link'] = "Tours";
   $data['website'] = $this->Inicio->get_website();
-    $data['head_info'] = head_info($this->website_info); //siempre
+  $data['head_info'] = head_info($this->website_info);
 
-    //Paquetes
-    $data_tours = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
-    if($nroDias > 0){
-      $data_tours['nro_dias'] = $nroDias;
-      $data_busqueda['nroDias'] = $nroDias;
-    }
 
-    $total_tours = $this->Tours->total_registros($data_tours);
-    $data['total_listado'] = $total_tours;
-    $data['listado'] = $this->Tours->listado($total_tours,0,$data_tours);
+  $total_tours = $this->Tours->total_registros($data_tours);
+  $data['total_listado'] = $total_tours;
+  $data['listado'] = $this->Tours->listado($total_tours,0,$data_tours);
 
     //Información de busqueda
-    $data['busqueda'] = $data_busqueda;
+  $data['busqueda'] = $data_busqueda;
 
-    $this->template->title('Tours');
-    $this->template->build('paginas/tours', $data);
-  }
+  $this->template->title('Tours');
+  $this->template->build('paginas/tours', $data);
+}
 
 /**
  * Tour
  */
-  public function tour($url_key) {
+public function tour($url_key) {
 
     //Consultar tour
-    $data_paquete = array('url_key' => $url_key);
-    $tour = $this->Tours->get_row($data_paquete);
-    $data['tour'] = $tour;
+  $data_paquete = array('url_key' => $url_key);
+  $tour = $this->Tours->get_row($data_paquete);
+  $data['tour'] = $tour;
 
-    $data['active_link'] = "Tours";
-    $data['website'] = $this->Inicio->get_website();
+  $data['active_link'] = "Tours";
+  $data['website'] = $this->Inicio->get_website();
     $data['head_info'] = head_info($tour, 'tour'); //siempre
 
     //Formas de pago (página)

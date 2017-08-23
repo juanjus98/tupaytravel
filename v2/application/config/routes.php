@@ -55,10 +55,6 @@ $route['inicio'] = 'paginas/index';
 /**
  * Páginas
  */
-$route['c/(:any)'] = 'paginas/productos/$1';
-$route['c/(:any)/(:num)'] = 'paginas/productos/$1/$2'; //Paginación
-$route['p/(:any)'] = 'paginas/detalle_producto/$1'; //Detalles de un producto
-
 $route['contactanos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
 
@@ -73,11 +69,12 @@ $route['paquete-tour/(:any)'] = 'paginas/paquete/$1';
  * Tours
  */
 $route['tours'] = 'paginas/tours';
-$route['tours/(:any)'] = 'paginas/tours/$1';
+$route['tours/(:any)'] = 'paginas/tours/$1'; //Solo provincia
+$route['tours/(:any)/(:any)'] = 'paginas/tours/$1/$2';//Provincia y categoría
+$route['tours/(:any)/(:any)/(:any)'] = 'paginas/tours/$1/$2/$3';//Provincia, categoría y args 
+
 $route['tour/(:any)'] = 'paginas/tour/$1';
 
-//Servicio servicio
-$route['servicio/(:any)'] = 'paginas/servicio/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

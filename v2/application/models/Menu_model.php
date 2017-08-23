@@ -10,7 +10,7 @@ class Menu_model extends CI_Model {
  */
 function menuTours($data=null) {
   $where = array('t1.estado != ' => 0);
-  $result = $this->db->select('t2.id AS provincia_id, t2.provincia, count(t1.id) as n_tours')
+  $result = $this->db->select('t2.id AS provincia_id, t2.provincia, t2.url_key, count(t1.id) as n_tours')
   ->join('tblprovincia as t2', 't2.id = t1.id_provincia')
   ->where($where)
   ->group_by('t1.id_provincia')

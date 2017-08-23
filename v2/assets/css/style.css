@@ -1024,6 +1024,9 @@ fieldset[disabled] .btn-primary-1.active {
 .timeline-content p:last-child {
   margin-bottom: 0;
 }
+.timeline-content p {
+  text-align: justify;
+}
 .timeline-content img {
   margin-top: 15px;
 }

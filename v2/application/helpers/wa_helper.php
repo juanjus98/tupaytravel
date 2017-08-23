@@ -51,8 +51,8 @@ if (!function_exists('wamenu')) {
         //Menú tours
         $resultado = $CI->Menu->menuTours();
         foreach ($resultado as $key => $value) {
-            $urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
-            $menuTours["tours/{$urlkey}"] = $value['provincia'];
+            $url_key = 'tours/' . $value['url_key'];
+            $menuTours[$url_key] = $value['provincia'];
         }
 
         //Menú estadia

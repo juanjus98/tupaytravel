@@ -125,10 +125,6 @@ class Paquetes_model extends CI_Model {
         ->get("tblpaquete as t1")
         ->row_array();
 
-/*        echo "<pre>";
-        print_r($result);
-        echo "</pre>";*/
-
         //Consultar itinerario (galeria)
         $itinerarios = $this->db->select("t1.*")
         ->where("t1.id_tblpaquete =", $result['id'])
@@ -171,7 +167,7 @@ class Paquetes_model extends CI_Model {
      * @since       02-03-2014
      * @version     Version 1.0
      */
-    function listadoDias() {
+    function listadoDias($data=null) {
         //Where
         $where = array('t1.estado != ' => 0);
 
