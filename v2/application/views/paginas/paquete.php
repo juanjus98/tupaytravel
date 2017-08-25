@@ -1,12 +1,12 @@
 <?php
-/*echo "<pre>";
-print_r($paises);
-echo "</pre>";*/
-
 $itinerarios = $paquete['itinerarios'];
 $estadia = ($paquete['estadia']==1) ? 'SI' : 'NO';
 $duracion = count($itinerarios);
 $ciudades = implode (", ", $paquete['ciudades_nombres']);
+
+if(!empty($busqueda_info)){
+  $date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
+}
 ?>
 <section class="main-container cont-detail">
   <div class="row">
@@ -126,10 +126,11 @@ $ciudades = implode (", ", $paquete['ciudades_nombres']);
                       $iiDia = 1;
                       foreach ($itinerarios as $key => $itinerario) {
                         $urlImagen = (!empty($itinerario['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $itinerario['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
+                        $str_fecha = (!empty($date_range[$key])) ? nice_date($date_range[$key], 'd/m/Y') : 'Día ' . $iiDia;
                         ?>
                         <li class="timeline-item">
                           <div class="timeline-info">
-                            <span><?php echo 'Día ' . $iiDia;?></span>
+                            <span><?php echo $str_fecha;?></span>
                           </div>
                           <div class="timeline-marker"></div>
                           <div class="timeline-content">

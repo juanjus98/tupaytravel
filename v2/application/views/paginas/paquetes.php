@@ -1,7 +1,7 @@
 <?php
-/*echo "<pre>";
-print_r($dias);
-echo "</pre>";*/
+if(!empty($busqueda_info)){
+  $date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
+}
 ?>
 <section class="main-container">
   <div class="row">
@@ -22,7 +22,7 @@ echo "</pre>";*/
             $total_itinerario = $this->Paquetes_galeria->total_registros($data_post);
             $itinerarios = $this->Paquetes_galeria->listado($total_itinerario, 0, $data_post);
 
-            $nombre_paquete = trim($paquete['nombre']);
+            $nombre_paquete = strip_tags($paquete['nombre']);
             $url_paquete = base_url('paquete-tour/' . $paquete['url_key']);
             $urlImagen = (!empty($paquete['imagen'])) ? base_url($this->config->item('upload_path') . $paquete['imagen']) : base_url('assets/images/no-image.jpg') ;
             ?>
@@ -46,11 +46,12 @@ echo "</pre>";*/
                     if(!empty($itinerarios)){
                       $i_dia = 1;
                       foreach ($itinerarios as $key => $itinerario) {
+                        $str_fecha = (!empty($date_range[$key])) ? nice_date($date_range[$key], 'd/m/Y') : 'Día ' . $i_dia;
                         ?>
                         <div class="list-group-item">
                           <h4 class="list-group-item-heading">
                             <i class="fa fa-calendar-check-o" aria-hidden="true"></i> 
-                            Día <?php echo $i_dia;?> <span><?php echo $itinerario['titulo'];?></span>
+                            <?php echo $str_fecha;?> <span><?php echo $itinerario['titulo'];?></span>
                           </h4>
                         </div>
                         <?php

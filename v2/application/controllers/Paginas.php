@@ -86,7 +86,9 @@ class Paginas extends CI_Controller {
         $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
         $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
         $fechaDesde = date('Y-m-d', strtotime($strDesde));
+        $data_busqueda['dateDesde'] = $fechaDesde;
         $fechaHasta = date('Y-m-d', strtotime($strHasta));
+        $data_busqueda['dateHasta'] = $fechaHasta;
         $dateDiff = strtotime($strHasta) - strtotime($strDesde);
         $nroDias = floor($dateDiff / (60 * 60 * 24)) + 1;
         $data_busqueda['fechaDesde'] = date("d-m-Y", strtotime($fechaDesde));
@@ -97,6 +99,17 @@ class Paginas extends CI_Controller {
       if(count($_dias) > 1){
         $nroDias = $_dias[0];
       }
+
+      $data_busqueda['nro_dias'] = $nroDias;
+      $s_busqueda['s_busqueda_paquetes'] = $data_busqueda;
+      $this->session->set_userdata($s_busqueda);
+
+    }else {
+      $this->session->unset_userdata('s_busqueda_paquetes');
+    }
+
+    if($this->session->userdata('s_busqueda_paquetes')){
+      $data['busqueda_info'] = $this->session->userdata('s_busqueda_paquetes');
     }
 
     $data['active_link'] = "paquetes-tours";
@@ -122,22 +135,9 @@ class Paginas extends CI_Controller {
   }
 
   public function paquete($url_key) {
-    if(isset($args)){
-      $_hasta = explode('hasta_', $args);
-      if(count($_hasta) > 1){
-        $_desde = explode('desde_',$_hasta[0]);
-        $strDesde =  substr($_desde[1], 4,4) . "-". substr($_desde[1], 2,2) . "-" . substr($_desde[1], 0,2);
-        $strHasta =  substr($_hasta[1], 4,4) . "-". substr($_hasta[1], 2,2) . "-" . substr($_hasta[1], 0,2);
-        $fechaDesde = date('Y-m-d', strtotime($strDesde));
-        $fechaHasta = date('Y-m-d', strtotime($strHasta));
-        $dateDiff = strtotime($strHasta) - strtotime($strDesde);
-        $nroDias = floor($dateDiff / (60 * 60 * 24));
-      }
-
-      $_dias = explode('dias', $args);
-      if(count($_dias) > 1){
-        $nroDias = $_dias[0];
-      }
+    //Verficamos si se hizo una busqueda por fechas
+    if($this->session->userdata('s_busqueda_paquetes')){
+      $data['busqueda_info'] = $this->session->userdata('s_busqueda_paquetes');
     }
 
     //Consultar Paquete
