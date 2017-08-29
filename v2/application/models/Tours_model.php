@@ -92,7 +92,7 @@ class Tours_model extends CI_Model {
             if (!empty($data['ordenar_por'])) {
                 $order_by = $data['ordenar_por'] . ' ' . $data['ordentipo'];
             } else {
-                $order_by = 't1.nombre ASC';
+                $order_by = 't1.orden ASC';
             }
 
             if ($start > 0) {
@@ -108,6 +108,8 @@ class Tours_model extends CI_Model {
             ->limit($limit, $start)
             ->get("tbltours as t1")
             ->result_array();
+
+            /*echo $this->db->last_query();*/
 
             return $resultado;
         }
