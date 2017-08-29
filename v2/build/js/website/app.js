@@ -32,16 +32,21 @@ $(function() {
 	//Select search select2
 	$(".select_search").select2();
 
+	$( ".imageLisGallery" ).hover(function() {
+		console.log("Hover");
+	});
+
 	
 	//Galería en listado
 	$('.imageLisGallery').lightSlider({
-        adaptiveHeight:true,
-        item:1,
-        slideMargin:0,
-        loop:false,
-        adaptiveHeight:true,
-        pager:false
-    });
+		adaptiveHeight:true,
+		item:1,
+		slideMargin:0,
+		loop:true,
+		adaptiveHeight:true,
+		pager:false,
+		auto:true,
+	});
 
 	//Galería
 	$('#imageGallery').lightSlider({

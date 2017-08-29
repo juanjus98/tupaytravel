@@ -42,8 +42,9 @@ if(!empty($busqueda_info)){
                           $urlImagen_galeria = (!empty($galeria['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $galeria['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
                           ?>
                           <li>
-                            <a href="<?php echo $url_paquete;?>" title="<?php echo $nombre_paquete;?>">
+                            <a href="<?php echo $url_paquete;?>" title="<?php echo $nombre_paquete;?>" class="list-item">
                               <img src="<?php echo $urlImagen_galeria;?>" alt="<?php echo $nombre_paquete;?>" class="img-responsive">
+                              <span><?php echo $galeria['titulo'];?></span>
                             </a>
                           </li>
                           <?php 
