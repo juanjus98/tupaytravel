@@ -14,6 +14,15 @@ module.exports = function(grunt){
 				}
 			}
 		},
+		copy: {
+		  main: {
+		    files: [
+		      /*{expand: true, cwd: 'node_modules/animate\.css/', src: ['animate.min.css'], dest: 'assets/css/'},
+		      {expand: true, cwd: 'node_modules/wowjs/dist/', src: ['wow.min.js'], dest: 'assets/js/'},*/
+		      {expand: true, cwd: 'node_modules/bootstrap-validator/dist/', src: ['*'], dest: 'assets/plugins/bootstrap-validator/'},
+		    ],
+		  },
+		},
 		cssmin: {
 			target: {
 				files: [{
@@ -53,6 +62,8 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-concat'); //Une archivos javascript
 	grunt.loadNpmTasks('grunt-contrib-uglify'); //Minifica archivos javascript
 
-	grunt.registerTask('default',['less','cssmin','jshint','concat','uglify']);
+	grunt.loadNpmTasks('grunt-contrib-copy'); //Copiar archivos
+
+	grunt.registerTask('default',['less','cssmin','jshint','concat','uglify', 'copy']);
 
 }

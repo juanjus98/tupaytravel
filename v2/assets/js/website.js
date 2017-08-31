@@ -48,6 +48,61 @@ $(function() {
 		console.log("Hover");
 	});
 
+	//Slider de videos
+	$('#content-slider').lightSlider({
+        item:4,
+        auto:true,
+        loop:true,
+        slideMove:2,
+        pager:false,
+        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+        speed:600,
+        responsive : [
+            {
+                breakpoint:800,
+                settings: {
+                    item:3,
+                    slideMove:1,
+                    slideMargin:6,
+                  }
+            },
+            {
+                breakpoint:480,
+                settings: {
+                    item:2,
+                    slideMove:1
+                  }
+            }
+        ]
+    });
+
+    //Slider de fotos
+	$('#content-slider-fotos').lightSlider({
+        item:4,
+        auto:true,
+        loop:true,
+        slideMove:2,
+        pager:false,
+        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+        speed:600,
+        responsive : [
+            {
+                breakpoint:800,
+                settings: {
+                    item:3,
+                    slideMove:1,
+                    slideMargin:6,
+                  }
+            },
+            {
+                breakpoint:480,
+                settings: {
+                    item:2,
+                    slideMove:1
+                  }
+            }
+        ]
+    });
 	
 	//Galería en listado
 	$('.imageLisGallery').lightSlider({
@@ -55,7 +110,6 @@ $(function() {
 		item:1,
 		slideMargin:0,
 		loop:true,
-		adaptiveHeight:true,
 		pager:false,
 		auto:true,
 	});
@@ -64,19 +118,19 @@ $(function() {
 	$('#imageGallery').lightSlider({
 		gallery:true,
 		item:1,
-		loop:true,
-		/*auto:true,*/
+		loop:false,
+		pager:false,
 		thumbItem:9,
 		slideMargin:0,
 		enableDrag: true,
 		enableTouch: true,
 		currentPagerPosition:'left',
-		adaptiveHeight:true,
-		onSliderLoad: function(el) {
+		adaptiveHeight:false,
+		/*onSliderLoad: function(el) {
 			el.lightGallery({
 				selector: '#imageGallery .lslide'
 			});
-		}   
+		}*/   
 	});
 
 	//Slimscroll

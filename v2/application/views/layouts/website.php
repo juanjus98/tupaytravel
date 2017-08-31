@@ -256,6 +256,10 @@ $tag_image = $head_info['image'];
 <script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
 <!-- //select2-->
 
+<!-- bootstrap-validator-->
+<script src="<?php echo base_url('assets/plugins/bootstrap-validator/validator.min.js');?>" type="text/javascript"></script>
+<!-- //bootstrap-validator-->
+
 <script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
 <!-- JavaScript-->
 

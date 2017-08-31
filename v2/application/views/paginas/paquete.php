@@ -11,7 +11,7 @@ if(!empty($busqueda_info)){
 <section class="main-container cont-detail">
   <div class="row">
     <div class="col-md-8">
-      <h1><?php echo $paquete['nombre'];?> <span><?php echo $paquete['precio'];?></span></h1>
+      <h1><?php echo $paquete['nombre'];?> <div class="clearfix mrg-top-15 visible-xs-block"></div> <span><?php echo $paquete['precio'];?></span></h1>
     </div>
     <div class="col-md-4">
       <div class="sharethis-inline-share-buttons"></div>
@@ -32,7 +32,11 @@ if(!empty($busqueda_info)){
                   ?>
                   <li data-thumb="<?php echo $urlImagen;?>" data-src="<?php echo $urlImagen;?>">
                     <img src="<?php echo $urlImagen;?>" class="img-responsive" />
-                    <div class="caption"><?php echo $caption = ($itinerario['titulo']) ? $itinerario['titulo'] : ''; ?></div>
+                    <div class="clearfix"></div>
+                    <div class="caption">
+                    <?php echo $caption = ($itinerario['titulo']) ? $itinerario['titulo'] : ''; ?>
+                    </div>
+                    <div class="clearfix"></div>
                   </li>
                   <?php 
                 }
@@ -86,7 +90,7 @@ if(!empty($busqueda_info)){
       <!-- <div class="cont-tabs"> -->
       <div class="tabbable-panel">
         <div class="tabbable-line">
-          <ul class="nav nav-tabs" id="myTabs" rele="tablist">
+          <ul class="nav nav-tabs nav-justified" id="myTabs" rele="tablist">
             <li role="presentation" class="active">
               <a href="#descripcion" id="descripcion-tab" role="tab" data-toggle="tab" aria-controls="descripcion" aria-expanded="true">
                 <i class="fa fa-info-circle" aria-hidden="true"></i> Información
@@ -192,7 +196,7 @@ if(!empty($busqueda_info)){
           </div>
           <div class="col-md-4">
             <div id="sticky-sidebar">
-              <form class="form-vertical" name="buscador" id="buscador" action="tours/" method="post">
+              <form class="form-vertical" name="buscador" id="buscador" action="" method="post" data-toggle="validator">
                <fieldset class="form-reservar">
                  <h3>Reservarlo ahora.</h3>
 <!-- <div class="form-group">
@@ -210,7 +214,7 @@ if(!empty($busqueda_info)){
 
 <div class="form-group">
   <label>Pais de origen:</label>
-  <select class="form-control select_search" name="pais_origen">
+  <select class="form-control select_search" name="pais_origen" required>
     <option value="">Seleccionar</option>
     <?php
     if(!empty($paises)){
@@ -224,7 +228,7 @@ if(!empty($busqueda_info)){
 
 <div class="form-group">
   <label>Ciudad de origen:</label>
-  <input type="text" name="ciudad" class="form-control" value="">
+  <input type="text" name="ciudad" class="form-control" value="" required>
 </div>
 
 <div class="form-group">
