@@ -1,380 +1,320 @@
 <?php
-session_start();
-include("conectar.php");
-include("funciones.php");
-require_once __DIR__ . '/libs/function.video.php';
-$link = conectar(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE)or die('No pudo conectarse : '. mysql_error());
-?>
-<!DOCTYPE html>
-<html lang="es" class="responsejs">
-<head>
-  <?php include('i_head.php');?>
-</head>
-<body>
-  <div class="container">
-    <?php include('i_header.php');?>
-    <div class="row"><!-- start nav -->
-      <div class="col-sm-12">
-        <?php include('i_navbar.php');?>
-      </div>
-    </div><!-- end nav -->		
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
 
-    <div class="row">
-     <div class="col-sm-5 hidden-xs home_form">
-      <div class="col-sm-12 well lform">
-        <div class="row">
-          <form class="form-vertical" name="buscador" id="buscador" action="tours/" method="post">
-           <fieldset>
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label>Inicio de Tour desde Lima - Perú</label>
-                <div class="input-group date">
-                  <input type="text" class="form-control" name="fecha_inicio" id="date_from" value="" >
-                  <span class="input-group-addon">
-                    <a href="#" id="fecha_inicio_show"><span class="glyphicon glyphicon-calendar"></span></a>
-                  </span>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label>Fin de Tour desde Lima - Perú</label>
-                <div class="input-group date">
-                  <input type="text" class="form-control" name="fecha_fin" id="date_to" value="">
-                  <span class="input-group-addon">
-                    <a href="#" id="fecha_fin_show"><span class="glyphicon glyphicon-calendar"></span></a>
-                  </span>
-                </div>
-              </div>
-              
-              <div class="row mrg-bot-15">						  
-                <div class="col-md-12">	
-                  <label>Nacionalidad</label>
-                  <input type="text" id="nacionalidad" name="nacionalidad" class="form-control">
-                </div>
-              </div>
+/*SET TIME ZONE*/
+if(!ini_get('date.timezone') ){
+   date_default_timezone_set('America/Lima');
+}
 
-              <div class="row">
-                <div class="col-xs-3">
-                  <label class="text-center btn-block">Adultos</label>
-                  <select name="adultos" id="adultos" class="form-control" placeholder="+18 años">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <p class="help-block text-center">+18 años.</p>
-                </div>
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
-                <div class="col-xs-3">
-                  <label class="text-center btn-block">Adolecentes</label>
-                  <select name="adolecentes" id="adolecentes" class="form-control" placeholder="12-17">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <p class="help-block text-center">12-17</p>
-                </div>
-                
-                <div class="col-xs-3">
-                  <label class="text-center btn-block">Ñiños</label>
-                  <select name="ninios" id="ninios" class="form-control" placeholder="8-11">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <p class="help-block text-center">8-11</p>
-                </div>
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
+{
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
 
-                <div class="col-xs-3">
-                  <label class="text-center btn-block">Infantes</label>
-                  <select name="infantes" id="infantes" class="form-control" placeholder="3-7">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <p class="help-block text-center">3-7</p>
-                </div>
-              </div>
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
 
-              <div class="row mrg-bot-15">
-                <div class="col-md-12">
-                  <label>¿Con Estadia?</label> &nbsp;&nbsp;&nbsp;
-                  <label class="radio-inline">
-                    <input type="radio" name="estadia" id="estadia1" value="Si" checked> SI
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="estadia" id="estadia2" value="No"> NO
-                  </label>
-                </div>
-              </div>
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
 
-              
-              <div class="row">	
-                <div class="col-md-12">
-                  <button id="buscar" class="btn btn-primary btn-block" type="submit">Buscar tours</button>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8 col-sm-7 col-xs-12 no_margin_left home_carousel">
-    <h3 class="titulo_opciones" style="margin-bottom: 10px; border-bottom: solid 4px #cd1;">Nuestras promociones:</h3>
-    <?php include('i_promociones.php');?>
-  </div>
-</div>
+/*
+ *---------------------------------------------------------------
+ * SYSTEM DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" directory.
+ * Set the path if it is not in the same directory as this file.
+ */
+	$system_path = 'system';
 
-<?php
-include('i_videos_slider.php');
-?>
+/*
+ *---------------------------------------------------------------
+ * APPLICATION DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * directory than the default one you can set its name here. The directory
+ * can also be renamed or relocated anywhere on your server. If you do,
+ * use an absolute (full) server path.
+ * For more info please see the user guide:
+ *
+ * https://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
 
-<?php
-include('i_fotos_slider.php');
-?>
-
-<div class="box-formas-pago text-center">
-  <a href="http://tupaytravel.com/p/formas-de-pago" class="btn btn-lg btn-pagos" title="Formas de pago.">
-    <i class="fa fa-credit-card" aria-hidden="true"></i> Formas de pago.
-  </a>
-</div>
-
-<p>CERTIFICADOS Y LICENCIAS</p>
-
-<a href="http://tupaytravel.com/images/tupay-documento.jpg" target="_blank"><img src="images/tupay-documento-peque.jpg"></a><img src="images/tupay-documento1peque.jpg" border="0" usemap="#Map">
-<map name="Map"><area shape="rect" coords="344,299,468,330" href="http://tupaytravel.com/images/tupay-documento1.jpg" target="_blank">
-</map>
-
-<?php include('i_footer.php');?>
-
-</div>
-
-<div class="cont-multichat">
-  <a href="https://m.me/tupay.travel" target="_blank">
-    <!-- <a href="//www.fb.com/msg/tupay.travel" target="_blank"> -->
-    <img src="images/icon-messenger48.png">
-  </a>
-  <a href="https://api.whatsapp.com/send?phone=51988878850" target="_blank">
-    <img src="images/icon-whatsapp48.png">
-  </a>
-</div>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-<!-- <script type="text/javascript" src="./js/response.min.js"></script> -->
-<!-- <link rel="stylesheet" href="./css/style.css"> -->
-<script type="text/javascript" src="./js/bootstrap.js"></script>
+/*
+ *---------------------------------------------------------------
+ * VIEW DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view directory out of the application
+ * directory, set the path to it here. The directory can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application directory.
+ * If you do move this, use an absolute (full) server path.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
 
 
-<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" directory.  Leave blank
+	// if your controller is not in a sub-directory within the "controllers" one
+	// $routing['directory'] = '';
 
-<script src="./js/lightslider/js/lightslider.js"></script>
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
 
-<!-- Add mousewheel plugin (this is optional) -->
-<script type="text/javascript" src="js/fancybox/lib/jquery.mousewheel.pack.js?v=3.1.3"></script>
-
-<!-- Add fancyBox main JS and CSS files -->
-<script type="text/javascript" src="js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" /> 
-
-<script type="text/javascript">
-
-  $.datepicker.regional['es'] = {
-   closeText: 'Cerrar',
-   prevText: '< Ant',
-   nextText: 'Sig >',
-   currentText: 'Hoy',
-   monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-   monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-   dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-   dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-   dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-   weekHeader: 'Sm',
-   dateFormat: 'dd-mm-yy',
-   firstDay: 1,
-   isRTL: false,
-   showMonthAfterYear: false,
-   yearSuffix: ''
- };
-
- $.datepicker.setDefaults($.datepicker.regional['es']);
-
- $(function() {
-
-  console.log("Ready!");
-
-    //Galería videos.
-    $("#content-slider").lightSlider({
-      loop:true,
-      auto:true,
-      item:4,
-      slideMove:2,
-      easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-      speed:600,
-      pauseOnHover: true,
-      pager: false,
-      responsive : [
-      {
-        breakpoint:800,
-        settings: {
-          item:3,
-          slideMove:1,
-          slideMargin:6,
-        }
-      },
-      {
-        breakpoint:480,
-        settings: {
-          item:2,
-          slideMove:1
-        }
-      }
-      ]
-    });
-
-    //Galería de fotos.
-    $("#content-slider-fotos").lightSlider({
-      loop:true,
-      auto:true,
-      item:4,
-      slideMove:2,
-      easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-      speed:600,
-      pauseOnHover: true,
-      pager: false,
-      responsive : [
-      {
-        breakpoint:800,
-        settings: {
-          item:3,
-          slideMove:1,
-          slideMargin:6,
-        }
-      },
-      {
-        breakpoint:480,
-        settings: {
-          item:2,
-          slideMove:1
-        }
-      }
-      ]
-    });
-
-    //Ver video fancybox
-    $(".various").fancybox({
-      maxWidth  : 800,
-      maxHeight : 600,
-      fitToView : false,
-      width   : '70%',
-      height    : '70%',
-      autoSize  : false,
-      closeClick  : false,
-      openEffect  : 'none',
-      closeEffect : 'none'
-    });
-
-    var dateFormat = "dd-mm-yy",
-    from = $( "#date_from" )
-    .datepicker({
-      minDate: 0,
-      defaultDate: "+1w",
-      changeMonth: true,
-      changeYear: true,
-      numberOfMonths: 1
-    })
-    .on( "change", function() {
-      to.datepicker( "option", "minDate", getDate( this ) );
-    }),
-    to = $( "#date_to" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      changeYear: true,
-      numberOfMonths: 1
-    })
-    .on( "change", function() {
-      from.datepicker( "option", "maxDate", getDate( this ) );
-    });
-
-    function getDate( element ) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-      } catch( error ) {
-        date = null;
-      }
-
-      return date;
-    };
-
-    $("#fecha_inicio_show").click(function() {
-      console.log("open 1");
-      $("#date_from").datepicker("show");
-    });
-
-    $("#fecha_fin_show").click(function() {
-      console.log("open 2");
-      $("#date_to").datepicker("show");
-    });
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
 
 
-    $('#buscar').on('click',function(event){
-      event.preventDefault()
-      //Validar
-      if($('#date_from').val()==""){
-        alert('Seleccionar Fecha Inicio de Tour');
-        $('#date_from').focus();
-        return false;
-      }
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
 
-      if($('#date_to').val()==""){
-        alert('Seleccionar Fecha Fin de Tour');
-        $('#date_to').focus();
-        return false;
-      }
 
-      if($('select#adultos').val() == "0"){
-        alert('Debe seleccionar al menos un Adulto');
-        $('select#adultos').focus();
-        return false;
-      }
 
-      $('form#buscador').submit();
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
 
-      /*if($('#date_from').val()!="" && $('#date_to').val()!=""){
-        $('form#buscador').submit();
-      } else{
-        alert('Inserte las fechas en el buscador');
-      }*/
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
 
-    });
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
 
-  } );
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = strtr(
+			rtrim($system_path, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		).DIRECTORY_SEPARATOR;
+	}
 
-</script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
 
-  ga('create', 'UA-82619572-1', 'auto');
-  ga('send', 'pageview');
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
-</script>
+	// Path to the system directory
+	define('BASEPATH', $system_path);
 
-</body>
-</html>
+	// Path to the front controller (this file) directory
+	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+	// Name of the "system" directory
+	define('SYSDIR', basename(BASEPATH));
+
+	// The path to the "application" directory
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+		else
+		{
+			$application_folder = strtr(
+				rtrim($application_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+	{
+		$application_folder = BASEPATH.strtr(
+			trim($application_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+
+	// The path to the "views" directory
+	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.'views';
+	}
+	elseif (is_dir($view_folder))
+	{
+		if (($_temp = realpath($view_folder)) !== FALSE)
+		{
+			$view_folder = $_temp;
+		}
+		else
+		{
+			$view_folder = strtr(
+				rtrim($view_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.strtr(
+			trim($view_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';

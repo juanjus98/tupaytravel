@@ -1,28 +1,5 @@
 RewriteEngine On
-#RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-Options -MultiViews
-
-Rewriterule ^tours/(.+)/(.+)/$ listado_tours.php?id=$1&title=$2 [L,QSA]
-Rewriterule ^tour/(.+)/(.+)/$ detalle_tour.php?id=$1&title=$2 [L,QSA]
-
-Rewriterule ^hoteles/(.+)/(.+)/$ listado_hoteles.php?id=$1&title=$2 [L,QSA]
-Rewriterule ^hotel/(.+)/(.+)/$ hoteles.php?id=$1&title=$2 [L,QSA]
-
-RewriteRule ^tours/$ listado.php [L,QSA]
-Rewriterule ^tours/(.+)$ listado.php?token=$1 [L,QSA]
-
-Rewriterule ^paquete/(.+)/(.+)/$ detalle_paquete.php?id_paquete=$1&title=$2 [L,QSA]
-Rewriterule ^paquete/(.+)/(.+)/(.+)$ detalle_paquete.php?id_paquete=$1&title=$2&token=$3 [L,QSA]
-
-RewriteRule ^contacto$ contacto.php [L,QSA]
-RewriteRule ^contactenos$ contacto.php [L,QSA]
-
-Rewriterule ^p/(.+)$ pagina.php?url_key=$1 [L,QSA]
-
-#V2
-RewriteRule ^paquetes-tours$ p_paquetes.php [L,QSA]
-RewriteRule ^paquetes-tours/(.+)$ p_paquetes.php?params=$1 [L,QSA]
-
-RewriteRule ^paquete-tour/(.+)$ p_paquete.php?params=$1 [L,QSA]
+#RewriteBase /v2/
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+RewriteRule ^(.*)$ index.php?/$1 [L]
