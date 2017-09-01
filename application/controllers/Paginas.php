@@ -23,6 +23,7 @@ class Paginas extends CI_Controller {
     $this->load->model("hoteles_model","Hoteles");
     $this->load->model("paquetes_galeria_model","Paquetes_galeria");
     $this->load->model("tours_itinerario_model","Tours_itinerario");
+    $this->load->model("hoteles_galeria_model","Hoteles_galeria");
     $this->load->model("provincias_model","Provincias");
 
     /**
@@ -257,10 +258,73 @@ public function tour($url_key) {
     $this->template->build('paginas/tour', $data);
   }
 
+/**
+ * Hoteles
+ */
+public function hoteles($provincia_key=null, $categoria_key=null, $args=null) {
+  $data_busqueda = array();
+  $data_dias = array();
 
-  public function contactanos() {
-    $this->template->title('Contáctanos');
-    $data['active_link'] = "contactanos";
+  $data_hoteles = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+  /**
+   * Setear argumentos de busqueda
+   */
+  if(isset($provincia_key)){
+    $data_provincia = array('url_key' => $provincia_key);
+    $provincia = $this->Provincias->get_row($data_provincia);
+    $id_provincia = $provincia['id'];
+    $data_hoteles['id_provincia'] = $id_provincia;
+    $data_busqueda['provincia'] = $provincia;
+    /*$data_dias['id_provincia'] = $id_provincia;*/
+  }
+
+  /*if(isset($categoria_key)){
+    //Consultar categoria
+    $data_crud['table'] = "tbltours_categoria as t1";
+    $data_crud['columns'] = "t1.*";
+    $data_crud['where'] = array("t1.url_key" => $categoria_key, "t1.estado !=" => 0);
+    $categoria = $this->Crud->getRow($data_crud);
+    $id_tbltours_categoria = $categoria['id'];
+    $data_tours['id_tbltours_categoria'] = $id_tbltours_categoria;
+    $data_busqueda['categoria'] = $categoria;
+  }*/
+
+  /*if(isset($args)){
+    list($nro_dias, $str_dias) = explode("-", $args);
+    $data_tours['nro_dias'] = $nro_dias;
+    $data_busqueda['nro_dias'] = $nro_dias;
+  }
+
+  $data['dias'] = $this->Tours->listadoDias($data_dias);*/
+
+  //Consultar categoria
+  /*$data_crud['table'] = "tbltours_categoria as t1";
+  $data_crud['columns'] = "t1.*";
+  $data_crud['where'] = array("t1.estado !=" => 0);
+  $data_crud['order_by'] = "t1.categoria ASC";
+  $data['categorias'] = $this->Crud->getRows($data_crud);*/
+
+
+  $data['active_link'] = "Hoteles";
+  $data['website'] = $this->Inicio->get_website();
+  $data['head_info'] = head_info($this->website_info);
+
+
+  $total_hoteles = $this->Hoteles->total_registros($data_hoteles);
+  $data['total_listado'] = $total_hoteles;
+  $data['listado'] = $this->Hoteles->listado($total_hoteles,0,$data_hoteles);
+
+    //Información de busqueda
+  $data['busqueda'] = $data_busqueda;
+
+  $this->template->title('Hoteles');
+  $this->template->build('paginas/hoteles', $data);
+}
+
+
+public function contactanos() {
+  $this->template->title('Contáctanos');
+  $data['active_link'] = "contactanos";
         $data['website'] = $this->Inicio->get_website(); //siempre
         $data['head_info'] = head_info($data['website']); //siempre
 

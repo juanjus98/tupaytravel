@@ -21,9 +21,9 @@ class Hoteles_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        /*if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id"] = $data['categoria_id'];
-        }*/
+        if (!empty($data['id_provincia'])) {
+            $where["t1.id_provincia"] = $data['id_provincia'];
+        }
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -32,12 +32,12 @@ class Hoteles_model extends CI_Model {
             $like["t1.nombre"] = "";
         }
 
-        $resultado = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
-                ->where($where)
-                ->like($like)
-                ->get("tblhotel as t1")
-                ->num_rows();
+        $resultado = $this->db->select("t1.*, t2.provincia")
+        ->join("tblprovincia as t2","t2.id = t1.id_provincia")
+        ->where($where)
+        ->like($like)
+        ->get("tblhotel as t1")
+        ->num_rows();
 
         return $resultado;
     }
@@ -58,9 +58,9 @@ class Hoteles_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        /*if (!empty($data['categoria_id'])) {
-            $where["t1.categoria_id"] = $data['categoria_id'];
-        }*/
+        if (!empty($data['id_provincia'])) {
+            $where["t1.id_provincia"] = $data['id_provincia'];
+        }
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -81,14 +81,16 @@ class Hoteles_model extends CI_Model {
             $start = ($start - 1) * $limit;
         }
 
-        $resultado = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
-                ->where($where)
-                ->like($like)
-                ->order_by($order_by)
-                ->limit($limit, $start)
-                ->get("tblhotel as t1")
-                ->result_array();
+        $resultado = $this->db->select("t1.*,t2.provincia")
+        ->join("tblprovincia as t2","t2.id = t1.id_provincia")
+        ->where($where)
+        ->like($like)
+        ->order_by($order_by)
+        ->limit($limit, $start)
+        ->get("tblhotel as t1")
+        ->result_array();
+
+        /*Consultar imagen*/
 
         return $resultado;
     }
@@ -121,8 +123,8 @@ class Hoteles_model extends CI_Model {
                 ->get("tblhotel as t1")
                 ->row_array();
 
-        return $result;
-    }
-    
+                return $result;
+            }
 
-}
+
+        }

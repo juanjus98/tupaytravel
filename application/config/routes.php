@@ -72,8 +72,12 @@ $route['tours'] = 'paginas/tours';
 $route['tours/(:any)'] = 'paginas/tours/$1'; //Solo provincia
 $route['tours/(:any)/(:any)'] = 'paginas/tours/$1/$2';//Provincia y categoría
 $route['tours/(:any)/(:any)/(:any)'] = 'paginas/tours/$1/$2/$3';//Provincia, categoría y args 
-
 $route['tour/(:any)'] = 'paginas/tour/$1';
+
+/**
+ * Hoteles
+ */
+$route['hoteles/(:any)'] = 'paginas/hoteles/$1'; //Con provincia
 
 
 $route['404_override'] = '';
