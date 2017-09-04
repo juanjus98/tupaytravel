@@ -5,7 +5,7 @@ class Ci_timthumb {
 	private $CI;
 
 	//Diretório das imagens
-	var $dir = 'images/uploads/';
+	var $dir = 'assets/images/uploads/';
 
 	public function __construct()
 	{

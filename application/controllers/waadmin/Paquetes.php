@@ -191,7 +191,7 @@ function editar($tipo='C',$id=NULL){
        $data['post'] = $this->input->post();
      }else{
 
-          //Cargar Imagen
+    //Cargar Imagen
       $upload_path = $this->config->item('upload_path');
       if($_FILES["imagen"]){
        $imagen_info1 = $this->imaupload->do_upload($upload_path, "imagen");

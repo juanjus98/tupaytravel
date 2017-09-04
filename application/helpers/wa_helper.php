@@ -269,6 +269,14 @@ if (!function_exists('head_info')) {
                     "image" => base_url($CI->config->item('upload_path') . $info['imagen'])
                     );
                 break;
+                case "hotel":
+                $head_info = array(
+                    "title" => $info['nombre'],
+                    "description" => strip_tags(str_replace("\n", "",$info['descripcion'])),
+                    "keywords" => $info['keywords'],
+                    "image" => base_url($CI->config->item('upload_path') . $info['imagen'])
+                    );
+                break;
             }
         }
         return $head_info;

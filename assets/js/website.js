@@ -133,6 +133,20 @@ $(function() {
 		}*/   
 	});
 
+	//Galería de hoteles
+	$('#imageGalleryHotel').lightSlider({
+		gallery:true,
+		item:1,
+		loop:false,
+		pager:true,
+		thumbItem:9,
+		slideMargin:0,
+		enableDrag: true,
+		enableTouch: true,
+		currentPagerPosition:'left',
+		adaptiveHeight:true,
+	});
+
 	//Slimscroll
 	$('.box-wscroll').slimScroll({
 		height: '233px'

@@ -1,15 +1,14 @@
 <?php
 /*echo '<pre>';
-print_r($paginas);
+print_r($estrellas);
 echo '</pre>';*/
-
 ?>
 <div class="row">
  <div class="col-xs-12">
    <div class="box">
      <form class="form-horizontal" name="edit_form" id="edit_form" action="<?php echo $current_url;?>" method="post" role="form" enctype="multipart/form-data">
 
-       <?php if($wa_tipo == 'E'){ ?> <input type="hidden" name="id" value="<?php echo $post['id'];?>"><?php }?>
+       <?php if($wa_tipo == 'E'){ ?> <input type="hidden" name="id_hotel" value="<?php echo $post['id_hotel'];?>"><?php }?>
 
        <div class="box-header" style="padding-bottom: 0;">
          <h3 class="box-title"><?php echo $tipo; ?></h3>
@@ -64,20 +63,18 @@ echo '</pre>';*/
 <tr>
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
-                         <label for="id_tbltours_categoria" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Categoría:</label>
+                         <label for="estrellas" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>N° Estrellas:</label>
                          <div class="col-sm-4">
-                           <select name="id_tbltours_categoria" id="id_tbltours_categoria" data-placeholder="Seleccionar provincia" class="chosen-select">
+                           <select name="estrellas" id="estrellas" data-placeholder="Seleccionar" class="chosen-select">
                             <option value=""></option>
                             <?php
-                            if(!empty($categorias)){
-                              foreach ($categorias as $key => $value) {
-                                $selected_categoria = ($value['id'] == $post['id_tbltours_categoria']) ? 'selected' : '' ;
-                                echo '<option value="'.$value['id'].'" ' . $selected_categoria . '>'.$value['categoria'].'</option>';
-                              }
-                            }
-                            ?>
+                                foreach ($estrellas as $index=>$value) {
+                                    $selected = ($index == $post['estrellas']) ? 'selected' : '' ;
+                                    echo '<option value="' . $index . '" ' . $selected . '>' . $value . '</option>';
+                                }
+                                ?>
                           </select>
-                          <?php echo form_error('id_tbltours_categoria', '<div class="error">', '</div>'); ?>
+                          <?php echo form_error('estrellas', '<div class="error">', '</div>'); ?>
                         </div>
 
                          <label for="id_provincia" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Provincia:</label>
@@ -97,43 +94,16 @@ echo '</pre>';*/
                         </div>
                       </td>
                     </tr>
-                   <tr>
-                     <td>
-                       <div class="form-group" style="margin-bottom: 0px;">
-                         <label for="descripcion" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Descripción:</label>
-                         <div class="col-sm-10">
-                           <textarea name="descripcion" id="descripcion" class="form-control" rows="3" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>><?php echo $retVal = (!empty($post['descripcion'])) ? $post['descripcion'] : '' ; ?></textarea>
-                           <?php echo form_error('descripcion', '<div class="error">', '</div>'); ?>
-                         </div>
-                       </div>
-                     </td>
-                   </tr>
-                    <tr>
-                     <td>
-                       <div class="form-group" style="margin-bottom: 0px;">
-                         <label for="estadia" class="col-sm-2 control-label" style="text-align: right;">Estadía:</label>
-                         <div class="col-sm-4">
-                           <?php
-                           $checked = "";
-                           if(!empty($post['estadia']) && $post['estadia'] == 1){
-                            $checked = "checked";
-                          }
-                          ?>
-                          <input class="form-control input-sm" id="estadia" name="estadia" type="checkbox" value="1" <?php echo $checked;?> <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>  Incluye estadía.
-                          <?php echo form_error('estadia', '<div class="error">', '</div>'); ?>
-                        </div>
-
-                        <label for="precio" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Precio:</label>
-                         <div class="col-sm-4">
-                           <input name="precio" id="precio" type="text" value="<?php echo $retVal = (!empty($post['precio'])) ? $post['precio'] : '';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
-                           <?php echo form_error('precio', '<div class="error">', '</div>'); ?>
-                         </div>
-                      </td>
-                    </tr>
 
                     <tr>
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
+                         <label for="localidad" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Localidad:</label>
+                         <div class="col-sm-4">
+                           <input name="localidad" id="localidad" type="text" value="<?php echo $retVal = (!empty($post['localidad'])) ? $post['localidad'] : '';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                           <?php echo form_error('localidad', '<div class="error">', '</div>'); ?>
+                         </div>
+
                          <label for="orden" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span>Orden:</label>
                          <div class="col-sm-4">
                            <input name="orden" id="orden" type="text" value="<?php echo $retVal = (!empty($post['orden'])) ? $post['orden'] : '';?>" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
@@ -167,10 +137,10 @@ echo '</pre>';*/
                      <td>
                        <div class="form-group" style="margin-bottom: 0px;">
                          <div class="col-sm-12">
-                          <?php echo form_error('detalle', '<div class="error">', '</div>'); ?>
+                          <?php echo form_error('descripcion', '<div class="error">', '</div>'); ?>
                           <?php
-                          $detalle = (!empty($post['detalle'])) ? $post['detalle'] : '' ;
-                          echo $this->ckeditor->editor('detalle', $detalle);
+                          $descripcion = (!empty($post['descripcion'])) ? $post['descripcion'] : '' ;
+                          echo $this->ckeditor->editor('descripcion', $descripcion);
                           ?>
                         </div>
                       </div>
@@ -179,64 +149,6 @@ echo '</pre>';*/
                 </tbody>
               </table><br>
 
-              <table class="table table-bordered">
-               <thead class="thead-default">
-                 <tr>
-                   <th><i class="fa fa-list"></i> Imagen Principal</th>
-                 </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                   <td>
-                     <div class="form-group" style="margin-bottom: 0px;">
-                       <label for="imagen" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Imagen:</label>
-                       <div class="col-sm-10">
-                         <input type="file" name="imagen" id="imagen" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
-                         <?php
-                         if(!empty($post['imagen'])){
-                           ?>
-                           <p class="help-block">
-                             <a href="<?php echo base_url($this->config->item('upload_path') . $post['imagen']);?>" target="_blank">
-                               <img src="<?php echo base_url($this->config->item('upload_path') . $post['imagen']);?>" style="max-height: 60px;">
-                             </a>
-                           </p>
-                           <?php }?>
-                         </div>
-                       </div>
-                     </td>
-                   </tr>
-                 </tbody>
-               </table><br>
-
-               <table class="table table-bordered">
-                  <thead class="thead-default">
-                   <tr>
-                     <th><i class="fa fa-list"></i> Forma de Pago</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <tr>
-                     <td>
-                       <div class="form-group" style="margin-bottom: 0px;">
-                         <label for="orden" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Forma de pago:</label>
-                         <div class="col-sm-4">
-                         <select name="formas_pago_id" id="formas_pago_id" class="form-control input-sm" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
-                           <option value="">Seleccionar</option>
-                           <?php
-                           if(!empty($paginas)){
-                            foreach ($paginas as $key => $value) {
-                              $selected = ($value['id'] == $post['formas_pago_id']) ? 'selected' : '' ;
-                              echo '<option value="'.$value['id'].'" '.$selected.'>'.$value['nombre_corto'].'</option>';
-                            }
-                           }
-                           ?>
-                         </select>
-                           <?php echo form_error('formas_pago_id', '<div class="error">', '</div>'); ?>
-                         </div>
-                       </td>
-                     </tr>
-                </tbody>
-              </table><br>        
              </div>
            </fieldset >
          </div><!--end pad-->

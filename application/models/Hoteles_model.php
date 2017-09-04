@@ -21,6 +21,10 @@ class Hoteles_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
+        if (!empty($data['estrellas'])) {
+            $where["t1.estrellas"] = $data['estrellas'];
+        }
+        
         if (!empty($data['id_provincia'])) {
             $where["t1.id_provincia"] = $data['id_provincia'];
         }
@@ -58,6 +62,10 @@ class Hoteles_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
+        if (!empty($data['estrellas'])) {
+            $where["t1.estrellas"] = $data['estrellas'];
+        }
+        
         if (!empty($data['id_provincia'])) {
             $where["t1.id_provincia"] = $data['id_provincia'];
         }
@@ -108,23 +116,36 @@ class Hoteles_model extends CI_Model {
      */
     function get_row($data) {
         $where = array('t1.estado != ' => 0);
-        if(!empty($data['id'])){
-            $where['t1.id'] = $data['id'];
+        if(!empty($data['id_hotel'])){
+            $where['t1.id_hotel'] = $data['id_hotel'];
         }
 
         if(!empty($data['url_key'])){
             $where['t1.url_key'] = $data['url_key'];
         }
 
-        $result = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")
-                ->join("marca as t3","t3.id = t1.marca_id","left")*/
+        $resultado = $this->db->select("t1.*,t2.provincia")
+        ->join("tblprovincia as t2","t2.id = t1.id_provincia")
                 ->where($where)
                 ->get("tblhotel as t1")
                 ->row_array();
 
-                return $result;
+                return $resultado;
             }
+
+/**
+ * Cantidad de estrellas
+ */
+function listarEstrellas(){
+    $estrellas = array(
+        1 => '1 Estrella',
+        2 => '2 Estrellas',
+        3 => '3 Estrellas',
+        4 => '4 Estrellas',
+        5 => '5 Estrellas',
+    );
+    return $estrellas;
+}
 
 
         }

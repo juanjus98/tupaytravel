@@ -12,12 +12,12 @@ echo '</pre>';*/
                     <div class="row pad" style="padding-bottom: 0px;">
 
                         <div class="col-sm-2">
-                            <select name="id_tbltours_categoria" class="form-control input-sm chosen-select"  data-placeholder="Seleccionar categoría">
+                            <select name="estrellas" class="form-control input-sm chosen-select"  data-placeholder="Seleccionar">
                             <option value=""></option>
                                 <?php
-                                foreach ($categorias as $value) {
-                                    $selected = ($value['id'] == $post['id_tbltours_categoria']) ? 'selected' : '' ;
-                                    echo '<option value="' . $value['id'] . '" ' . $selected . '>' . $value['categoria'] . '</option>';
+                                foreach ($estrellas as $index=>$value) {
+                                    $selected = ($index == $post['estrellas']) ? 'selected' : '' ;
+                                    echo '<option value="' . $index . '" ' . $selected . '>' . $value . '</option>';
                                 }
                                 ?>
                             </select>
@@ -48,13 +48,13 @@ echo '</pre>';*/
                         </div>
 
                         <div class="col-sm-2">
-                            <a href="<?php echo base_url('waadmin/tours/index?refresh');?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
+                            <a href="<?php echo base_url('waadmin/hoteles/index?refresh');?>" class="btn btn-default btn-sm" title="Restablecer"><i class="fa fa-undo" aria-hidden="true"></i> Restablecer </a>
                         </div>
 
                         <div class="col-sm-3">
                             <div class="pull-right">
                                 <!-- <button class="btn btn-success btn-sm"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button> -->
-                                <a href="<?php echo base_url('waadmin/tours/editar/C');?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
+                                <a href="<?php echo base_url('waadmin/hoteles/editar/C');?>" class="btn btn-success btn-sm" title="Agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar </a>
 
                                 <a href="#" class="btn btn-danger btn-sm" id="btn-eliminar" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar </a>
 
@@ -63,18 +63,17 @@ echo '</pre>';*/
                     </div>
                 </form>
             </div><!-- /.box-header -->
-            <form name="index_form" id="index_form" action="<?php echo base_url(); ?>waadmin/tours/eliminar" method="post">
+            <form name="index_form" id="index_form" action="<?php echo base_url(); ?>waadmin/hoteles/eliminar" method="post">
                 <div class="box-body table-responsive">
                     <table class="table table-hover table-bordered">
                         <tbody>
                             <tr>
                                 <th><input type="checkbox" id="chkTodo" /></th>
-                                <th>Categoría</th>
+                                <th>N° Estrellas</th>
                                 <th>Nombre</th>
                                 <th>Provincia</th>
                                 <th class="text-center">Orden</th>
-                                <th class="text-center">N° días</th>
-                                <th style="min-width: 110px;"></th>
+                                <th></th>
                             </tr>
                             <?php
                             if(!empty($listado)){
@@ -82,23 +81,26 @@ echo '</pre>';*/
                                     ?>
                                     <tr>
                                         <td>
-                                            <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id'] ?>" value="<?php echo $item['id'] ?>" class="chk">
+                                            <input type="checkbox" name="items[]" id="eliminarchk-<?php echo $item['id_hotel'] ?>" value="<?php echo $item['id_hotel'] ?>" class="chk">
                                         </td>
-                                        <td><?php echo $item['categoria']; ?></td>
+                                        <td>
+                                        <?php 
+                                        echo $estrellas[$item['estrellas']];
+                                        ?>
+                                        </td>
                                         <td><?php echo $item['nombre']; ?></td>
                                         <td><?php echo $item['provincia']; ?></td>
-                                        <td class="text-center" data-controller="/tours/uporden" data-identificador="<?php echo $item['id'];?>">
+                                        <td class="text-center" data-controller="/hoteles/uporden" data-identificador="<?php echo $item['id_hotel'];?>">
                                             <div class="box_orden">
                                                 <?php echo $item['orden']; ?>
                                             </div>
-                                            <input type="text" name="orden_<?php echo $item['id'];?>" value="<?php echo $item['orden'];?>" style="display: none; max-width: 40px; margin: 0 auto;" class="form-control input-sm text-center input-order">
+                                            <input type="text" name="orden_<?php echo $item['id_hotel'];?>" value="<?php echo $item['orden'];?>" style="display: none; max-width: 40px; margin: 0 auto;" class="form-control input-sm text-center input-order">
                                         </td>
-                                        <td class="text-center"><?php echo $item['nro_dias']; ?></td>
                                         <td class="text-center">
-                                            <a href="<?php echo base_url(); ?>waadmin/tours/editar/V/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            <a href="<?php echo base_url(); ?>waadmin/tours/editar/E/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a href="<?php echo base_url(); ?>waadmin/hoteles/editar/V/<?php echo $item['id_hotel']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Visualizar"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a href="<?php echo base_url(); ?>waadmin/hoteles/editar/E/<?php echo $item['id_hotel']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/tours_itinerario/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Intinerario"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                                            <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/hoteles_galeria/index/<?php echo $item['id_hotel']; ?>" data-toggle="tooltip" title="Galería"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>

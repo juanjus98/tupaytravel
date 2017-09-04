@@ -275,35 +275,7 @@ public function hoteles($provincia_key=null, $categoria_key=null, $args=null) {
     $id_provincia = $provincia['id'];
     $data_hoteles['id_provincia'] = $id_provincia;
     $data_busqueda['provincia'] = $provincia;
-    /*$data_dias['id_provincia'] = $id_provincia;*/
   }
-
-  /*if(isset($categoria_key)){
-    //Consultar categoria
-    $data_crud['table'] = "tbltours_categoria as t1";
-    $data_crud['columns'] = "t1.*";
-    $data_crud['where'] = array("t1.url_key" => $categoria_key, "t1.estado !=" => 0);
-    $categoria = $this->Crud->getRow($data_crud);
-    $id_tbltours_categoria = $categoria['id'];
-    $data_tours['id_tbltours_categoria'] = $id_tbltours_categoria;
-    $data_busqueda['categoria'] = $categoria;
-  }*/
-
-  /*if(isset($args)){
-    list($nro_dias, $str_dias) = explode("-", $args);
-    $data_tours['nro_dias'] = $nro_dias;
-    $data_busqueda['nro_dias'] = $nro_dias;
-  }
-
-  $data['dias'] = $this->Tours->listadoDias($data_dias);*/
-
-  //Consultar categoria
-  /*$data_crud['table'] = "tbltours_categoria as t1";
-  $data_crud['columns'] = "t1.*";
-  $data_crud['where'] = array("t1.estado !=" => 0);
-  $data_crud['order_by'] = "t1.categoria ASC";
-  $data['categorias'] = $this->Crud->getRows($data_crud);*/
-
 
   $data['active_link'] = "Hoteles";
   $data['website'] = $this->Inicio->get_website();
@@ -320,6 +292,49 @@ public function hoteles($provincia_key=null, $categoria_key=null, $args=null) {
   $this->template->title('Hoteles');
   $this->template->build('paginas/hoteles', $data);
 }
+
+/**
+ * Tour
+ */
+public function hotel($id_hotel, $titulo) {
+
+    //Consultar tour
+  $data_hotel = array('id_hotel' => $id_hotel);
+  $hotel = $this->Hoteles->get_row($data_hotel);
+  $data['hotel'] = $hotel;
+
+  //Consultar galería
+  $data_galeria = array('id_hotel' => $id_hotel);
+  $total_galeria = $this->Hoteles_galeria->total_registros($data_galeria);
+  $galeria = $this->Hoteles_galeria->listado($total_galeria, 0, $data_galeria);
+  $data['galeria'] = $galeria;
+
+  //Imagen principal
+  foreach ($galeria as $key => $value) {
+    /*echo "<pre>";
+    print_r($value);
+    echo "</pre>";*/
+    if($value['principal'] == 1){
+      $hotel['imagen'] = $value['foto'];
+      break;
+    }
+  }
+
+  //Relacionados
+  $data_hoteles = array('id_provincia' => $hotel['id_provincia']);
+  $data['hoteles_relacionados'] = $this->Hoteles->listado(8,0,$data_hoteles);
+
+  $data['active_link'] = "Hoteles";
+  $data['website'] = $this->Inicio->get_website();
+  $data['head_info'] = head_info($hotel, 'hotel'); //siempre
+
+
+    //Paises
+    $data['paises'] = $this->Crud->getPaises();
+
+    $this->template->title('Hotel');
+    $this->template->build('paginas/hotel', $data);
+  }
 
 
 public function contactanos() {

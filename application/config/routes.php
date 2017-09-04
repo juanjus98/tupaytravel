@@ -78,6 +78,7 @@ $route['tour/(:any)'] = 'paginas/tour/$1';
  * Hoteles
  */
 $route['hoteles/(:any)'] = 'paginas/hoteles/$1'; //Con provincia
+$route['hotel/(:num)/(:any)'] = 'paginas/hotel/$1/$2'; //Hotel
 
 
 $route['404_override'] = '';

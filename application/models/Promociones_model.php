@@ -22,9 +22,9 @@ class Promociones_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        if (!empty($data['categoria_id'])) {
+        /*if (!empty($data['categoria_id'])) {
             $where["t1.categoria_id"] = $data['categoria_id'];
-        }
+        }*/
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -59,9 +59,9 @@ class Promociones_model extends CI_Model {
         $where = array('t1.estado != ' => 0);
 
         //Where
-        if (!empty($data['categoria_id'])) {
+        /*if (!empty($data['categoria_id'])) {
             $where["t1.categoria_id"] = $data['categoria_id'];
-        }
+        }*/
 
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
@@ -83,7 +83,6 @@ class Promociones_model extends CI_Model {
         }
 
         $resultado = $this->db->select("t1.*")
-                /*->join("categoria as t2","t2.id = t1.categoria_id","left")*/
                 ->where($where)
                 ->like($like)
                 ->order_by($order_by)
@@ -111,9 +110,9 @@ class Promociones_model extends CI_Model {
             $where['t1.id'] = $data['id'];
         }
 
-        if(!empty($data['url_key'])){
+/*        if(!empty($data['url_key'])){
             $where['t1.url_key'] = $data['url_key'];
-        }
+        }*/
 
         $result = $this->db->select("t1.*")
                 /*->join("categoria as t2","t2.id = t1.categoria_id","left")

@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Hoteles extends CI_Controller {
+class Promociones extends CI_Controller {
 
  function __construct() {
    parent::__construct();
@@ -16,7 +16,7 @@ class Hoteles extends CI_Controller {
 
  $this->load->helper('waadmin');
  $this->load->model("crud_model","Crud");
- $this->load->model('hoteles_model', 'Hoteles');
+ $this->load->model('promociones_model', 'Promociones');
  $this->load->model('provincias_model', 'Provincias');
  $this->load->model('paginas_model', 'Paginas');
 
@@ -28,7 +28,7 @@ class Hoteles extends CI_Controller {
  *
  * Muestra el listado de las categorías.
  *
- * @package     hoteles
+ * @package     Promociones
  * @author      Juan Julio Sandoval Layza
  * @copyright webApu.com 
  * @since       26-02-2015
@@ -37,26 +37,12 @@ class Hoteles extends CI_Controller {
  public function index() {
  //$data['wa_tipo'] = $tipo;
    $data['wa_modulo'] = 'Listado';
-   $data['wa_menu'] = 'Hoteles';
+   $data['wa_menu'] = 'Promociones';
 
-//Provincias   
-$total_provincias = $this->Provincias->total_registros();
-$data['provincias'] = $this->Provincias->listado($total_provincias, 0);
-
-//Estrellas
-$data['estrellas'] = $this->Hoteles->listarEstrellas();
-
-//Consultar categoria
-/*$data_crud['table'] = "tblhoteles_categoria as t1";
-$data_crud['columns'] = "t1.*";
-$data_crud['where'] = array("t1.estado !=" => 0);
-$data_crud['order_by'] = "t1.categoria ASC";
-$data['categorias'] = $this->Crud->getRows($data_crud);*/
-
-$sessionName = 's_hoteles'; //Session name
+$sessionName = 's_Promociones'; //Session name
 
 //Paginacion
-$base_url = base_url() . "waadmin/hoteles/index";
+$base_url = base_url() . "waadmin/promociones/index";
 $per_page = 30; //registros por página
 $uri_segment = 4; //segmento de la url
 $num_links = 4; //número de links
@@ -66,7 +52,7 @@ $num_links = 4; //número de links
 
  if (isset($_GET['refresh'])) {
    $this->session->unset_userdata($sessionName);
-   redirect("waadmin/hoteles/index");
+   redirect("waadmin/promociones/index");
  }
 
  //Setear post
@@ -74,10 +60,10 @@ $num_links = 4; //número de links
  $data['post'] = $post;
 
  //Total de registros por post
- $data['total_registros'] = $this->Hoteles->total_registros($post);
+ $data['total_registros'] = $this->Promociones->total_registros($post);
 
  //Listado
- $data['listado'] = $this->Hoteles->listado($per_page, $page, $post);
+ $data['listado'] = $this->Promociones->listado($per_page, $page, $post);
 
  //Paginacion
  $total_rows = $data['total_registros'];
@@ -86,19 +72,15 @@ $num_links = 4; //número de links
  $this->pagination->initialize($set_paginacion);
  $data["links"] = $this->pagination->create_links();
 
- $this->template->title('Hoteles');
- $this->template->build('waadmin/hoteles/index', $data);
+ $this->template->title('Promociones');
+ $this->template->build('waadmin/promociones/index', $data);
 }
 
 function editar($tipo='C',$id=NULL){
- $path = '../../../../assets/plugins/ckfinder';
- $width = 'auto';
- $ckEditor = $this->editor($path, $width);
-
  $data['current_url'] = base_url(uri_string());
- $data['back_url'] = base_url('waadmin/hoteles/index');
+ $data['back_url'] = base_url('waadmin/promociones/index');
  if(isset($id)){
-   $data['edit_url'] = base_url('waadmin/hoteles/editar/E/' . $id);
+   $data['edit_url'] = base_url('waadmin/promociones/editar/E/' . $id);
  }
 
  switch ($tipo) {
@@ -115,20 +97,12 @@ function editar($tipo='C',$id=NULL){
 
  $data['wa_tipo'] = $tipo;
  $data['wa_modulo'] = $data['tipo'];
- $data['wa_menu'] = 'Hotel';
+ $data['wa_menu'] = 'Promoción';
 
  if($tipo == 'E' || $tipo == 'V'){
-  $data_row = array('id_hotel' => $id);
-  $data['post'] = $this->Hoteles->get_row($data_row);
-}
-
-//Provincias   
-$total_provincias = $this->Provincias->total_registros();
-$data['provincias'] = $this->Provincias->listado($total_provincias, 0);
-
-//Estrellas
-$data['estrellas'] = $this->Hoteles->listarEstrellas();
-   
+  $data_row = array('id' => $id);
+  $data['post'] = $this->Promociones->get_row($data_row);
+}  
 
    if ($this->input->post()) {
      $post= $this->input->post();
@@ -136,45 +110,21 @@ $data['estrellas'] = $this->Hoteles->listarEstrellas();
 
      $config = array(
        array(
-         'field' => 'nombre',
-         'label' => 'Nombre',
+         'field' => 'titulo',
+         'label' => 'Título',
          'rules' => 'required',
          'errors' => array(
            'required' => 'Campo requerido.',
            )
          ),
        array(
-         'field' => 'estrellas',
-         'label' => 'N° Estrellas',
+         'field' => 'url',
+         'label' => 'Url',
          'rules' => 'required',
          'errors' => array(
            'required' => 'Campo requerido.',
            )
-         ),
-       array(
-         'field' => 'id_provincia',
-         'label' => 'Provincia',
-         'rules' => 'required',
-         'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-         ),
-       array(
-         'field' => 'descripcion',
-         'label' => 'Descripción',
-         'rules' => 'required',
-         'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-         ),
-       array(
-         'field' => 'orden',
-         'label' => 'Orden',
-         'rules' => 'required',
-         'errors' => array(
-           'required' => 'Campo requerido.',
-           )
-         ),
+         )
        );
 
      $this->form_validation->set_rules($config);
@@ -187,50 +137,48 @@ $data['estrellas'] = $this->Hoteles->listarEstrellas();
 
      /*$estadia = (isset($post['estadia'])) ? $post['estadia'] : 0 ;*/
 
+     //Cargar Imagen
+      $upload_path = $this->config->item('upload_path');
+      if($_FILES["imagen"]){
+       $imagen_info1 = $this->imaupload->do_upload($upload_path, "imagen");
+     }
+
      $data_form = array(
-       "nombre" => $post['nombre'],
-       "descripcion" => $post['descripcion'],
-       "orden" => $post['orden'],
-       "keywords" => $post['keywords'],
-       "id_provincia" => $post['id_provincia'],
-       "localidad" => $post['localidad'],
-       "estrellas" => $post['estrellas']
+       "titulo" => $post['titulo'],
+       "url" => $post['url'],
+       "target" => $post['target'],
+       "orden" => $post['orden']
        );
 
-     if(empty($post['url_key_pre'])){
-       $data_urlkey = array('tipo' => 'h', 'urlkey' => $post['nombre']);
-       $url_key = $this->Crud->get_urlkey($data_urlkey);
-       $data_form['url_key'] = $url_key;
-
-       //Actualizamos la tabla urlkey
-       $data_urlkey_insert = array('tipo' => 'h', 'urlkey' => $url_key);
-       $this->db->insert("urlkey",$data_urlkey_insert);
+     //cargar imágenes
+     if (!empty($imagen_info1['upload_data'])) {
+       $data_form['imagen'] = $imagen_info1['upload_data']['file_name'];
      }
 
     //Agregar
      if($tipo == 'C'){
-       $this->db->insert('tblhotel', $data_form);
-       $hotel_id = $this->db->insert_id();
+       $this->db->insert('tblpromociones', $data_form);
+       /*$hotel_id = $this->db->insert_id();*/
        $this->session->set_userdata('msj_success', "Registro agregado satisfactoriamente.");
      }
 
 
           //Editar
      if ($tipo == 'E') {
-       $this->db->where('id_hotel', $post['id_hotel']);
-       $this->db->update('tblhotel', $data_form);
+       $this->db->where('id', $post['id']);
+       $this->db->update('tblpromociones', $data_form);
        /*echo $this->db->affected_rows();*/
-       $hotel_id = $post['id_hotel'];
+       /*$hotel_id = $post['id_hotel'];*/
        $this->session->set_userdata('msj_success', "Registros actualizados satisfactoriamente.");
      }
 
-     redirect('/waadmin/hoteles/index');
+     redirect('/waadmin/promociones/index');
    }
 
  }
 
- $this->template->title($data['tipo'] . ' Hotel');
- $this->template->build('waadmin/hoteles/editar', $data);
+ $this->template->title($data['tipo'] . ' Promoción');
+ $this->template->build('waadmin/promociones/editar', $data);
 }
 
  /**
@@ -255,17 +203,17 @@ $data['estrellas'] = $this->Hoteles->listarEstrellas();
            "estado" => 0
            );
          $this->db->where('id', $item);
-         $this->db->update('tblhoteles', $data_eliminar);
+         $this->db->update('tblpromociones', $data_eliminar);
        }
        $this->session->set_userdata('msj_success', "Registros eliminados satisfactoriamente.");
-       redirect("waadmin/hoteles/index");
+       redirect("waadmin/promociones/index");
      } else {
        $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
-       redirect("waadmin/hoteles/index");
+       redirect("waadmin/promociones/index");
      }
    } else {
      $this->session->set_userdata('msj_error', "Debe seleccionar al menos un registro.");
-     redirect("waadmin/hoteles/index");
+     redirect("waadmin/promociones/index");
    }
 
    $this->template->title('Listado');
@@ -279,8 +227,8 @@ public function uporden(){
   if($this->input->post()){
     $post = $this->input->post();
     $data_form = array('orden' => $post['orden']);
-    $this->db->where('id_hotel', $post['id']);
-    $this->db->update('tblhotel', $data_form);
+    $this->db->where('id', $post['id']);
+    $this->db->update('tblpromociones', $data_form);
     echo "Orden actualizado.";
   }
 }

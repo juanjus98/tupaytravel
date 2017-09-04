@@ -21,21 +21,26 @@ if(!empty($busqueda)){
         <?php
         if(!empty($listado)) {
           foreach ($listado as $key => $item) {
-
-            echo "<pre>";
-            print_r($item);
-            echo "</pre>";
             
             //Consultar imagen principal
-            $data_galeria = array('id_hotel' => $item['id'], 'principal' => 1);
+            $data_galeria = array('id_hotel' => $item['id_hotel'], 'principal' => 1);
             $galeria = $this->Hoteles_galeria->get_row($data_galeria);
+
+
+            if(!empty($galeria)){
+              /*$urlImagen = base_url('assets/images/hotel/' . $galeria['foto']) ;*/
+              $urlImagen = base_url('imagens/w600_h360_at__' . $galeria['foto']);
+            }else{
+              $urlImagen = base_url('assets/images/no-image.jpg') ;
+            }
 
             $nombre = trim($item['nombre']);
             $provincia = trim($item['provincia']);
+            $localidad = trim($item['localidad']);
 
-            $url_hotel = base_url('hotel/' . $item['id'] . '/' . $item['url_key']);
+            $url_hotel = base_url('hotel/' . $item['id_hotel'] . '/' . $item['url_key']);
             /*$url_detalle_hotel_2 = 'hotel/' . $com2['id_hotel'] . '/' . url_amigable($com2['nombre']) .'/';*/
-            $urlImagen = (!empty($item['imagen'])) ? base_url($this->config->item('upload_path') . $item['imagen']) : base_url('assets/images/no-image.jpg') ;
+            
             ?>
 
                 <div class="col-sm-12 col-md-4">
@@ -44,7 +49,7 @@ if(!empty($busqueda)){
                     <!-- <div class="discount">25%</div> -->
                     <figure>
                       <a href="<?php echo $url_hotel;?>" title="<?php echo $nombre;?>">
-                        <img src="https://unsplash.it/800/600" alt="<?php echo $nombre;?>">
+                        <img src="<?php echo $urlImagen;?>" alt="<?php echo $nombre;?>">
                       </a>
                       <!-- <div class="tg-icons">
                         <span class="badge" data-toggle="tooltip" title="Título"><i class="fa fa-plane" aria-hidden="true"></i></span>
@@ -54,7 +59,7 @@ if(!empty($busqueda)){
                     <div class="caption">
                       <h3><a href="<?php echo $url_hotel;?>" title="<?php echo $nombre;?>"><?php echo $nombre;?></a></h3>
                       <h4>
-                        <i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $provincia;?>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i><?php echo $retVal = (!empty($localidad)) ? $localidad . ' - ' : '' ; echo $provincia;?>
                       </h4>
                       <!-- <p>Descripción</p> -->
                     </div>
