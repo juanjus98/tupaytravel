@@ -41,6 +41,68 @@ function getDate(element) {
 }
 
 $(function() {
+	//Reservar
+$('#modal-reservar').on('shown.bs.modal', function () {
+	$('#nombres').focus();
+});
+
+$('#form-reservar').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    // handle the invalid form...
+    console.log("Error formulario");
+  } else {
+    console.log("Enviar formulario");
+    /*var data_form = $( this ).serializeFormJSON();
+    console.log(data_form);*/
+
+	var formdata = $(this).serializeArray();
+	var data = {};
+	$(formdata ).each(function(index, obj){
+	data[obj.name] = obj.value;
+	});
+
+	//Escribir detalles en #list-form-data
+	if($('#item_pais_origen').length == 0 ){
+		$( "#list-form-data" ).append( '<li id="item_pais_origen"><input type="hidden" name="pais_origen" id="pais_origen" value="' + data.pais_origen + '"><span class="fa fa-check text-success"></span> País de origen: ' + data.pais_origen + '</li>' );
+	}
+
+	if($('#item_ciudad').length == 0 ){
+		$( "#list-form-data" ).append( '<li id="item_ciudad"><input type="hidden" name="pais_origen" id="pais_origen" value="' + data.pais_ciudad + '"><span class="fa fa-check text-success"></span> Ciudad: ' + data.ciudad + '</li>' );
+	}
+
+	if(data.adultos > 0 && $('#item_adultos').length == 0 ){
+		$( "#list-form-data" ).append( '<li id="item_adultos"><input type="hidden" name="adultos" id="adultos" value="' + data.adultos + '"><span class="fa fa-check text-success"></span> Adultos: ' + data.adultos + '</li>' );
+	}
+
+	if(data.adolecentes > 0 && $('#item_adolecentes').length == 0){
+		$( "#list-form-data" ).append( '<li id="item_adolecentes"><input type="hidden" name="adolecentes" id="adolecentes" value="' + data.adolecentes + '"><span class="fa fa-check text-success"></span> Adolecentes: ' + data.adolecentes + '</li>' );
+	}
+
+	if(data.ninios > 0 && $('#item_ninios').length == 0){
+		$( "#list-form-data" ).append( '<li id="item_ninios"><input type="hidden" name="ninios" id="ninios" value="' + data.ninios + '"><span class="fa fa-check text-success"></span> Niños: ' + data.ninios + '</li>' );
+	}
+
+	if(data.infantes > 0 && $('#item_infantes').length == 0){
+		$( "#list-form-data" ).append( '<li id="item_infantes"><input type="hidden" name="infantes" id="infantes" value="' + data.infantes + '"><span class="fa fa-check text-success"></span> Infantes: ' + data.infantes + '</li>' );
+	}
+
+	console.log(data);
+
+    $('#modal-reservar').modal('show');
+  }
+  return false;
+});
+
+//Enviar formulario final form-reservar-completar
+$('#form-reservar-completar').validator().on('submit', function (e) {
+  if (e.isDefaultPrevented()) {
+    console.log("Error formulario no enviar formulario");
+  } else {
+    console.log("Enviar formulario");
+  }
+  return false;
+});
+
 	//Select search select2
 	$(".select_search").select2();
 

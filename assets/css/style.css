@@ -311,6 +311,9 @@ ul.social-icons {
   background: #fff;
   color: #fff;
 }
+.modal-body .lead {
+  font-size: 16px;
+}
 .tool-bar {
   z-index: 99 !important;
 }

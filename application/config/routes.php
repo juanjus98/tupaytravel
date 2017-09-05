@@ -80,6 +80,7 @@ $route['tour/(:any)'] = 'paginas/tour/$1';
 $route['hoteles/(:any)'] = 'paginas/hoteles/$1'; //Con provincia
 $route['hotel/(:num)/(:any)'] = 'paginas/hotel/$1/$2'; //Hotel
 
+$route['reservar'] = 'paginas/reservar';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
