@@ -67,7 +67,7 @@ $('#form-reservar').validator().on('submit', function (e) {
 	}
 
 	if($('#item_ciudad').length == 0 ){
-		$( "#list-form-data" ).append( '<li id="item_ciudad"><input type="hidden" name="pais_origen" id="pais_origen" value="' + data.pais_ciudad + '"><span class="fa fa-check text-success"></span> Ciudad: ' + data.ciudad + '</li>' );
+		$( "#list-form-data" ).append( '<li id="item_ciudad"><input type="hidden" name="ciudad" id="ciudad" value="' + data.ciudad + '"><span class="fa fa-check text-success"></span> Ciudad: ' + data.ciudad + '</li>' );
 	}
 
 	if(data.adultos > 0 && $('#item_adultos').length == 0 ){
@@ -97,10 +97,10 @@ $('#form-reservar').validator().on('submit', function (e) {
 $('#form-reservar-completar').validator().on('submit', function (e) {
   if (e.isDefaultPrevented()) {
     console.log("Error formulario no enviar formulario");
+    return false;
   } else {
     console.log("Enviar formulario");
   }
-  return false;
 });
 
 	//Select search select2

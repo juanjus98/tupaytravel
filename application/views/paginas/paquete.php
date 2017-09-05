@@ -313,7 +313,7 @@ if(empty($busqueda_info)){
 <div class="modal fade" id="modal-reservar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-    <form name="form-reservar-completar" action="<?php echo base_url('reservar');?>" method="post" data-toggle="validator">
+    <form name="form-reservar-completar" id="form-reservar-completar" action="<?php echo base_url('reservar');?>" method="post" data-toggle="validator">
       <input type="hidden" name="tipo_info" value="<?php echo $tipo_info;?>">
       <input type="hidden" name="id_info" value="<?php echo $id_info;?>">
       <div class="modal-header">
@@ -364,7 +364,7 @@ if(empty($busqueda_info)){
 
                       <div class="form-group has-feedback">
                       <label for="email" class="control-label">Correo electrónico:</label>
-                      <input type="text" name="email" id="email" class="form-control" value="" required>
+                      <input type="email" name="email" id="email" class="form-control" value="" required>
                       <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                       </div>
 

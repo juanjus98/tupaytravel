@@ -464,6 +464,7 @@ public function reservar() {
         //Enviar formulario
         if($this->input->post()){
           $post = $this->input->post();
+
           $config = array(
            array(
              'field' => 'nombres',
@@ -495,26 +496,36 @@ public function reservar() {
           $this->form_validation->set_rules($config);
           $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
-          if ($this->form_validation->run() == FALSE)
-          {
+          if ($this->form_validation->run() == FALSE){
             $data['post'] = $post;
           }else{
-            echo "<pre>";
+            /*echo "<hr><pre>";
             print_r($post);
             echo "</pre>";
-            die();
+            die();*/
             
             //GUARDAR EN LA BASE DE DATOS LA NUEVA SOLICITUD DE COTIZACIÓN.
             $data_insert = array(
-              "nombres" => strip_tags($post['nombre']),
+              "tipo_info" => strip_tags($post['tipo_info']),
+              "id_info" => strip_tags($post['id_info']),
+              "date_desde" => strip_tags($post['dateDesde']),
+              "date_hasta" => strip_tags($post['dateHasta']),
+              "pais_origen" => strip_tags($post['pais_origen']),
+              "ciudad" => strip_tags($post['ciudad']),
+              "adultos" => strip_tags($post['adultos']),
+              "adolecentes" => strip_tags($post['adolecentes']),
+              "ninios" => strip_tags($post['ninios']),
+              "infantes" => strip_tags($post['infantes']),
+              "nombres" => strip_tags($post['nombres']),
               "telefono" => strip_tags($post['telefono']),
+              "celular" => strip_tags($post['celular']),
               "email" => strip_tags($post['email']),
               "mensaje" => strip_tags($post['mensaje']),
               "agregar" => date("Y-m-d H:i:s")
-              );
+            );
 
-            /*$this->db->insert('contactos', $data_insert);
-            $contactos_id = $this->db->insert_id();*/
+            $this->db->insert('reservas', $data_insert);
+            $reservas_id = $this->db->insert_id();
 
             //Templates Email
             $data_email['post'] = $data_insert;
@@ -522,12 +533,17 @@ public function reservar() {
             //Otros datos para el email
             $data_email['website'] = $this->Inicio->get_website();
             $data_email['cabeceras'] = $this->config->item('waemail');
+
+            echo "<pre>";
+            print_r($data_email);
+            echo "</pre><hr>";
             
             //Template user email
-            $email_user = $this->load->view('paginas/email/tp_contacto_user', $data_email, TRUE);
+            echo $email_user = $this->load->view('paginas/email/tp_reservar_user', $data_email, TRUE);
+            die();
 
             //Template admin admin
-            $email_admin = $this->load->view('paginas/email/tp_contacto', $data_email, TRUE);
+            $email_admin = $this->load->view('paginas/email/tp_reservar', $data_email, TRUE);
 
             //Enviar email
             $this->load->library('email');
@@ -535,7 +551,7 @@ public function reservar() {
             $config['useragent']           = "CodeIgniter";
             /*$config['protocol'] = 'sendmail';*/
             $config['protocol']            = "smtp";
-            $config['smtp_host']           = "localhost";
+            $config['smtp_host']           = "mail.tupaytravel.com";
             $config['smtp_port']           = "25";
 
             $config['mailpath'] = "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
@@ -545,13 +561,13 @@ public function reservar() {
 
             $this->email->initialize($config);
 
-            $this->email->from('informes@consorciobongourmet.com', utf8_decode('Informes Bon Gourmet Eventos y Convenciones'));
+            $this->email->from('reservas@tupaytravel.com', utf8_decode('Reservas Tupay Travel'));
             $this->email->reply_to($post['email'], utf8_decode($post['nombre']));
             $this->email->to('juanjus98@gmail.com'); //Email destino (quién recibe el correo)
             /*$this->email->cc('epropesco@hotmail.com');*/
             //$this->email->bcc('them@their-example.com');
 
-            $this->email->subject(utf8_decode('Nuevo contacto.'));
+            $this->email->subject(utf8_decode('Reservar'));
             $this->email->message($email_admin);
             $this->email->send(); //Envia email al administrador
             /*echo $this->email->print_debugger();*/
@@ -560,14 +576,18 @@ public function reservar() {
             $this->email->clear();
             $this->email->initialize($config);
 
-            $this->email->from('informes@consorciobongourmet.com', utf8_decode('Informes Bon Gourmet Eventos y Convenciones'));
+            $this->email->from('reservas@tupaytravel.com', utf8_decode('Reservas Tupay Travel'));
             $this->email->to($post['email'], utf8_decode($post['nombre']));
-            $this->email->subject(utf8_decode('Gracias por contáctarnos - Bon Gourmet Eventos y Convenciones'));
+            $this->email->subject(utf8_decode('Confirmación de reserva.'));
             $this->email->message($email_user);
             $this->email->send();
             $this->email->print_debugger(array('headers'));
 
-            redirect("confirmacion");
+            /*print_r($this->email->print_debugger());*/
+
+            die();
+
+            redirect("/");
           }
         } //Post
 
