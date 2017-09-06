@@ -70,6 +70,10 @@ $('#form-reservar').validator().on('submit', function (e) {
 		$( "#list-form-data" ).append( '<li id="item_ciudad"><input type="hidden" name="ciudad" id="ciudad" value="' + data.ciudad + '"><span class="fa fa-check text-success"></span> Ciudad: ' + data.ciudad + '</li>' );
 	}
 
+	if(typeof data.fecha_arribo  != "undefined" && $('#item_fecha_arribo').length == 0 ){
+		$( "#list-form-data" ).append( '<li id="item_fecha_arribo"><input type="hidden" name="fecha_arribo" id="fecha_arribo" value="' + data.fecha_arribo + '"><span class="fa fa-check text-success"></span> Fecha de arribo (desde Lima): ' + data.fecha_arribo + '</li>' );
+	}
+
 	if(data.adultos > 0 && $('#item_adultos').length == 0 ){
 		$( "#list-form-data" ).append( '<li id="item_adultos"><input type="hidden" name="adultos" id="adultos" value="' + data.adultos + '"><span class="fa fa-check text-success"></span> Adultos: ' + data.adultos + '</li>' );
 	}

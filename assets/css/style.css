@@ -311,9 +311,6 @@ ul.social-icons {
   background: #fff;
   color: #fff;
 }
-.modal-body .lead {
-  font-size: 16px;
-}
 .tool-bar {
   z-index: 99 !important;
 }
@@ -1327,6 +1324,12 @@ fieldset[disabled] .btn-primary-1.active {
 }
 .marker-outline .timeline-item:hover .timeline-marker:before {
   background: #99C115;
+}
+.wa-modal {
+  z-index: 16000003;
+}
+.wa-modal .modal-body .lead {
+  font-size: 16px;
 }
 /**
  * Mobiles

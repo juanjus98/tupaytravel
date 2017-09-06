@@ -64,6 +64,7 @@ $route['confirmacion'] = 'paginas/confirmacion';
 $route['paquetes-tours'] = 'paginas/paquetes';
 $route['paquetes-tours/(:any)'] = 'paginas/paquetes/$1';
 $route['paquete-tour/(:any)'] = 'paginas/paquete/$1';
+$route['pdf-paquete/(:any)'] = 'paginas/pdf_paquete/$1';
 
 /**
  * Tours

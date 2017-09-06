@@ -145,7 +145,10 @@ class Paginas extends CI_Controller {
     //Consultar Paquete
     $data_paquete = array('url_key' => $url_key);
     $paquete = $this->Paquetes->get_row($data_paquete);
+    $paquete['tipo_info'] = 'P'; //Paquete
     $data['paquete'] = $paquete;
+
+    $data['servicio_info'] = $paquete;
 
     $data['active_link'] = "paquetes-tours";
     $data['website'] = $this->Inicio->get_website();
@@ -162,6 +165,35 @@ class Paginas extends CI_Controller {
 
     $this->template->title('Paquete');
     $this->template->build('paginas/paquete', $data);
+  }
+
+  public function pdf_paquete($url_key) {
+
+  // boost the memory limit if it's low ;)
+    ini_set('memory_limit','32M'); 
+
+  //Consultar servicio
+    $data_where = array('url_key' => $url_key);
+    $resultado = $this->Paquetes->get_row($data_where);
+    $data['post'] = $resultado;
+
+  // render the view into HTML
+    $data['titulo'] = "Prueba de mPDF";
+    $html = $this->load->view('paginas/pdf/pdf_paquete', $data, true);
+
+    $this->load->library('mimpdf');
+
+    $pdf = $this->mimpdf->load();
+
+  // Add a footer for good measure ;)
+    $pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date(DATE_RFC822));
+
+  // write the HTML into the PDF
+    $pdf->WriteHTML($html);
+
+  // save to file because we can
+    $pdf->Output("Demo_mPDF.pdf", 'D');
+
   }
 
 
@@ -239,24 +271,27 @@ public function tour($url_key) {
     //Consultar tour
   $data_paquete = array('url_key' => $url_key);
   $tour = $this->Tours->get_row($data_paquete);
+  $tour['tipo_info'] = 'T'; //Tour
   $data['tour'] = $tour;
+
+  $data['servicio_info'] = $tour;
 
   $data['active_link'] = "Tours";
   $data['website'] = $this->Inicio->get_website();
-    $data['head_info'] = head_info($tour, 'tour'); //siempre
+  $data['head_info'] = head_info($tour, 'tour'); //siempre
 
     //Formas de pago (página)
-    if(!empty($tour['formas_pago_id'])){
-      $data_pagina = array('id' => $tour['formas_pago_id']);
-      $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
-    }
+  if(!empty($tour['formas_pago_id'])){
+    $data_pagina = array('id' => $tour['formas_pago_id']);
+    $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
+  }
 
     //Paises
-    $data['paises'] = $this->Crud->getPaises();
+  $data['paises'] = $this->Crud->getPaises();
 
-    $this->template->title('Tour');
-    $this->template->build('paginas/tour', $data);
-  }
+  $this->template->title('Tour');
+  $this->template->build('paginas/tour', $data);
+}
 
 /**
  * Hoteles
@@ -330,11 +365,11 @@ public function hotel($id_hotel, $titulo) {
 
 
     //Paises
-    $data['paises'] = $this->Crud->getPaises();
+  $data['paises'] = $this->Crud->getPaises();
 
-    $this->template->title('Hotel');
-    $this->template->build('paginas/hotel', $data);
-  }
+  $this->template->title('Hotel');
+  $this->template->build('paginas/hotel', $data);
+}
 
 
 public function contactanos() {
@@ -457,7 +492,7 @@ public function contactanos() {
  */
 public function reservar() {
   $this->template->title('Reservar');
-    $data['active_link'] = "contactanos";
+  $data['active_link'] = "contactanos";
         $data['website'] = $this->Inicio->get_website(); //siempre
         $data['head_info'] = head_info($data['website']); //siempre
 
@@ -499,8 +534,15 @@ public function reservar() {
           if ($this->form_validation->run() == FALSE){
             $data['post'] = $post;
           }else{
-            
+
             //GUARDAR EN LA BASE DE DATOS LA NUEVA SOLICITUD DE COTIZACIÓN.
+            $adultos = (!empty($post['adultos'])) ? strip_tags($post['adultos']) : 0 ;
+            $adolecentes = (!empty($post['adolecentes'])) ? strip_tags($post['adolecentes']) : 0 ;
+            $ninios = (!empty($post['ninios'])) ? strip_tags($post['ninios']) : 0 ;
+            $infantes = (!empty($post['infantes'])) ? strip_tags($post['infantes']) : 0 ;
+
+            $fecha_arribo = (!empty($post['fecha_arribo'])) ? strip_tags($post['fecha_arribo']) : '' ;
+
             $data_insert = array(
               "tipo_info" => strip_tags($post['tipo_info']),
               "id_info" => strip_tags($post['id_info']),
@@ -508,45 +550,71 @@ public function reservar() {
               "date_hasta" => strip_tags($post['dateHasta']),
               "pais_origen" => strip_tags($post['pais_origen']),
               "ciudad" => strip_tags($post['ciudad']),
-              "adultos" => strip_tags($post['adultos']),
-              "adolecentes" => strip_tags($post['adolecentes']),
-              "ninios" => strip_tags($post['ninios']),
-              "infantes" => strip_tags($post['infantes']),
+              "fecha_arribo" => $fecha_arribo,
+              "adultos" => $adultos,
+              "adolecentes" => $adolecentes,
+              "ninios" => $ninios,
+              "infantes" => $infantes,
               "nombres" => strip_tags($post['nombres']),
               "telefono" => strip_tags($post['telefono']),
               "celular" => strip_tags($post['celular']),
               "email" => strip_tags($post['email']),
               "mensaje" => strip_tags($post['mensaje']),
               "agregar" => date("Y-m-d H:i:s")
-            );
+              );
 
             $this->db->insert('reservas', $data_insert);
             $reservas_id = $this->db->insert_id();
-
-            //Consultar Paquete
-            $data_paquete = array('id' => $post['id_info']);
-            $paquete = $this->Paquetes->get_row($data_paquete);
-
-            $url_servicio = base_url() . 'paquete-tour/' . $paquete['url_key'];
-            $servicio = array(
-              'nombre_servicio' => $paquete['nombre'],
-              'descripcion_servicio' => $paquete['detalles'],
-              'url_servicio' => $url_servicio,
-              'itinerario' => $paquete['itinerarios']
-            );
-            
-            $data_email['servicio'] = $servicio;
 
             //Templates Email
             $data_email['post'] = $data_insert;
 
             //Otros datos para el email
             $data_email['website'] = $this->Inicio->get_website();
-            $data_email['cabeceras'] = $this->config->item('waemail');
+            
+            if($post['tipo_info'] == 'P'){
+            //Consultar Paquete
+              $data_paquete = array('id' => $post['id_info']);
+              $paquete = $this->Paquetes->get_row($data_paquete);
 
-            if($this->session->userdata('s_busqueda_paquetes')){
-            $data_email['busqueda_info'] = $this->session->userdata('s_busqueda_paquetes');
+              $url_servicio = base_url() . 'paquete-tour/' . $paquete['url_key'];
+              $servicio = array(
+                'nombre_servicio' => $paquete['nombre'],
+                'descripcion_servicio' => $paquete['detalles'],
+                'url_servicio' => $url_servicio,
+                'itinerario' => $paquete['itinerarios']
+                );
+
+              $data_email['servicio'] = $servicio;
+
+              $titulo_email_admin = 'Solicitud de reserva - Paquete';
             }
+
+            if($post['tipo_info'] == 'T'){
+              //Consultar Tour
+              $data_tour = array('id' => $post['id_info']);
+              $tour = $this->Tours->get_row($data_tour);
+
+              $url_servicio = base_url() . 'tour/' . $tour['url_key'];
+              $servicio = array(
+                'nombre_servicio' => $tour['nombre'],
+                'descripcion_servicio' => $tour['detalle'],
+                'url_servicio' => $url_servicio,
+                'itinerario' => $tour['itinerarios']
+                );
+
+              $data_email['servicio'] = $servicio;
+              $titulo_email_admin = 'Solicitud de reserva - Tour';
+            }
+
+            $cabeceras_email = $this->config->item('waemail');
+            $cabeceras_email['titulo_email_admin'] = $titulo_email_admin;
+            $data_email['cabeceras'] = $cabeceras_email;
+
+/*            echo "<pre>";
+            print_r($data_email);
+            echo "</pre>";
+            die();*/
             
             //Template user email
             $email_user = $this->load->view('paginas/email/tp_reservar_user', $data_email, TRUE);
@@ -576,7 +644,7 @@ public function reservar() {
             $this->email->cc('juanjus98@gmail.com');
             //$this->email->bcc('them@their-example.com');
 
-            $subject_admin = utf8_decode('Nueva solicitud de reserva de ') . utf8_decode($post['nombres']);
+            $subject_admin = utf8_decode($titulo_email_admin) . utf8_decode(' - ' . $post['nombres']);
             $this->email->subject($subject_admin);
             $this->email->message($email_admin);
             $this->email->send(); //Envia email al administrador

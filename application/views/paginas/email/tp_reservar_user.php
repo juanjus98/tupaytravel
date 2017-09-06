@@ -154,14 +154,14 @@ if(!empty($busqueda_info)){
 		$iiDia = 1;
 		foreach ($itinerario as $key => $value) {
 			$urlImagen = (!empty($value['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $value['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
-			$str_fecha = (!empty($date_range[$key])) ? nice_date($date_range[$key], 'd/m/Y') : 'Día ' . $iiDia;
+			$str_fecha = (!empty($date_range[$key])) ? nice_date($date_range[$key], 'd/m/Y') : utf8_decode('Día ') . $iiDia;
 		?>
 		<tr>
 		    <td style="vertical-align: top;">
 				<div style="padding: 0 10px 0 0;">
 				<p style="color: #333;"><?php echo $str_fecha;?></p>
-				<h3 style="margin:6px 0;"><?php echo $value['titulo'];?></h3>
-				<p style="text-align: justify;"><?php echo $value['descripcion'];?></p>
+				<h3 style="margin:6px 0;"><?php echo utf8_decode($value['titulo']);?></h3>
+				<p style="text-align: justify;"><?php echo utf8_decode($value['descripcion']);?></p>
 				</div>
 			</td>
 			<td style="width: 200px; vertical-align: middle;">

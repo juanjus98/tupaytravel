@@ -16,7 +16,7 @@
 										<tr>
 											<td style="padding:36px 48px;display:block">
 												<h1 style="color:#ffffff;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:30px;font-weight:300;line-height:150%;margin:0;text-align:left">
-													<?php echo utf8_decode('Solicitud de reserva.');?>
+													<?php echo utf8_decode($cabeceras['titulo_email_admin']);?>
 												</h1>
 											</td>
 										</tr>
@@ -72,11 +72,28 @@
 										<?php echo utf8_decode('Otros detalles:');?>
 									</h2>	
 									<ul>
-										<li>
-											<strong>Fechas elegidas:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
-											<?php echo date('d/m/Y', strtotime($post['date_desde'])) . ' - ' . date('d/m/Y', strtotime($post['date_hasta']));?>
-										</span>
-									</li>
+										<?php
+										if(!empty($post['date_desde']) && !empty($post['date_hasta'])){
+											?>
+											<li>
+												<strong>Fechas elegidas:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
+												<?php echo date('d/m/Y', strtotime($post['date_desde'])) . ' - ' . date('d/m/Y', strtotime($post['date_hasta']));?>
+											</span>
+										</li>
+										<?php
+									}
+									?>
+									<?php
+										if(!empty($post['fecha_arribo'])){
+											?>
+											<li>
+												<strong>Fecha de arribo (desde Lima):</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
+												<?php echo str_replace("-","/",$post['fecha_arribo']);?>
+											</span>
+										</li>
+										<?php
+									}
+									?>
 									<li>
 										<strong><?php echo utf8_decode('País de origen:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 										<?php echo $post['pais_origen'];?>
@@ -116,61 +133,61 @@
 </td>
 </tr>
 <tr>
-<td style="padding: 0 40px;">
-<h2 style="color:<?php echo $cabeceras['color'];?>;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">
-<?php echo utf8_decode('Servicio elegido:');?>
-</h2>
-<?php
-$nombre_servicio = $servicio['nombre_servicio'];
-$descripcion_servicio = $servicio['descripcion_servicio'];
-$url_servicio = $servicio['url_servicio'];
-$itinerario = $servicio['itinerario'];
-
-if(!empty($busqueda_info)){
-  $date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
-}
-
-?>
-	<table style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:12px;">
-		<tr>
-		<td colspan="2">
-		<h2 style="margin:6px 0;"><?php echo $nombre_servicio;?></h2>
-		<p><a href="<?php echo $url_servicio;?>" target="_blank"><?php echo utf8_decode('Ver detalles en la página web.');?></a></p>
-		<?php echo $descripcion_servicio;?>
-		</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<h2 style="margin:6px 0;">Itinerario:</h2>
-			</td>
-		</tr>
+	<td style="padding: 0 40px;">
+		<h2 style="color:<?php echo $cabeceras['color'];?>;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">
+			<?php echo utf8_decode('Servicio elegido:');?>
+		</h2>
 		<?php
-		$iiDia = 1;
-		foreach ($itinerario as $key => $value) {
-			$urlImagen = (!empty($value['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $value['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
-			$str_fecha = (!empty($date_range[$key])) ? nice_date($date_range[$key], 'd/m/Y') : 'Día ' . $iiDia;
-		?>
-		<tr>
-		    <td style="vertical-align: top;">
-				<div style="padding: 0 10px 0 0;">
-				<p style="color: #333;"><?php echo $str_fecha;?></p>
-				<h3 style="margin:6px 0;"><?php echo $value['titulo'];?></h3>
-				<p style="text-align: justify;"><?php echo $value['descripcion'];?></p>
-				</div>
-			</td>
-			<td style="width: 200px; vertical-align: middle;">
-				<img src="<?php echo $urlImagen;?>" style="max-width: 200px;">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr></td>
-		</tr>
-		<?php 
-		$iiDia++;
+		$nombre_servicio = $servicio['nombre_servicio'];
+		$descripcion_servicio = $servicio['descripcion_servicio'];
+		$url_servicio = $servicio['url_servicio'];
+		$itinerario = $servicio['itinerario'];
+
+		if(!empty($busqueda_info)){
+			$date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
 		}
+
 		?>
-	</table>
-</td>
+		<table style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:12px;">
+			<tr>
+				<td colspan="2">
+					<h2 style="margin:6px 0;"><?php echo $nombre_servicio;?></h2>
+					<p><a href="<?php echo $url_servicio;?>" target="_blank"><?php echo utf8_decode('Ver detalles en la página web.');?></a></p>
+					<?php echo $descripcion_servicio;?>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<h2 style="margin:6px 0;">Itinerario:</h2>
+				</td>
+			</tr>
+			<?php
+			$iiDia = 1;
+			foreach ($itinerario as $key => $value) {
+				$urlImagen = (!empty($value['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $value['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
+				$str_fecha = (!empty($date_range[$key])) ? nice_date($date_range[$key], 'd/m/Y') : utf8_decode('Día ') . $iiDia;
+				?>
+				<tr>
+					<td style="vertical-align: top;">
+						<div style="padding: 0 10px 0 0;">
+							<p style="color: #333;"><?php echo $str_fecha;?></p>
+							<h3 style="margin:6px 0;"><?php echo utf8_decode($value['titulo']);?></h3>
+							<p style="text-align: justify;"><?php echo utf8_decode($value['descripcion']);?></p>
+						</div>
+					</td>
+					<td style="width: 200px; vertical-align: middle;">
+						<img src="<?php echo $urlImagen;?>" style="max-width: 200px;">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr></td>
+				</tr>
+				<?php 
+				$iiDia++;
+			}
+			?>
+		</table>
+	</td>
 </tr>
 </tbody>
 </table>

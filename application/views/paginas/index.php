@@ -396,11 +396,11 @@
   <div class="col-md-4">
 <div class="container-box">
 <h3 class="titulo_opciones">
-  Estadía 
+  Hoteles 
   <div class="clearfix visible-xs-block"></div>
-  <span>
+  <!-- <span>
     <a href="#">Ver más</a>
-  </span>
+  </span> -->
 </h3>
 <div class="box-wscroll">
 <?php
@@ -409,7 +409,8 @@
   <ul class="list-group container-list">
   <?php
         foreach ($hoteles as $key => $value) {
-        $url_hotel = 'hotel/' . $value['url_key'];
+        /*$url_hotel = 'hotel/' . $value['url_key'];*/
+        $url_hotel = base_url('hotel/' . $value['id_hotel'] . '/' . $value['url_key']);
     ?>
     <li class="list-group-item">
       <a href="<?php echo $url_hotel;?>" class="text-capitalize to-emoji"><?php echo $value['nombre'];?></a>
