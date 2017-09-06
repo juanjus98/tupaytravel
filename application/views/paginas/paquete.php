@@ -297,7 +297,6 @@ if(empty($busqueda_info)){
     <button class="btn btn-primary-1 btn-block" type="submit">
       <i class="fa fa-hand-o-right" aria-hidden="true"></i> Reservar ahora.
     </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-reservar">Preview</button>
   </div>
 </div>
 </fieldset>

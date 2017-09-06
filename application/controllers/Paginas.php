@@ -499,10 +499,6 @@ public function reservar() {
           if ($this->form_validation->run() == FALSE){
             $data['post'] = $post;
           }else{
-            /*echo "<hr><pre>";
-            print_r($post);
-            echo "</pre>";
-            die();*/
             
             //GUARDAR EN LA BASE DE DATOS LA NUEVA SOLICITUD DE COTIZACIÓN.
             $data_insert = array(
@@ -527,6 +523,20 @@ public function reservar() {
             $this->db->insert('reservas', $data_insert);
             $reservas_id = $this->db->insert_id();
 
+            //Consultar Paquete
+            $data_paquete = array('id' => $post['id_info']);
+            $paquete = $this->Paquetes->get_row($data_paquete);
+
+            $url_servicio = base_url() . 'paquete-tour/' . $paquete['url_key'];
+            $servicio = array(
+              'nombre_servicio' => $paquete['nombre'],
+              'descripcion_servicio' => $paquete['detalles'],
+              'url_servicio' => $url_servicio,
+              'itinerario' => $paquete['itinerarios']
+            );
+            
+            $data_email['servicio'] = $servicio;
+
             //Templates Email
             $data_email['post'] = $data_insert;
 
@@ -534,13 +544,12 @@ public function reservar() {
             $data_email['website'] = $this->Inicio->get_website();
             $data_email['cabeceras'] = $this->config->item('waemail');
 
-            echo "<pre>";
-            print_r($data_email);
-            echo "</pre><hr>";
+            if($this->session->userdata('s_busqueda_paquetes')){
+            $data_email['busqueda_info'] = $this->session->userdata('s_busqueda_paquetes');
+            }
             
             //Template user email
-            echo $email_user = $this->load->view('paginas/email/tp_reservar_user', $data_email, TRUE);
-            die();
+            $email_user = $this->load->view('paginas/email/tp_reservar_user', $data_email, TRUE);
 
             //Template admin admin
             $email_admin = $this->load->view('paginas/email/tp_reservar', $data_email, TRUE);
@@ -562,12 +571,13 @@ public function reservar() {
             $this->email->initialize($config);
 
             $this->email->from('reservas@tupaytravel.com', utf8_decode('Reservas Tupay Travel'));
-            $this->email->reply_to($post['email'], utf8_decode($post['nombre']));
-            $this->email->to('juanjus98@gmail.com'); //Email destino (quién recibe el correo)
-            /*$this->email->cc('epropesco@hotmail.com');*/
+            $this->email->reply_to($post['email'], utf8_decode($post['nombres']));
+            $this->email->to('tupaytravel@hotmail.com'); //Email destino (quién recibe el correo)
+            $this->email->cc('juanjus98@gmail.com');
             //$this->email->bcc('them@their-example.com');
 
-            $this->email->subject(utf8_decode('Reservar'));
+            $subject_admin = utf8_decode('Nueva solicitud de reserva de ') . utf8_decode($post['nombres']);
+            $this->email->subject($subject_admin);
             $this->email->message($email_admin);
             $this->email->send(); //Envia email al administrador
             /*echo $this->email->print_debugger();*/
@@ -577,7 +587,7 @@ public function reservar() {
             $this->email->initialize($config);
 
             $this->email->from('reservas@tupaytravel.com', utf8_decode('Reservas Tupay Travel'));
-            $this->email->to($post['email'], utf8_decode($post['nombre']));
+            $this->email->to($post['email'], utf8_decode($post['nombres']));
             $this->email->subject(utf8_decode('Confirmación de reserva.'));
             $this->email->message($email_user);
             $this->email->send();
@@ -585,9 +595,8 @@ public function reservar() {
 
             /*print_r($this->email->print_debugger());*/
 
-            die();
-
-            redirect("/");
+            $redirect = $url_servicio . '?ack=success';
+            redirect($redirect);
           }
         } //Post
 

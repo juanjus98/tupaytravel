@@ -93,7 +93,10 @@ $tag_image = $head_info['image'];
    </script>
    <!--End of Zendesk Chat Script-->
 
-   <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>
+   <script type="text/javascript">
+   var base_url='<?php echo base_url();?>';
+   <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
+   </script>
  </head>
  <body>
   <div class="container">

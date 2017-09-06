@@ -32,8 +32,8 @@
 								<table border="0" cellpadding="0" cellspacing="0" width="600"><tbody><tr>
 									<td valign="top" style="background-color:#fdfdfd">
 										<table border="0" cellpadding="20" cellspacing="0" width="100%"><tbody><tr>
-											<td valign="top" style="padding:40px">
-												<div style="color:#737373;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left">
+											<td valign="top" style="padding:0 40px">
+												<div style="padding-top: 40px; color:#737373;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left">
 													<p style="margin:0 0 16px">
 														<?php echo utf8_decode('Le confirmamos que hemos recibido su solicitud de reserva.');?>
 														<br>
@@ -117,37 +117,74 @@
 					<?php echo $post['infantes'];?>
 				</span>
 			</li>
-
 		</ul>
-
-		<span style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; font-size: 12px;"><font color="#888888">Más detalles</font></span>
 	</div>
 </td>
 </tr>
+<tr>
+<td style="padding: 0 40px;">
+<h2 style="color:<?php echo $cabeceras['color'];?>;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">
+<?php echo utf8_decode('Servicio elegido:');?>
+</h2>
+<?php
+$nombre_servicio = $servicio['nombre_servicio'];
+$descripcion_servicio = $servicio['descripcion_servicio'];
+$url_servicio = $servicio['url_servicio'];
+$itinerario = $servicio['itinerario'];
+
+if(!empty($busqueda_info)){
+  $date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
+}
+
+?>
+	<table style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:12px;">
+		<tr>
+		<td colspan="2">
+		<h2 style="margin:6px 0;"><?php echo $nombre_servicio;?></h2>
+		<p><a href="<?php echo $url_servicio;?>" target="_blank"><?php echo utf8_decode('Ver detalles en la página web.');?></a></p>
+		<?php echo $descripcion_servicio;?>
+		</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<h2 style="margin:6px 0;">Itinerario:</h2>
+			</td>
+		</tr>
+		<?php
+		$iiDia = 1;
+		foreach ($itinerario as $key => $value) {
+			$urlImagen = (!empty($value['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $value['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
+			$str_fecha = (!empty($date_range[$key])) ? nice_date($date_range[$key], 'd/m/Y') : 'Día ' . $iiDia;
+		?>
+		<tr>
+		    <td style="vertical-align: top;">
+				<div style="padding: 0 10px 0 0;">
+				<p style="color: #333;"><?php echo $str_fecha;?></p>
+				<h3 style="margin:6px 0;"><?php echo $value['titulo'];?></h3>
+				<p style="text-align: justify;"><?php echo $value['descripcion'];?></p>
+				</div>
+			</td>
+			<td style="width: 200px; vertical-align: middle;">
+				<img src="<?php echo $urlImagen;?>" style="max-width: 200px;">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr></td>
+		</tr>
+		<?php 
+		$iiDia++;
+		}
+		?>
+	</table>
+</td>
+</tr>
 </tbody>
 </table>
 </td>
 </tr>
-
-<tr>
-	<td style="padding:15px;">
-	<h2 style="color:<?php echo $cabeceras['color'];?>;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">
-	<?php echo utf8_decode('Servicio elegido:');?>
-</h2>
-
-		<table>
-			<tr><td><h3>Titulo del servicio aqui</h3></td></tr>
-			<tr>
-				<td>
-					<img src="http://tupaytravel.com/assets/images/uploads/lima-_1503770498.jpg" style="width: 100%;">
-				</td>
-			</tr>
-		</table>
-	</td>
-</tr>
 </tbody>
 </table>
-<span style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; font-size: 12px;">
+<span style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; font-size: 12px; margin-top:20px; display: block;">
 	<font color="#888888">&copy; <?php echo utf8_decode($website['title']);?></font>
 </span>
 </td>
