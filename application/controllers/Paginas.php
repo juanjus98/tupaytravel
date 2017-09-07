@@ -167,18 +167,35 @@ class Paginas extends CI_Controller {
     $this->template->build('paginas/paquete', $data);
   }
 
-  public function pdf_paquete($url_key) {
+  public function pdf_paquete($url_key,$tipo='P') {
 
   // boost the memory limit if it's low ;)
-    ini_set('memory_limit','32M'); 
+    /*ini_set('memory_limit','32M'); */
 
   //Consultar servicio
     $data_where = array('url_key' => $url_key);
     $resultado = $this->Paquetes->get_row($data_where);
     $data['post'] = $resultado;
 
+    $url_servicio = base_url() . 'paquete-tour/' . $resultado['url_key'];
+    $servicio = array(
+      'nombre_servicio' => $resultado['nombre'],
+      'descripcion_servicio' => $resultado['detalles'],
+      'url_servicio' => $url_servicio,
+      'itinerario' => $resultado['itinerarios']
+      );
+
+    $data['servicio'] = $servicio;
+    $data['website'] = $this->Inicio->get_website();
+    $cabeceras_email = $this->config->item('waemail');
+    $cabeceras_email['titulo_email_admin'] = $servicio['nombre_servicio'];
+    $data['cabeceras'] = $cabeceras_email;
+
   // render the view into HTML
-    $data['titulo'] = "Prueba de mPDF";
+    $data['titulo'] = $servicio['nombre_servicio'];
+
+  //
+    $file_name_pdf = $resultado['url_key'] . '.pdf';
     $html = $this->load->view('paginas/pdf/pdf_paquete', $data, true);
 
     $this->load->library('mimpdf');
@@ -192,7 +209,7 @@ class Paginas extends CI_Controller {
     $pdf->WriteHTML($html);
 
   // save to file because we can
-    $pdf->Output("Demo_mPDF.pdf", 'D');
+    $pdf->Output($file_name_pdf, 'D');
 
   }
 
@@ -610,11 +627,6 @@ public function reservar() {
             $cabeceras_email = $this->config->item('waemail');
             $cabeceras_email['titulo_email_admin'] = $titulo_email_admin;
             $data_email['cabeceras'] = $cabeceras_email;
-
-/*            echo "<pre>";
-            print_r($data_email);
-            echo "</pre>";
-            die();*/
             
             //Template user email
             $email_user = $this->load->view('paginas/email/tp_reservar_user', $data_email, TRUE);
