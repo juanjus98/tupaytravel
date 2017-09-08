@@ -27,5 +27,5 @@ $config['upload_path'] = "/assets/images/uploads/";
  * Configuración de email
  */
 $config['waemail']['dominio'] = "www.tupaytravel.com";
-$config['waemail']['logo'] = "http://tupaytravel.com/assets/images/logo.png";
+$config['waemail']['logo'] = "http://tupaytravel.com/assets/images/logo_email.jpg";
 $config['waemail']['color'] = "#99C115";

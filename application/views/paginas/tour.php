@@ -13,6 +13,8 @@ $id_info = $tour['id'];
   <div class="row">
     <div class="col-md-8">
       <h1><?php echo $tour['nombre'];?> <span><?php echo $tour['precio'];?></span></h1>
+      <div class="clearfix"></div>
+      <a href="<?php echo base_url('pdf-tour/' . $tour['url_key']);?>" class="btn btn-link"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar en PDF</a>
     </div>
     <div class="col-md-4">
       <div class="sharethis-inline-share-buttons"></div>

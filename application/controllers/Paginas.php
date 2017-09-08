@@ -197,16 +197,26 @@ class Paginas extends CI_Controller {
   //
     $file_name_pdf = $resultado['url_key'] . '.pdf';
     $html = $this->load->view('paginas/pdf/pdf_paquete', $data, true);
+    /*die();*/
 
     $this->load->library('mimpdf');
 
     $pdf = $this->mimpdf->load();
 
   // Add a footer for good measure ;)
-    $pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date(DATE_RFC822));
+    $pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date("d/m/Y H:i"));
 
   // write the HTML into the PDF
     $pdf->WriteHTML($html);
+
+     //Formas de pago (página)
+    if(!empty($resultado['formas_pago_id'])){
+      $data_pagina = array('id' => $resultado['formas_pago_id']);
+      $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
+      $html_formas_pago = $this->load->view('paginas/pdf/pdf_formas_pago', $data, true);
+      $pdf->AddPage();
+      $pdf->WriteHTML($html_formas_pago);
+    }
 
   // save to file because we can
     $pdf->Output($file_name_pdf, 'D');
@@ -309,6 +319,62 @@ public function tour($url_key) {
   $this->template->title('Tour');
   $this->template->build('paginas/tour', $data);
 }
+
+  public function pdf_tour($url_key) {
+
+  // boost the memory limit if it's low ;)
+    /*ini_set('memory_limit','32M'); */
+
+  //Consultar servicio
+    $data_where = array('url_key' => $url_key);
+    $resultado = $this->Tours->get_row($data_where);
+    $data['post'] = $resultado;
+
+    $url_servicio = base_url() . 'tour/' . $resultado['url_key'];
+    $servicio = array(
+      'nombre_servicio' => $resultado['nombre'],
+      'descripcion_servicio' => $resultado['detalle'],
+      'url_servicio' => $url_servicio,
+      'itinerario' => $resultado['itinerarios']
+      );
+
+    $data['servicio'] = $servicio;
+    $data['website'] = $this->Inicio->get_website();
+    $cabeceras_email = $this->config->item('waemail');
+    $cabeceras_email['titulo_email_admin'] = $servicio['nombre_servicio'];
+    $data['cabeceras'] = $cabeceras_email;
+
+  // render the view into HTML
+    $data['titulo'] = $servicio['nombre_servicio'];
+
+  //
+    $file_name_pdf = $resultado['url_key'] . '.pdf';
+    $html = $this->load->view('paginas/pdf/pdf_paquete', $data, true);
+    /*die();*/
+
+    $this->load->library('mimpdf');
+
+    $pdf = $this->mimpdf->load();
+
+  // Add a footer for good measure ;)
+    $pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date("d/m/Y H:i"));
+
+  // write the HTML into the PDF
+    $pdf->WriteHTML($html);
+
+     //Formas de pago (página)
+    if(!empty($resultado['formas_pago_id'])){
+      $data_pagina = array('id' => $resultado['formas_pago_id']);
+      $data['formas_pago'] = $this->Paginas->get_row($data_pagina);
+      $html_formas_pago = $this->load->view('paginas/pdf/pdf_formas_pago', $data, true);
+      $pdf->AddPage();
+      $pdf->WriteHTML($html_formas_pago);
+    }
+
+  // save to file because we can
+    $pdf->Output($file_name_pdf, 'D');
+
+  }
 
 /**
  * Hoteles

@@ -74,6 +74,7 @@ $route['tours/(:any)'] = 'paginas/tours/$1'; //Solo provincia
 $route['tours/(:any)/(:any)'] = 'paginas/tours/$1/$2';//Provincia y categoría
 $route['tours/(:any)/(:any)/(:any)'] = 'paginas/tours/$1/$2/$3';//Provincia, categoría y args 
 $route['tour/(:any)'] = 'paginas/tour/$1';
+$route['pdf-tour/(:any)'] = 'paginas/pdf_tour/$1';
 
 /**
  * Hoteles
