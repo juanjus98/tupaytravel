@@ -60,10 +60,6 @@ class Paginas extends CI_Controller {
     //Hoteles
     $total_hoteles = $this->Hoteles->total_registros();
     $data['hoteles'] = $this->Hoteles->listado($total_hoteles,0);
-    /*echo "<pre>";
-    print_r($data['paquetes']);
-    echo "</pre>";*/
-
 
     $data_crud['table'] = "slider as t1";
     $data_crud['columns'] = "t1.*";

@@ -368,7 +368,7 @@
   Tours 
   <div class="clearfix visible-xs-block"></div>
   <span>
-    <a href="#">Ver más</a>
+    <a href="<?php echo base_url('tours');?>">Ver más</a>
   </span>
 </h3>
 <div class="box-wscroll">
@@ -438,9 +438,10 @@
   </div>
   <div class="col-md-6">
     <div class="box box-3 brd-2 text-center">
-      <a href="p/certificados-licencias" class="btn btn-lg btn-wa2" title="Cetificados y Licencias">
+      <a href="<?php echo base_url('assets/images/bg-certificados-licencias.jpg');?>" class="btn btn-lg btn-wa2" title="Cetificados y Licencias" data-fancybox="images">
       <i class="fa fa-id-card" aria-hidden="true"></i> Cetificados y Licencias
       </a>
+      <a href="<?php echo base_url('assets/images/bg-certificados-licencias.jpg');?>" data-fancybox="images"></a>
     </div>
   </div>
 </div>

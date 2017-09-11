@@ -1,8 +1,5 @@
 <?php
-/*echo "<pre>";
-print_r($paquetes);
-echo "</pre>";*/
-if(!empty($busqueda_info)){
+if(!empty($busqueda_info['dateDesde']) && !empty($busqueda_info['dateHasta'])){
   $date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
 }
 ?>
@@ -20,7 +17,7 @@ if(!empty($busqueda_info)){
         <?php
         if(!empty($paquetes)) {
           foreach ($paquetes as $key => $paquete) {
-                //Consultar itinerario
+            //Consultar itinerario
             $data_post = array('id_tblpaquete' => $paquete['id']);
             $total_itinerario = $this->Paquetes_galeria->total_registros($data_post);
             $itinerarios = $this->Paquetes_galeria->listado($total_itinerario, 0, $data_post);
