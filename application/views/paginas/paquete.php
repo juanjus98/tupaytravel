@@ -9,9 +9,14 @@ $nombre = $paquete['nombre'];
 $tipo_info = 'P'; //P:paquete, T:tour
 $id_info = $paquete['id'];
 
-if(!empty($busqueda_info)){
+/*if(!empty($busqueda_info)){
+  $date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
+}*/
+
+if(!empty($busqueda_info['dateDesde']) && !empty($busqueda_info['dateHasta'])){
   $date_range = date_range($busqueda_info['dateDesde'], $busqueda_info['dateHasta']);
 }
+
 
 ?>
 <section class="main-container cont-detail">
