@@ -164,6 +164,10 @@ class Paginas extends CI_Controller {
   }
 
   public function pdf_paquete($url_key,$tipo='P') {
+    //Verficamos si se hizo una busqueda por fechas
+    if($this->session->userdata('s_busqueda_paquetes')){
+      $data['busqueda_info'] = $this->session->userdata('s_busqueda_paquetes');
+    }
 
   // boost the memory limit if it's low ;)
     /*ini_set('memory_limit','32M'); */
@@ -425,9 +429,6 @@ public function hotel($id_hotel, $titulo) {
 
   //Imagen principal
   foreach ($galeria as $key => $value) {
-    /*echo "<pre>";
-    print_r($value);
-    echo "</pre>";*/
     if($value['principal'] == 1){
       $hotel['imagen'] = $value['foto'];
       break;
@@ -747,7 +748,7 @@ public function reservar() {
       }
 
     //Mensaje de confirmación
-      public function confirmacion($token='') {
+    public function confirmacion($token='') {
         $data['active_link'] = "inicio";
         $data['website'] = $this->Inicio->get_website();
       $data['head_info'] = head_info($data['website']); //siempre
@@ -756,86 +757,25 @@ public function reservar() {
       $this->template->build('paginas/confirmacion', $data);
     }
 
-    public function salones() {
-      $this->template->title('Salones');
+  /**
+   * Pagina
+   */
+  public function pagina($url_key) {
+    //Consultar tour
+    $data_where = array('url_key' => $url_key);
+    $result = $this->Paginas->get_row($data_where);
+    $data['pagina'] = $result;
 
-      $data['active_link'] = "salones";
-      $data['footer_line'] = "salones";
-      $data['website'] = $this->Inicio->get_website();
+    $data['active_link'] = "pagina";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($result, 'pagina'); //siempre
 
-      //Categorías para carousel parent_id != 0, destacar=1
-      $data_crud['table'] = "categoria as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.parent_id !=" => 0, "t1.destacar" => 1, "t1.estado !=" => 0);
-      $data_crud['order_by'] = "t1.orden Asc";
-      $data['categorias_carousel'] = $this->Crud->getRows($data_crud);
 
-      $data['head_info'] = head_info($data['website']); //siempre
-      $this->template->build('paginas/salones', $data);
-    }
-
-    public function salon($url_key=null) {
-      $this->template->title('Salon');
-      $data['active_link'] = "salones";
-      $data['active_gallery'] = true;
-
-      $data['website'] = $this->Inicio->get_website();
-      
-      //Consultar salón
-      $data_crud['table'] = "producto as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.url_key" => $url_key, "t1.estado !=" => 0);
-      /*$data_crud['order_by'] = "t1.orden Asc";*/
-      $salon = $this->Crud->getRow($data_crud);
-      $data['salon'] = $salon;
-
-      //Consultar producto_especificaciones
-      $data_crud['table'] = "producto_especificaciones as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.producto_id" => $salon['id'], "t1.estado !=" => 0);
-      $data_crud['order_by'] = "t1.id Asc";
-      $producto_especificaciones = $this->Crud->getRows($data_crud);
-      $data['producto_especificaciones'] = $producto_especificaciones;
-
-      //Consultar producto_imagen
-      $data_crud['table'] = "producto_imagen as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.producto_id" => $salon['id'], "t1.estado !=" => 0);
-      $data_crud['order_by'] = "t1.id Asc";
-      $galeria = $this->Crud->getRows($data_crud);
-      $data['galeria'] = $galeria;
-
-      $data['head_info'] = head_info($salon,'salon'); //siempre
-      $this->template->build('paginas/salon', $data);
-    }
-
-    public function servicio($url_key=null) {
-      $data['active_link'] = "servicios";
-      $data['active_gallery'] = true;
-
-      $data['website'] = $this->Inicio->get_website();
-      
-      //Consultar salón
-      $data_crud['table'] = "servicio as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.url_key" => $url_key, "t1.estado !=" => 0);
-      $servicio = $this->Crud->getRow($data_crud);
-      $data['servicio'] = $servicio;
-
-      //Consultar servicio_detalle
-      $data_crud['table'] = "servicio_detalle as t1";
-      $data_crud['columns'] = "t1.*";
-      $data_crud['where'] = array("t1.servicio_id" => $servicio['id'], "t1.estado !=" => 0);
-      $data_crud['order_by'] = "t1.id ASC";
-      $servicio_detalle = $this->Crud->getRows($data_crud);
-      $data['servicio_detalle'] = $servicio_detalle;
-
-      $data['head_info'] = head_info($servicio,'servicio'); //siempre
-      $this->template->title('Servicio');
-      $this->template->build('paginas/servicio', $data);
-    }
-
+    $this->template->title('Página');
+    $this->template->build('paginas/pagina', $data);
   }
 
-  /* End of file categorias.php */
-/* Location: ./application/controllers/waadmin/categorias.php */
+}
+
+/* End of file paginas.php */
+/* Location: ./application/controllers/waadmin/paginas.php */

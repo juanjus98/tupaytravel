@@ -431,7 +431,7 @@
 <div class="row marg-t20 boxs-fast">
   <div class="col-md-6">
     <div class="box box-1 brd-2 text-center">
-      <a href="p/formas-de-pago" class="btn btn-lg btn-wa1" title="Formas de pago.">
+      <a href="p/formas-de-pago-rp" class="btn btn-lg btn-wa1" title="Formas de pago.">
       <i class="fa fa-credit-card" aria-hidden="true"></i> Formas de pago
       </a>
     </div>

@@ -57,6 +57,7 @@ $route['inicio'] = 'paginas/index';
  */
 $route['contactanos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
+$route['p/(:any)'] = 'paginas/pagina/$1';
 
 /**
  * Paquetes

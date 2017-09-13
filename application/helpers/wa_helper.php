@@ -277,6 +277,14 @@ if (!function_exists('head_info')) {
                     "image" => base_url($CI->config->item('upload_path') . $info['imagen'])
                     );
                 break;
+                case "pagina":
+                $head_info = array(
+                    "title" => $info['nombre_corto'],
+                    "description" => strip_tags(str_replace("\n", "",$info['resumen'])),
+                    "keywords" => $info['keywords'],
+                    "image" => base_url($CI->config->item('upload_path') . $info['imagen_1'])
+                    );
+                break;
             }
         }
         return $head_info;

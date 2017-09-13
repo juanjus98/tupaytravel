@@ -4,9 +4,7 @@
  * Desarrollado por Juan Julio Sandoval Layza <juanjus98@gmail.com>
  */
 $website_info = $this->website_info;
-/*echo "<pre>";
-print_r($website_info);
-echo "</pre>";*/
+
 $direccion = $website_info['direccion'];
 $telefono_1 = $website_info['telefono_1'];
 $telefono_2 = $website_info['telefono_2'];
@@ -181,38 +179,50 @@ $tag_image = $head_info['image'];
               <div class="footer-single">
                 <div class="footer-title"><h2>Información de Contácto</h2></div>
                 <address>
+                  <strong><?php echo $website_info['title'];?></strong><br>
                   <strong>Oficina:</strong> <?php echo $retVal = (!empty($direccion)) ? $direccion : '' ; ?> <br>
-                  <i class="fa fa-phone"></i>  <?php echo $retVal = (!empty($telefono_1)) ? $telefono_1 : '' ; ?> <br>
                   <i class="fa fa-whatsapp"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : '' ; ?><br>
-                  <i class="fa fa-envelope"></i> <?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?><br>
+                  <i class="fa fa-envelope"></i> <a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?>"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?></a><br>
                 </address>          
               </div>
             </div>
 
             <div class="col-md-4 col-sm-6">
               <div class="footer-single useful-links">
-               <div class="footer-title"><h2>Tours Destacados</h2></div>
+               <div class="footer-title"><h2>Promociones</h2></div>
+                <?php
+                $promociones = $this->Promociones->listado(6,0);
+                if(!empty($promociones)){
+                ?>
                <ul class="list-unstyled">
-                <li><a href="#">Home <i class="fa fa-angle-right pull-right"></i></a></li>
-                <li><a href="#">About Us <i class="fa fa-angle-right pull-right"></i></a></li>
-                <li><a href="#">Services <i class="fa fa-angle-right pull-right"></i></a></li>
-                <li><a href="#">Portfolio <i class="fa fa-angle-right pull-right"></i></a></li>
-                <li><a href="#">Pricing <i class="fa fa-angle-right pull-right"></i></a></li>
-                <li><a href="#">Contact Us <i class="fa fa-angle-right pull-right"></i></a></li>
+                  <?php
+                  foreach ($promociones as $key => $value) {
+                  $tituloPromo = $value['titulo'];
+                  ?>
+                  <li><a href="<?php echo $value['url'];?>" title="<?php echo $tituloPromo;?>"><?php echo $tituloPromo;?> <i class="fa fa-angle-right pull-right"></i></a></li>
+                  <?php } ?>
               </ul>
+              <?php
+               }
+              ?>
             </div>
           </div>
 
           <div class="col-md-4 col-sm-6">
             <div class="footer-single useful-links">
-             <div class="footer-title"><h2>Estadia</h2></div>
+             <div class="footer-title"><h2><?php echo $website_info['title'];?></h2></div>
              <ul class="list-unstyled">
-              <li><a href="#">Home <i class="fa fa-angle-right pull-right"></i></a></li>
-              <li><a href="#">About Us <i class="fa fa-angle-right pull-right"></i></a></li>
-              <li><a href="#">Services <i class="fa fa-angle-right pull-right"></i></a></li>
-              <li><a href="#">Portfolio <i class="fa fa-angle-right pull-right"></i></a></li>
-              <li><a href="#">Pricing <i class="fa fa-angle-right pull-right"></i></a></li>
-              <li><a href="#">Contact Us <i class="fa fa-angle-right pull-right"></i></a></li>
+             <?php
+             $links = array(
+              array('title' => 'Formas de pago', 'url' => 'http://tupaytravel.com/p/formas-de-pago-rp', 'target' => '_self'),
+              array('title' => 'Contáctenos', 'url' => 'http://tupaytravel.com/contactenos', 'target' => '_self'),
+              array('title' => 'Facebook', 'url' => 'https://www.facebook.com/tupay.travel/', 'target' => '_blank'),
+              array('title' => 'Youtube', 'url' => 'https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA', 'target' => '_blank'),
+            );
+             foreach ($links as $key => $value) {
+               echo '<li><a href="'.$value['url'].'" target="'.$value['target'].'">'.$value['title'].' <i class="fa fa-angle-right pull-right"></i></a></li>';
+             }
+             ?>
             </ul>
           </div>
         </div>
