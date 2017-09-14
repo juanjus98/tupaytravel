@@ -4,7 +4,7 @@ print_r($busqueda);
 echo "</pre>";*/
 ?>
 <div id="sticky-sidebar">
-  <form class="form-vertical" name="buscador" id="buscador" action="" method="post">
+  <form class="form-vertical" name="buscador" id="buscador" method="post">
    <fieldset class="form-home">
      <h3>¿En qué fechas viajas?</h3>
      <div class="form-group">

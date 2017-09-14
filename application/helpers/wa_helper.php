@@ -79,8 +79,9 @@ if (!function_exists('wamenu')) {
 
 if (!function_exists('crear_menu')) {
 
-    function crear_menu($menu, $active_link) {
-        $nav = '<ul class="nav navbar-nav navbar-nav-wa">';
+    function crear_menu($menu, $active_link=null, $is_submenu=null) {
+        /*$nav = '<ul class="nav navbar-nav navbar-nav-wa">';*/
+        $nav = ($is_submenu != 'SI') ? '<ul class="nav navbar-nav navbar-nav-wa">' : '' ;
         foreach ($menu as $key => $value) {
             $class_active = "";
             if ($key == $active_link) {
@@ -88,7 +89,7 @@ if (!function_exists('crear_menu')) {
             }
             if (is_array($value)) {
                 $nav .= '<li class="dropdown '.$class_active.'"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $key . ' <span class="caret"></span></a>' . PHP_EOL;
-                $nav .= '<ul class="dropdown-menu">' . PHP_EOL . @crear_menu($value) . PHP_EOL . '</ul>';
+                $nav .= '<ul class="dropdown-menu">' . PHP_EOL . @crear_menu($value, null, 'SI') . PHP_EOL . '</ul>';
                 $nav .= '</li>' . PHP_EOL;
             } else {
                 $key = ($key!='inicio') ? $key : '' ;
@@ -96,7 +97,8 @@ if (!function_exists('crear_menu')) {
             }
         }
 
-        $nav .= '</ul>';
+        /*$nav .= '</ul>';*/
+        $nav .= ($is_submenu != 'SI') ? '</ul>' : '' ;
         return $nav;
     }
 

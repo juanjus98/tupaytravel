@@ -133,6 +133,7 @@ class Paginas extends CI_Controller {
   }
 
   public function paquete($url_key) {
+    $data['actual_link'] = "detalles";
     //Verficamos si se hizo una busqueda por fechas
     if($this->session->userdata('s_busqueda_paquetes')){
       $data['busqueda_info'] = $this->session->userdata('s_busqueda_paquetes');
@@ -294,7 +295,7 @@ public function tours($provincia_key=null, $categoria_key=null, $args=null) {
  * Tour
  */
 public function tour($url_key) {
-
+  $data['actual_link'] = "detalles";
     //Consultar tour
   $data_paquete = array('url_key' => $url_key);
   $tour = $this->Tours->get_row($data_paquete);

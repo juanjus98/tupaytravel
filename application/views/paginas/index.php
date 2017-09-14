@@ -30,14 +30,14 @@
         </div>
 
         <div class="form-group">
-          <label for="exampleInputEmail1">Nacionalidad</label>
+          <label for="nacionalidad">Nacionalidad</label>
           <input type="text" id="nacionalidad" name="nacionalidad" class="form-control">
         </div>
 
         <div class="row">
           <div class="col-xs-3">
             <label class="text-center btn-block">Adultos</label>
-            <select name="adultos" id="adultos" class="form-control" placeholder="+18 años">
+            <select name="adultos" id="adultos" class="form-control">
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -50,7 +50,7 @@
 
           <div class="col-xs-3">
             <label class="text-center btn-block">Adolecentes</label>
-            <select name="adolecentes" id="adolecentes" class="form-control" placeholder="12-17">
+            <select name="adolecentes" id="adolecentes" class="form-control">
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -63,7 +63,7 @@
 
           <div class="col-xs-3">
             <label class="text-center btn-block">Ñiños</label>
-            <select name="ninios" id="ninios" class="form-control" placeholder="8-11">
+            <select name="ninios" id="ninios" class="form-control">
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -76,7 +76,7 @@
 
           <div class="col-xs-3">
             <label class="text-center btn-block">Infantes</label>
-            <select name="infantes" id="infantes" class="form-control" placeholder="3-7">
+            <select name="infantes" id="infantes" class="form-control">
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -144,7 +144,7 @@
   <div class="container-box">
     <h3 class="titulo_opciones">
     Ellos nos recomiendan
-    <div class="clearfix visible-xs-block"></div>
+    <span class="clearfix visible-xs-block"></span>
     <span><a href="#"><i class="fa fa-youtube-play youtube-icon" aria-hidden="true"></i> Visita nuestro canal</a></span>
     </h3>
     <?php
@@ -183,7 +183,7 @@
   <div class="container-box">
     <h3 class="titulo_opciones">
     Galería de fotos
-    <div class="clearfix visible-xs-block"></div>
+    <span class="clearfix visible-xs-block"></span>
     <span><a href="#"><i class="fa fa-camera-retro galeria-icon" aria-hidden="true"></i> Ver galería</a></span>
     </h3>
       <ul id="content-slider-fotos" class="content-slider">
@@ -335,7 +335,7 @@
     <div class="container-box">
     <h3 class="titulo_opciones">
       Paquetes Tour Perú 
-      <div class="clearfix visible-xs-block"></div>
+      <span class="clearfix visible-xs-block"></span>
       <span>
         <a href="paquetes-tours">Ver más</a>
       </span>
@@ -366,7 +366,7 @@
 <div class="container-box">
 <h3 class="titulo_opciones">
   Tours 
-  <div class="clearfix visible-xs-block"></div>
+  <span class="clearfix visible-xs-block"></span>
   <span>
     <a href="<?php echo base_url('tours');?>">Ver más</a>
   </span>
@@ -397,7 +397,7 @@
 <div class="container-box">
 <h3 class="titulo_opciones">
   Hoteles 
-  <div class="clearfix visible-xs-block"></div>
+  <span class="clearfix visible-xs-block"></span>
   <!-- <span>
     <a href="#">Ver más</a>
   </span> -->

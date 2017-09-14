@@ -9,6 +9,8 @@ die();*/
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
     <title><?php echo @$template['title']; ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1"><!--Escalable en cualquier dispositivo-->

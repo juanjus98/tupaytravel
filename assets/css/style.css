@@ -563,6 +563,15 @@ ul.social-icons {
   margin-top: 5px;
   line-height: 22px;
 }
+.footer-single h1 {
+  color: #979797;
+  font-size: 14px;
+  font-weight: normal;
+}
+.footer-single h1 strong {
+  font-weight: 700;
+  color: #99C115;
+}
 @media (max-width: 767px) {
   .xs-center {
     text-align: center;
