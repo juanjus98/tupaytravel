@@ -177,7 +177,7 @@ $tag_image = $head_info['image'];
          </div>
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><?php echo crear_menu(wamenu(), $active_link);?>
            <div class="pull-right menu-r">
-             <a href="contactenos" class="btn btn-contactenos"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contáctenos</a>
+             <a href="<?php echo base_url('contactenos');?>" class="btn btn-contactenos"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contáctenos</a>
            </div>
          </div>
          <!-- /.navbar-collapse -->
@@ -204,8 +204,7 @@ $tag_image = $head_info['image'];
                  <i class="fa fa-whatsapp"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : '' ; ?><br>
                  <i class="fa fa-envelope"></i> <a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?>"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?></a><br>
                </address>
-               <div class="fb-like" data-share="true" data-show-faces="false">
-             </div>
+               <!-- <div class="fb-like" data-share="true" data-show-faces="false"></div> -->
            </div>
          </div>
          <div class="col-md-4 col-sm-6">

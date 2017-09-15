@@ -55,7 +55,7 @@ $route['inicio'] = 'paginas/index';
 /**
  * Páginas
  */
-$route['contactanos'] = 'paginas/contactanos';
+$route['contactenos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
 $route['p/(:any)'] = 'paginas/pagina/$1';
 

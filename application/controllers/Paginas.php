@@ -452,51 +452,55 @@ public function hotel($id_hotel, $titulo) {
   $this->template->build('paginas/hotel', $data);
 }
 
+/**
+ * Contáctenos
+ */
 
 public function contactanos() {
-  $this->template->title('Contáctanos');
-  $data['active_link'] = "contactanos";
+        $this->template->title('Contáctanos');
+        $data['active_link'] = "contactanos";
         $data['website'] = $this->Inicio->get_website(); //siempre
         $data['head_info'] = head_info($data['website']); //siempre
 
-        //Enviar formulario
+      //Enviar formulario
         if($this->input->post()){
           $post = $this->input->post();
           $config = array(
            array(
-             'field' => 'nombre',
-             'label' => 'Nombres',
-             'rules' => 'required',
-             'errors' => array(
-               'required' => 'Campo requerido.',
-               )
-             ),
+               'field' => 'nombre',
+               'label' => 'Nombres',
+               'rules' => 'required',
+               'errors' => array(
+                   'required' => 'Campo requerido.',
+                   )
+               ),
            array(
-             'field' => 'email',
-             'label' => 'E-mail',
-             'rules' => 'required|valid_email',
-             'errors' => array(
-               'required' => 'Campo requerido.',
-               'valid_email' => 'E-mail inválido.'
-               )
-             ),
+               'field' => 'email',
+               'label' => 'E-mail',
+               'rules' => 'required|valid_email',
+               'errors' => array(
+                   'required' => 'Campo requerido.',
+                   'valid_email' => 'E-mail inválido.'
+                   )
+               ),
            array(
-             'field' => 'telefono',
-             'label' => 'Teléfono',
-             'rules' => 'required',
-             'errors' => array(
-               'required' => 'Campo requerido.',
+               'field' => 'telefono',
+               'label' => 'Teléfono',
+               'rules' => 'required',
+               'errors' => array(
+                   'required' => 'Campo requerido.',
+                   )
                )
-             )
            );
 
-          $this->form_validation->set_rules($config);
-          $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
+       $this->form_validation->set_rules($config);
+       $this->form_validation->set_error_delimiters('<p class="text-red text-error">', '</p>');
 
           if ($this->form_validation->run() == FALSE)
           {
             $data['post'] = $post;
           }else{
+
             //GUARDAR EN LA BASE DE DATOS LA NUEVA SOLICITUD DE COTIZACIÓN.
             $data_insert = array(
               "nombres" => strip_tags($post['nombre']),
@@ -528,7 +532,7 @@ public function contactanos() {
             $config['useragent']           = "CodeIgniter";
             /*$config['protocol'] = 'sendmail';*/
             $config['protocol']            = "smtp";
-            $config['smtp_host']           = "localhost";
+            $config['smtp_host']           = "mail.tupaytravel.com";
             $config['smtp_port']           = "25";
 
             $config['mailpath'] = "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
@@ -538,13 +542,14 @@ public function contactanos() {
 
             $this->email->initialize($config);
 
-            $this->email->from('informes@consorciobongourmet.com', utf8_decode('Informes Bon Gourmet Eventos y Convenciones'));
-            $this->email->reply_to($post['email'], utf8_decode($post['nombre']));
-            $this->email->to('juanjus98@gmail.com'); //Email destino (quién recibe el correo)
-            /*$this->email->cc('epropesco@hotmail.com');*/
+            $this->email->from('reservas@tupaytravel.com', utf8_decode('Reservas Tupay Travel'));
+            $this->email->reply_to($post['email'], utf8_decode($post['nombres']));
+            $this->email->to('tupaytravel@hotmail.com'); //Email destino (quién recibe el correo)
+            $this->email->cc('juanjus98@gmail.com');
             //$this->email->bcc('them@their-example.com');
 
-            $this->email->subject(utf8_decode('Nuevo contacto.'));
+            $subject_str = utf8_decode('Nuevo contacto') . " " . utf8_decode($post['nombre']);
+            $this->email->subject($subject_str);
             $this->email->message($email_admin);
             $this->email->send(); //Envia email al administrador
             /*echo $this->email->print_debugger();*/
@@ -553,20 +558,20 @@ public function contactanos() {
             $this->email->clear();
             $this->email->initialize($config);
 
-            $this->email->from('informes@consorciobongourmet.com', utf8_decode('Informes Bon Gourmet Eventos y Convenciones'));
+            $this->email->from('reservas@tupaytravel.com', utf8_decode('Tupay Travel'));
             $this->email->to($post['email'], utf8_decode($post['nombre']));
-            $this->email->subject(utf8_decode('Gracias por contáctarnos - Bon Gourmet Eventos y Convenciones'));
+            $this->email->subject(utf8_decode('Gracias por contáctarnos desde tupaytravel.com'));
             $this->email->message($email_user);
             $this->email->send();
             $this->email->print_debugger(array('headers'));
 
-            redirect("confirmacion");
+            redirect("contactenos?send=ack");
           }
         } //Post
 
 
-        $this->template->build('paginas/contactanos', $data);
-      }
+      $this->template->build('paginas/contactanos', $data);
+    }
 
 /**
  * Reservar

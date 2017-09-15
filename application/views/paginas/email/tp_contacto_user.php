@@ -49,7 +49,7 @@
 												<ul>
 												<li>
 													<strong>Nombres y Apellidos:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
-													<?php echo $post['nombres'];?>
+													<?php echo utf8_decode($post['nombres']);?>
 												</span>
 											</li>
 											<li>
@@ -63,7 +63,7 @@
 										<li>
 											<strong>Mensaje:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 											<?php
-											echo str_replace("\n", "<br>", $post['mensaje']);
+											echo str_replace("\n", "<br>", utf8_decode($post['mensaje']));
 											?>
 										</span>
 									</li>

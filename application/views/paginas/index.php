@@ -438,10 +438,10 @@
   </div>
   <div class="col-md-6">
     <div class="box box-3 brd-2 text-center">
-      <a href="<?php echo base_url('assets/images/bg-certificados-licencias.jpg');?>" class="btn btn-lg btn-wa2" title="Cetificados y Licencias" data-fancybox="images">
+      <a href="<?php echo base_url('assets/images/cert-1.jpg');?>" class="btn btn-lg btn-wa2" title="Cetificados y Licencias" data-fancybox="images">
       <i class="fa fa-id-card" aria-hidden="true"></i> Cetificados y Licencias
       </a>
-      <a href="<?php echo base_url('assets/images/bg-certificados-licencias.jpg');?>" data-fancybox="images"></a>
+      <a href="<?php echo base_url('assets/images/cert-2.jpg');?>" data-fancybox="images"></a>
     </div>
   </div>
 </div>

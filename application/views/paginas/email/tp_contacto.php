@@ -19,7 +19,7 @@
 										<tr>
 											<td style="padding:36px 48px;display:block">
 												<h1 style="color:#ffffff;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:30px;font-weight:300;line-height:150%;margin:0;text-align:left">
-												<?php echo utf8_decode('Nuevo contacto.');?>
+													<?php echo utf8_decode('Nuevo contacto.');?>
 												</h1>
 											</td>
 										</tr>
@@ -41,64 +41,64 @@
 
 													</p>
 													
-												<h2 style="color:<?php echo $cabeceras['color'];?>;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">
-													<?php echo utf8_decode('Información:');?>
-												</h2>
-												<ul>
-												<li>
-													<strong>Nombres y Apellidos:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
-													<?php echo $post['nombres'];?>
-												</span>
-											</li>
-											<li>
-												<strong>Correo:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif"><a href="mailto:juanjus98@gmail.com" target="_blank"><?php echo $post['email'];?></a></span>
-											</li>
-											<li>
-												<strong><?php echo utf8_decode('Teléfono:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
-												<?php echo $post['telefono'];?>
-											</span>
-										</li>
-										<li>
-											<strong>Mensaje:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
-											<?php
-											echo str_replace("\n", "<br>", $post['mensaje']);
-											?>
-										</span>
-									</li>
-								</ul>
-								<span style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; font-size: 12px;"><font color="#888888"><!--texto--></font></span>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</td>
-	</tr>
-</tbody>
-</table>
-<span style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; font-size: 12px;">
-	<font color="#888888">&copy; <?php echo utf8_decode($website['title']);?></font>
-</span>
-</td>
-</tr>
-<tr>
-	<td align="center" valign="top">
-		<table border="0" cellpadding="10" cellspacing="0" width="600"><tbody><tr>
-			<td valign="top" style="padding:0">
-				<table border="0" cellpadding="10" cellspacing="0" width="100%">
-					<tbody>
-						<tr>
-							<td colspan="2" valign="middle" style="padding:0 48px 48px 48px;border:0;color:#99b1c7;font-family:Arial;font-size:12px;line-height:125%;text-align:center">
-								<p><a href="<?php echo "//" . $cabeceras['dominio']; ?>" target="_blank"><?php echo $cabeceras['dominio']; ?></a></p>
+													<h2 style="color:<?php echo $cabeceras['color'];?>;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:16px 0 8px;text-align:left">
+														<?php echo utf8_decode('Información:');?>
+													</h2>
+													<ul>
+														<li>
+															<strong>Nombres y Apellidos:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
+																<?php echo utf8_decode($post['nombres']);?>
+															</span>
+														</li>
+														<li>
+															<strong>Correo:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif"><a href="mailto:juanjus98@gmail.com" target="_blank"><?php echo $post['email'];?></a></span>
+														</li>
+														<li>
+															<strong><?php echo utf8_decode('Teléfono:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
+																<?php echo $post['telefono'];?>
+															</span>
+														</li>
+														<li>
+															<strong>Mensaje:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
+																<?php
+																echo str_replace("\n", "<br>", utf8_decode($post['mensaje']));
+																?>
+															</span>
+														</li>
+													</ul>
+													<span style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; font-size: 12px;"><font color="#888888"><!--texto--></font></span>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				<span style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif; font-size: 12px;">
+					<font color="#888888">&copy; <?php echo utf8_decode($website['title']);?></font>
+				</span>
 			</td>
 		</tr>
-	</tbody>
-</table>
-</td>
+		<tr>
+			<td align="center" valign="top">
+				<table border="0" cellpadding="10" cellspacing="0" width="600"><tbody><tr>
+					<td valign="top" style="padding:0">
+						<table border="0" cellpadding="10" cellspacing="0" width="100%">
+							<tbody>
+								<tr>
+									<td colspan="2" valign="middle" style="padding:0 48px 48px 48px;border:0;color:#99b1c7;font-family:Arial;font-size:12px;line-height:125%;text-align:center">
+										<p><a href="<?php echo "//" . $cabeceras['dominio']; ?>" target="_blank"><?php echo $cabeceras['dominio']; ?></a></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</td>
 </tr>
 </tbody>
 </table>
