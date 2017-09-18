@@ -156,7 +156,7 @@
           $youtube_id = getYoutubeId($value['url']);
           $video_embed = "http://www.youtube.com/embed/".$youtube_id."?autoplay=1"; 
           $video_titulo = $value['titulo'];
-          $video_imagen = $value['imagen'];
+          $video_imagen = 'http://img.youtube.com/vi/' . $youtube_id . '/hqdefault.jpg';
           ?>
           <li>
             <div class="cont-item">
@@ -164,6 +164,7 @@
                 <span class="fa fa-youtube-play"></span>
                 <img src="<?php echo $video_imagen;?>" alt="<?php echo $video_titulo;?>" class="img-responsive">
               </a>
+              <?php //echo $youtube_id;?>
             </div>
           </li>
           <?php
