@@ -13,18 +13,15 @@ class Paginas extends CI_Controller {
     $this->load->model('inicio_model', 'Inicio');
     $this->load->model('paginas_model', 'Paginas');
 
-    $this->load->model('productos_model', 'Productos');
+    //$this->load->model('productos_model', 'Productos');
     $this->load->model("crud_model","Crud");
 
-    $this->load->model("promociones_model","Promociones");
-    $this->load->model("videos_model","Videos");
     $this->load->model("paquetes_model","Paquetes");
     $this->load->model("tours_model","Tours");
     $this->load->model("hoteles_model","Hoteles");
     $this->load->model("paquetes_galeria_model","Paquetes_galeria");
     $this->load->model("tours_itinerario_model","Tours_itinerario");
     $this->load->model("hoteles_galeria_model","Hoteles_galeria");
-    $this->load->model("provincias_model","Provincias");
 
     /**
      * Información del website
@@ -37,6 +34,8 @@ class Paginas extends CI_Controller {
   }
 
   public function index() {
+    $this->load->model("promociones_model","Promociones");
+    $this->load->model("videos_model","Videos");
     $data['active_link'] = "inicio";
 
     $data['website'] = $this->Inicio->get_website();
@@ -229,6 +228,7 @@ class Paginas extends CI_Controller {
  * Tours
  */
 public function tours($provincia_key=null, $categoria_key=null, $args=null) {
+  $this->load->model("provincias_model","Provincias");
   $data_busqueda = array();
   $data_dias = array();
 
@@ -381,6 +381,7 @@ public function tour($url_key) {
  * Hoteles
  */
 public function hoteles($provincia_key=null, $categoria_key=null, $args=null) {
+  $this->load->model("provincias_model","Provincias");
   $data_busqueda = array();
   $data_dias = array();
 

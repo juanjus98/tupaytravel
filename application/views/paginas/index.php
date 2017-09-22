@@ -173,7 +173,7 @@
       <?php
     }
     ?>
-  </div><!-- //container-box-->
+  </div>
   </div>
 </div>
 

@@ -46,8 +46,7 @@ $tag_image = $head_info['image'];
 
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
+ 
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -73,7 +72,11 @@ $tag_image = $head_info['image'];
 <meta name="theme-color" content="#ffffff">
 <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
 <link rel="icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
+
+<!--SHARE API-->
+<?php if($actual_link == 'detalles'){ ?>
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59836a81515dc700116604dd&product=inline-share-buttons' async='async'></script>
+<?php } ?>
 <!--Start of Zendesk Chat Script-->
 <script type="text/javascript">
  window.$zopim||(function(d,s){var z=$zopim=function(c){
@@ -88,14 +91,7 @@ $tag_image = $head_info['image'];
      var base_url='<?php echo base_url();?>';
      <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
    </script>
-   <!-- Global Site Tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106441653-1"></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments)};
-     gtag('js', new Date());
-     gtag('config', 'UA-106441653-1');
-   </script>
+
  </head>
  <body>
   <div id="fb-root"></div>
@@ -142,15 +138,7 @@ $tag_image = $head_info['image'];
              <li><a href="<?php echo $retVal = (!empty($url_youtube)) ? $url_youtube : '#' ; ?>" target="_blank" class="social-icon"> <i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
            </ul>
          </div>
-         <div class="box box5 hidden-xs">
-           <div id="google_translate_element"></div>
-           <script type="text/javascript">
-             function googleTranslateElementInit() {
-               new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'ar,de,en,es,fr,it,ja,pt,ru,zh-TW'}, 'google_translate_element');
-             }
-           </script>
-           <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-         </div>
+         <!-- <div class="box box5 hidden-xs"></div> -->
        </div>
      </div>
      <!-- Logo y banner-->
@@ -261,6 +249,9 @@ $tag_image = $head_info['image'];
    </a>
  </div>
  <!-- //Multichat-->
+
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
+
  <!-- JavaScript-->
  <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
  <script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
@@ -276,9 +267,11 @@ $tag_image = $head_info['image'];
  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.css');?>" />
  <script src="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.js');?>"></script>
  <!-- //fancybox-->
+ 
  <!-- sticky-->
  <script type="text/javascript" src="<?php echo base_url('assets/plugins/sticky/jquery.sticky.js');?>"></script>
  <!-- sticky-->
+
  <!-- slimscroll-->
  <script type="text/javascript" src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.js');?>"></script>
  <!-- //slimscroll-->
@@ -286,10 +279,15 @@ $tag_image = $head_info['image'];
  <script src="<?php echo base_url('assets/plugins/emoji/emoji.js');?>" type="text/javascript"></script>
  <!-- //emoji-->
  <!-- select2-->
+ <?php //if($actual_link == 'detalles'){ ?>
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
  <script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
+ <?php //} ?>
  <!-- //select2-->
  <!-- bootstrap-validator-->
+ <?php //if($actual_link == 'detalles'){ ?>
  <script src="<?php echo base_url('assets/plugins/bootstrap-validator/validator.min.js');?>" type="text/javascript"></script>
+ <?php //} ?>
  <!-- //bootstrap-validator-->
  <script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
  <!-- JavaScript-->
@@ -298,5 +296,5 @@ $tag_image = $head_info['image'];
 </body>
 </html>
 <?php
-echo $actual_link;
+//echo $actual_link;
 ?>

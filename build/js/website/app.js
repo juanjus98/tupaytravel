@@ -1,4 +1,4 @@
-$.datepicker.regional["es"] = {
+$.datepicker.regional['es'] = {
 	closeText: 'Cerrar',
 	prevText: '< Ant',
 	nextText: 'Sig >',
@@ -34,6 +34,7 @@ $('#modal-reservar').on('shown.bs.modal', function () {
 	$('#nombres').focus();
 });
 
+if($("#form-reservar").length == 0) {
 $('#form-reservar').validator().on('submit', function (e) {
   if (e.isDefaultPrevented()) {
     // handle the invalid form...
@@ -84,8 +85,10 @@ $('#form-reservar').validator().on('submit', function (e) {
   }
   return false;
 });
+}
 
 //Enviar formulario final form-reservar-completar
+if($("#form-reservar-completar").length == 0) {
 $('#form-reservar-completar').validator().on('submit', function (e) {
   if (e.isDefaultPrevented()) {
     console.log("Error formulario no enviar formulario");
@@ -94,13 +97,10 @@ $('#form-reservar-completar').validator().on('submit', function (e) {
     console.log("Enviar formulario");
   }
 });
+}
 
 	//Select search select2
 	$(".select_search").select2();
-
-	$( ".imageLisGallery" ).hover(function() {
-		console.log("Hover");
-	});
 
 	//Slider de videos
 	$('#content-slider').lightSlider({

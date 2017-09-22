@@ -7,7 +7,8 @@ module.exports = function(grunt){
 					paths:['build/less/']
 				},
 				files:{
-					"assets/css/bootstrap.css" : "node_modules/bootstrap/less/bootstrap.less",
+					/*"assets/css/bootstrap.css" : "node_modules/bootstrap/less/bootstrap.less",*/
+					"assets/css/bootstrap.css" : "build/less/website/bootstrap.less",
 					"assets/css/font-awesome.css" : "build/less/font-awesome/less/font-awesome.less",
 					"assets/css/style.css" : "build/less/website/website.less",
 					"assets/css/waadmin.css" : "build/less/AdminLTE/AdminLTE.less",
