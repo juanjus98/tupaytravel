@@ -58,8 +58,6 @@ if (!function_exists('wamenu')) {
         //Menú estadia
         $resultado = $CI->Menu->menuEstadia();
         foreach ($resultado as $key => $value) {
-            /*$urlkey = url_title(convert_accented_characters($value['provincia_id'] . " " .$value['provincia']),'-', TRUE);
-            $menuEstadia["hoteles/{$urlkey}"] = $value['provincia'];*/
             $url_key = 'hoteles/' . $value['url_key'];
             $menuEstadia[$url_key] = $value['provincia'];
         }
