@@ -22,6 +22,7 @@ class Paginas extends CI_Controller {
     $this->load->model("paquetes_galeria_model","Paquetes_galeria");
     $this->load->model("tours_itinerario_model","Tours_itinerario");
     $this->load->model("hoteles_galeria_model","Hoteles_galeria");
+    $this->load->model("promociones_model","Promociones");
 
     /**
      * Información del website
@@ -34,7 +35,6 @@ class Paginas extends CI_Controller {
   }
 
   public function index() {
-    $this->load->model("promociones_model","Promociones");
     $this->load->model("videos_model","Videos");
     $data['active_link'] = "inicio";
 
