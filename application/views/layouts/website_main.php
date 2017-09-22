@@ -1,19 +1,4 @@
 <?php
-function sanitize_output($buffer) {
- $search = array(
- '/\>[^\S ]+/s', // strip whitespaces after tags, except space
- '/[^\S ]+\</s', // strip whitespaces before tags, except space
- '/(\s)+/s' // shorten multiple whitespace sequences
-);
- $replace = array(
-   '>',
-   '<',
-   '\\1'
- );
- $buffer = preg_replace($search, $replace, $buffer);
- return $buffer;
-}
-ob_start("sanitize_output");
 /**
  * Website
  * Desarrollado por Juan Julio Sandoval Layza <juanjus98@gmail.com>
@@ -56,16 +41,19 @@ $tag_image = $head_info['image'];
  <meta property="og:description" content="<?php echo $tag_description; ?>"/>
  <meta property="og:url" content="<?php echo $tag_url; ?>" />
  <meta property="og:image" content="<?php echo $tag_image; ?>"/>
+
  <meta property="fb:app_id" content="872929552871590" />
+
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
+ 
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<!-- <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('assets/icons/apple-icon-57x57.png') ?>">
+<link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('assets/icons/apple-icon-57x57.png') ?>">
 <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url('assets/icons/apple-icon-60x60.png') ?>">
 <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('assets/icons/apple-icon-72x72.png') ?>">
 <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url('assets/icons/apple-icon-76x76.png') ?>">
@@ -81,41 +69,45 @@ $tag_image = $head_info['image'];
 <link rel="manifest" href="<?php echo base_url('assets/icons/manifest.json') ?>">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="<?php echo base_url('assets/icons/ms-icon-144x144.png') ?>">
-<meta name="theme-color" content="#ffffff"> -->
+<meta name="theme-color" content="#ffffff">
 <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
 <link rel="icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
+
 <script src="<?php echo base_url('assets/plugins/lozad/lozad.min.js');?>" type="text/javascript"></script>
+
 <!--SHARE API-->
 <?php if($actual_link == 'detalles'){ ?>
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59836a81515dc700116604dd&product=inline-share-buttons' async='async'></script>
 <?php } ?>
 <!--Start of Zendesk Chat Script-->
-<!-- <script type="text/javascript">
- window.$zopim||(function(d,s){var z=$zopim=function(c){
- z._.push(c)},$=z.s=
- d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
- _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
- $.src='https://v2.zopim.com/?4djBSec4OHl4b786bXDsRHxsqN4T47rj';z.t=+new Date;$.
- type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-</script> -->
-<!--End of Zendesk Chat Script-->
 <script type="text/javascript">
- var base_url='<?php echo base_url();?>';
- <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
-</script>
-</head>
-<body>
- <div id="fb-root"></div>
- <script>
-   window.fbAsyncInit = function() {
-     FB.init({
-       appId : '872929552871590',
-       xfbml : true,
-       version : 'v2.10'
-     });
-     FB.AppEvents.logPageView();
-   };
-   (function(d, s, id){
+ window.$zopim||(function(d,s){var z=$zopim=function(c){
+   z._.push(c)},$=z.s=
+   d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+     _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+     $.src='https://v2.zopim.com/?4djBSec4OHl4b786bXDsRHxsqN4T47rj';z.t=+new Date;$.
+     type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+   </script>
+   <!--End of Zendesk Chat Script-->
+   <script type="text/javascript">
+     var base_url='<?php echo base_url();?>';
+     <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
+   </script>
+
+ </head>
+ <body>
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '872929552871590',
+        xfbml      : true,
+        version    : 'v2.10'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
@@ -123,6 +115,7 @@ $tag_image = $head_info['image'];
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
  </script>
+
  <div class="container">
    <div class="main brd-lr">
      <!-- header-->
@@ -202,94 +195,108 @@ $tag_image = $head_info['image'];
                  <i class="fa fa-envelope"></i> <a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?>"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?></a><br>
                </address>
                <!-- <div class="fb-like" data-share="true" data-show-faces="false"></div> -->
+           </div>
+         </div>
+         <div class="col-md-4 col-sm-6">
+           <div class="footer-single useful-links">
+             <div class="footer-title"><h2>Promociones</h2></div>
+             <?php
+             $promociones = $this->Promociones->listado(6,0);
+             if(!empty($promociones)){
+               ?>
+               <ul class="list-unstyled">
+                 <?php
+                 foreach ($promociones as $key => $value) {
+                   $tituloPromo = $value['titulo'];
+                   ?>
+                   <li><a href="<?php echo $value['url'];?>" title="<?php echo $tituloPromo;?>"><?php echo $tituloPromo;?> <i class="fa fa-angle-right pull-right"></i></a></li>
+                   <?php } ?>
+                 </ul>
+                 <?php
+               }
+               ?>
              </div>
            </div>
            <div class="col-md-4 col-sm-6">
              <div class="footer-single useful-links">
-               <div class="footer-title"><h2>Promociones</h2></div>
-               <?php
-               $promociones = $this->Promociones->listado(6,0);
-               if(!empty($promociones)){
-                 ?>
-                 <ul class="list-unstyled">
-                   <?php
-                   foreach ($promociones as $key => $value) {
-                     $tituloPromo = $value['titulo'];
-                     ?>
-                     <li><a href="<?php echo $value['url'];?>" title="<?php echo $tituloPromo;?>"><?php echo $tituloPromo;?> <i class="fa fa-angle-right pull-right"></i></a></li>
-                     <?php } ?>
-                   </ul>
-                   <?php
+               <div class="footer-title"><h2>Links Importantes<?php //echo $website_info['title'];?></h2></div>
+               <ul class="list-unstyled">
+                 <?php
+                 $links = array(
+                   array('title' => 'Formas de pago', 'url' => 'http://tupaytravel.com/p/formas-de-pago-rp', 'target' => '_self'),
+                   array('title' => 'Contáctenos', 'url' => 'http://tupaytravel.com/contactenos', 'target' => '_self'),
+                   array('title' => 'Facebook', 'url' => 'https://www.facebook.com/tupay.travel/', 'target' => '_blank'),
+                   array('title' => 'Youtube', 'url' => 'https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA', 'target' => '_blank'),
+                 );
+                 foreach ($links as $key => $value) {
+                   echo '<li><a href="'.$value['url'].'" target="'.$value['target'].'">'.$value['title'].' <i class="fa fa-angle-right pull-right"></i></a></li>';
                  }
                  ?>
-               </div>
-             </div>
-             <div class="col-md-4 col-sm-6">
-               <div class="footer-single useful-links">
-                 <div class="footer-title"><h2>Links Importantes<?php //echo $website_info['title'];?></h2></div>
-                 <ul class="list-unstyled">
-                   <?php
-                   $links = array(
-                     array('title' => 'Formas de pago', 'url' => 'http://tupaytravel.com/p/formas-de-pago-rp', 'target' => '_self'),
-                     array('title' => 'Contáctenos', 'url' => 'http://tupaytravel.com/contactenos', 'target' => '_self'),
-                     array('title' => 'Facebook', 'url' => 'https://www.facebook.com/tupay.travel/', 'target' => '_blank'),
-                     array('title' => 'Youtube', 'url' => 'https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA', 'target' => '_blank'),
-                   );
-                   foreach ($links as $key => $value) {
-                     echo '<li><a href="'.$value['url'].'" target="'.$value['target'].'">'.$value['title'].' <i class="fa fa-angle-right pull-right"></i></a></li>';
-                   }
-                   ?>
-                 </ul>
-               </div>
+               </ul>
              </div>
            </div>
-         </section>
-       </footer>
-       <!-- //Footer-->
-     </div><!-- main brd-lr-->
-   </div><!-- container-->
-   <!-- Multichat-->
-   <div class="cont-multichat">
-     <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
-       <img src="<?php echo base_url('assets/images/icon-messenger48.png');?>" alt="Facebook messenger">
-     </a>
-     <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
-       <img src="<?php echo base_url('assets/images/icon-whatsapp48.png');?>" alt="Whatsapp">
-     </a>
-   </div>
-   <!-- //Multichat-->
-   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
-   <!-- JavaScript-->
-   <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
-   <script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
-   <!-- jquery-ui-->
-   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css');?>">
-   <script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js');?>"></script>
-   <!-- //jquery-ui-->
-   <!-- lightslider-->
-   <link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>
-   <script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
-   <!-- //lightslider-->
-   <!-- fancybox-->
-   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.css');?>" />
-   <script src="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.js');?>"></script>
-   <!-- //fancybox-->
-   <!-- sticky-->
-   <script type="text/javascript" src="<?php echo base_url('assets/plugins/sticky/jquery.sticky.min.js');?>"></script>
-   <!-- sticky-->
-   <!-- slimscroll-->
-   <script type="text/javascript" src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.min.js');?>"></script>
-   <!-- //slimscroll-->
-   <!-- emoji-->
-   <script src="<?php echo base_url('assets/plugins/emoji/emoji.min.js');?>" type="text/javascript"></script>
-   <!-- //emoji-->
-   <!-- //bootstrap-validator-->
-   <script src="<?php echo base_url('assets/js/home.min.js');?>" type="text/javascript"></script>
-   <!-- JavaScript-->
-   <!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
-   <!-- <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet"> -->
- </body>
- </html>
- <?php
+         </div>
+       </section>
+     </footer>
+     <!-- //Footer-->
+   </div><!-- main brd-lr-->
+ </div><!-- container-->
+ <!-- Multichat-->
+ <div class="cont-multichat">
+   <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
+     <img src="<?php echo base_url('assets/images/icon-messenger48.png');?>" alt="Facebook messenger">
+   </a>
+   <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
+     <img src="<?php echo base_url('assets/images/icon-whatsapp48.png');?>" alt="Whatsapp">
+   </a>
+ </div>
+ <!-- //Multichat-->
+
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
+
+ <!-- JavaScript-->
+ <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
+ <script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
+ <!-- jquery-ui-->
+ <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css');?>">
+ <script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js');?>"></script>
+ <!-- //jquery-ui-->
+ <!-- lightslider-->
+ <link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>
+ <script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
+ <!-- //lightslider-->
+ <!-- fancybox-->
+ <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.css');?>" />
+ <script src="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.js');?>"></script>
+ <!-- //fancybox-->
+ 
+ <!-- sticky-->
+ <script type="text/javascript" src="<?php echo base_url('assets/plugins/sticky/jquery.sticky.js');?>"></script>
+ <!-- sticky-->
+
+ <!-- slimscroll-->
+ <script type="text/javascript" src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.js');?>"></script>
+ <!-- //slimscroll-->
+ <!-- emoji-->
+ <script src="<?php echo base_url('assets/plugins/emoji/emoji.js');?>" type="text/javascript"></script>
+ <!-- //emoji-->
+ <!-- select2-->
+ <?php //if($actual_link == 'detalles'){ ?>
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
+ <script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
+ <?php //} ?>
+ <!-- //select2-->
+ <!-- bootstrap-validator-->
+ <?php //if($actual_link == 'detalles'){ ?>
+ <script src="<?php echo base_url('assets/plugins/bootstrap-validator/validator.min.js');?>" type="text/javascript"></script>
+ <?php //} ?>
+ <!-- //bootstrap-validator-->
+ <script src="<?php echo base_url('assets/js/website.min.js');?>" type="text/javascript"></script>
+ <!-- JavaScript-->
+ <!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
+ <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet">
+</body>
+</html>
+<?php
 //echo $actual_link;
- ?>
+?>

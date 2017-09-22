@@ -1,39 +1,3 @@
-const observer = lozad('.lozad', {
-    rootMargin: '10px 0px', // syntax similar to that of CSS Margin
-    threshold: 0.1 // ratio of element convergence
-});
-observer.observe();
-
-$.datepicker.regional['es'] = {
-	closeText: 'Cerrar',
-	prevText: '< Ant',
-	nextText: 'Sig >',
-	currentText: 'Hoy',
-	monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-	monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-	dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-	dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-	dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-	weekHeader: 'Sm',
-	dateFormat: 'dd-mm-yy',
-	firstDay: 1,
-	isRTL: false,
-	showMonthAfterYear: false,
-	yearSuffix: ''
-};
-
-$.datepicker.setDefaults($.datepicker.regional["es"]);
-
-function getDate(element) {
-	var date;
-	try {
-		date = $.datepicker.parseDate(dateFormat, element.value);
-	} catch( error ) {
-		date = null;
-	}
-	return date;
-}
-
 $(function() {
 	//Reservar
 $('#modal-reservar').on('shown.bs.modal', function () {
