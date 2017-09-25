@@ -10,7 +10,7 @@ ExpiresDefault A3600
 
 <filesmatch ".(jpg|JPG|gif|GIF|png|css|ico|js)$">
  ExpiresDefault "access plus 7 day"
-</filesmatch> 
+</filesmatch>
 
 SetOutputFilter DEFLATE
 AddOutputFilterByType DEFLATE text/xml

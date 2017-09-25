@@ -42,34 +42,33 @@ $tag_image = $head_info['image'];
  <meta property="og:url" content="<?php echo $tag_url; ?>" />
  <meta property="og:image" content="<?php echo $tag_image; ?>"/>
  <meta property="fb:app_id" content="872929552871590" />
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
+ <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
-<link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url('assets/icons/apple-icon-57x57.png') ?>">
-<link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url('assets/icons/apple-icon-60x60.png') ?>">
-<link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('assets/icons/apple-icon-72x72.png') ?>">
-<link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url('assets/icons/apple-icon-76x76.png') ?>">
-<link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url('assets/icons/apple-icon-114x114.png') ?>">
-<link rel="apple-touch-icon" sizes="120x120" href="<?php echo base_url('assets/icons/apple-icon-120x120.png') ?>">
-<link rel="apple-touch-icon" sizes="144x144" href="<?php echo base_url('assets/icons/apple-icon-144x144.png') ?>">
-<link rel="apple-touch-icon" sizes="152x152" href="<?php echo base_url('assets/icons/apple-icon-152x152.png') ?>">
-<link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url('assets/icons/apple-icon-180x180.png') ?>">
-<link rel="icon" type="image/png" sizes="192x192" href="<?php echo base_url('assets/icons/android-icon-192x192.png') ?>">
-<link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url('assets/icons/favicon-32x32.png') ?>">
-<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url('assets/icons/favicon-96x96.png') ?>">
-<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/icons/favicon-16x16.png') ?>">
-<link rel="manifest" href="<?php echo base_url('assets/icons/manifest.json') ?>">
+<link rel="apple-touch-icon" sizes="57x57" href="assets/icons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="assets/icons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="assets/icons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="assets/icons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="assets/icons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="assets/icons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="assets/icons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="assets/icons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/icons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+<link rel="manifest" href="assets/icons/manifest.json">
 <meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="<?php echo base_url('assets/icons/ms-icon-144x144.png') ?>">
+<meta name="msapplication-TileImage" content="assets/icons/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
-<link rel="icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>" type="image/x-icon">
-<script src="<?php echo base_url('assets/plugins/lozad/lozad.min.js');?>" type="text/javascript"></script>
+<link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+<link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
 
 <script type="text/javascript">
  var base_url='<?php echo base_url();?>';
@@ -109,7 +108,7 @@ $tag_image = $head_info['image'];
        <div class="col-md-12">
          <div class="logo pull-left">
            <a href="<?php echo base_url();?>" title="<?php echo $website_info['title']; ?>">
-             <img alt="<?php echo $website_info['title']; ?>" data-src="<?php echo base_url('assets/images/logo.png');?>" class="lozad">
+             <img alt="<?php echo $website_info['title']; ?>" data-src="assets/images/logo.png" class="lozad">
            </a>
          </div>
        </div> 
@@ -128,7 +127,7 @@ $tag_image = $head_info['image'];
          </div>
          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><?php echo crear_menu(wamenu(), $active_link);?>
            <div class="pull-right menu-r">
-             <a href="<?php echo base_url('contactenos');?>" class="btn btn-contactenos"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contáctenos</a>
+             <a href="contactenos" class="btn btn-contactenos"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contáctenos</a>
            </div>
          </div>
          <!-- /.navbar-collapse -->
@@ -205,42 +204,45 @@ $tag_image = $head_info['image'];
    <!-- Multichat-->
    <div class="cont-multichat">
      <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
-       <img src="<?php echo base_url('assets/images/icon-messenger48.png');?>" alt="Facebook messenger">
+       <img src="assets/images/icon-messenger48.png" alt="Facebook messenger">
      </a>
      <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
-       <img src="<?php echo base_url('assets/images/icon-whatsapp48.png');?>" alt="Whatsapp">
+       <img src="assets/images/icon-whatsapp48.png" alt="Whatsapp">
      </a>
    </div>
    <!-- //Multichat-->
-   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>" />
-   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css');?>" />
-   <link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet" />
-   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.css');?>" />
-   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
+   <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css" />
+   <link href="assets/plugins/lightslider/css/lightslider.min.css" rel="stylesheet" />
+   <link rel="stylesheet" href="assets/plugins/fancybox/dist/jquery.fancybox.min.css" />
+   
+   <script src="assets/plugins/lozad/lozad.min.js" type="text/javascript"></script>
+
    <!-- JavaScript-->
-   <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
-   <script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
+   <script src="assets/plugins/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
+   <script src="assets/plugins/bootstrap.min.js" type="text/javascript"></script>
    <!-- jquery-ui-->
-   <script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js');?>"></script>
+   <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
    <!-- //jquery-ui-->
    <!-- lightslider-->
-   <script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
+   <script src="assets/plugins/lightslider/js/lightslider.min.js"></script>
    <!-- //lightslider-->
    <!-- sticky-->
-   <script type="text/javascript" src="<?php echo base_url('assets/plugins/sticky/jquery.sticky.min.js');?>"></script>
+   <script type="text/javascript" src="assets/plugins/sticky/jquery.sticky.min.js"></script>
    <!-- sticky-->
    <!-- slimscroll-->
-   <script type="text/javascript" src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.min.js');?>"></script>
+   <script type="text/javascript" src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
    <!-- //slimscroll-->
    <!-- emoji-->
-   <script src="<?php echo base_url('assets/plugins/emoji/emoji.min.js');?>" type="text/javascript"></script>
+   <script src="assets/plugins/emoji/emoji.min.js" type="text/javascript"></script>
    <!-- //emoji-->
    <!-- fancybox-->
-   <script src="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.js');?>"></script>
+   <script src="assets/plugins/fancybox/dist/jquery.fancybox.min.js"></script>
    <!-- //fancybox-->
    <!-- //bootstrap-validator-->
-   <script src="<?php echo base_url('assets/js/home.min.js');?>" type="text/javascript"></script>
+   <script src="assets/js/home.min.js" type="text/javascript"></script>
    <!-- JavaScript-->
+   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet" />
  </body>
  </html>
  <?php

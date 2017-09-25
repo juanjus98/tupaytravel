@@ -99,7 +99,7 @@ function editar($tipo='C',$id=NULL){
  $data['wa_modulo'] = $data['tipo'];
  $data['wa_menu'] = 'Video';
 
-if($tipo == 'E' || $tipo == 'V'){
+ if($tipo == 'E' || $tipo == 'V'){
   $data_row = array('id' => $id);
   $data['post'] = $this->Videos->get_row($data_row);
 }  
@@ -143,6 +143,14 @@ if ($this->input->post()) {
     "orden" => $post['orden']
   );
 
+   $youtubeId = getYoutubeId($data['post']['url']);
+   $youtubeImage = 'http://img.youtube.com/vi/'.$youtubeId.'/0.jpg';
+   $imageName = url_title(convert_accented_characters($data['post']['titulo']),'-', TRUE) . '.jpg';
+   $destination = 'assets/images/uploads/' . $imageName;
+   copy($youtubeImage,$destination);
+
+   $data_form['imagen'] = $imageName;
+
     //Agregar
    if($tipo == 'C'){
      $this->db->insert('tblvideos', $data_form);
@@ -152,14 +160,7 @@ if ($this->input->post()) {
 
           //Editar
    if ($tipo == 'E') {
-    $youtubeId = getYoutubeId($data['post']['url']);
-    $youtubeImage = 'http://img.youtube.com/vi/'.$youtubeId.'/0.jpg';
-    $imageName = url_title(convert_accented_characters($data['post']['titulo']),'-', TRUE) . '.jpg';
-    $destination = 'assets/images/uploads/' . $imageName;
-    copy($youtubeImage,$destination);
-
-    $data_form['imagen'] = $imageName;
-
+    
      $this->db->where('id', $post['id']);
      $this->db->update('tblvideos', $data_form);
      /*echo $this->db->affected_rows();*/
