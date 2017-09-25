@@ -8,7 +8,7 @@ class Paginas extends CI_Controller {
 
   function __construct() {
     parent::__construct();
-    $this->template->set_layout('website.php');
+    $this->template->set_layout('website_main.php');
 
     $this->load->model('inicio_model', 'Inicio');
     $this->load->model('paginas_model', 'Paginas');
@@ -35,6 +35,7 @@ class Paginas extends CI_Controller {
   }
 
   public function index() {
+    $this->template->set_layout('website.php');
     $this->load->model("videos_model","Videos");
     $data['active_link'] = "inicio";
 
