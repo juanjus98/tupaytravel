@@ -8171,6 +8171,7 @@ body > .header .logo .icon {
   -moz-border-radius: 0px !important;
   border-radius: 0px !important;
   box-shadow: none;
+  color: #333;
 }
 .form-control:focus {
   border-color: #3c8dbc !important;

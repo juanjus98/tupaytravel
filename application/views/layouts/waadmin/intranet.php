@@ -15,13 +15,11 @@ die();*/
 
     <meta name="viewport" content="width=device-width, initial-scale=1"><!--Escalable en cualquier dispositivo-->
     <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>"> -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/waadmin.min.css') ?>">
-
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
 
     <!-- iCheked-->
-    <link href="<?php echo base_url('assets/plugins/icheck/skins/all.css?v=1.0.2') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/plugins/icheck/skins/minimal/minimal.css') ?>" rel="stylesheet">
 
     <!-- Chosen-->
     <link href="<?php echo base_url('assets/plugins/chosen/chosen.min.css') ?>" rel="stylesheet">
@@ -33,6 +31,8 @@ die();*/
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/waadmin.css') ?>">
 
     <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>">
     <script type="text/javascript">var base_url='<?php echo base_url($this->config->item('admin_path'));?>';</script>
