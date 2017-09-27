@@ -1,38 +1,8 @@
-const observer = lozad('.lozad', {
+var observer = lozad('.lozad', {
     rootMargin: '10px 0px', // syntax similar to that of CSS Margin
     threshold: 0.1 // ratio of element convergence
 });
 observer.observe();
-
-$.datepicker.regional['es'] = {
-	closeText: 'Cerrar',
-	prevText: '< Ant',
-	nextText: 'Sig >',
-	currentText: 'Hoy',
-	monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-	monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-	dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-	dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-	dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-	weekHeader: 'Sm',
-	dateFormat: 'dd-mm-yy',
-	firstDay: 1,
-	isRTL: false,
-	showMonthAfterYear: false,
-	yearSuffix: ''
-};
-
-$.datepicker.setDefaults($.datepicker.regional["es"]);
-
-function getDate(element) {
-	var date;
-	try {
-		date = $.datepicker.parseDate(dateFormat, element.value);
-	} catch( error ) {
-		date = null;
-	}
-	return date;
-}
 
 $(function() {
 	//Slider de videos home
@@ -102,52 +72,51 @@ $(function() {
 	/**
 	 * Fecha datepicker
 	 */
-	 $(".select-fecha").datepicker({
+	 /*$(".select-fecha").datepicker({
 	 	minDate: 0,
 	 	defaultDate: "+1w",
 	 	changeMonth: true,
 	 	changeYear: true,
 	 	numberOfMonths: 1
-	 });
+	 });*/
 
 	 $(".show_calendar").click(function() {
 	 	$(".select-fecha").datepicker("show");
 	 });
 
-	/**
-	 * Formulario home
-	 */
-	 var dateFormat = "dd-mm-yy",
-	 from = $( "#date_from" )
-	 .datepicker({
-	 	minDate: 0,
-	 	defaultDate: "+1w",
-	 	changeMonth: true,
-	 	changeYear: true,
-	 	numberOfMonths: 1
-	 }).on( "change", function() {
-	 	to.datepicker( "option", "minDate", getDate( this ) );
-	 }),
-	 to = $( "#date_to" ).datepicker({
-	 	defaultDate: "+1w",
-	 	changeMonth: true,
-	 	changeYear: true,
-	 	numberOfMonths: 1
-	 })
-	 .on( "change", function() {
-	 	from.datepicker( "option", "maxDate", getDate( this ) );
-	 });
+/**
+ * Datepicker para formulario de busqueda
+ */
+ var dpOptions = {
+ 	format: 'dd-mm-yyyy',
+ 	startDate: '+1d',
+ 	language: "es",
+ 	autoclose: true,
+ };
 
-	 $("#fecha_inicio_show").click(function() {
-	 	$("#date_from").datepicker("show");
-	 });
+ var dp1 = $("#date_from");
+ var dp2 = $("#date_to");
 
-	 $("#fecha_fin_show").click(function() {
-	 	$("#date_to").datepicker("show");
-	 });
+ var datePicker1 = dp1.datepicker(dpOptions).
+ on('changeDate', function (e) {
+ 	var nDate = new Date(e.date);
+ 	nDate.setDate(nDate.getDate() + 1);
+ 	datePicker2.datepicker('setStartDate', nDate);
+ 	dp2.focus();
+ });
 
-	 $('#buscar').on('click',function(event){
-	 	event.preventDefault();
+ var datePicker2 = dp2.datepicker(dpOptions);
+
+ $("#fecha_inicio_show").click(function() {
+ 	$("#date_from").datepicker("show");
+ });
+
+ $("#fecha_fin_show").click(function() {
+ 	$("#date_to").datepicker("show");
+ });
+
+ $('#buscar').on('click',function(event){
+ 	event.preventDefault();
 	//Validar
 	if($('#date_from').val()==""){
 		alert('Seleccionar Fecha Inicio de Tour');
@@ -173,4 +142,4 @@ $(function() {
 	$(location).attr('href',urlBusqueda);
 });
 
-	});
+});

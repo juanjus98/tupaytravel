@@ -212,9 +212,10 @@ $tag_image = $head_info['image'];
    </div>
    <!-- //Multichat-->
    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
-   <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css" />
+   <!-- <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css" /> -->
    <link href="assets/plugins/lightslider/css/lightslider.min.css" rel="stylesheet" />
    <link rel="stylesheet" href="assets/plugins/fancybox/dist/jquery.fancybox.min.css" />
+   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.min.css" />
    
    <script src="assets/plugins/lozad/lozad.min.js" type="text/javascript"></script>
 
@@ -222,7 +223,7 @@ $tag_image = $head_info['image'];
    <script src="assets/plugins/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
    <script src="assets/plugins/bootstrap.min.js" type="text/javascript"></script>
    <!-- jquery-ui-->
-   <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+   <!-- <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script> -->
    <!-- //jquery-ui-->
    <!-- lightslider-->
    <script src="assets/plugins/lightslider/js/lightslider.min.js"></script>
@@ -230,6 +231,12 @@ $tag_image = $head_info['image'];
    <!-- sticky-->
    <script type="text/javascript" src="assets/plugins/sticky/jquery.sticky.min.js"></script>
    <!-- sticky-->
+
+   <!-- Bootstrap datepicker-->
+   <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+   <script src="assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+   <!-- //Bootstrap datepicker-->
+
    <!-- slimscroll-->
    <script type="text/javascript" src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
    <!-- //slimscroll-->

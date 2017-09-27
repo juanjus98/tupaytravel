@@ -22,6 +22,7 @@ module.exports = function(grunt){
 		      {expand: true, cwd: 'node_modules/wowjs/dist/', src: ['wow.min.js'], dest: 'assets/js/'},*/
 		      {expand: true, cwd: 'node_modules/bootstrap-validator/dist/', src: ['*'], dest: 'assets/plugins/bootstrap-validator/'},
 		      {expand: true, cwd: 'node_modules/lozad/dist/', src: ['*'], dest: 'assets/plugins/lozad/'},
+		      {expand: true, cwd: 'node_modules/bootstrap-datepicker/dist/', src: ['*/*'], dest: 'assets/plugins/bootstrap-datepicker/'},
 		      ],
 		  },
 		},

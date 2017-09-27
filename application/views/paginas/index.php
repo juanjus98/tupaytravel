@@ -116,7 +116,7 @@
              <a href="<?php echo $value['url'];?>" target="<?php echo $value['target'];?>">
                <div class="cont-promo">
                  <span class="btn-block titulo-block"><?php echo $tituloPromo;?></span>
-                 <img alt="<?php echo $tituloPromo;?>" data-src="<?php echo $urlImagen;?>" class="lozad img-responsive">
+                 <img alt="<?php echo $tituloPromo;?>" src="<?php echo $urlImagen;?>" class="img-responsive">
                </div>
              </a>
            </div>
@@ -162,7 +162,7 @@
                <div class="cont-item">
                  <a data-fancybox href="<?php echo $video_embed;?>" title="<?php echo $video_titulo;?>" class="video">
                    <span class="fa fa-youtube-play"></span>
-                   <img alt="<?php echo $video_titulo;?>" data-src="<?php echo $video_imagen;?>" class="lozad img-responsive">
+                   <img alt="<?php echo $video_titulo;?>" src="<?php echo $video_imagen;?>" class="img-responsive">
                  </a>
                  <?php //echo $youtube_id;?>
                </div>

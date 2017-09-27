@@ -195,108 +195,111 @@ $tag_image = $head_info['image'];
                  <i class="fa fa-envelope"></i> <a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?>"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?></a><br>
                </address>
                <!-- <div class="fb-like" data-share="true" data-show-faces="false"></div> -->
-           </div>
-         </div>
-         <div class="col-md-4 col-sm-6">
-           <div class="footer-single useful-links">
-             <div class="footer-title"><h2>Promociones</h2></div>
-             <?php
-             $promociones = $this->Promociones->listado(6,0);
-             if(!empty($promociones)){
-               ?>
-               <ul class="list-unstyled">
-                 <?php
-                 foreach ($promociones as $key => $value) {
-                   $tituloPromo = $value['titulo'];
-                   ?>
-                   <li><a href="<?php echo $value['url'];?>" title="<?php echo $tituloPromo;?>"><?php echo $tituloPromo;?> <i class="fa fa-angle-right pull-right"></i></a></li>
-                   <?php } ?>
-                 </ul>
-                 <?php
-               }
-               ?>
              </div>
            </div>
            <div class="col-md-4 col-sm-6">
              <div class="footer-single useful-links">
-               <div class="footer-title"><h2>Links Importantes<?php //echo $website_info['title'];?></h2></div>
-               <ul class="list-unstyled">
-                 <?php
-                 $links = array(
-                   array('title' => 'Formas de pago', 'url' => 'http://tupaytravel.com/p/formas-de-pago-rp', 'target' => '_self'),
-                   array('title' => 'Contáctenos', 'url' => 'http://tupaytravel.com/contactenos', 'target' => '_self'),
-                   array('title' => 'Facebook', 'url' => 'https://www.facebook.com/tupay.travel/', 'target' => '_blank'),
-                   array('title' => 'Youtube', 'url' => 'https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA', 'target' => '_blank'),
-                 );
-                 foreach ($links as $key => $value) {
-                   echo '<li><a href="'.$value['url'].'" target="'.$value['target'].'">'.$value['title'].' <i class="fa fa-angle-right pull-right"></i></a></li>';
+               <div class="footer-title"><h2>Promociones</h2></div>
+               <?php
+               $promociones = $this->Promociones->listado(6,0);
+               if(!empty($promociones)){
+                 ?>
+                 <ul class="list-unstyled">
+                   <?php
+                   foreach ($promociones as $key => $value) {
+                     $tituloPromo = $value['titulo'];
+                     ?>
+                     <li><a href="<?php echo $value['url'];?>" title="<?php echo $tituloPromo;?>"><?php echo $tituloPromo;?> <i class="fa fa-angle-right pull-right"></i></a></li>
+                     <?php } ?>
+                   </ul>
+                   <?php
                  }
                  ?>
-               </ul>
+               </div>
+             </div>
+             <div class="col-md-4 col-sm-6">
+               <div class="footer-single useful-links">
+                 <div class="footer-title"><h2>Links Importantes<?php //echo $website_info['title'];?></h2></div>
+                 <ul class="list-unstyled">
+                   <?php
+                   $links = array(
+                     array('title' => 'Formas de pago', 'url' => 'http://tupaytravel.com/p/formas-de-pago-rp', 'target' => '_self'),
+                     array('title' => 'Contáctenos', 'url' => 'http://tupaytravel.com/contactenos', 'target' => '_self'),
+                     array('title' => 'Facebook', 'url' => 'https://www.facebook.com/tupay.travel/', 'target' => '_blank'),
+                     array('title' => 'Youtube', 'url' => 'https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA', 'target' => '_blank'),
+                   );
+                   foreach ($links as $key => $value) {
+                     echo '<li><a href="'.$value['url'].'" target="'.$value['target'].'">'.$value['title'].' <i class="fa fa-angle-right pull-right"></i></a></li>';
+                   }
+                   ?>
+                 </ul>
+               </div>
              </div>
            </div>
-         </div>
-       </section>
-     </footer>
-     <!-- //Footer-->
-   </div><!-- main brd-lr-->
- </div><!-- container-->
- <!-- Multichat-->
- <div class="cont-multichat">
-   <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
-     <img src="<?php echo base_url('assets/images/icon-messenger48.png');?>" alt="Facebook messenger">
-   </a>
-   <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
-     <img src="<?php echo base_url('assets/images/icon-whatsapp48.png');?>" alt="Whatsapp">
-   </a>
- </div>
- <!-- //Multichat-->
+         </section>
+       </footer>
+       <!-- //Footer-->
+     </div><!-- main brd-lr-->
+   </div><!-- container-->
+   <!-- Multichat-->
+   <div class="cont-multichat">
+     <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
+       <img src="<?php echo base_url('assets/images/icon-messenger48.png');?>" alt="Facebook messenger">
+     </a>
+     <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
+       <img src="<?php echo base_url('assets/images/icon-whatsapp48.png');?>" alt="Whatsapp">
+     </a>
+   </div>
+   <!-- //Multichat-->
 
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
+   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
+   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.min.css'); ?>" />
 
- <!-- JavaScript-->
- <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
- <script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
- <!-- jquery-ui-->
- <link rel="stylesheet" href="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.css');?>">
- <script src="<?php echo base_url('assets/plugins/jquery-ui/jquery-ui.min.js');?>"></script>
- <!-- //jquery-ui-->
- <!-- lightslider-->
- <link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>
- <script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
- <!-- //lightslider-->
- <!-- fancybox-->
- <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.css');?>" />
- <script src="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.js');?>"></script>
- <!-- //fancybox-->
- 
- <!-- sticky-->
- <script type="text/javascript" src="<?php echo base_url('assets/plugins/sticky/jquery.sticky.js');?>"></script>
- <!-- sticky-->
+   <!-- JavaScript-->
+   <script src="<?php echo base_url('assets/plugins/jquery/jquery-3.1.1.min.js');?>" type="text/javascript"></script>
+   <script src="<?php echo base_url('assets/plugins/bootstrap.min.js');?>" type="text/javascript"></script>
+   
+   <!-- lightslider-->
+   <link href="<?php echo base_url('assets/plugins/lightslider/css/lightslider.min.css');?>" rel="stylesheet"/>
+   <script src="<?php echo base_url('assets/plugins/lightslider/js/lightslider.min.js');?>"></script>
+   <!-- //lightslider-->
+   <!-- fancybox-->
+   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.css');?>" />
+   <script src="<?php echo base_url('assets/plugins/fancybox/dist/jquery.fancybox.min.js');?>"></script>
+   <!-- //fancybox-->
 
- <!-- slimscroll-->
- <script type="text/javascript" src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.js');?>"></script>
- <!-- //slimscroll-->
- <!-- emoji-->
- <script src="<?php echo base_url('assets/plugins/emoji/emoji.js');?>" type="text/javascript"></script>
- <!-- //emoji-->
- <!-- select2-->
- <?php //if($actual_link == 'detalles'){ ?>
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
- <script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
- <?php //} ?>
- <!-- //select2-->
- <!-- bootstrap-validator-->
- <?php //if($actual_link == 'detalles'){ ?>
- <script src="<?php echo base_url('assets/plugins/bootstrap-validator/validator.min.js');?>" type="text/javascript"></script>
- <?php //} ?>
- <!-- //bootstrap-validator-->
- <script src="<?php echo base_url('assets/js/main.min.js');?>" type="text/javascript"></script>
- <!-- JavaScript-->
- <!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
- <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet">
-</body>
-</html>
-<?php
+   <!-- sticky-->
+   <script type="text/javascript" src="<?php echo base_url('assets/plugins/sticky/jquery.sticky.js');?>"></script>
+   <!-- sticky-->
+
+   <!-- Bootstrap datepicker-->
+   <script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js');?>"></script>
+   <script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js');?>" charset="UTF-8"></script>
+   <!-- //Bootstrap datepicker-->
+
+   <!-- slimscroll-->
+   <script type="text/javascript" src="<?php echo base_url('assets/plugins/slimscroll/jquery.slimscroll.js');?>"></script>
+   <!-- //slimscroll-->
+   <!-- emoji-->
+   <script src="<?php echo base_url('assets/plugins/emoji/emoji.js');?>" type="text/javascript"></script>
+   <!-- //emoji-->
+   <!-- select2-->
+   <?php //if($actual_link == 'detalles'){ ?>
+   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css'); ?>">
+   <script src="<?php echo base_url('assets/plugins/select2/js/select2.min.js');?>" type="text/javascript"></script>
+   <?php //} ?>
+   <!-- //select2-->
+   <!-- bootstrap-validator-->
+   <?php //if($actual_link == 'detalles'){ ?>
+   <script src="<?php echo base_url('assets/plugins/bootstrap-validator/validator.min.js');?>" type="text/javascript"></script>
+   <?php //} ?>
+   <!-- //bootstrap-validator-->
+   <script src="<?php echo base_url('assets/js/main.min.js');?>" type="text/javascript"></script>
+   <!-- JavaScript-->
+   <!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
+   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet">
+ </body>
+ </html>
+ <?php
 //echo $actual_link;
-?>
+ ?>

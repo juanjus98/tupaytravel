@@ -2,13 +2,13 @@
  * Variables globales
  */
 
-const observer = lozad('.lozad', {
+var observer = lozad('.lozad', {
     rootMargin: '10px 0px', // syntax similar to that of CSS Margin
     threshold: 0.1 // ratio of element convergence
 });
 observer.observe();
 
-$.datepicker.regional['es'] = {
+/*$.datepicker.regional['es'] = {
 	closeText: 'Cerrar',
 	prevText: '< Ant',
 	nextText: 'Sig >',
@@ -26,7 +26,7 @@ $.datepicker.regional['es'] = {
 	yearSuffix: ''
 };
 
-$.datepicker.setDefaults($.datepicker.regional["es"]);
+$.datepicker.setDefaults($.datepicker.regional["es"]);*/
 
 function getDate(element) {
 	var date;
@@ -40,25 +40,25 @@ function getDate(element) {
 
 $(function() {
 	//Reservar
-$('#modal-reservar').on('shown.bs.modal', function () {
-	$('#nombres').focus();
-});
+	$('#modal-reservar').on('shown.bs.modal', function () {
+		$('#nombres').focus();
+	});
 
-if($("#form-reservar").length == 0) {
-$('#form-reservar').validator().on('submit', function (e) {
-  if (e.isDefaultPrevented()) {
+	if($("#form-reservar").length == 0) {
+		$('#form-reservar').validator().on('submit', function (e) {
+			if (e.isDefaultPrevented()) {
     // handle the invalid form...
     console.log("Error formulario");
-  } else {
-    console.log("Enviar formulario");
+} else {
+	console.log("Enviar formulario");
     /*var data_form = $( this ).serializeFormJSON();
     console.log(data_form);*/
 
-	var formdata = $(this).serializeArray();
-	var data = {};
-	$(formdata ).each(function(index, obj){
-	data[obj.name] = obj.value;
-	});
+    var formdata = $(this).serializeArray();
+    var data = {};
+    $(formdata ).each(function(index, obj){
+    	data[obj.name] = obj.value;
+    });
 
 	//Escribir detalles en #list-form-data
 	if($('#item_pais_origen').length == 0 ){
@@ -91,22 +91,22 @@ $('#form-reservar').validator().on('submit', function (e) {
 
 	console.log(data);
 
-    $('#modal-reservar').modal('show');
-  }
-  return false;
-});
+	$('#modal-reservar').modal('show');
 }
+return false;
+});
+	}
 
 //Enviar formulario final form-reservar-completar
 if($("#form-reservar-completar").length == 0) {
-$('#form-reservar-completar').validator().on('submit', function (e) {
-  if (e.isDefaultPrevented()) {
-    console.log("Error formulario no enviar formulario");
-    return false;
-  } else {
-    console.log("Enviar formulario");
-  }
-});
+	$('#form-reservar-completar').validator().on('submit', function (e) {
+		if (e.isDefaultPrevented()) {
+			console.log("Error formulario no enviar formulario");
+			return false;
+		} else {
+			console.log("Enviar formulario");
+		}
+	});
 }
 
 	//Select search select2
@@ -114,60 +114,60 @@ $('#form-reservar-completar').validator().on('submit', function (e) {
 
 	//Slider de videos
 	$('#content-slider').lightSlider({
-        item:4,
-        auto:true,
-        loop:true,
-        slideMove:2,
-        pager:false,
-        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-        speed:600,
-        responsive : [
-            {
-                breakpoint:800,
-                settings: {
-                    item:3,
-                    slideMove:1,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:480,
-                settings: {
-                    item:2,
-                    slideMove:1
-                  }
-            }
-        ]
-    });
+		item:4,
+		auto:true,
+		loop:true,
+		slideMove:2,
+		pager:false,
+		easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+		speed:600,
+		responsive : [
+		{
+			breakpoint:800,
+			settings: {
+				item:3,
+				slideMove:1,
+				slideMargin:6,
+			}
+		},
+		{
+			breakpoint:480,
+			settings: {
+				item:2,
+				slideMove:1
+			}
+		}
+		]
+	});
 
     //Slider de fotos
-	$('#content-slider-fotos').lightSlider({
-        item:4,
-        auto:true,
-        loop:true,
-        slideMove:2,
-        pager:false,
-        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-        speed:600,
-        responsive : [
-            {
-                breakpoint:800,
-                settings: {
-                    item:3,
-                    slideMove:1,
-                    slideMargin:6,
-                  }
-            },
-            {
-                breakpoint:480,
-                settings: {
-                    item:2,
-                    slideMove:1
-                  }
-            }
-        ]
+    $('#content-slider-fotos').lightSlider({
+    	item:4,
+    	auto:true,
+    	loop:true,
+    	slideMove:2,
+    	pager:false,
+    	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+    	speed:600,
+    	responsive : [
+    	{
+    		breakpoint:800,
+    		settings: {
+    			item:3,
+    			slideMove:1,
+    			slideMargin:6,
+    		}
+    	},
+    	{
+    		breakpoint:480,
+    		settings: {
+    			item:2,
+    			slideMove:1
+    		}
+    	}
+    	]
     });
-	
+
 	//Galería en listado
 	$('.imageLisGallery').lightSlider({
 		adaptiveHeight:true,
@@ -235,10 +235,34 @@ $('#form-reservar-completar').validator().on('submit', function (e) {
 	 	$(".select-fecha").datepicker("show");
 	 });
 
+/**
+ * Datepicker para formulario de busqueda
+ */
+ var dpOptions = {
+ 	format: 'dd-mm-yyyy',
+ 	startDate: '+1d',
+ 	language: "es",
+ 	autoclose: true,
+ };
+
+ var dp1 = $("#date_from");
+ var dp2 = $("#date_to");
+
+ var datePicker1 = dp1.datepicker(dpOptions).
+ on('changeDate', function (e) {
+ 	var nDate = new Date(e.date);
+ 	nDate.setDate(nDate.getDate() + 1);
+ 	datePicker2.datepicker('setStartDate', nDate);
+ 	dp2.focus();
+ });
+
+ var datePicker2 = dp2.datepicker(dpOptions);
+
+
 	/**
 	 * Formulario home
 	 */
-	 var dateFormat = "dd-mm-yy",
+	 /*var dateFormat = "dd-mm-yy",
 	 from = $( "#date_from" )
 	 .datepicker({
 	 	minDate: 0,
@@ -257,7 +281,7 @@ $('#form-reservar-completar').validator().on('submit', function (e) {
 	 })
 	 .on( "change", function() {
 	 	from.datepicker( "option", "maxDate", getDate( this ) );
-	 });
+	 });*/
 
 	 $("#fecha_inicio_show").click(function() {
 	 	$("#date_from").datepicker("show");
