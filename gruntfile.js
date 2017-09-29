@@ -47,7 +47,6 @@ module.exports = function(grunt){
 					'assets/js/website.js': ['build/js/website/variables.js','build/js/website/functions.js','build/js/website/app.js'],
 					'assets/js/home.js': ['build/js/website/variables.js','build/js/website/functions.js','build/js/website/home.js'],
 					'assets/js/main.js': ['build/js/website/variables.js','build/js/website/functions.js','build/js/website/main.js'],
-					'assets/js/global.js': ['assets/plugins/jquery-ui/jquery-ui.js','assets/plugins/lightslider/js/lightslider.js','assets/plugins/fancybox/dist/jquery.fancybox.js','assets/plugins/sticky/jquery.sticky.js','assets/plugins/slimscroll/jquery.slimscroll.js','assets/plugins/emoji/emoji.js','assets/js/app.js'],
 				},
 			},
 		},
@@ -60,7 +59,6 @@ module.exports = function(grunt){
 					'assets/js/main.min.js': ['assets/js/main.js'],
 					'assets/plugins/sticky/jquery.sticky.min.js': ['assets/plugins/sticky/jquery.sticky.js'],
 					'assets/plugins/emoji/emoji.min.js': ['assets/plugins/emoji/emoji.js'],
-					'assets/js/global.min.js': ['assets/js/global.js']
 				}
 			}
 		}

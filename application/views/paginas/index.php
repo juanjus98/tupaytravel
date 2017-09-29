@@ -116,7 +116,7 @@
              <a href="<?php echo $value['url'];?>" target="<?php echo $value['target'];?>">
                <div class="cont-promo">
                  <span class="btn-block titulo-block"><?php echo $tituloPromo;?></span>
-                 <img alt="<?php echo $tituloPromo;?>" src="<?php echo $urlImagen;?>" class="img-responsive">
+                 <img alt="<?php echo $tituloPromo;?>" data-src="<?php echo $urlImagen;?>" class="lozad img-responsive">
                </div>
              </a>
            </div>
@@ -211,7 +211,7 @@
            <div class="cont-item">
              <a href="<?php echo $value['url'];?>" target="<?php echo $value['target'];?>" title="<?php echo $value['titulo'];?>" class="foto">
                <span class="fa fa-camera-retro"></span>
-               <img alt="<?php echo $value['titulo'];?>" data-src="<?php echo $value['imagen'];?>" class="lozad img-responsive">
+               <img alt="<?php echo $value['titulo'];?>" src="<?php echo $value['imagen'];?>" class="img-responsive">
              </a>
            </div>
          </li>

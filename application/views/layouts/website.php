@@ -1,8 +1,4 @@
 <?php
-/**
- * Website
- * Desarrollado por Juan Julio Sandoval Layza <juanjus98@gmail.com>
- */
 $website_info = $this->website_info;
 $direccion = $website_info['direccion'];
 $telefono_1 = $website_info['telefono_1'];
@@ -69,7 +65,7 @@ $tag_image = $head_info['image'];
 <meta name="theme-color" content="#ffffff">
 <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
 <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
-
+<!--End of Zendesk Chat Script-->
 <script type="text/javascript">
  var base_url='<?php echo base_url();?>';
  <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
@@ -211,12 +207,14 @@ $tag_image = $head_info['image'];
      </a>
    </div>
    <!-- //Multichat-->
+
+   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet" />
    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css" />
    <!-- <link rel="stylesheet" href="assets/plugins/jquery-ui/jquery-ui.min.css" /> -->
    <link href="assets/plugins/lightslider/css/lightslider.min.css" rel="stylesheet" />
    <link rel="stylesheet" href="assets/plugins/fancybox/dist/jquery.fancybox.min.css" />
    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.min.css" />
-   
+
    <script src="assets/plugins/lozad/lozad.min.js" type="text/javascript"></script>
 
    <!-- JavaScript-->
@@ -249,9 +247,19 @@ $tag_image = $head_info['image'];
    <!-- //bootstrap-validator-->
    <script src="assets/js/home.min.js" type="text/javascript"></script>
    <!-- JavaScript-->
-   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet" />
- </body>
- </html>
- <?php
+
+   <!--Start of Zendesk Chat Script-->
+   <script type="text/javascript">
+     window.$zopim||(function(d,s){var z=$zopim=function(c){
+       z._.push(c)},$=z.s=
+       d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+         _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+         $.src='https://v2.zopim.com/?4djBSec4OHl4b786bXDsRHxsqN4T47rj';z.t=+new Date;$.
+         type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+       </script>
+
+     </body>
+     </html>
+     <?php
 //echo $actual_link;
- ?>
+     ?>
