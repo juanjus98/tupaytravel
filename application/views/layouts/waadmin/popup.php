@@ -12,9 +12,8 @@ die();*/
     <title><?php echo @$template['title']; ?></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1"><!--Escalable en cualquier dispositivo-->
-    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>"> -->
+
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/waadmin.min.css') ?>">
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/plugins/tagsinput/bootstrap-tagsinput.css') ?>">
 
@@ -31,6 +30,8 @@ die();*/
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/waadmin.css') ?>">
 
     <link rel="shortcut icon" href="<?php echo base_url('assets/icons/favicon.ico') ?>">
     <script type="text/javascript">var base_url='<?php echo base_url();?>';</script>

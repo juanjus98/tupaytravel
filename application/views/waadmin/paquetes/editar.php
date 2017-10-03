@@ -187,6 +187,10 @@ echo '</pre>';*/
                      <div class="form-group" style="margin-bottom: 0px;">
                        <label for="imagen" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Imagen:</label>
                        <div class="col-sm-10">
+                        <div class="alert alert-warning alert-dismissable">
+                            <i class="fa fa-info-circle"></i> 
+                            <b>Atención!</b> Peso máximo 500KB (jpg), Dimensiones 600px * 380px.
+                          </div>
                          <input type="file" name="imagen" id="imagen" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
                          <?php
                          if(!empty($post['imagen'])){

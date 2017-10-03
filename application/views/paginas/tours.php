@@ -27,33 +27,16 @@ if(!empty($busqueda)){
 
             $nombre_tour = trim($item['nombre']);
             $url_tour = base_url('tour/' . $item['url_key']);
-            $urlImagen = (!empty($item['imagen'])) ? base_url($this->config->item('upload_path') . $item['imagen']) : base_url('assets/images/no-image.jpg') ;
+            $urlImagen = base_url('assets/images/no-image.jpg') ;
+            /*$urlImagen = (!empty($item['imagen'])) ? base_url($this->config->item('upload_path') . $item['imagen']) : base_url('assets/images/no-image.jpg') ;*/
             ?>
             <div class="listado-item hvr-glow">
               <div class="row">
                 <div class="col-sm-12 col-md-5">
                   <div class="thumbnail">
-                    <?php
-                    if(!empty($itinerarios)){
-                      ?>
-                      <ul class="imageLisGallery">
-                        <?php
-                        foreach ($itinerarios as $key => $galeria) {
-                          $urlImagen_galeria = (!empty($galeria['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $galeria['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
-                          ?>
-                          <li>
-                            <a href="<?php echo $url_tour;?>" title="<?php echo $nombre_tour;?>" class="list-item">
-                              <img src="<?php echo $urlImagen_galeria;?>" alt="<?php echo $nombre_tour;?>" class="img-responsive">
-                              <span><?php echo $galeria['titulo'];?></span>
-                            </a>
-                          </li>
-                          <?php 
-                        }
-                        ?>
-                      </ul>
-                      <?php
-                    }
-                    ?>
+                    <a href="<?php echo $url_tour;?>" title="<?php echo $nombre_tour;?>" class="list-item">
+                      <img src="<?php echo $urlImagen;?>" alt="<?php echo $nombre_tour;?>" class="img-responsive">
+                    </a>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-7">

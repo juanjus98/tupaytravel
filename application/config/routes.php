@@ -62,10 +62,15 @@ $route['p/(:any)'] = 'paginas/pagina/$1';
 /**
  * Paquetes
  */
-$route['paquetes-tours'] = 'paginas/paquetes';
+$route['paquetes-tours'] = 'paquetes/index';
+$route['paquetes-tours/(:any)'] = 'paquetes/index/$1';
+$route['paquete-tour/(:any)'] = 'paquetes/paquete/$1';
+$route['pdf-paquete/(:any)'] = 'paquetes/pdf_paquete/$1';
+
+/*$route['paquetes-tours'] = 'paginas/paquetes';
 $route['paquetes-tours/(:any)'] = 'paginas/paquetes/$1';
 $route['paquete-tour/(:any)'] = 'paginas/paquete/$1';
-$route['pdf-paquete/(:any)'] = 'paginas/pdf_paquete/$1';
+$route['pdf-paquete/(:any)'] = 'paginas/pdf_paquete/$1';*/
 
 /**
  * Tours

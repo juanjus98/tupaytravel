@@ -24,17 +24,33 @@ if(!empty($busqueda_info['dateDesde']) && !empty($busqueda_info['dateHasta'])){
 
             $nombre_paquete = strip_tags($paquete['nombre']);
             $url_paquete = base_url('paquete-tour/' . $paquete['url_key']);
-
-            $urlImagen = base_url('assets/images/no-image.jpg') ;
-            /*$urlImagen = (!empty($paquete['imagen'])) ? base_url($this->config->item('upload_path') . $paquete['imagen']) : base_url('assets/images/no-image.jpg') ;*/
+            $urlImagen = (!empty($paquete['imagen'])) ? base_url($this->config->item('upload_path') . $paquete['imagen']) : base_url('assets/images/no-image.jpg') ;
             ?>
             <div class="listado-item">
               <div class="row">
                 <div class="col-sm-12 col-md-5">
                   <div class="thumbnail">
-                    <a href="<?php echo $url_paquete;?>" title="<?php echo $nombre_paquete;?>" class="list-item">
-                      <img src="<?php echo $urlImagen;?>" alt="<?php echo $nombre_paquete;?>" class="img-responsive">
-                    </a>
+                    <?php
+                    if(!empty($itinerarios)){
+                      ?>
+                      <ul class="imageLisGallery">
+                        <?php
+                        foreach ($itinerarios as $key => $galeria) {
+                          $urlImagen_galeria = (!empty($galeria['nombre_imagen'])) ? base_url($this->config->item('upload_path') . $galeria['nombre_imagen']) : base_url('assets/images/no-image.jpg') ;
+                          ?>
+                          <li>
+                            <a href="<?php echo $url_paquete;?>" title="<?php echo $nombre_paquete;?>" class="list-item">
+                              <img src="<?php echo $urlImagen_galeria;?>" alt="<?php echo $nombre_paquete;?>" class="img-responsive">
+                              <span><?php echo $galeria['titulo'];?></span>
+                            </a>
+                          </li>
+                          <?php 
+                        }
+                        ?>
+                      </ul>
+                      <?php
+                    }
+                    ?>
                   </div>
                 </div>
 

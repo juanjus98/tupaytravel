@@ -11539,6 +11539,9 @@ fieldset[disabled] .btn-vk.active {
 .bootstrap-tagsinput {
   width: 100%;
 }
+.form-control {
+  color: #333;
+}
 /* CELULAR */
 @media (max-width: 767px) {
   .girl-cont {
