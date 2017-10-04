@@ -51,7 +51,7 @@ if (!function_exists('wamenu')) {
         //Menú tours
         $resultado = $CI->Menu->menuTours();
         foreach ($resultado as $key => $value) {
-            $url_key = 'tours/' . $value['url_key'];
+            $url_key = 'tours/' . $value['url_key'] . '/tradicional'; //Fix tradicional
             $menuTours[$url_key] = $value['provincia'];
         }
 

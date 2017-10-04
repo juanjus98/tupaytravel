@@ -32,7 +32,7 @@ echo "</pre>";*/
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset class="hidden-xs">
     <div class="container-box">
       <h3 class="titulo_opciones">Número de días</h3>
       <div class="box-wscroll">
