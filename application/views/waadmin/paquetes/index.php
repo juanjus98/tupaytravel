@@ -49,6 +49,7 @@ echo '</pre>';*/
 
                                 <a href="#" class="btn btn-danger btn-sm" id="btn-eliminar" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar </a>
 
+
                             </div>
                         </div>
                     </div>
@@ -69,6 +70,9 @@ echo '</pre>';*/
                             <?php
                             if(!empty($listado)){
                                 foreach ($listado as $key => $item) {
+                                    /*echo "<pre>";
+                                    print_r($item);
+                                    echo "</pre>";*/
                                     ?>
                                     <tr>
                                         <td>
@@ -88,6 +92,9 @@ echo '</pre>';*/
                                             <a href="<?php echo base_url(); ?>waadmin/paquetes/editar/E/<?php echo $item['id']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
                                             <a class="btn btn-info btn-xs wapopup" data-width="800" data-height="600" href="<?php echo base_url(); ?>waadmin/paquetes_galeria/index/<?php echo $item['id']; ?>" data-toggle="tooltip" title="Intinerario"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+
+                                            <?php $url_pdf = base_url('pdf-paquete/' .  $item['url_key']);?>
+                                            <a href="<?php echo $url_pdf;?>" target="_blank" class="btn btn-danger btn-xs" title="Descargar PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
                                         </td>
                                     </tr>

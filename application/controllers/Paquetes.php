@@ -83,6 +83,10 @@ class Paquetes extends CI_Controller {
       $data_busqueda['nroDias'] = $nroDias;
     }
 
+    $data_paquetes['publicar'] = 1;
+
+    //publicar
+
     $total_paquetes = $this->Paquetes->total_registros($data_paquetes);
     $data['total_paquetes'] = $total_paquetes;
     $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);

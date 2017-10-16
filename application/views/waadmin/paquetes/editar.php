@@ -149,6 +149,24 @@ echo '</pre>';*/
                        </td>
                      </tr>
 
+<tr>
+ <td>
+   <div class="form-group" style="margin-bottom: 0px;">
+     <label for="publicar" class="col-sm-2 control-label" style="text-align: right;">Publicar:</label>
+     <div class="col-sm-4">
+       <?php
+       $checked = "";
+       if(!empty($post['publicar']) && $post['publicar'] == 1){
+        $checked = "checked";
+      }
+      ?>
+      <input class="form-control input-sm" id="publicar" name="publicar" type="checkbox" value="1" <?php echo $checked;?> <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>  Mostrar públicamente.
+      <?php echo form_error('publicar', '<div class="error">', '</div>'); ?>
+    </div>
+
+  </td>
+</tr>
+
                    </tbody>
                  </table><br>
 

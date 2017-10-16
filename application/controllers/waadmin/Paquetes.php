@@ -199,6 +199,8 @@ function editar($tipo='C',$id=NULL){
 
      $estadia = (isset($post['estadia'])) ? $post['estadia'] : 0 ;
 
+     $publicar = (isset($post['publicar'])) ? $post['publicar'] : 0 ;
+
      $data_form = array(
        "nombre" => $post['nombre'],
        "detalles" => $post['detalles'],
@@ -207,7 +209,8 @@ function editar($tipo='C',$id=NULL){
        "precio" => $post['precio'],
        "orden" => $post['orden'],
        "keywords" => $post['keywords'],
-       "formas_pago_id" => $post['formas_pago_id']
+       "formas_pago_id" => $post['formas_pago_id'],
+       "publicar" => $publicar
        );
 
           //cargar imágenes
