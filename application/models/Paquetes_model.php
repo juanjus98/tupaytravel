@@ -26,6 +26,14 @@ class Paquetes_model extends CI_Model {
             $where["t2.ciudad"] = $data['ciudad'];
         }
 
+        if(!empty($data['nro_dias'])){
+            $where["t1.nro_dias"] = $data['nro_dias'];
+        }
+
+        if(!empty($data['publicar'])){
+            $where["t1.publicar"] = $data['publicar'];
+        }
+
         //Like
         if (!empty($data['campo']) && !empty($data['busqueda'])) {
             $like[$data['campo']] = $data['busqueda'];
@@ -66,6 +74,10 @@ class Paquetes_model extends CI_Model {
 
         if(!empty($data['nro_dias'])){
             $where["t1.nro_dias"] = $data['nro_dias'];
+        }
+
+        if(!empty($data['publicar'])){
+            $where["t1.publicar"] = $data['publicar'];
         }
 
         //Like

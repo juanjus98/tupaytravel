@@ -70,6 +70,17 @@ $tag_image = $head_info['image'];
  var base_url='<?php echo base_url();?>';
  <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
 </script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106441653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-106441653-1');
+</script>
+
 </head>
 <body>
  <div class="container">

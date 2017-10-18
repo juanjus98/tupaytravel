@@ -79,43 +79,24 @@ $tag_image = $head_info['image'];
 <?php if($actual_link == 'detalles'){ ?>
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59836a81515dc700116604dd&product=inline-share-buttons' async='async'></script>
 <?php } ?>
-<!--Start of Zendesk Chat Script-->
-<script type="text/javascript">
- window.$zopim||(function(d,s){var z=$zopim=function(c){
-   z._.push(c)},$=z.s=
-   d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-     _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-     $.src='https://v2.zopim.com/?4djBSec4OHl4b786bXDsRHxsqN4T47rj';z.t=+new Date;$.
-     type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-   </script>
-   <!--End of Zendesk Chat Script-->
+
    <script type="text/javascript">
      var base_url='<?php echo base_url();?>';
      <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
    </script>
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106441653-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-106441653-1');
+</script>
+
  </head>
  <body>
-  <div id="fb-root"></div>
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '872929552871590',
-        xfbml      : true,
-        version    : 'v2.10'
-      });
-      FB.AppEvents.logPageView();
-    };
-
-    (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
- </script>
-
  <div class="container">
    <div class="main brd-lr">
      <!-- header-->
@@ -298,6 +279,18 @@ $tag_image = $head_info['image'];
    <!-- JavaScript-->
    <!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet">
+
+<!--Start of Zendesk Chat Script-->
+<script type="text/javascript">
+ window.$zopim||(function(d,s){var z=$zopim=function(c){
+   z._.push(c)},$=z.s=
+   d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+     _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+     $.src='https://v2.zopim.com/?4djBSec4OHl4b786bXDsRHxsqN4T47rj';z.t=+new Date;$.
+     type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+   </script>
+   <!--End of Zendesk Chat Script-->
+
  </body>
  </html>
  <?php
