@@ -13,10 +13,10 @@ echo "</pre>";*/
       <p>Si usted desea comunicarse con nosotros rellenane el siguiente formulario, estamos atentos para atender sus dudas y consultas.</p>
       <?php
       if($_GET['send'] == 'ack'){
-      ?>
-      <div class="alert alert-success" role="alert"><i class="fa fa-smile-o" aria-hidden="true"></i> <strong>Gracias por contactarnos!</strong> en breve responderemos su mensaje. </div>
-      <?php
-    }
+        ?>
+        <div class="alert alert-success" role="alert"><i class="fa fa-smile-o" aria-hidden="true"></i> <strong>Gracias por contactarnos!</strong> en breve responderemos su mensaje. </div>
+        <?php
+      }
       ?>
 
       <div class="form">
@@ -48,24 +48,24 @@ echo "</pre>";*/
 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <h1>Tupay Travel.</h1>
-        <p>
-          <?php echo $website_info['title'];?>
-        </p>
-        <div class="datos-contacto">
-          <span><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $website_info['direccion'];?></span><br>
-          <span><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $website_info['telefono_2'];?></span><br>
-          <span><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $website_info['telefono_2'];?></span><br>
-          <span><i class="fa fa-envelope" aria-hidden="true"></i> <?php echo $website_info['email_1'];?></span><br><br>
-          <span>
-            <i class="fa fa-facebook-official" aria-hidden="true"></i> /
-            <a href="https://www.facebook.com/<?php echo $website_info['url_facebook'];?>" target="_blank">
-              <?php echo $website_info['url_facebook'];?>
-            </a>
-          </span><br>
+      <h1>Tupay Travel.</h1>
+      <p>
+        <?php echo $website_info['title'];?>
+      </p>
+      <div class="datos-contacto">
+        <span><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $website_info['direccion'];?></span><br>
+        <span><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $website_info['telefono_2'];?></span><br>
+        <span><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $website_info['telefono_2'];?></span><br>
+        <span><i class="fa fa-envelope" aria-hidden="true"></i> <?php echo $website_info['email_1'];?></span><br><br>
+        <span>
+          <i class="fa fa-facebook-official" aria-hidden="true"></i> /
+          <a href="https://www.facebook.com/<?php echo $website_info['url_facebook'];?>" target="_blank">
+            <?php echo $website_info['url_facebook'];?>
+          </a>
+        </span><br>
 
-          <span>
-            <i class="fa fa-skype" aria-hidden="true"> /
+        <span>
+          <i class="fa fa-skype" aria-hidden="true"> /
             <a href="skype:<?php echo $website_info['skype'];?>?call" target="_blank" title="Hablemos por skype"></i> <?php echo $website_info['skype'];?></a>
           </span>
 

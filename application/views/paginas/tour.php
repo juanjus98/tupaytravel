@@ -21,6 +21,15 @@ $id_info = $tour['id'];
     </div>
   </div>
   <div class="row">
+    <div class="col-md-12">
+      <?php
+      if($_GET['ack'] == 'success'){
+        ?>
+        <div class="alert alert-success" role="alert"><i class="fa fa-smile-o" aria-hidden="true"></i> <strong>Tu solicitud ha sido enviada con éxito.</strong> Nos estaremos poniendo en contacto contigo a la brevedad posible. Gracias. </div>
+        <?php
+      }
+      ?>
+    </div>
     <div class="col-md-8">
       <div class="cont-gallery">
         <div class="row">

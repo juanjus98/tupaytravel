@@ -1,6 +1,6 @@
 var observer = lozad('.lozad', {
-    rootMargin: '10px 0px', // syntax similar to that of CSS Margin
-    threshold: 0.1 // ratio of element convergence
+ rootMargin: '10px 0px', // syntax similar to that of CSS Margin
+ threshold: 0.1 // ratio of element convergence
 });
 observer.observe();
 
@@ -10,61 +10,53 @@ $(function() {
 		$('#nombres').focus();
 	});
 
-	if($("#form-reservar").length == 0) {
-		$('#form-reservar').validator().on('submit', function (e) {
-			if (e.isDefaultPrevented()) {
-    // handle the invalid form...
-    console.log("Error formulario");
-} else {
-	console.log("Enviar formulario");
-    /*var data_form = $( this ).serializeFormJSON();
-    console.log(data_form);*/
+	$('#form-reservar').validator().on('submit', function (e) {
+		if (e.isDefaultPrevented()) {
+			console.log("Error formulario");
+			return false;
+		} else {
+			var formdata = $(this).serializeArray();
+			var data = {};
+			$(formdata ).each(function(index, obj){
+				data[obj.name] = obj.value;
+			});
 
-    var formdata = $(this).serializeArray();
-    var data = {};
-    $(formdata ).each(function(index, obj){
-    	data[obj.name] = obj.value;
-    });
+			if($('#item_pais_origen').length == 0 ){
+				$( "#list-form-data" ).append( '<li id="item_pais_origen"><input type="hidden" name="pais_origen" id="pais_origen" value="' + data.pais_origen + '"><span class="fa fa-check text-success"></span> País de origen: ' + data.pais_origen + '</li>' );
+			}
 
-	//Escribir detalles en #list-form-data
-	if($('#item_pais_origen').length == 0 ){
-		$( "#list-form-data" ).append( '<li id="item_pais_origen"><input type="hidden" name="pais_origen" id="pais_origen" value="' + data.pais_origen + '"><span class="fa fa-check text-success"></span> País de origen: ' + data.pais_origen + '</li>' );
-	}
+			if($('#item_ciudad').length == 0 ){
+				$( "#list-form-data" ).append( '<li id="item_ciudad"><input type="hidden" name="ciudad" id="ciudad" value="' + data.ciudad + '"><span class="fa fa-check text-success"></span> Ciudad: ' + data.ciudad + '</li>' );
+			}
 
-	if($('#item_ciudad').length == 0 ){
-		$( "#list-form-data" ).append( '<li id="item_ciudad"><input type="hidden" name="ciudad" id="ciudad" value="' + data.ciudad + '"><span class="fa fa-check text-success"></span> Ciudad: ' + data.ciudad + '</li>' );
-	}
+			if(typeof data.fecha_arribo != "undefined" && $('#item_fecha_arribo').length == 0 ){
+				$( "#list-form-data" ).append( '<li id="item_fecha_arribo"><input type="hidden" name="fecha_arribo" id="fecha_arribo" value="' + data.fecha_arribo + '"><span class="fa fa-check text-success"></span> Fecha de arribo (desde Lima): ' + data.fecha_arribo + '</li>' );
+			}
 
-	if(typeof data.fecha_arribo  != "undefined" && $('#item_fecha_arribo').length == 0 ){
-		$( "#list-form-data" ).append( '<li id="item_fecha_arribo"><input type="hidden" name="fecha_arribo" id="fecha_arribo" value="' + data.fecha_arribo + '"><span class="fa fa-check text-success"></span> Fecha de arribo (desde Lima): ' + data.fecha_arribo + '</li>' );
-	}
+			if(data.adultos > 0 && $('#item_adultos').length == 0 ){
+				$( "#list-form-data" ).append( '<li id="item_adultos"><input type="hidden" name="adultos" id="adultos" value="' + data.adultos + '"><span class="fa fa-check text-success"></span> Adultos: ' + data.adultos + '</li>' );
+			}
 
-	if(data.adultos > 0 && $('#item_adultos').length == 0 ){
-		$( "#list-form-data" ).append( '<li id="item_adultos"><input type="hidden" name="adultos" id="adultos" value="' + data.adultos + '"><span class="fa fa-check text-success"></span> Adultos: ' + data.adultos + '</li>' );
-	}
+			if(data.adolecentes > 0 && $('#item_adolecentes').length == 0){
+				$( "#list-form-data" ).append( '<li id="item_adolecentes"><input type="hidden" name="adolecentes" id="adolecentes" value="' + data.adolecentes + '"><span class="fa fa-check text-success"></span> Adolecentes: ' + data.adolecentes + '</li>' );
+			}
 
-	if(data.adolecentes > 0 && $('#item_adolecentes').length == 0){
-		$( "#list-form-data" ).append( '<li id="item_adolecentes"><input type="hidden" name="adolecentes" id="adolecentes" value="' + data.adolecentes + '"><span class="fa fa-check text-success"></span> Adolecentes: ' + data.adolecentes + '</li>' );
-	}
+			if(data.ninios > 0 && $('#item_ninios').length == 0){
+				$( "#list-form-data" ).append( '<li id="item_ninios"><input type="hidden" name="ninios" id="ninios" value="' + data.ninios + '"><span class="fa fa-check text-success"></span> Niños: ' + data.ninios + '</li>' );
+			}
 
-	if(data.ninios > 0 && $('#item_ninios').length == 0){
-		$( "#list-form-data" ).append( '<li id="item_ninios"><input type="hidden" name="ninios" id="ninios" value="' + data.ninios + '"><span class="fa fa-check text-success"></span> Niños: ' + data.ninios + '</li>' );
-	}
+			if(data.infantes > 0 && $('#item_infantes').length == 0){
+				$( "#list-form-data" ).append( '<li id="item_infantes"><input type="hidden" name="infantes" id="infantes" value="' + data.infantes + '"><span class="fa fa-check text-success"></span> Infantes: ' + data.infantes + '</li>' );
+			}
 
-	if(data.infantes > 0 && $('#item_infantes').length == 0){
-		$( "#list-form-data" ).append( '<li id="item_infantes"><input type="hidden" name="infantes" id="infantes" value="' + data.infantes + '"><span class="fa fa-check text-success"></span> Infantes: ' + data.infantes + '</li>' );
-	}
+			$('#modal-reservar').modal('show');
 
-	console.log(data);
+			return false;
+		}
+		return false;
+	});
 
-	$('#modal-reservar').modal('show');
-}
-return false;
-});
-	}
 
-//Enviar formulario final form-reservar-completar
-if($("#form-reservar-completar").length == 0) {
 	$('#form-reservar-completar').validator().on('submit', function (e) {
 		if (e.isDefaultPrevented()) {
 			console.log("Error formulario no enviar formulario");
@@ -73,7 +65,6 @@ if($("#form-reservar-completar").length == 0) {
 			console.log("Enviar formulario");
 		}
 	});
-}
 
 	//Select search select2
 	$(".select_search").select2();
@@ -106,34 +97,34 @@ if($("#form-reservar-completar").length == 0) {
 		]
 	});
 
-    //Slider de fotos
-    $('#content-slider-fotos').lightSlider({
-    	item:4,
-    	auto:true,
-    	loop:true,
-    	slideMove:2,
-    	pager:false,
-    	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-    	speed:600,
-    	responsive : [
-    	{
-    		breakpoint:800,
-    		settings: {
-    			item:3,
-    			slideMove:1,
-    			slideMargin:6,
-    		}
-    	},
-    	{
-    		breakpoint:480,
-    		settings: {
-    			item:2,
-    			slideMove:1
-    		}
-    	}
-    	]
-    });
-    
+ //Slider de fotos
+ $('#content-slider-fotos').lightSlider({
+ 	item:4,
+ 	auto:true,
+ 	loop:true,
+ 	slideMove:2,
+ 	pager:false,
+ 	easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+ 	speed:600,
+ 	responsive : [
+ 	{
+ 		breakpoint:800,
+ 		settings: {
+ 			item:3,
+ 			slideMove:1,
+ 			slideMargin:6,
+ 		}
+ 	},
+ 	{
+ 		breakpoint:480,
+ 		settings: {
+ 			item:2,
+ 			slideMove:1
+ 		}
+ 	}
+ 	]
+ });
+ 
 	//Galería en listado
 	$('.imageLisGallery').lightSlider({
 		adaptiveHeight:true,
@@ -160,7 +151,7 @@ if($("#form-reservar-completar").length == 0) {
 			el.lightGallery({
 				selector: '#imageGallery .lslide'
 			});
-		}*/   
+		}*/ 
 	});
 
 	//Galería de hoteles
