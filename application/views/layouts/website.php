@@ -39,7 +39,7 @@ $tag_image = $head_info['image'];
  <meta property="og:image" content="<?php echo $tag_image; ?>"/>
  <meta property="fb:app_id" content="872929552871590" />
  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
- <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+ <link rel="stylesheet" type="text/css" href="assets/css/style.min.css?v=33">
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -256,7 +256,7 @@ $tag_image = $head_info['image'];
    <script src="assets/plugins/fancybox/dist/jquery.fancybox.min.js"></script>
    <!-- //fancybox-->
    <!-- //bootstrap-validator-->
-   <script src="assets/js/home.min.js" type="text/javascript"></script>
+   <script src="assets/js/home.min.js?v=33" type="text/javascript"></script>
    <!-- JavaScript-->
 
    <!--Start of Zendesk Chat Script-->

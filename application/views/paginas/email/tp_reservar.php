@@ -54,11 +54,11 @@
 														<?php echo $post['telefono'];?>
 													</span>
 												</li>
-												<li>
+												<!-- <li>
 													<strong><?php echo utf8_decode('Celular:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 													<?php echo $post['celular'];?>
 												</span>
-											</li>
+											</li> -->
 											<li>
 												<strong>Mensaje:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 												<?php
@@ -105,7 +105,7 @@
 								</span>
 							</li>
 
-							<li>
+							<!-- <li>
 								<strong><?php echo utf8_decode('Adultos:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 								<?php echo $post['adultos'];?>
 							</span>
@@ -127,7 +127,7 @@
 					<strong><?php echo utf8_decode('Infantes:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 					<?php echo $post['infantes'];?>
 				</span>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </td>

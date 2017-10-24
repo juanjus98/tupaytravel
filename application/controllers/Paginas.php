@@ -588,6 +588,11 @@ public function reservar() {
         if($this->input->post()){
           $post = $this->input->post();
 
+          /*echo "<pre>";
+          print_r($post);
+          echo "</pre>";
+          die();*/
+
           $config = array(
            array(
              'field' => 'nombres',
@@ -598,8 +603,8 @@ public function reservar() {
                )
              ),
            array(
-             'field' => 'celular',
-             'label' => 'Celular',
+             'field' => 'telefono',
+             'label' => 'telefono',
              'rules' => 'required',
              'errors' => array(
                'required' => 'Campo requerido.',
@@ -759,7 +764,7 @@ public function reservar() {
     public function confirmacion($token='') {
         $data['active_link'] = "inicio";
         $data['website'] = $this->Inicio->get_website();
-      $data['head_info'] = head_info($data['website']); //siempre
+        $data['head_info'] = head_info($data['website']); //siempre
 
       $this->template->title('Confirmación');
       $this->template->build('paginas/confirmacion', $data);

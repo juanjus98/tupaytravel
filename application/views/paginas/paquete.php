@@ -226,4 +226,4 @@ if(!empty($busqueda_info['dateDesde']) && !empty($busqueda_info['dateHasta'])){
   </section>
 
   <!--Modal reservar-->
-  <?php $this->load->view('paginas/i_reservar_form_modal');?>
+  <?php //$this->load->view('paginas/i_reservar_form_modal');?>

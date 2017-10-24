@@ -32,14 +32,14 @@ if(!empty($busqueda)){
             ?>
             <div class="listado-item hvr-glow">
               <div class="row">
-                <div class="col-sm-12 col-md-5">
+                <!-- <div class="col-sm-12 col-md-5">
                   <div class="thumbnail">
                     <a href="<?php echo $url_tour;?>" title="<?php echo $nombre_tour;?>" class="list-item">
                       <img src="<?php echo $urlImagen;?>" alt="<?php echo $nombre_tour;?>" class="img-responsive">
                     </a>
                   </div>
-                </div>
-                <div class="col-sm-12 col-md-7">
+                </div> -->
+                <div class="col-sm-12 col-md-12">
                   <h3>
                     <a href="<?php echo $url_tour;?>" title="<?php echo $nombre_tour;?>">
                       <?php echo strtolower($nombre_tour);?>
@@ -64,14 +64,14 @@ if(!empty($busqueda)){
                     ?>
                   </div>
 
-                  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <!-- <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
                       <a href="#" class="btn btn-precio"><?php echo $item['precio'];?></a>
                     </div>
                     <div class="btn-group" role="group">
                     <a href="<?php echo $url_tour;?>" title="<?php echo $nombre_tour;?>" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

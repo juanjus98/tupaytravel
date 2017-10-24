@@ -12,7 +12,7 @@ $id_info = $tour['id'];
 <section class="main-container cont-detail">
   <div class="row">
     <div class="col-md-8">
-      <h1><?php echo $tour['nombre'];?> <span><?php echo $tour['precio'];?></span></h1>
+      <h1><?php echo $tour['nombre'];?> <div class="clearfix mrg-top-15 visible-xs-block"></div> <span><?php echo $tour['precio'];?></span></h1>
       <div class="clearfix"></div>
       <a href="<?php echo base_url('pdf-tour/' . $tour['url_key']);?>" class="btn btn-link"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar en PDF</a>
     </div>
@@ -98,7 +98,7 @@ $id_info = $tour['id'];
       <!-- <div class="cont-tabs"> -->
       <div class="tabbable-panel">
         <div class="tabbable-line">
-          <ul class="nav nav-tabs" id="myTabs" rele="tablist">
+          <ul class="nav nav-tabs nav-justified" id="myTabs" rele="tablist">
             <li role="presentation" class="active">
               <a href="#descripcion" id="descripcion-tab" role="tab" data-toggle="tab" aria-controls="descripcion" aria-expanded="true">
                 <i class="fa fa-info-circle" aria-hidden="true"></i> Información
@@ -210,4 +210,4 @@ $id_info = $tour['id'];
 
   </section>
   <!--Modal reservar-->
-  <?php $this->load->view('paginas/i_reservar_form_modal');?>
+  <?php //$this->load->view('paginas/i_reservar_form_modal');?>

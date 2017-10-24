@@ -30,15 +30,15 @@ if(!empty($busqueda_info['dateDesde']) && !empty($busqueda_info['dateHasta'])){
             ?>
             <div class="listado-item">
               <div class="row">
-                <div class="col-sm-12 col-md-5">
+                <!-- <div class="col-sm-12 col-md-5">
                   <div class="thumbnail">
                     <a href="<?php echo $url_paquete;?>" title="<?php echo $nombre_paquete;?>" class="list-item">
                       <img src="<?php echo $urlImagen;?>" alt="<?php echo $nombre_paquete;?>" class="img-responsive">
                     </a>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="col-sm-12 col-md-7">
+                <div class="col-sm-12 col-md-12">
                   <h3>
                     <a href="<?php echo $url_paquete;?>" title="<?php echo $nombre_paquete;?>">
                       <?php echo strtolower($nombre_paquete);?>
@@ -64,14 +64,14 @@ if(!empty($busqueda_info['dateDesde']) && !empty($busqueda_info['dateHasta'])){
                     ?>
                   </div>
 
-                  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <!-- <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
                       <a href="#" class="btn btn-precio"><?php echo $paquete['precio'];?></a>
                     </div>
                     <div class="btn-group" role="group">
                       <a href="<?php echo $url_paquete;?>" title="<?php echo $nombre_paquete;?>" class="btn btn-detalles"><i class="fa fa-plus" aria-hidden="true"></i> Detalles</a>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

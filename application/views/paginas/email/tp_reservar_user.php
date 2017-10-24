@@ -60,11 +60,11 @@
 														<?php echo $post['telefono'];?>
 													</span>
 												</li>
-												<li>
+												<!-- <li>
 													<strong><?php echo utf8_decode('Celular:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 													<?php echo $post['celular'];?>
 												</span>
-											</li>
+											</li> -->
 											<li>
 												<strong>Mensaje:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 												<?php
@@ -78,11 +78,13 @@
 										<?php echo utf8_decode('Otros detalles:');?>
 									</h2>	
 									<ul>
+										<?php if(!empty($post['date_desde']) && !empty($post['date_hasta'])){?>
 										<li>
 											<strong>Fechas elegidas:</strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 											<?php echo date('d/m/Y', strtotime($post['date_desde'])) . ' - ' . date('d/m/Y', strtotime($post['date_hasta']));?>
 										</span>
 									</li>
+									<?php } ?>
 									<li>
 										<strong><?php echo utf8_decode('País de origen:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 										<?php echo $post['pais_origen'];?>
@@ -94,7 +96,7 @@
 								</span>
 							</li>
 
-							<li>
+							<!-- <li>
 								<strong><?php echo utf8_decode('Adultos:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 								<?php echo $post['adultos'];?>
 							</span>
@@ -116,7 +118,7 @@
 					<strong><?php echo utf8_decode('Infantes:');?></strong> <span  style="color:#505050;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif">
 					<?php echo $post['infantes'];?>
 				</span>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </td>

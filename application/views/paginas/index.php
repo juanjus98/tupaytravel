@@ -31,7 +31,7 @@
            <label for="nacionalidad">Nacionalidad</label>
            <input type="text" id="nacionalidad" name="nacionalidad" class="form-control">
          </div>
-         <div class="row">
+         <!-- <div class="row">
            <div class="col-xs-3">
              <label class="text-center btn-block">Adultos</label>
              <select name="adultos" id="adultos" class="form-control">
@@ -80,8 +80,8 @@
              </select>
              <p class="help-block text-center">3-7</p>
            </div>
-         </div>
-         <div class="row mrg-bot-15">
+         </div> -->
+         <!-- <div class="row mrg-bot-15">
            <div class="col-md-12">
              <label>¿Con Estadia?</label> &nbsp;&nbsp;&nbsp;
              <label class="radio-inline">
@@ -91,7 +91,7 @@
                <input type="radio" name="estadia" id="estadia2" value="No"> NO
              </label>
            </div>
-         </div>
+         </div> -->
          <div class="row"> 
            <div class="col-md-12">
              <button id="buscar" class="btn btn-primary-1 btn-block" type="submit"><i class="fa fa-search" aria-hidden="true"></i> BUSCAR TOUR</button>

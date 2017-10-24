@@ -45,7 +45,7 @@ $tag_image = $head_info['image'];
  <meta property="fb:app_id" content="872929552871590" />
 
  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css'); ?>">
+ <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.min.css?v=33'); ?>">
  
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,7 +77,7 @@ $tag_image = $head_info['image'];
 
 <!--SHARE API-->
 <?php if($actual_link == 'detalles'){ ?>
-<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59836a81515dc700116604dd&product=inline-share-buttons' async='async'></script>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59eeb8ce528ea300127769fe&product=inline-share-buttons"></script>
 <?php } ?>
 
    <script type="text/javascript">
@@ -275,7 +275,7 @@ $tag_image = $head_info['image'];
    <script src="<?php echo base_url('assets/plugins/bootstrap-validator/validator.min.js');?>" type="text/javascript"></script>
    <?php //} ?>
    <!-- //bootstrap-validator-->
-   <script src="<?php echo base_url('assets/js/main.min.js');?>" type="text/javascript"></script>
+   <script src="<?php echo base_url('assets/js/main.min.js?v=33');?>" type="text/javascript"></script>
    <!-- JavaScript-->
    <!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet">
