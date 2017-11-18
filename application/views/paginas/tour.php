@@ -8,6 +8,7 @@ $provincia = $tour['provincia'];
 $nombre = $tour['nombre'];
 $tipo_info = 'T'; //P:paquete, T:tour
 $id_info = $tour['id'];
+//echo md5("P3ru@2017");
 ?>
 <section class="main-container cont-detail">
   <div class="row">
