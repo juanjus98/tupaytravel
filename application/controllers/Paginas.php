@@ -48,12 +48,12 @@ class Paginas extends CI_Controller {
     $data['videos'] = $this->Videos->listado(8,0);
 
     //Paquetes
-    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+    $data_paquetes = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC', 'publicar' => 1);
     $total_paquetes = $this->Paquetes->total_registros();
     $data['paquetes'] = $this->Paquetes->listado($total_paquetes,0,$data_paquetes);
 
     //Tours
-    $data_tours = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+    $data_tours = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC', 'publicar' => 1);
     $total_tours = $this->Tours->total_registros();
     $data['tours'] = $this->Tours->listado($total_tours,0,$data_tours);
 
@@ -531,13 +531,12 @@ public function contactanos() {
             //Enviar email
             $this->load->library('email');
 
-            $config['useragent']           = "CodeIgniter";
+            /*$config['useragent']           = "CodeIgniter";*/
             /*$config['protocol'] = 'sendmail';*/
-            $config['protocol']            = "smtp";
+            /*$config['protocol']            = "smtp";
             $config['smtp_host']           = "mail.tupaytravel.com";
             $config['smtp_port']           = "25";
-
-            $config['mailpath'] = "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
+            $config['mailpath'] = "/usr/bin/sendmail";*/
             $config['charset'] = 'iso-8859-1';
             $config['wordwrap'] = TRUE;
             $config['mailtype'] = 'html';
@@ -565,12 +564,77 @@ public function contactanos() {
             $this->email->subject(utf8_decode('Gracias por contáctarnos desde tupaytravel.com'));
             $this->email->message($email_user);
             $this->email->send();
-            $this->email->print_debugger(array('headers'));
+            /*$this->email->print_debugger(array('headers'));*/
 
             redirect("contactenos?send=ack");
           }
         } //Post
 
+
+      $this->template->build('paginas/contactanos', $data);
+    }
+
+/**
+ * Prueba de email
+ */
+public function testemail() {
+
+      //Enviar formulario
+
+
+            //Templates Email
+            $data_email['post'] = $data_insert;
+
+            //Otros datos para el email
+            $data_email['website'] = $this->Inicio->get_website();
+            $data_email['cabeceras'] = $this->config->item('waemail');
+            
+            //Template user email
+            $email_user = $this->load->view('paginas/email/tp_contacto_user', $data_email, TRUE);
+
+            //Template admin admin
+            $email_admin = $this->load->view('paginas/email/tp_contacto', $data_email, TRUE);
+
+            //Enviar email
+            $this->load->library('email');
+
+            /*$config['useragent']           = "CodeIgniter";*/
+            $config['protocol']            = "smtp";
+            $config['smtp_host']           = "tupaytravel.com";
+            /*$config['smtp_user']           = "reservas";
+            $config['smtp_pass']           = "Thenumber1!!!";*/
+            $config['smtp_crypto']         = "ssl";
+            $config['smtp_port']           = "465";
+
+            /*$config['mailpath'] = "/usr/bin/sendmail";*/
+            $config['charset'] = 'iso-8859-1';
+            $config['wordwrap'] = TRUE;
+            $config['mailtype'] = 'html';
+
+            /*$this->email->initialize($config);
+            $this->email->from('reservas@tupaytravel.com', utf8_decode('Reservas Tupay Travel'));
+            $this->email->reply_to($post['email'], utf8_decode($post['nombres']));
+            $this->email->to('tupaytravel@hotmail.com'); //Email destino (quién recibe el correo)
+            $this->email->cc('juanjus98@gmail.com');*/
+            //$this->email->bcc('them@their-example.com');
+
+            /*$subject_str = utf8_decode('Test Contactos') . " " . utf8_decode($post['nombre']);
+            $this->email->subject($subject_str);
+            $this->email->message($email_admin);
+            $this->email->send();*/
+            /*echo $this->email->print_debugger();*/
+
+            //ENVIAMOS EMAIL DE CONFIRMACIÓN
+            /*$this->email->clear();*/
+            $this->email->initialize($config);
+
+            $this->email->from('reservas@tupaytravel.com', utf8_decode('Tupay Travel'));
+            $this->email->to("juanju98@hotmail.com", utf8_decode("Juan Julio SSL"));
+            $this->email->subject(utf8_decode('Prueba ssl'));
+            $this->email->message($email_user);
+            $this->email->send();
+            echo $this->email->print_debugger();
+            die();
 
       $this->template->build('paginas/contactanos', $data);
     }
@@ -587,11 +651,6 @@ public function reservar() {
         //Enviar formulario
         if($this->input->post()){
           $post = $this->input->post();
-
-          /*echo "<pre>";
-          print_r($post);
-          echo "</pre>";
-          die();*/
 
           $config = array(
            array(
@@ -713,13 +772,12 @@ public function reservar() {
             //Enviar email
             $this->load->library('email');
 
-            $config['useragent']           = "CodeIgniter";
+            /*$config['useragent']           = "CodeIgniter";*/
             /*$config['protocol'] = 'sendmail';*/
-            $config['protocol']            = "smtp";
+            /*$config['protocol']            = "smtp";
             $config['smtp_host']           = "mail.tupaytravel.com";
             $config['smtp_port']           = "25";
-
-            $config['mailpath'] = "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
+            $config['mailpath'] = "/usr/bin/sendmail";*/
             $config['charset'] = 'iso-8859-1';
             $config['wordwrap'] = TRUE;
             $config['mailtype'] = 'html';
@@ -747,7 +805,6 @@ public function reservar() {
             $this->email->subject(utf8_decode('Confirmación de reserva.'));
             $this->email->message($email_user);
             $this->email->send();
-            $this->email->print_debugger(array('headers'));
 
             /*print_r($this->email->print_debugger());*/
 
@@ -786,6 +843,50 @@ public function reservar() {
 
     $this->template->title('Página');
     $this->template->build('paginas/pagina', $data);
+  }
+
+/**
+ * Reservar
+ */
+public function testcorreo(){
+
+    $this->load->library('email');
+    
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'mail.tupaytravel.com';
+    $config['smtp_user'] = 'reservas@tupaytravel.com';
+    $config['smtp_pass'] = 'Thenummber1!!!';
+    $config['smtp_port'] = '587';
+    /*$config['smtp_crypto'] = '587';*/
+    
+    /*$config['mailpath'] = '/usr/sbin/sendmail';*/
+    /*$config['charset'] = 'iso-8859-1';*/
+/*    $config['charset']    = 'utf-8';*/
+    /*$config['wordwrap'] = TRUE;*/
+    $config['mailtype'] = 'html';
+    $config['newline']    = "\r\n";
+    $config['crlf']    = "\r\n";
+
+
+    $this->email->initialize($config);
+
+    $this->email->from("reservas@tupaytravel.com", "bcperutravel Test");
+    $this->email->to('juanjus98@gmail.com', 'Solicitud - Paquete turistico');
+    /*$this->email->to('juanjus98@gmail.com', 'Solicitud - Paquete turistico');*/
+    $this->email->subject('PRUEBA DE CORREO V2');
+    $this->email->message('<h1>PRUEBA ENVIADO POR JUAN JULIO</h1>');
+    if ($this->email->send()) {
+      $msg = 'ENVIADO!!';
+    }
+    else {
+      $msg = 'NO ENVIADO';
+    }
+
+    echo "<br>";
+
+    print_r($this->email->print_debugger());
+
+    echo $msg;
   }
 
 }

@@ -56,9 +56,14 @@ function index($id){
  }
 
  //Setear post
- $post = $this->Crud->set_post($this->input->post(),$sessionName);
- $post['id_tblpaquete'] = $id;
+ $data_post = array('id_tblpaquete' => $this->paquete_id, );
+ $post = $this->Crud->set_post($data_post,$sessionName);
+ /*$post['id_tblpaquete'] = $id;*/
  $data['post'] = $post;
+
+ /*echo "<pre>";
+ print_r($post);
+ echo "</pre>";*/
 
  //Total de registros por post
  $data['total_registros'] = $this->Paquetes_galeria->total_registros($post);

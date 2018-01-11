@@ -56,8 +56,9 @@ function index($id){
  }
 
  //Setear post
- $post = $this->Crud->set_post($this->input->post(),$sessionName);
- $post['id_tbltours'] = $id;
+ $data_post = array('id_tbltours' => $this->tour_id, );
+ $post = $this->Crud->set_post($data_post,$sessionName);
+ /*$post['id_tbltours'] = $id;*/
  $data['post'] = $post;
 
  //Total de registros por post
