@@ -889,6 +889,24 @@ public function testcorreo(){
     echo $msg;
   }
 
+public function fotos() {
+    /*$this->template->set_layout('website.php');*/
+    $this->load->model("galerias_model","Galerias");
+    $this->load->model("galeria_fotos_model","Fotos");
+    $data['active_link'] = "fotos";
+
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
+
+    //Tours
+    $data_galerias = array('ordenar_por' => 't1.orden', 'ordentipo' => 'ASC');
+    $total_galerias = $this->Galerias->total_registros($data_galerias);
+    $data['galerias'] = $this->Galerias->listado($total_galerias,0,$data_galerias);
+
+    $this->load->view('paginas/fotos',$data);
+}
+
+
 }
 
 /* End of file paginas.php */

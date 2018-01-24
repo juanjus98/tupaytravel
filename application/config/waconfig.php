@@ -22,6 +22,7 @@ $config['website']['dominio'] = "www.tupaytravel.com";
  * Directorio de carga de imagenes
  */
 $config['upload_path'] = "/assets/images/uploads/";
+$config['galeria_upload_path'] = "/assets/galeria/";
 
 /**
  * Configuración de email

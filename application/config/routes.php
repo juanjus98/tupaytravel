@@ -59,6 +59,9 @@ $route['contactenos'] = 'paginas/contactanos';
 $route['confirmacion'] = 'paginas/confirmacion';
 $route['p/(:any)'] = 'paginas/pagina/$1';
 
+$route['fotos'] = 'paginas/fotos';
+
+
 /**
  * Paquetes
  */

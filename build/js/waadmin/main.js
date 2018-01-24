@@ -21,7 +21,8 @@ $(function() {
      $("td input.input-order").focusout(function(){
         $(this).hide();
         var tdparent = $(this).parents('td');
-        var url = base_url + tdparent.data('controller');
+        /*var url = base_url + tdparent.data('controller');*/
+        var url = tdparent.data('controller');
         var id = tdparent.data('identificador');
         var orden = $(this).val();
         tdparent.find('.box_orden').show().text(orden).show();

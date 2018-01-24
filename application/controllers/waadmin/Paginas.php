@@ -254,6 +254,7 @@ $this->template->build('waadmin/paginas/editar', $data);
    $this->ckfinder->SetupCKEditor($this->ckeditor, $path);
  }
 
+
 }
 
 /* End of file categorias.php */
