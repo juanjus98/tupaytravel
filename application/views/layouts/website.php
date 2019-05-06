@@ -39,7 +39,7 @@ $tag_image = $head_info['image'];
  <meta property="og:image" content="<?php echo $tag_image; ?>"/>
  <meta property="fb:app_id" content="872929552871590" />
  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
- <link rel="stylesheet" type="text/css" href="assets/css/style.min.css?v=33">
+ <link rel="stylesheet" type="text/css" href="assets/css/style.min.css?v=<?php echo rand(99,999);?>">
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -260,14 +260,26 @@ $tag_image = $head_info['image'];
    <!-- JavaScript-->
 
    <!--Start of Zendesk Chat Script-->
-   <script type="text/javascript">
+<!--    <script type="text/javascript">
      window.$zopim||(function(d,s){var z=$zopim=function(c){
        z._.push(c)},$=z.s=
        d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
          _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
          $.src='https://v2.zopim.com/?4djBSec4OHl4b786bXDsRHxsqN4T47rj';z.t=+new Date;$.
          type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-       </script>
+       </script> -->
+
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+(function(){ var widget_id = 'BW0Kp9BLov';var d=document;var w=window;function l(){
+  var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+  s.src = '//code.jivosite.com/script/widget/'+widget_id
+    ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}
+  if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}
+  else{w.addEventListener('load',l,false);}}})();
+</script>
+<!-- {/literal} END JIVOSITE CODE -->
+
 
      </body>
      </html>

@@ -92,6 +92,7 @@ $route['hoteles/(:any)'] = 'paginas/hoteles/$1'; //Con provincia
 $route['hotel/(:num)/(:any)'] = 'paginas/hotel/$1/$2'; //Hotel
 
 $route['reservar'] = 'paginas/reservar';
+$route['gracias/(:any)'] = 'paginas/gracias/$1'; //$i url_key de producto
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

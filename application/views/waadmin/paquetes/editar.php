@@ -227,6 +227,39 @@ echo '</pre>';*/
                </table><br>
 
                <table class="table table-bordered">
+               <thead class="thead-default">
+                 <tr>
+                   <th><i class="fa fa-list"></i> Archivo PDF</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>
+                     <div class="form-group" style="margin-bottom: 0px;">
+                       <label for="archivo_pdf" class="col-sm-2 control-label" style="text-align: right;"><span style="color: red; font-weight: bold;">*</span> Imagen:</label>
+                       <div class="col-sm-10">
+                        <div class="alert alert-warning alert-dismissable">
+                            <i class="fa fa-info-circle"></i> 
+                            <b>Atención!</b> Peso máximo 500KB (jpg), Dimensiones 600px * 380px.
+                          </div>
+                         <input type="file" name="archivo_pdf" id="archivo_pdf" <?php echo $retVal = ($wa_tipo == 'V') ? "disabled" : "";?>>
+                         <?php
+                         if(!empty($post['archivo_pdf'])){
+                           ?>
+                           <p class="help-block">
+                             <a href="<?php echo base_url($this->config->item('upload_path') . $post['archivo_pdf']);?>" target="_blank">
+                               <img src="<?php echo base_url($this->config->item('upload_path') . $post['archivo_pdf']);?>" style="max-height: 60px;">
+                             </a>
+                           </p>
+                           <?php }?>
+                         </div>
+                       </div>
+                     </td>
+                   </tr>
+                 </tbody>
+               </table><br>
+
+               <table class="table table-bordered">
                   <thead class="thead-default">
                    <tr>
                      <th><i class="fa fa-list"></i> Forma de Pago</th>

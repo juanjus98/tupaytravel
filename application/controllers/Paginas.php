@@ -723,6 +723,8 @@ public function reservar() {
 
             //Otros datos para el email
             $data_email['website'] = $this->Inicio->get_website();
+
+            $thank_key = $post['tipo_info'];
             
             if($post['tipo_info'] == 'P'){
             //Consultar Paquete
@@ -740,6 +742,8 @@ public function reservar() {
               $data_email['servicio'] = $servicio;
 
               $titulo_email_admin = 'Solicitud de reserva - Paquete';
+
+              $url_key_th = $paquete['url_key'];
             }
 
             if($post['tipo_info'] == 'T'){
@@ -757,7 +761,10 @@ public function reservar() {
 
               $data_email['servicio'] = $servicio;
               $titulo_email_admin = 'Solicitud de reserva - Tour';
+              $url_key_th = $tour['url_key'];
             }
+
+            $thank_key = $post['tipo_info'] . '-' . $url_key_th;
 
             $cabeceras_email = $this->config->item('waemail');
             $cabeceras_email['titulo_email_admin'] = $titulo_email_admin;
@@ -808,24 +815,35 @@ public function reservar() {
 
             /*print_r($this->email->print_debugger());*/
 
-            $redirect = $url_servicio . '?ack=success';
+            /*$redirect = $url_servicio . '?ack=success';*/
+            $redirect = base_url('gracias/' . $thank_key);
+            
             redirect($redirect);
           }
         } //Post
 
 
         $this->template->build('paginas/contactanos', $data);
-      }
+  }
 
-    //Mensaje de confirmación
-    public function confirmacion($token='') {
-        $data['active_link'] = "inicio";
-        $data['website'] = $this->Inicio->get_website();
-        $data['head_info'] = head_info($data['website']); //siempre
+  public function gracias($args){
+    $data['active_link'] = "inicio";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
 
-      $this->template->title('Confirmación');
-      $this->template->build('paginas/confirmacion', $data);
-    }
+    $this->template->title('Confirmación');
+    $this->template->build('paginas/gracias', $data);
+  }
+
+  //Mensaje de confirmación
+  public function confirmacion($token='') {
+    $data['active_link'] = "inicio";
+    $data['website'] = $this->Inicio->get_website();
+    $data['head_info'] = head_info($data['website']); //siempre
+
+    $this->template->title('Confirmación');
+    $this->template->build('paginas/confirmacion', $data);
+  }
 
   /**
    * Pagina
