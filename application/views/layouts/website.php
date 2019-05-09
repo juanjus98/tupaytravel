@@ -5,18 +5,23 @@ $telefono_1 = $website_info['telefono_1'];
 $telefono_2 = $website_info['telefono_2'];
 $email_1 = $website_info['email_1'];
 $email_2 = $website_info['email_2'];
-$skype_user = 'skype:'.$website_info['skype'].'?call';
+$skype_user = 'skype:' . $website_info['skype'] . '?call';
 $facebook_messenger = 'https://m.me/' . $website_info['messenger']; //Messenger facebook
-$whatsapp_messenger = 'https://api.whatsapp.com/send?phone=' . $telefono_2;
+/*$whatsapp_messenger = 'https://api.whatsapp.com/send?phone=' . $telefono_2;*/
+$whatsappNumber = str_replace(array('+', ' '), array('', ''), $telefono_2);
+
+/*$saludoWhatsapp = 'Hola ¿Cómo podemos ayudarte?';*/
+$whatsapp_messenger = 'https://wa.me/' . $whatsappNumber;
+
 $url_facebook = 'https://www.facebook.com/' . $website_info['url_facebook'];
 $url_twitter = 'https://twitter.com/' . $website_info['url_twitter'];
 $url_youtube = 'https://www.youtube.com/user/' . $website_info['url_youtube'];
 /**
  * Preparar tags en header
  */
-$tag_title = str_replace(array('\r\n', '\r', '\n'), " ",strip_tags($head_info['title']));
+$tag_title = str_replace(array('\r\n', '\r', '\n'), " ", strip_tags($head_info['title']));
 $tag_description = $head_info['description'];
-$tag_keywords = str_replace(array('\r\n', '\r', '\n'), " ",strip_tags($head_info['keywords']));
+$tag_keywords = str_replace(array('\r\n', '\r', '\n'), " ", strip_tags($head_info['keywords']));
 $tag_url = base_url() . uri_string();
 $tag_image = $head_info['image'];
 ?>
@@ -39,7 +44,7 @@ $tag_image = $head_info['image'];
  <meta property="og:image" content="<?php echo $tag_image; ?>"/>
  <meta property="fb:app_id" content="872929552871590" />
  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
- <link rel="stylesheet" type="text/css" href="assets/css/style.min.css?v=<?php echo rand(99,999);?>">
+ <link rel="stylesheet" type="text/css" href="assets/css/style.min.css?v=<?php echo rand(99, 999); ?>">
  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -67,8 +72,8 @@ $tag_image = $head_info['image'];
 <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
 <!--End of Zendesk Chat Script-->
 <script type="text/javascript">
- var base_url='<?php echo base_url();?>';
- <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : '' ;?>
+ var base_url='<?php echo base_url(); ?>';
+ <?php echo $ack_msj = (isset($_GET['ack'])) ? "var ack_msj='" . $_GET['ack'] . "'" : ''; ?>
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -83,6 +88,32 @@ $tag_image = $head_info['image'];
 
 </head>
 <body>
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v3.3'
+    });
+  };
+
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_ES/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="959339647430909"
+  theme_color="#13cf13"
+  logged_in_greeting="Un cordial saludo   podemos ayudarle en algún tours."
+  logged_out_greeting="Un cordial saludo   podemos ayudarle en algún tours.">
+</div>
 
  <div class="container">
    <div class="main brd-lr">
@@ -91,21 +122,21 @@ $tag_image = $head_info['image'];
        <div class="boxes">
          <div class="box box1">
            <h3>Hablemos por</h3>
-           <p><a href="<?php echo $retVal = (!empty($skype_user)) ? $skype_user : '#' ; ?>" target="_blank" title="Hablemos por skype"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
+           <p><a href="<?php echo $retVal = (!empty($skype_user)) ? $skype_user : '#'; ?>" target="_blank" title="Hablemos por skype"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
          </div>
          <div class="box box2">
            <h3>Whatsapp</h3>
-           <p><a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : '' ; ?></a></p>
+           <p><a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : ''; ?>" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : ''; ?></a></p>
          </div>
          <div class="box box3 hidden-xs">
            <h3>Escríbenos</h3>
-           <p><a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ;?>?Subject=Contáctar"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ;?></a></p>
+           <p><a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?>?Subject=Contáctar"><?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?></a></p>
          </div>
          <div class="box box4 hidden-xs">
            <ul class="social-icons">
-             <li><a href="<?php echo $retVal = (!empty($url_facebook)) ? $url_facebook : '#' ; ?>" target="_blank" class="social-icon"> <i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-             <li><a href="<?php echo $retVal = (!empty($url_twitter)) ? $url_twitter : '#' ; ?>" target="_blank" class="social-icon"> <i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-             <li><a href="<?php echo $retVal = (!empty($url_youtube)) ? $url_youtube : '#' ; ?>" target="_blank" class="social-icon"> <i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+             <li><a href="<?php echo $retVal = (!empty($url_facebook)) ? $url_facebook : '#'; ?>" target="_blank" class="social-icon"> <i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+             <li><a href="<?php echo $retVal = (!empty($url_twitter)) ? $url_twitter : '#'; ?>" target="_blank" class="social-icon"> <i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+             <li><a href="<?php echo $retVal = (!empty($url_youtube)) ? $url_youtube : '#'; ?>" target="_blank" class="social-icon"> <i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
            </ul>
          </div>
          <!-- <div class="box box5 hidden-xs"></div> -->
@@ -115,11 +146,11 @@ $tag_image = $head_info['image'];
      <div class="head-bar">
        <div class="col-md-12">
          <div class="logo pull-left">
-           <a href="<?php echo base_url();?>" title="<?php echo $website_info['title']; ?>">
+           <a href="<?php echo base_url(); ?>" title="<?php echo $website_info['title']; ?>">
              <img alt="<?php echo $website_info['title']; ?>" data-src="assets/images/logo.png" class="lozad">
            </a>
          </div>
-       </div> 
+       </div>
      </div>
      <!-- //Logo y banner-->
      <!-- Menú-->
@@ -133,7 +164,7 @@ $tag_image = $head_info['image'];
              <span class="icon-bar"></span>
            </button>
          </div>
-         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><?php echo crear_menu(wamenu(), $active_link);?>
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><?php echo crear_menu(wamenu(), $active_link); ?>
            <div class="pull-right menu-r">
              <a href="contactenos" class="btn btn-contactenos"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contáctenos</a>
            </div>
@@ -154,13 +185,13 @@ $tag_image = $head_info['image'];
              <div class="footer-single">
                <div class="footer-title"><h2>Información de Contácto</h2></div>
                <h1>
-                 <?php echo $website_info['title'];?>
+                 <?php echo $website_info['title']; ?>
                  <?php //echo $website_info['description'];?>
                </h1>
                <address>
-                 <strong>Oficina:</strong> <?php echo $retVal = (!empty($direccion)) ? $direccion : '' ; ?> <br>
-                 <i class="fa fa-whatsapp"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : '' ; ?><br>
-                 <i class="fa fa-envelope"></i> <a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?>"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ; ?></a><br>
+                 <strong>Oficina:</strong> <?php echo $retVal = (!empty($direccion)) ? $direccion : ''; ?> <br>
+                 <i class="fa fa-whatsapp"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : ''; ?><br>
+                 <i class="fa fa-envelope"></i> <a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?>"><?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?></a><br>
                </address>
                <!-- <div class="fb-like" data-share="true" data-show-faces="false"></div> -->
              </div>
@@ -169,20 +200,20 @@ $tag_image = $head_info['image'];
              <div class="footer-single useful-links">
                <div class="footer-title"><h2>Promociones</h2></div>
                <?php
-               $promociones = $this->Promociones->listado(6,0);
-               if(!empty($promociones)){
-                 ?>
+$promociones = $this->Promociones->listado(6, 0);
+if (!empty($promociones)) {
+	?>
                  <ul class="list-unstyled">
                    <?php
-                   foreach ($promociones as $key => $value) {
-                     $tituloPromo = $value['titulo'];
-                     ?>
-                     <li><a href="<?php echo $value['url'];?>" title="<?php echo $tituloPromo;?>"><?php echo $tituloPromo;?> <i class="fa fa-angle-right pull-right"></i></a></li>
-                     <?php } ?>
+foreach ($promociones as $key => $value) {
+		$tituloPromo = $value['titulo'];
+		?>
+                     <li><a href="<?php echo $value['url']; ?>" title="<?php echo $tituloPromo; ?>"><?php echo $tituloPromo; ?> <i class="fa fa-angle-right pull-right"></i></a></li>
+                     <?php }?>
                    </ul>
                    <?php
-                 }
-                 ?>
+}
+?>
                </div>
              </div>
              <div class="col-md-4 col-sm-6">
@@ -190,16 +221,16 @@ $tag_image = $head_info['image'];
                  <div class="footer-title"><h2>Links Importantes<?php //echo $website_info['title'];?></h2></div>
                  <ul class="list-unstyled">
                    <?php
-                   $links = array(
-                     array('title' => 'Formas de pago', 'url' => 'http://tupaytravel.com/p/formas-de-pago-rp', 'target' => '_self'),
-                     array('title' => 'Contáctenos', 'url' => 'http://tupaytravel.com/contactenos', 'target' => '_self'),
-                     array('title' => 'Facebook', 'url' => 'https://www.facebook.com/tupay.travel/', 'target' => '_blank'),
-                     array('title' => 'Youtube', 'url' => 'https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA', 'target' => '_blank'),
-                   );
-                   foreach ($links as $key => $value) {
-                     echo '<li><a href="'.$value['url'].'" target="'.$value['target'].'">'.$value['title'].' <i class="fa fa-angle-right pull-right"></i></a></li>';
-                   }
-                   ?>
+$links = array(
+	array('title' => 'Formas de pago', 'url' => 'http://tupaytravel.com/p/formas-de-pago-rp', 'target' => '_self'),
+	array('title' => 'Contáctenos', 'url' => 'http://tupaytravel.com/contactenos', 'target' => '_self'),
+	array('title' => 'Facebook', 'url' => 'https://www.facebook.com/tupay.travel/', 'target' => '_blank'),
+	array('title' => 'Youtube', 'url' => 'https://www.youtube.com/channel/UCRIeYohcJ_u31-wDiOwRAFA', 'target' => '_blank'),
+);
+foreach ($links as $key => $value) {
+	echo '<li><a href="' . $value['url'] . '" target="' . $value['target'] . '">' . $value['title'] . ' <i class="fa fa-angle-right pull-right"></i></a></li>';
+}
+?>
                  </ul>
                </div>
              </div>
@@ -210,14 +241,14 @@ $tag_image = $head_info['image'];
      </div><!-- main brd-lr-->
    </div><!-- container-->
    <!-- Multichat-->
-   <div class="cont-multichat">
+   <!-- <div class="cont-multichat">
      <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
        <img src="assets/images/icon-messenger48.png" alt="Facebook messenger">
      </a>
-     <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
+     <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : ''; ?>" title="Whatsapp" target="_blank">
        <img src="assets/images/icon-whatsapp48.png" alt="Whatsapp">
      </a>
-   </div>
+   </div> -->
    <!-- //Multichat-->
 
    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet" />
@@ -265,4 +296,4 @@ $tag_image = $head_info['image'];
      </html>
      <?php
 //echo $actual_link;
-     ?>
+?>
