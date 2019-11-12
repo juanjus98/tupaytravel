@@ -86,8 +86,21 @@ $tag_image = $head_info['image'];
   gtag('config', 'UA-106441653-1');
 </script>
 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MGXFB57');</script>
+<!-- End Google Tag Manager -->
+
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGXFB57"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 <script>
@@ -122,15 +135,15 @@ $tag_image = $head_info['image'];
        <div class="boxes">
          <div class="box box1">
            <h3>Hablemos por</h3>
-           <p><a href="<?php echo $retVal = (!empty($skype_user)) ? $skype_user : '#'; ?>" target="_blank" title="Hablemos por skype"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
+           <p><a href="<?php echo $retVal = (!empty($skype_user)) ? $skype_user : '#'; ?>" target="_blank" title="Hablemos por skype" class="top-link"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
          </div>
          <div class="box box2">
            <h3>Whatsapp</h3>
-           <p><a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : ''; ?>" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : ''; ?></a></p>
+           <p><a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : ''; ?>" target="_blank" class="top-link"><i class="fa fa-whatsapp" aria-hidden="true"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : ''; ?></a></p>
          </div>
          <div class="box box3 hidden-xs">
            <h3>Escríbenos</h3>
-           <p><a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?>?Subject=Contáctar"><?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?></a></p>
+           <p><a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?>?Subject=Contáctar"  class="top-link"><?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?></a></p>
          </div>
          <div class="box box4 hidden-xs">
            <ul class="social-icons">

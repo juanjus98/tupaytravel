@@ -95,8 +95,47 @@ $tag_image = $head_info['image'];
   gtag('config', 'UA-106441653-1');
 </script>
 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MGXFB57');</script>
+<!-- End Google Tag Manager -->
  </head>
  <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGXFB57"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v3.3'
+    });
+  };
+
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_ES/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="959339647430909"
+  theme_color="#13cf13"
+  logged_in_greeting="Un cordial saludo   podemos ayudarle en algún tours."
+  logged_out_greeting="Un cordial saludo   podemos ayudarle en algún tours.">
+</div>
+
  <div class="container">
    <div class="main brd-lr">
      <!-- header-->
@@ -104,15 +143,15 @@ $tag_image = $head_info['image'];
        <div class="boxes">
          <div class="box box1">
            <h3>Hablemos por</h3>
-           <p><a href="<?php echo $retVal = (!empty($skype_user)) ? $skype_user : '#' ; ?>" target="_blank" title="Hablemos por skype"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
+           <p><a href="<?php echo $retVal = (!empty($skype_user)) ? $skype_user : '#'; ?>" target="_blank" title="Hablemos por skype" class="top-link"><i class="fa fa-skype" aria-hidden="true"></i> Skype</a></p>
          </div>
          <div class="box box2">
            <h3>Whatsapp</h3>
-           <p><a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : '' ; ?></a></p>
+           <p><a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : ''; ?>" target="_blank" class="top-link"><i class="fa fa-whatsapp" aria-hidden="true"></i> <?php echo $retVal = (!empty($telefono_2)) ? $telefono_2 : ''; ?></a></p>
          </div>
          <div class="box box3 hidden-xs">
            <h3>Escríbenos</h3>
-           <p><a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ;?>?Subject=Contáctar"><?php echo $retVal = (!empty($email_1)) ? $email_1 : '' ;?></a></p>
+           <p><a href="mailto:<?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?>?Subject=Contáctar"  class="top-link"><?php echo $retVal = (!empty($email_1)) ? $email_1 : ''; ?></a></p>
          </div>
          <div class="box box4 hidden-xs">
            <ul class="social-icons">
@@ -223,14 +262,14 @@ $tag_image = $head_info['image'];
      </div><!-- main brd-lr-->
    </div><!-- container-->
    <!-- Multichat-->
-   <div class="cont-multichat">
+   <!-- <div class="cont-multichat">
      <a href="https://m.me/tupay.travel" title="Facebook messenger" target="_blank">
        <img src="<?php echo base_url('assets/images/icon-messenger48.png');?>" alt="Facebook messenger">
      </a>
      <a href="<?php echo $retVal = (!empty($whatsapp_messenger)) ? $whatsapp_messenger : '' ; ?>" title="Whatsapp" target="_blank">
        <img src="<?php echo base_url('assets/images/icon-whatsapp48.png');?>" alt="Whatsapp">
      </a>
-   </div>
+   </div> -->
    <!-- //Multichat-->
 
    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/font-awesome.min.css'); ?>">
@@ -280,16 +319,6 @@ $tag_image = $head_info['image'];
    <!-- <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet"> -->
    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,600,700,800" rel="stylesheet">
 
-<!--Start of Zendesk Chat Script-->
-<script type="text/javascript">
- window.$zopim||(function(d,s){var z=$zopim=function(c){
-   z._.push(c)},$=z.s=
-   d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-     _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-     $.src='https://v2.zopim.com/?4djBSec4OHl4b786bXDsRHxsqN4T47rj';z.t=+new Date;$.
-     type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-   </script>
-   <!--End of Zendesk Chat Script-->
 
  </body>
  </html>
